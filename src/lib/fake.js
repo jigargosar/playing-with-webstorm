@@ -1,7 +1,7 @@
 import faker from 'faker'
 import {Chance} from 'chance'
 
-import jsf from "json-schema-faker";
+import jsf from 'json-schema-faker'
 
 const seed = Math.random()
 
@@ -15,7 +15,7 @@ export function randomWords() {
 const schema = {
   type: 'object',
   properties: {
-    user: {$ref: '#/definitions/user'},
+    user: { $ref: '#/definitions/user' },
   },
   required: ['user'],
   definitions: {
@@ -23,7 +23,7 @@ const schema = {
       type: 'object',
       properties: {
         id: {
-          $ref: '#/definitions/positiveInt',
+          $ref: '#/definitions/modelId',
         },
         name: {
           type: 'string',
@@ -31,7 +31,6 @@ const schema = {
         },
         email: {
           type: 'string',
-          format: 'email',
           faker: 'internet.email',
         },
       },
@@ -42,8 +41,17 @@ const schema = {
       minimum: 0,
       exclusiveMinimum: true,
     },
+    modelId: {
+      type: 'string',
+      faker: 'random.word',
+    },
   },
-};
+}
+
+jsf.extend('faker', function() {
+  return require('faker');
+});
+
 
 jsf.resolve(schema).then(function(sample) {
   console.log(sample)
