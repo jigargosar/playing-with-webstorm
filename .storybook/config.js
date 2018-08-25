@@ -1,13 +1,16 @@
 import {addDecorator, configure} from '@storybook/react'
 import {withInfo} from '@storybook/addon-info'
-import {setConsoleOptions, withConsole} from '@storybook/addon-console';
+import {setConsoleOptions, withConsole,} from '@storybook/addon-console'
+
+addDecorator((story, context) =>
+  withInfo({ inline: true })(story)(context),
+)
 
 setConsoleOptions({
   panelExclude: [/\[HMR]/],
-});
+})
 
-addDecorator((storyFn, context) => withConsole()(storyFn)(context));
-
+addDecorator((storyFn, context) => withConsole()(storyFn)(context))
 
 // addDecorator(
 //   withInfo({
@@ -15,10 +18,6 @@ addDecorator((storyFn, context) => withConsole()(storyFn)(context));
 //     info:"None"
 //   }),
 // )
-
-addDecorator((story, context) =>
-  withInfo({inline:true})(story)(context),
-)
 
 function loadStories() {
   require('../src/stories/index.stories')
