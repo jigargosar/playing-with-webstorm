@@ -12,6 +12,8 @@ function TaskItem({ task }) {
   return <ListItemLayout>{getTitle(task)}</ListItemLayout>
 }
 
+function ContentWithFixed() {}
+
 function App() {
   const tasks = times(partial(createTask)([]))(30)
   return (
@@ -20,7 +22,7 @@ function App() {
         <div className="overflow-scroll">
           {renderKeyedById(TaskItem, 'task', tasks)}
         </div>
-        <div className="pa3 f2">footer</div>
+        <div className="">footer</div>
       </div>
     </MainLayout>
   )
