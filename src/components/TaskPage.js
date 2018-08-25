@@ -1,20 +1,21 @@
 import { createNewTaskWithDefaults, setDone } from '../models/Task'
 import React from 'react'
-import { compose, partial, times } from 'ramda'
+import { compose, times } from 'ramda'
 import { MainLayout } from './MainLayout'
 import { TaskList } from './TaskList'
-import { withProps, withStateHandlers } from 'recompose'
+import { withHandlers, withProps, withState } from 'recompose'
 import { overModel } from '../models/TaskList'
 
 const enhance = compose(
-  withStateHandlers(
-    { tasks: times(createNewTaskWithDefaults)(30) },
-    {
-      setDone: ({ tasks }) => (done, task) => ({
-        tasks: overModel(task, partial(setDone, [done]), tasks),
-      }),
-    },
+  withState(
+    'tasks',
+    'updateTasks',
+    times(createNewTaskWithDefaults)(30),
   ),
+  withHandlers({
+    setDone: ({ updateTasks }) => (done, task) =>
+      updateTasks(overModel(task, setDone(done))),
+  }),
   withProps(setDone => ({ actions: { setDone } })),
 )
 

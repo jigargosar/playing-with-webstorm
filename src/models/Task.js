@@ -1,7 +1,7 @@
 import * as nanoid from 'nanoid'
 import { randomWords } from '../lib/fake'
 import { validate } from '../lib/validate'
-import { merge } from 'ramda'
+import { curry, merge } from 'ramda'
 
 export function createTask({
   id = `task_${nanoid()}`,
@@ -22,11 +22,10 @@ export function getTitle({ title }) {
   return title
 }
 
-export function setDone(done, task) {
+export const setDone = curry((done, task) => {
   validate('BO', [done, task])
   return merge(task, { done })
-}
-
+})
 export function isDone({ done }) {
   validate('B', [done])
   return done
