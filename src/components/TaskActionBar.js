@@ -1,6 +1,5 @@
-import { identity, isNil, map } from 'ramda'
+import { identity, isNil, map, unless } from 'ramda'
 import React, { Fragment } from 'react'
-import { isDone } from '../models/Task'
 
 function renderButton(label, handleClick) {
   return (
@@ -20,8 +19,7 @@ export function TaskActionBar({ queries, actions }) {
     {
       label: 'done',
       handleClick: () => {
-        if (isNil(task)) return
-        actions.setDone(!isDone(task), task)
+        unless(isNil)(actions.onTaskToggleDone)(task)
       },
     },
     { label: 'delete', handleClick: identity },
