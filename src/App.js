@@ -9,12 +9,12 @@ function ListItemLayout({ spacing = 'pa2', children }) {
   return <div className={`${spacing} flex`}>{children}</div>
 }
 
-function TaskItem({ task }) {
-  return <ListItemLayout>{getTitle(task)}</ListItemLayout>
-}
-
 function ListLayout({ children }) {
   return <div>{children}</div>
+}
+
+function TaskItem({ task }) {
+  return <ListItemLayout>{getTitle(task)}</ListItemLayout>
 }
 
 function App() {
