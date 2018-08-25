@@ -13,7 +13,7 @@ function TaskItem({ task }) {
   )
 }
 
-function Button({ label }) {
+function BottomActionButton({ label }) {
   return (
     <div className="ph2">
       <button className="ph2">{label}</button>
@@ -43,7 +43,7 @@ function App() {
         bottom={
           <div className="pa2 frr bt b--silver">
             {map(({ id, label }) => (
-              <Button key={id} label={label} />
+              <BottomActionButton key={id} label={label} />
             ))(buttons)}
           </div>
         }
