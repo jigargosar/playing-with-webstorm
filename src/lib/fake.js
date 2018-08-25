@@ -3,6 +3,8 @@ import {Chance} from 'chance'
 
 import jsf from 'json-schema-faker'
 
+import nanoid from "nanoid";
+
 const seed = Math.random()
 
 export const chance = Chance(seed)
@@ -25,6 +27,11 @@ const schema = {
         id: {
           $ref: '#/definitions/modelId',
         },
+        mid: {
+          type:'string',
+          format:'modelId',
+          modelName:'user'
+        },
         name: {
           type: 'string',
           faker: 'name.findName',
@@ -34,7 +41,7 @@ const schema = {
           faker: 'internet.email',
         },
       },
-      required: ['id', 'name', 'email'],
+      required: ['id', 'mid','name', 'email'],
     },
     positiveInt: {
       type: 'integer',
@@ -50,6 +57,10 @@ const schema = {
 
 jsf.extend('faker', function() {
   return require('faker');
+});
+jsf.format('modelId', function({modelName='model'}) {
+  console.log(a);
+  return `${modelName}_${nanoid}`;
 });
 
 
