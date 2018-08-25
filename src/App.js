@@ -34,8 +34,10 @@ function App() {
         <div className="overflow-scroll">
           {renderKeyedById(TaskItem, 'task', tasks)}
         </div>
-        <div className="frr ">
-          {map(b => <BottomActionBar key={b} b={b} />)(buttons)}
+        <div>
+          <div className="frr">
+            {map(b => <BottomActionBar key={b} b={b} />)(buttons)}
+          </div>
         </div>
       </div>
     </MainLayout>
