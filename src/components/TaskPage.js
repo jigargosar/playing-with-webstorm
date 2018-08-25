@@ -11,7 +11,7 @@ import {
 } from 'ramda'
 import { MainLayout } from './MainLayout'
 import { TaskList } from './TaskList'
-import { withStateHandlers } from 'recompose'
+import { withProps, withStateHandlers } from 'recompose'
 import { assert } from '../lib/assert'
 
 const enhance = compose(
@@ -26,12 +26,13 @@ const enhance = compose(
         })(state),
     },
   ),
+  withProps(setDone => ({ actions: { setDone } })),
 )
 
-function TaskPage({ tasks, setDone }) {
+function TaskPage({ tasks, actions }) {
   return (
     <MainLayout title={'FunDo'}>
-      <TaskList tasks={tasks} actions={{ setDone }} />
+      <TaskList tasks={tasks} actions={actions} />
     </MainLayout>
   )
 }
