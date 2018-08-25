@@ -9,6 +9,7 @@ import {
   defaultTo,
   eqProps,
   head,
+  isNil,
   times,
 } from 'ramda'
 import { MainLayout } from './MainLayout'
@@ -77,7 +78,10 @@ function TaskPage({ queries, actions }) {
     navigateNext: 'down',
     navigatePrev: 'up',
     deleteTask: ['d'],
-    toggleDone: ['x'],
+    toggleDone: [
+      'x',
+      ...(isNil(queries.focusedTask) ? ['space'] : []),
+    ],
   }
 
   return (
