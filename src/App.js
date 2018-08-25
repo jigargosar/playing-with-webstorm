@@ -32,6 +32,16 @@ function BottomBarLayout({ children, bottom }) {
   )
 }
 
+function BottomActionBar({ buttonProps }) {
+  return (
+    <div className="pa2 frr bt b--silver">
+      {map(({ id, label }) => (
+        <BottomActionButton key={id} label={label} />
+      ))(buttonProps)}
+    </div>
+  )
+}
+
 function App() {
   const tasks = times(partial(createTask)([]))(30)
   const buttons = [
@@ -41,15 +51,7 @@ function App() {
   ].map(b => merge({ id: b.label }, b))
   return (
     <MainLayout title={'FunDo'}>
-      <BottomBarLayout
-        bottom={
-          <div className="pa2 frr bt b--silver">
-            {map(({ id, label }) => (
-              <BottomActionButton key={id} label={label} />
-            ))(buttons)}
-          </div>
-        }
-      >
+      <BottomBarLayout bottom={<BottomActionBar />}>
         {renderKeyedById(TaskItem, 'task', tasks)}
       </BottomBarLayout>
     </MainLayout>
