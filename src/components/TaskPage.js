@@ -68,6 +68,7 @@ const enhance = compose(
           handleGlobalKeyDown: e => {},
           onTaskToggleDone: task => (e = {}) => {
             const code = propOr(null, 'code')(e)
+
             if (code === 'Space') {
               console.log(e)
               e.preventDefault()
