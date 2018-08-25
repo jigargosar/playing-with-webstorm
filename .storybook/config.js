@@ -9,7 +9,7 @@ import {withInfo} from '@storybook/addon-info'
 // )
 
 addDecorator((story, context) =>
-  withInfo('common info')(story)(context),
+  withInfo({inline:true})(story)(context),
 )
 
 function loadStories() {
