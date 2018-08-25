@@ -13,10 +13,10 @@ function TaskItem({ task }) {
   )
 }
 
-function BottomActionBar({ b }) {
+function Button({ label }) {
   return (
     <div className="ph2">
-      <button className="ph2">{b.label}</button>
+      <button className="ph2">{label}</button>
     </div>
   )
 }
@@ -42,7 +42,9 @@ function App() {
       <BottomBarLayout
         bottom={
           <div className="pa2 frr bt b--silver">
-            {map(b => <BottomActionBar key={b.id} b={b} />)(buttons)}
+            {map(({ id, label }) => (
+              <Button key={id} label={label} />
+            ))(buttons)}
           </div>
         }
       >
