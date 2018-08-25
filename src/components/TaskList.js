@@ -13,7 +13,7 @@ function TaskItem({ task, queries, actions }) {
   return (
     <div
       className={cn('fdr iic', { 'bg-light-blue': selected })}
-      onClick={setSelectedTaskHandler}
+      onFocus={setSelectedTaskHandler}
     >
       <div className="pa2">
         <input
@@ -22,7 +22,7 @@ function TaskItem({ task, queries, actions }) {
           onChange={onDoneChange}
         />
       </div>
-      <div className="pa2 fa ba b--silver">{getTitle(task)}</div>
+      <div className="pa2 fa  b--silver">{getTitle(task)}</div>
     </div>
   )
 }
