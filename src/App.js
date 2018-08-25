@@ -10,7 +10,6 @@ function RepeatString({ value = 'default string', times = 30 }) {
   )
 }
 function MainLayout({
-  children,
   title = 'Playing With Webstorm',
   ...otherProps
 }) {
