@@ -3,7 +3,6 @@ import { TaskActionBar } from './TaskActionBar'
 import React from 'react'
 import { getTitle, isDone } from '../models/Task'
 import cn from 'classname'
-import { HotKeys } from 'react-hotkeys'
 
 function TaskItem({ task, queries, actions }) {
   const done = isDone(task)
@@ -13,8 +12,7 @@ function TaskItem({ task, queries, actions }) {
     toggleDone: actions.onTaskToggleDone(task),
   }
   return (
-    <HotKeys
-      handlers={handlers}
+    <div
       className={cn('fdr iic outline-0', 'bb b--black-10', {
         'bg-light-blue': selected,
       })}
@@ -30,7 +28,7 @@ function TaskItem({ task, queries, actions }) {
         />
       </div>
       <div className="pa2 fa  ">{getTitle(task)}</div>
-    </HotKeys>
+    </div>
   )
 }
 
