@@ -35,7 +35,7 @@ const enhance = compose(
     }) => {
       const selectedTask = compose(
         defaultTo(head(tasks)),
-        defaultTo(findById(selectedTaskId)(focusedTaskId)),
+        defaultTo(findById(focusedTaskId)(tasks)),
         findById(selectedTaskId),
       )(tasks)
       const updateTaskDone = curry((done, task) =>
