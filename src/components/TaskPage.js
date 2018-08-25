@@ -12,9 +12,11 @@ const enhance = compose(
     'updateTasks',
     times(createNewTaskWithDefaults)(30),
   ),
+  withState('selectedTaskId', 'updateSelectedTaskId', null),
   withHandlers({
     setDone: ({ updateTasks }) => (done, task) =>
       updateTasks(overModel(task, setDone(done))),
+    setSelectedTask: () => ({ id }) => updateSelectedTaskId(id),
   }),
   withProps(({ setDone }) => ({ actions: { setDone } })),
 )
