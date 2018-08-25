@@ -31,7 +31,7 @@ const enhance = compose(
 function TaskPage({ tasks, setDone }) {
   return (
     <MainLayout title={'FunDo'}>
-      <TaskList tasks={tasks} actions={setDone} />
+      <TaskList tasks={tasks} actions={{ setDone }} />
     </MainLayout>
   )
 }
