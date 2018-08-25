@@ -1,4 +1,11 @@
-import { curry, findIndex, lensIndex, over, propEq } from 'ramda'
+import {
+  curry,
+  find,
+  findIndex,
+  lensIndex,
+  over,
+  propEq,
+} from 'ramda'
 import { assert } from '../lib/assert'
 
 export const overModel = curry(({ id }, fn, list) => {
