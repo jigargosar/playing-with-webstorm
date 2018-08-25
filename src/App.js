@@ -13,11 +13,17 @@ function TaskItem({ task }) {
   return <ListItemLayout>{getTitle(task)}</ListItemLayout>
 }
 
+function ListLayout({ children }) {
+  return <div>{children}</div>
+}
+
 function App() {
   const tasks = times(partial(createTask)([]))(30)
   return (
     <MainLayout title={'FunDo'}>
-      {renderKeyedById(TaskItem, 'task', tasks)}
+      <ListLayout>
+        {renderKeyedById(TaskItem, 'task', tasks)}
+      </ListLayout>
     </MainLayout>
   )
 }
