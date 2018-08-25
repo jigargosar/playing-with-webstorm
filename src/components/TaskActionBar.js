@@ -18,9 +18,7 @@ export function TaskActionBar({ queries, actions }) {
     { label: 'add', handleClick: identity },
     {
       label: 'done',
-      handleClick: () => {
-        unless(isNil)(actions.onTaskToggleDone)(task)
-      },
+      handleClick: unless(isNil)(actions.onTaskToggleDone)(task),
     },
     { label: 'delete', handleClick: identity },
   ]
