@@ -23,7 +23,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "storybook": "start-storybook -p 9009 -s public",
+    "storybook": "nodemon -w .storybook/webpack.config.js -x start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public"
   },
   "devDependencies": {
@@ -34,6 +34,7 @@
     "@storybook/addons": "^3.4.10",
     "@storybook/react": "^3.4.10",
     "babel-core": "^6.26.3",
-    "babel-runtime": "^6.26.0"
+    "babel-runtime": "^6.26.0",
+    "nodemon": "^1.18.3"
   }
 }

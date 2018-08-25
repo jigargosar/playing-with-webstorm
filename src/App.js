@@ -1,11 +1,13 @@
 import React from 'react'
 import 'tachyons'
-import {MainLayout} from "./components/MainLayout";
+import {MainLayout} from './components/MainLayout'
 
 function RepeatString({ value = 'default string', times = 30 }) {
   return (
     <div>
-      {new Array(times).fill(value).map((s, i) => <div key={i}>{s}</div>)}
+      {new Array(times)
+        .fill(value)
+        .map((s, i) => <div key={i}>{s}</div>)}
     </div>
   )
 }
