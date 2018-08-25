@@ -49,10 +49,10 @@ export function DrawerLayout({
 }
 
 DrawerLayout.propTypes = {
-  debug: PropTypes.bool,
   styleClass: PropTypes.string,
-  children: PropTypes.node.isRequired,
   header: PropTypes.node,
   footer: PropTypes.node,
   sidebar: PropTypes.node,
+  children: PropTypes.node.isRequired,
+  debug: PropTypes.bool,
 }

@@ -25,4 +25,4 @@ import {DrawerLayout} from "../shared-components/DrawerLayout";
 
 const sidebarLayoutStories = storiesOf('DrawerLayout', module)
 
-sidebarLayoutStories.add('with default props', <DrawerLayout/>)
+sidebarLayoutStories.add('with default props', ()=><DrawerLayout>a</DrawerLayout>)
