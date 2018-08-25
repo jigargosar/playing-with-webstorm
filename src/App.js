@@ -7,7 +7,7 @@ import {times} from 'ramda'
 function App() {
   return (
     <MainLayout title={'FunDo'}>
-      {times(i => <div key={i}>{getTitle(Task())}</div>, 30)}
+      {times(i => <div key={i}>{getTitle(Task())}</div>)(30)}
     </MainLayout>
   )
 }
