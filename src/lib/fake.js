@@ -2,8 +2,11 @@ import faker from 'faker'
 import {Chance} from 'chance'
 
 import jsf from 'json-schema-faker'
-
 import nanoid from "nanoid";
+
+jsf.option({
+  optionalsProbability: 0.5
+});
 
 const seed = Math.random()
 
