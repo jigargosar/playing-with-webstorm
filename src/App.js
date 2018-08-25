@@ -13,14 +13,11 @@ function HeaderContent() {
   return <div className={"f2 ma2"}>fixed header</div>;
 }
 
-function FooterContent() {
-  return <div className={"pa2 f4"}>fixed footer</div>;
-}
 
-function DrawerLayout({ children, header, footer, sidebar, debug=false }) {
+function DrawerLayout({ className,children, header, footer, sidebar, debug=false }) {
   return (
     <Fragment>
-      <div className={cn("flex flex-column vh-100 overflow-hidden ", {'bg-black-20':debug})}>
+      <div className={cn("flex flex-column vh-100 overflow-hidden ", className,{'bg-black-20':debug})}>
         <div className={cn({"bg-black-20 ba bw1 b--blue":debug})}>{header}</div>
         <div className={"flex-auto flex "}>
           {sidebar && <div
@@ -43,9 +40,10 @@ function DrawerLayout({ children, header, footer, sidebar, debug=false }) {
 function App() {
   return (
     <DrawerLayout
+      className={cn('bg-near-white')}
     header={<HeaderContent />}
-    footer={<FooterContent />}
-    sidebar={<RepeatString value={"side bar item"} times={3} />}
+    // footer={<div className={"pa2 f4"}>fixed footer</div>}
+    sidebar={<RepeatString value={"drawer item"} times={3} />}
     debug={false}
     >
       <RepeatString value={"main content items"} times={3} />
