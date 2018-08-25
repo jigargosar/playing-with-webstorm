@@ -48,7 +48,7 @@ const enhance = compose(
         },
         actions: {
           setDone: updateTaskDone,
-          onTaskDoneChange: e => updateTaskDone(e.target.value),
+          onTaskDoneChange: e => updateTaskDone(e.target.checked),
           onTaskFocus: ({ id }) => () => {
             updateSelectedTaskId(id)
             updateFocusedTaskId(id)
