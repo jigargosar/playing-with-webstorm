@@ -13,7 +13,7 @@ function App() {
   const tasks = times(partial(createTask)([]))(30)
   return (
     <MainLayout title={'FunDo'}>
-      {map(t => <Fragment key={t.id}><TaskItem task={t}/></Fragment>)(30)}
+      {map(t => <Fragment key={t.id}><TaskItem task={t}/></Fragment>)(tasks)}
     </MainLayout>
   )
 }
