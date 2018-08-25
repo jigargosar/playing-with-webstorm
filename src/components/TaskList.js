@@ -4,8 +4,14 @@ import React from 'react'
 import { getTitle, isDone } from '../models/Task'
 import cn from 'classname'
 import { HotKeys } from 'react-hotkeys'
+import { compose, identity } from 'ramda'
 
-function TaskItem({ task, queries, actions }) {
+const enhanceTaskItem = compose(identity)
+const TaskItem = enhanceTaskItem(function TaskItem({
+  task,
+  queries,
+  actions,
+}) {
   const done = isDone(task)
   const selected = queries.isTaskSelected(task)
   const handlers = {
@@ -32,8 +38,7 @@ function TaskItem({ task, queries, actions }) {
       </div>
     </HotKeys>
   )
-}
-
+})
 export function TaskList({ queries, actions }) {
   return (
     <BottomBarLayout
