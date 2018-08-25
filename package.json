@@ -5,7 +5,8 @@
   "prettier": {
     "trailingComma": "all",
     "arrowParens": "avoid",
-    "singleQuote": true
+    "singleQuote": true,
+    "semi": false
   },
   "dependencies": {
     "classname": "^0.0.0",
