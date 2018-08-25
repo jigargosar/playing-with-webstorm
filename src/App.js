@@ -12,8 +12,6 @@ function TaskItem({ task }) {
   return <ListItemLayout>{getTitle(task)}</ListItemLayout>
 }
 
-function ContentWithFixed() {}
-
 function App() {
   const tasks = times(partial(createTask)([]))(30)
   return (
