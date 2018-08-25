@@ -1,5 +1,6 @@
 import {DrawerLayout} from "../shared-components/DrawerLayout";
 import React from "react";
+import {PropTypes} from "../lib-exports/PropTypes";
 
 export function MainLayout({
                              title = 'Playing With Webstorm',
@@ -13,3 +14,7 @@ export function MainLayout({
     />
   )
 }
+
+MainLayout.propTypes = {
+  children: PropTypes.node.isRequired,
+};
