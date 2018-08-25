@@ -23,15 +23,6 @@ function BottomActionButton({ label, ...otherProps }) {
   )
 }
 
-function BottomBarLayout({ children, bottom }) {
-  return (
-    <div className="fdc-h-100">
-      <div className="overflow-scroll">{children}</div>
-      <div>{bottom}</div>
-    </div>
-  )
-}
-
 function BottomActionBar() {
   const buttonProps = [
     { label: 'delete' },
@@ -43,6 +34,15 @@ function BottomActionBar() {
       {map(({ id, label }) => (
         <BottomActionButton key={id} label={label} />
       ))(buttonProps)}
+    </div>
+  )
+}
+
+function BottomBarLayout({ children, bottom }) {
+  return (
+    <div className="fdc-h-100">
+      <div className="overflow-scroll">{children}</div>
+      <div>{bottom}</div>
     </div>
   )
 }
