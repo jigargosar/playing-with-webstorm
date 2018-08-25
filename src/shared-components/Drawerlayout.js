@@ -2,7 +2,7 @@ import React, {Fragment} from 'react'
 import cn from 'classname'
 
 export function DrawerLayout({
-  className,
+  styleClass="bg-near-white sans-serif",
   children,
   header,
   footer,
@@ -12,7 +12,7 @@ export function DrawerLayout({
   return (
     <Fragment>
       <div
-        className={cn('flex flex-column vh-100 overflow-hidden ', className, {
+        className={cn('flex flex-column vh-100 overflow-hidden ', styleClass, {
           'bg-black-20': debug,
         })}
       >

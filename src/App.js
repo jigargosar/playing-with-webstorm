@@ -15,7 +15,6 @@ function MainLayout({
 }) {
   return (
     <DrawerLayout
-      className="bg-near-white sans-serif"
       header={<div className={'f2 ma2'}>{title}</div>}
       // footer={<div className={"pa2 f4"}>fixed footer</div>}
       {...otherProps}
