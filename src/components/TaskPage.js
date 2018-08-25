@@ -46,6 +46,9 @@ const enhance = compose(
         queries: {
           isTaskSelected: eqProps('id', selectedTask),
           selectedTask,
+          focusedTask: defaultTo(null)(
+            findById(focusedTaskId)(tasks),
+          ),
           tasks,
         },
         actions: {
@@ -69,14 +72,14 @@ const enhance = compose(
   ),
 )
 
-const keyMap = {
-  navigateNext: 'down',
-  navigatePrev: 'up',
-  deleteTask: ['d'],
-  toggleDone: ['x'],
-}
-
 function TaskPage({ queries, actions }) {
+  const keyMap = {
+    navigateNext: 'down',
+    navigatePrev: 'up',
+    deleteTask: ['d'],
+    toggleDone: ['x'],
+  }
+
   return (
     <HotKeys keyMap={keyMap}>
       <MainLayout
