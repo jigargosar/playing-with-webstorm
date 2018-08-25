@@ -61,6 +61,8 @@ const enhance = compose(
             updateFocusedTaskId(null)
           },
           handleGlobalKeyDown: e => {},
+          onTaskToggleDone: () => task =>
+            updateTaskDone(!task.done, task),
         },
       }
     },
@@ -71,6 +73,7 @@ const keyMap = {
   navigateNext: 'down',
   navigatePrev: 'up',
   deleteTask: ['d'],
+  toggleDone: ['x'],
 }
 
 function TaskPage({ queries, actions }) {

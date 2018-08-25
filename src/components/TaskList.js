@@ -7,6 +7,9 @@ import cn from 'classname'
 function TaskItem({ task, queries, actions }) {
   const done = isDone(task)
   const selected = queries.isTaskSelected(task)
+  const handlers = {
+    toggleDone: actions.onTaskToggleDone(task),
+  }
   return (
     <div
       className={cn('fdr iic outline-0', 'bb b--black-10', {
