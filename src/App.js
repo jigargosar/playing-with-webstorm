@@ -2,7 +2,7 @@ import React from 'react'
 
 import { MainLayout } from './components/MainLayout'
 import { createTask, getTitle } from './models/Task'
-import { partial, times } from 'ramda'
+import { map, merge, partial, times } from 'ramda'
 import { renderKeyedById } from './lib/react-ext'
 
 function TaskItem({ task }) {
@@ -27,14 +27,16 @@ function App() {
     { label: 'delete' },
     { label: 'done' },
     { label: 'add' },
-  ]
+  ].map(b => merge({ id: b.label }, b))
   return (
     <MainLayout title={'FunDo'}>
       <div className="fdc-h-100">
         <div className="overflow-scroll">
           {renderKeyedById(TaskItem, 'task', tasks)}
         </div>
-        <div>{map(b => <BottomActionBar b={b} />)(buttons)}</div>
+        <div className="frr ">
+          {map(b => <BottomActionBar key={b} b={b} />)(buttons)}
+        </div>
       </div>
     </MainLayout>
   )
