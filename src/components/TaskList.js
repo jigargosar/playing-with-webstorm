@@ -9,8 +9,12 @@ function TaskItem({ task, queries, actions }) {
   const onDoneChange = e => actions.setDone(e.target.checked, task)
 
   const selected = queries.isTaskSelected(task)
+  const setSelectedTaskHandler = () => actions.setSelectedTask(task)
   return (
-    <div className={`fdr iic` + cn({ 'bg-light-blue': selected })}>
+    <div
+      className={`fdr iic` + cn({ 'bg-light-blue': selected })}
+      onClick={setSelectedTaskHandler}
+    >
       <div className="pa2">
         <input
           type="checkbox"
