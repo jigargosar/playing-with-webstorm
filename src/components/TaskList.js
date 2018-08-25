@@ -1,21 +1,32 @@
 import { BottomBarLayout } from './BottomBarLayout'
 import { TaskActionBar } from './TaskActionBar'
-import { renderKeyedById } from '../lib/react-ext'
 import React from 'react'
-import { getTitle } from '../models/Task'
+import { getTitle, isDone } from '../models/Task'
 
-function TaskItem({ task }) {
+function TaskItem({ task, actions }) {
+  const done = isDone(task)
+  const onDoneChange = e => actions.setDone(e.target.checked, task)
+
   return (
     <div className={`fdr iic`}>
+      <div className="pa2">
+        <input
+          type="checkbox"
+          checked={done}
+          onChange={onDoneChange}
+        />
+      </div>
       <div className="pa2 fa ba b--silver">{getTitle(task)}</div>
     </div>
   )
 }
 
-export function TaskList({ tasks }) {
+export function TaskList({ tasks, actions }) {
   return (
     <BottomBarLayout bottom={<TaskActionBar />}>
-      {renderKeyedById(TaskItem, 'task', tasks)}
+      {tasks.map(task => (
+        <TaskItem key={task.id} task={task} actions={actions} />
+      ))}
     </BottomBarLayout>
   )
 }
