@@ -9,3 +9,7 @@ body {
   flex-direction: column;
   height: 100%;
 }
+.fr {
+  display: flex;
+  flex-direction: row;
+}
