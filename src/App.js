@@ -25,7 +25,7 @@ function MainLayout({
 
 function App() {
   return (
-    <MainLayout>
+    <MainLayout title={'FunDo'}>
       <RepeatString value={'main content items'} times={3} />
     </MainLayout>
   )
