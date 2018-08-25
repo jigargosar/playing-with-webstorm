@@ -1,14 +1,84 @@
 import React, {Component, Fragment} from "react";
 import "tachyons";
-import PageHeader from "./components/PageHeader";
-import PageFooter from "./components/PageFooter";
 
 class App extends Component {
   render() {
     return (
       <Fragment>
-        <PageHeader />
-        <PageFooter />
+        <div className={'vh-100 bg-black-30'}>
+          <div>
+            fixed header
+          </div>
+          <div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+            <div>content</div>
+          </div>
+          <div>
+            fixed footer
+          </div>
+        </div>
       </Fragment>
     );
   }
