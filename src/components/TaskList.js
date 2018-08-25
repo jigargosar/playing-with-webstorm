@@ -13,6 +13,7 @@ function TaskItem({ task, queries, actions }) {
   return (
     <div
       className={cn('fdr iic', { 'bg-light-blue': selected })}
+      tabIndex={-1}
       onFocus={setSelectedTaskHandler}
     >
       <div className="pa2">
