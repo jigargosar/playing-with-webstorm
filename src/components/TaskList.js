@@ -1,12 +1,16 @@
 import { BottomBarLayout } from './BottomBarLayout'
 import { TaskActionBar } from './TaskActionBar'
-import React from 'react'
+import React, { Fragment } from 'react'
 import { getTitle, isDone } from '../models/Task'
 import cn from 'classname'
 import { HotKeys } from 'react-hotkeys'
-import { compose, identity } from 'ramda'
+import { compose } from 'ramda'
 
-const enhanceTaskItem = compose(identity)
+const enhanceTaskItem = compose(BaseComponent => props => (
+  <Fragment>
+    <BaseComponent {...props} />
+  </Fragment>
+))
 const TaskItem = enhanceTaskItem(function TaskItem({
   task,
   queries,
