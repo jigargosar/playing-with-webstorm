@@ -1,10 +1,15 @@
 import {addDecorator, configure} from '@storybook/react'
 import {withInfo} from '@storybook/addon-info'
 
-addDecorator(
-  withInfo({
-    // header: false, // Global configuration for the info addon across all of your stories.
-  }),
+// addDecorator(
+//   withInfo({
+//     // header: false, // Global configuration for the info addon across all of your stories.
+//     info:"None"
+//   }),
+// )
+
+addDecorator((story, context) =>
+  withInfo('common info')(story)(context),
 )
 
 function loadStories() {
