@@ -5,7 +5,7 @@ import { MainLayout } from './MainLayout'
 import { TaskList } from './TaskList'
 import { withStateHandlers } from 'recompose'
 
-const enhance = compose(withStateHandlers)
+const enhance = compose(withStateHandlers())
 
 function TaskPage() {
   const tasks = times(createNewTaskWithDefaults)(30)
