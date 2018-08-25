@@ -67,14 +67,22 @@ const enhance = compose(
   ),
 )
 
+const keyMap = {
+  navigateNext: 'down',
+  navigatePrev: 'up',
+  deleteTask: ['d'],
+}
+
 function TaskPage({ queries, actions }) {
   return (
-    <MainLayout
-      title={'FunDo'}
-      onKeyDown={actions.handleGlobalKeyDown}
-    >
-      <TaskList queries={queries} actions={actions} />
-    </MainLayout>
+    <HotKeys keyMap={keyMap}>
+      <MainLayout
+        title={'FunDo'}
+        onKeyDown={actions.handleGlobalKeyDown}
+      >
+        <TaskList queries={queries} actions={actions} />
+      </MainLayout>
+    </HotKeys>
   )
 }
 
