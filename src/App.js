@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Fragment} from "react";
 import "tachyons";
 
 function MainContent() {
@@ -144,8 +144,8 @@ function SidebarContent() {
 
 function App() {
   return (
-    <div className={'vh-100 overflow-hidden'}>
-      <div className={"flex h-100 flex-column overflow-scroll bg-black-30"}>
+    <Fragment>
+      <div className={"flex flex-column vh-100 overflow-hidden bg-black-30"}>
         <div className={"bg-black-30"}>fixed header</div>
         <div className={"flex"}>
           <div className={'w-30 mw6 overflow-scroll '}><SidebarContent /></div>
@@ -153,7 +153,7 @@ function App() {
         </div>
         <div className={'bg-black-30'}>fixed footer</div>
       </div>
-    </div>
+    </Fragment>
   );
 }
 
