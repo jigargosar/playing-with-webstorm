@@ -12,7 +12,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged",
+      "post-commit": "update-git-index"
     }
   },
   "lint-staged": {
@@ -20,6 +21,15 @@
       "prettier --write",
       "git add"
     ]
+  },
+  "scripts": {
+    "update-git-index": "git update-index -g",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "storybook": "nodemon -w .storybook/webpack.config.js -x start-storybook -p 9009 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "dependencies": {
     "chance": "^1.0.16",
@@ -36,14 +46,6 @@
     "react-scripts": "1.1.5",
     "react-treebeard": "^2.1.0",
     "tachyons": "^4.11.1"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "storybook": "nodemon -w .storybook/webpack.config.js -x start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^3.4.10",
