@@ -12,7 +12,9 @@ function TaskItem({ task, queries, actions }) {
   const setSelectedTaskHandler = () => actions.setSelectedTask(task)
   return (
     <div
-      className={cn('fdr iic', { 'bg-light-blue': selected })}
+      className={cn('fdr iic outline-0', {
+        'bg-light-blue': selected,
+      })}
       tabIndex={-1}
       onFocus={setSelectedTaskHandler}
     >
