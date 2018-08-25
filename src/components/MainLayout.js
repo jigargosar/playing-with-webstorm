@@ -13,5 +13,6 @@ export function MainLayout({ children, title = 'Playing With Webstorm', ...other
 }
 
 MainLayout.propTypes = {
-  children: PropTypes.node.isRequired,
+  ...DrawerLayout.propTypes,
+  title: PropTypes.string,
 }
