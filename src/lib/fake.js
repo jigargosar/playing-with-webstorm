@@ -25,9 +25,6 @@ const schema = {
       type: 'object',
       properties: {
         id: {
-          $ref: '#/definitions/modelId',
-        },
-        mid: {
           type:'string',
           format:'modelId',
           modelName:'user'
@@ -60,12 +57,12 @@ jsf.extend('faker', function() {
 });
 
 jsf.format('modelId', function({modelName='model'}) {
-  return `${modelName}_${nanoid}`;
+  return `${modelName}_${nanoid()}`;
 });
 
 
 jsf.resolve(schema).then(function(sample) {
-  console.log(sample)
+  console.table(sample.user)
   // "[object Object]"
 
   console.log(sample.user.name)
