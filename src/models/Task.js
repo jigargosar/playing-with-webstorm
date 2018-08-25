@@ -8,6 +8,6 @@ export function Task({
   done = false,
   createdAt = Date.now(),
 } = {}) {
-  validate(['SSBN'], [id, title, done, createdAt])
+  validate('SSBN', [id, title, done, createdAt])
   return { id, title, done, createdAt }
 }
