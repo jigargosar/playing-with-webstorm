@@ -1,10 +1,8 @@
 import faker from 'faker'
-import {Chance} from 'chance'
+import { Chance } from 'chance'
 
 import jsf from 'json-schema-faker'
-import nanoid from "nanoid";
-import {schema} from "../data/schema";
-
+import nanoid from 'nanoid'
 
 const seed = Math.random()
 
@@ -16,26 +14,23 @@ export function randomWords() {
 }
 
 jsf.option({
-  optionalsProbability: 0.5
-});
-
+  optionalsProbability: 0.5,
+})
 
 jsf.extend('faker', function() {
-  return require('faker');
-});
-
-jsf.format('modelId', function({modelName='model'}) {
-  return `${modelName}_${nanoid()}`;
-});
-
-export { jsf}
-
-
-
-jsf.resolve(schema).then(function(sample) {
-  console.table(sample.user)
-  // "[object Object]"
-
-  console.log(sample.user.name)
-  // "John Doe"
+  return require('faker')
 })
+
+jsf.format('modelId', function({ modelName = 'model' }) {
+  return `${modelName}_${nanoid()}`
+})
+
+export { jsf }
+
+// jsf.resolve(schema).then(function(sample) {
+//   console.table(sample.user)
+//   // "[object Object]"
+//
+//   console.log(sample.user.name)
+//   // "John Doe"
+// })
