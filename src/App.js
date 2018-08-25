@@ -9,21 +9,26 @@ function RepeatString({ value = 'default string', times = 30 }) {
     </div>
   )
 }
-function MainLayout({children,title='Playing With Webstorm'}) {
-  return <DrawerLayout
-    className="bg-near-white sans-serif"
-    header={<div className={'f2 ma2'}>{title}</div>}
-    // footer={<div className={"pa2 f4"}>fixed footer</div>}
-    sidebar={<RepeatString value={"drawer item"} times={3}/>}
-    debug={false}
-  >
-    {children}
-  </DrawerLayout>;
+function MainLayout({
+  children,
+  title = 'Playing With Webstorm',
+  ...otherProps
+}) {
+  return (
+    <DrawerLayout
+      className="bg-near-white sans-serif"
+      header={<div className={'f2 ma2'}>{title}</div>}
+      // footer={<div className={"pa2 f4"}>fixed footer</div>}
+      {...otherProps}
+    />
+  )
 }
 
 function App() {
   return (
-    <MainLayout><RepeatString value={"main content items"} times={3}/></MainLayout>
+    <MainLayout>
+      <RepeatString value={'main content items'} times={3} />
+    </MainLayout>
   )
 }
 
