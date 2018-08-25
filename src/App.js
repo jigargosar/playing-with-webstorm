@@ -8,7 +8,7 @@ import { renderKeyedById } from './lib/react-ext'
 function TaskItem({ task }) {
   return (
     <div className={`pa2 fdr`}>
-      <div className="">{getTitle(task)}</div>
+      <div className="fa">{getTitle(task)}</div>
     </div>
   )
 }
@@ -21,7 +21,7 @@ function App() {
         <div className="overflow-scroll">
           {renderKeyedById(TaskItem, 'task', tasks)}
         </div>
-        <div className="pa2 bt b--silver">footer</div>
+        <div className="pa2 bt b--silver">b1,b2,b3</div>
       </div>
     </MainLayout>
   )
