@@ -1,8 +1,8 @@
 import React from 'react'
 
 import { MainLayout } from './components/MainLayout'
-import { createTask, getTitle } from './models/Task'
-import { map, merge, partial, times } from 'ramda'
+import { createNewTaskWithDefaults, getTitle } from './models/Task'
+import { map, merge, times } from 'ramda'
 import { renderKeyedById } from './lib/react-ext'
 
 function TaskItem({ task }) {
@@ -48,7 +48,7 @@ function BottomActionBar() {
 }
 
 function App() {
-  const tasks = times(partial(createTask)([]))(30)
+  const tasks = times(createNewTaskWithDefaults)(30)
 
   return (
     <MainLayout title={'FunDo'}>
