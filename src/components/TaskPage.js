@@ -16,7 +16,7 @@ const enhance = compose(
     setDone: ({ updateTasks }) => (done, task) =>
       updateTasks(overModel(task, setDone(done))),
   }),
-  withProps(setDone => ({ actions: { setDone } })),
+  withProps(({ setDone }) => ({ actions: { setDone } })),
 )
 
 function TaskPage({ tasks, actions }) {
