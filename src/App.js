@@ -5,8 +5,8 @@ import { createTask, getTitle } from './models/Task'
 import { partial, times } from 'ramda'
 import { renderKeyedById } from './lib/react-ext'
 
-function ListItemLayout({ children }) {
-  return <div className="pa2 flex">{children}</div>
+function ListItemLayout({ spacing = 'pa2', children }) {
+  return <div className={`${spacing} flex`}>{children}</div>
 }
 
 function TaskItem({ task }) {
