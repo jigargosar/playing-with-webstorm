@@ -21,7 +21,7 @@ function App() {
         <div className="overflow-scroll">
           {renderKeyedById(TaskItem, 'task', tasks)}
         </div>
-        <div className="">footer</div>
+        <div className="pa2 bt b--silver">footer</div>
       </div>
     </MainLayout>
   )
