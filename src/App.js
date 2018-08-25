@@ -33,6 +33,11 @@ function BottomBarLayout({ children, bottom }) {
 }
 
 function BottomActionBar({ buttonProps }) {
+  const buttonProps = [
+    { label: 'delete' },
+    { label: 'done' },
+    { label: 'add' },
+  ].map(b => merge({ id: b.label }, b))
   return (
     <div className="pa2 frr bt b--silver">
       {map(({ id, label }) => (
@@ -44,11 +49,7 @@ function BottomActionBar({ buttonProps }) {
 
 function App() {
   const tasks = times(partial(createTask)([]))(30)
-  const buttons = [
-    { label: 'delete' },
-    { label: 'done' },
-    { label: 'add' },
-  ].map(b => merge({ id: b.label }, b))
+
   return (
     <MainLayout title={'FunDo'}>
       <BottomBarLayout bottom={<BottomActionBar />}>
