@@ -58,8 +58,8 @@ const schema = {
 jsf.extend('faker', function() {
   return require('faker');
 });
+
 jsf.format('modelId', function({modelName='model'}) {
-  console.log(a);
   return `${modelName}_${nanoid}`;
 });
 
