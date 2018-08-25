@@ -5,20 +5,12 @@ import { createNewTaskWithDefaults, getTitle } from './models/Task'
 import { times } from 'ramda'
 import { renderKeyedById } from './lib/react-ext'
 import { TaskActionBar } from './components/TaskActionBar'
+import { BottomBarLayout } from './components/BottomBarLayout'
 
 function TaskItem({ task }) {
   return (
     <div className={`fdr iic`}>
       <div className="pa2 fa ba b--silver">{getTitle(task)}</div>
-    </div>
-  )
-}
-
-function BottomBarLayout({ children, bottom }) {
-  return (
-    <div className="fdc-h-100">
-      <div className="overflow-scroll">{children}</div>
-      <div>{bottom}</div>
     </div>
   )
 }
