@@ -11,7 +11,7 @@ function TaskItem({ task, queries, actions }) {
   const selected = queries.isTaskSelected(task)
   return (
     <div
-      className={cn('fdr iic outline-0', {
+      className={cn('fdr iic outline-0', 'bb b--black-10', {
         'bg-light-blue': selected,
       })}
       tabIndex={-1}
@@ -25,7 +25,7 @@ function TaskItem({ task, queries, actions }) {
           onChange={onDoneChange}
         />
       </div>
-      <div className="pa2 fa  b--silver">{getTitle(task)}</div>
+      <div className="pa2 fa  ">{getTitle(task)}</div>
     </div>
   )
 }
