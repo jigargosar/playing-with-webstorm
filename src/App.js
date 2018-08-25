@@ -7,8 +7,8 @@ import { renderKeyedById } from './lib/react-ext'
 
 function TaskItem({ task }) {
   return (
-    <div className={`pa2 fdr`}>
-      <div className="fa">{getTitle(task)}</div>
+    <div className={`fdr`}>
+      <div className="pa2 fa ba b--silver">{getTitle(task)}</div>
     </div>
   )
 }
