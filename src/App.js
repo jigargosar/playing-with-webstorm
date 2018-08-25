@@ -23,9 +23,9 @@ function App() {
         </div>
         <div>
           <div className="pa2 frr bt b--silver">
-            <button>delete</button>
-            <button>done</button>
-            <button>add</button>
+            <button className="ph2">delete</button>
+            <button className="ph2">done</button>
+            <button className="ph2">add</button>
           </div>
         </div>
       </div>
