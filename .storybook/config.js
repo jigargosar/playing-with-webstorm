@@ -3,7 +3,7 @@ import {withInfo} from '@storybook/addon-info'
 import {setConsoleOptions, withConsole,} from '@storybook/addon-console'
 
 addDecorator((story, context) =>
-  withInfo({ inline: true })(story)(context),
+  withInfo({ inline: false })(story)(context),
 )
 
 setConsoleOptions({
