@@ -6,7 +6,9 @@
     "trailingComma": "all",
     "arrowParens": "avoid",
     "singleQuote": true,
-    "semi": false
+    "semi": false,
+    "tabWidth": 2,
+    "printWidth": 70
   },
   "dependencies": {
     "classname": "^0.0.0",
