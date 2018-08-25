@@ -1,3 +1,1 @@
-import times from 'ramda/times'
-
-export {times}
+export {times , partial, map}from 'ramda'

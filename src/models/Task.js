@@ -2,7 +2,7 @@ import * as nanoid from 'nanoid'
 import {randomWords} from '../lib/fake'
 import {validate} from '../lib/validate'
 
-export function Task({
+export function createTask({
   id = `task_${nanoid()}`,
   title = randomWords(),
   done = false,

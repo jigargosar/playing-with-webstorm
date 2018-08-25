@@ -1,14 +1,19 @@
-import React from 'react'
+import React, {Fragment} from 'react'
 import 'tachyons'
 import {MainLayout} from './components/MainLayout'
-import {getTitle, Task} from './models/Task'
-import {times} from 'ramda'
+import {createTask, getTitle} from './models/Task'
+import {map, partial, times} from 'ramda'
+
+
+function TaskItem({task}) {
+  return <div>{getTitle(task)}</div>
+}
 
 function App() {
-  const tasks = times(() => Task())(30)
+  const tasks = times(partial(createTask)([]))(30)
   return (
     <MainLayout title={'FunDo'}>
-      {times(i => <div key={i}>{getTitle(Task())}</div>)(30)}
+      {map(t => <Fragment key={t.id}><TaskItem task={t}/></Fragment>)(30)}
     </MainLayout>
   )
 }
