@@ -1,1 +1,1 @@
-export {times , partial, map}from 'ramda'
+export { times, partial, map, mapObjIndexed } from 'ramda'

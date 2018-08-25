@@ -13,6 +13,14 @@ function TaskItem({ task }) {
   )
 }
 
+function BottomActionBar({ b }) {
+  return (
+    <div className="ph2">
+      <button className="ph2">{b.label}</button>
+    </div>
+  )
+}
+
 function App() {
   const tasks = times(partial(createTask)([]))(30)
   const buttons = [
@@ -26,15 +34,7 @@ function App() {
         <div className="overflow-scroll">
           {renderKeyedById(TaskItem, 'task', tasks)}
         </div>
-        <div>
-          <div className="pa2 frr bt b--silver">
-            {buttons.map(b => (
-              <div key={b.label} className="ph2">
-                <button className="ph2">{b.label}</button>
-              </div>
-            ))}
-          </div>
-        </div>
+        <div>{map(b => <BottomActionBar b={b} />)(buttons)}</div>
       </div>
     </MainLayout>
   )
