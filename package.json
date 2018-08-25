@@ -16,6 +16,7 @@
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-scripts": "1.1.5",
+    "react-treebeard": "^2.1.0",
     "tachyons": "^4.11.1"
   },
   "scripts": {
@@ -28,6 +29,7 @@
   },
   "devDependencies": {
     "@storybook/addon-actions": "^3.4.10",
+    "@storybook/addon-console": "^1.0.4",
     "@storybook/addon-info": "^3.4.10",
     "@storybook/addon-links": "^3.4.10",
     "@storybook/addon-storysource": "^3.4.10",

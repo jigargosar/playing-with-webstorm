@@ -1,6 +1,7 @@
 import React from 'react'
 import {storiesOf} from '@storybook/react'
 import {DrawerLayout} from "../shared-components/DrawerLayout";
+import "tachyons"
 
 // import {action} from '@storybook/addon-actions'
 // import {linkTo} from '@storybook/addon-links'
@@ -25,4 +26,4 @@ import {DrawerLayout} from "../shared-components/DrawerLayout";
 
 const sidebarLayoutStories = storiesOf('DrawerLayout', module)
 
-sidebarLayoutStories.add('with default props', ()=><DrawerLayout>a</DrawerLayout>)
+sidebarLayoutStories.add('with default props', () => <DrawerLayout>a</DrawerLayout>)

@@ -1,5 +1,13 @@
 import {addDecorator, configure} from '@storybook/react'
 import {withInfo} from '@storybook/addon-info'
+import {setConsoleOptions, withConsole} from '@storybook/addon-console';
+
+setConsoleOptions({
+  panelExclude: [/\[HMR]/],
+});
+
+addDecorator((storyFn, context) => withConsole()(storyFn)(context));
+
 
 // addDecorator(
 //   withInfo({
