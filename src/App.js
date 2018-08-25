@@ -148,8 +148,8 @@ function App() {
       <div className={"flex h-100 flex-column overflow-scroll bg-black-30"}>
         <div className={"bg-black-30"}>fixed header</div>
         <div className={"flex"}>
-          <div className={'overflow-scroll bg-black-30'}><SidebarContent /></div>
-          <div className={'overflow-scroll'}><MainContent /></div>
+          <div className={'w-30 mw6 overflow-scroll '}><SidebarContent /></div>
+          <div className={'flex-auto overflow-scroll bg-black-30'}><MainContent /></div>
         </div>
         <div className={'bg-black-30'}>fixed footer</div>
       </div>
