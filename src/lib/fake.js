@@ -3,6 +3,7 @@ import {Chance} from 'chance'
 
 import jsf from 'json-schema-faker'
 import nanoid from "nanoid";
+import {schema} from "../../data/schema";
 
 
 const seed = Math.random()
@@ -28,45 +29,6 @@ jsf.format('modelId', function({modelName='model'}) {
 });
 
 export { jsf}
-
-
-const schema = {
-  type: 'object',
-  properties: {
-    user: { $ref: '#/definitions/user' },
-  },
-  required: ['user'],
-  definitions: {
-    user: {
-      type: 'object',
-      properties: {
-        id: {
-          type:'string',
-          format:'modelId',
-          modelName:'user'
-        },
-        name: {
-          type: 'string',
-          faker: 'name.findName',
-        },
-        email: {
-          type: 'string',
-          faker: 'internet.email',
-        },
-      },
-      required: ['id', 'mid','name', 'email'],
-    },
-    positiveInt: {
-      type: 'integer',
-      minimum: 0,
-      exclusiveMinimum: true,
-    },
-    modelId: {
-      type: 'string',
-      faker: 'random.word',
-    },
-  },
-}
 
 
 
