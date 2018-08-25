@@ -6,8 +6,6 @@ import cn from 'classname'
 
 function TaskItem({ task, queries, actions }) {
   const done = isDone(task)
-  const onDoneChange = e => actions.setDone(e.target.checked, task)
-
   const selected = queries.isTaskSelected(task)
   return (
     <div
@@ -22,7 +20,7 @@ function TaskItem({ task, queries, actions }) {
         <input
           type="checkbox"
           checked={done}
-          onChange={onDoneChange}
+          onChange={actions.onTaskDoneChange(task)}
         />
       </div>
       <div className="pa2 fa  ">{getTitle(task)}</div>

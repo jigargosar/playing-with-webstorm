@@ -22,7 +22,7 @@ export function getTitle({ title }) {
   return title
 }
 
-export const setDone = curry((done, task) => {
+export const setTaskDone = curry((done, task) => {
   validate('BO', [done, task])
   return merge(task, { done })
 })

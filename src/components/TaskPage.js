@@ -1,4 +1,7 @@
-import { createNewTaskWithDefaults, setDone } from '../models/Task'
+import {
+  createNewTaskWithDefaults,
+  setTaskDone,
+} from '../models/Task'
 import React from 'react'
 import {
   compose,
@@ -34,6 +37,9 @@ const enhance = compose(
         defaultTo(head(tasks)),
         findById(selectedTaskId),
       )(tasks)
+      const updateTaskDone = curry((done, task) =>
+        updateTasks(overModel(task, setTaskDone(done))),
+      )
       return {
         queries: {
           isTaskSelected: eqProps('id', selectedTask),
@@ -41,9 +47,8 @@ const enhance = compose(
           tasks,
         },
         actions: {
-          setDone: curry((done, task) =>
-            updateTasks(overModel(task, setDone(done))),
-          ),
+          setDone: updateTaskDone,
+          onTaskDoneChange: e => updateTaskDone(e.target.value),
           onTaskFocus: ({ id }) => () => {
             updateSelectedTaskId(id)
             updateFocusedTaskId(id)
