@@ -15,14 +15,20 @@ function TaskItem({ task }) {
   )
 }
 
+function TaskList({ tasks }) {
+  return (
+    <BottomBarLayout bottom={<TaskActionBar />}>
+      {renderKeyedById(TaskItem, 'task', tasks)}
+    </BottomBarLayout>
+  )
+}
+
 function App() {
   const tasks = times(createNewTaskWithDefaults)(30)
 
   return (
     <MainLayout title={'FunDo'}>
-      <BottomBarLayout bottom={<TaskActionBar />}>
-        {renderKeyedById(TaskItem, 'task', tasks)}
-      </BottomBarLayout>
+      <TaskList tasks={tasks} />
     </MainLayout>
   )
 }
