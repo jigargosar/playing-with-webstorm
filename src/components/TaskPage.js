@@ -6,7 +6,6 @@ import {
   defaultTo,
   eqProps,
   head,
-  isNil,
   times,
 } from 'ramda'
 import { MainLayout } from './MainLayout'
@@ -28,9 +27,6 @@ const enhance = compose(
       selectedTaskId,
       updateSelectedTaskId,
     }) => {
-      const setTaskDone = curry((done, task) =>
-        updateTasks(overModel(task, setDone(done))),
-      )
       const selectedTask = compose(
         defaultTo(head(tasks)),
         findById(selectedTaskId),
@@ -41,12 +37,10 @@ const enhance = compose(
           selectedTask,
         },
         actions: {
-          setDone: setTaskDone,
+          setDone: curry((done, task) =>
+            updateTasks(overModel(task, setDone(done))),
+          ),
           setSelectedTask: ({ id }) => updateSelectedTaskId(id),
-          setSelectedTaskDone: done => {
-            if (isNil(selectedTask)) return
-            return setTaskDone(done, selectedTask)
-          },
         },
       }
     },
