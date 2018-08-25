@@ -71,6 +71,8 @@ const enhance = compose(
             if (code === 'Space') {
               e.preventDefault()
             }
+            console.log(task.done)
+            console.table(task)
             updateTaskDone(!task.done, task)
           },
         },
