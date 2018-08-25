@@ -35,8 +35,8 @@ function App() {
           {renderKeyedById(TaskItem, 'task', tasks)}
         </div>
         <div>
-          <div className="frr">
-            {map(b => <BottomActionBar key={b} b={b} />)(buttons)}
+          <div className="pa2 frr bt b--silver">
+            {map(b => <BottomActionBar key={b.id} b={b} />)(buttons)}
           </div>
         </div>
       </div>
