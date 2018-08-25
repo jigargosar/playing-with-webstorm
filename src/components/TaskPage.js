@@ -20,12 +20,15 @@ const enhance = compose(
     times(createNewTaskWithDefaults)(30),
   ),
   withState('selectedTaskId', 'updateSelectedTaskId', null),
+  withState('focusedTaskId', 'updateFocusedTaskId', null),
   withProps(
     ({
       tasks,
       updateTasks,
       selectedTaskId,
       updateSelectedTaskId,
+      focusedTaskId,
+      updateFocusedTaskId,
     }) => {
       const selectedTask = compose(
         defaultTo(head(tasks)),
@@ -40,7 +43,14 @@ const enhance = compose(
           setDone: curry((done, task) =>
             updateTasks(overModel(task, setDone(done))),
           ),
-          setSelectedTask: ({ id }) => updateSelectedTaskId(id),
+          onTaskFocus: ({ id }) => () => {
+            updateSelectedTaskId(id)
+            updateFocusedTaskId(id)
+          },
+          onTaskBlur: ({ id }) => () => {
+            if (id !== focusedTaskId) return
+            updateFocusedTaskId(null)
+          },
         },
       }
     },

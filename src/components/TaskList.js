@@ -9,14 +9,14 @@ function TaskItem({ task, queries, actions }) {
   const onDoneChange = e => actions.setDone(e.target.checked, task)
 
   const selected = queries.isTaskSelected(task)
-  const setSelectedTaskHandler = () => actions.setSelectedTask(task)
   return (
     <div
       className={cn('fdr iic outline-0', {
         'bg-light-blue': selected,
       })}
       tabIndex={-1}
-      onFocus={setSelectedTaskHandler}
+      onFocus={actions.onTaskFocus(task)}
+      onBlur={actions.onTaskBlur(task)}
     >
       <div className="pa2">
         <input
