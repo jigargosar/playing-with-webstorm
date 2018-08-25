@@ -18,7 +18,6 @@ function TaskItem({ task, queries, actions }) {
       })}
       tabIndex={-1}
       onFocus={actions.onTaskFocus(task)}
-      onBlur={actions.onTaskBlur(task)}
     >
       <div className="pa2">
         <input

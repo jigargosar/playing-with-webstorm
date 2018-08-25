@@ -56,11 +56,6 @@ const enhance = compose(
             updateTaskDone(e.target.checked, task),
           onTaskFocus: ({ id }) => () => {
             updateSelectedTaskId(id)
-            updateFocusedTaskId(id)
-          },
-          onTaskBlur: ({ id }) => () => {
-            if (id !== focusedTaskId) return
-            updateFocusedTaskId(null)
           },
           onTaskToggleDone: task => () => {
             updateTaskDone(!task.done, task)
