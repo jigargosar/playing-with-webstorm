@@ -4,27 +4,11 @@ import React from 'react'
 import { getTitle, isDone } from '../models/Task'
 import cn from 'classname'
 import { HotKeys } from 'react-hotkeys'
-import { compose } from 'ramda'
-import { withStateHandlers } from 'recompose'
 
-const enhanceTaskItem = compose(
-  withStateHandlers(
-    { hasFocus: false },
-    {
-      onFocus: () => () => ({ hasFocus: true }),
-      onBlur: () => () => ({ hasFocus: false }),
-    },
-  ),
-)
-const TaskItem = enhanceTaskItem(function TaskItem({
-  task,
-  queries,
-  actions,
-  onFocus,
-  onBlur,
-}) {
+function TaskItem({ task, queries, actions }) {
   const done = isDone(task)
   const selected = queries.isTaskSelected(task)
+
   const handlers = {
     toggleDone: actions.onTaskToggleDone(task),
   }
@@ -35,14 +19,8 @@ const TaskItem = enhanceTaskItem(function TaskItem({
         'bg-light-blue': selected,
       })}
       tabIndex={-1}
-      onFocus={compose(
-        actions.onTaskFocus(task),
-        onFocus,
-      )}
-      onBlur={compose(
-        actions.onTaskBlur(task),
-        onBlur,
-      )}
+      onFocus={actions.onTaskFocus(task)}
+      onBlur={actions.onTaskBlur(task)}
     >
       <div className="pa2">
         <input
@@ -54,7 +32,7 @@ const TaskItem = enhanceTaskItem(function TaskItem({
       <div className="pa2 fa  ">{getTitle(task)}</div>
     </HotKeys>
   )
-})
+}
 
 export function TaskList({ queries, actions }) {
   return (

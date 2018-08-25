@@ -9,15 +9,12 @@ import {
   defaultTo,
   eqProps,
   head,
-  isNil,
-  prop,
   times,
 } from 'ramda'
 import { MainLayout } from './MainLayout'
 import { TaskList } from './TaskList'
 import { withProps, withState } from 'recompose'
 import { findById, overModel } from '../models/TaskList'
-import { HotKeys } from 'react-hotkeys'
 
 const enhance = compose(
   withState(
@@ -65,14 +62,7 @@ const enhance = compose(
             if (id !== focusedTaskId) return
             updateFocusedTaskId(null)
           },
-          handleGlobalKeyDown: e => {},
-          onTaskToggleDone: task => (e = {}) => {
-            const code = prop('code')(e)
-            if (code === 'Space') {
-              e.preventDefault()
-            }
-            console.log(task.done)
-            console.table(task)
+          onTaskToggleDone: task => () => {
             updateTaskDone(!task.done, task)
           },
         },
@@ -82,25 +72,13 @@ const enhance = compose(
 )
 
 function TaskPage({ queries, actions }) {
-  const keyMap = {
-    navigateNext: 'down',
-    navigatePrev: 'up',
-    deleteTask: ['d'],
-    toggleDone: [
-      'x',
-      ...(isNil(queries.focusedTask) ? ['space'] : []),
-    ],
-  }
-
   return (
-    <HotKeys keyMap={keyMap}>
-      <MainLayout
-        title={'FunDo'}
-        onKeyDown={actions.handleGlobalKeyDown}
-      >
-        <TaskList queries={queries} actions={actions} />
-      </MainLayout>
-    </HotKeys>
+    <MainLayout
+      title={'FunDo'}
+      onKeyDown={actions.handleGlobalKeyDown}
+    >
+      <TaskList queries={queries} actions={actions} />
+    </MainLayout>
   )
 }
 
