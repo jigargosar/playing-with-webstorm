@@ -15,6 +15,7 @@ import { MainLayout } from './MainLayout'
 import { TaskList } from './TaskList'
 import { withProps, withState } from 'recompose'
 import { findById, overModel } from '../models/TaskList'
+import { HotKeys } from 'react-hotkeys'
 
 const enhance = compose(
   withState(
@@ -59,6 +60,7 @@ const enhance = compose(
             if (id !== focusedTaskId) return
             updateFocusedTaskId(null)
           },
+          handleGlobalKeyDown: e => {},
         },
       }
     },
@@ -67,7 +69,10 @@ const enhance = compose(
 
 function TaskPage({ queries, actions }) {
   return (
-    <MainLayout title={'FunDo'}>
+    <MainLayout
+      title={'FunDo'}
+      onKeyDown={actions.handleGlobalKeyDown}
+    >
       <TaskList queries={queries} actions={actions} />
     </MainLayout>
   )
