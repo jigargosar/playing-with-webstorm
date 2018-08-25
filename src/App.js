@@ -5,8 +5,12 @@ import { createTask, getTitle } from './models/Task'
 import { partial, times } from 'ramda'
 import { renderKeyedById } from './lib/react-ext'
 
+function ListItem(children) {
+  return <div>{children}</div>
+}
+
 function TaskItem({ task }) {
-  return <div>{getTitle(task)}</div>
+  return <ListItem>{getTitle(task)}</ListItem>
 }
 
 function App() {
