@@ -1,12 +1,15 @@
-import React, {Component} from "react";
-import "tachyons"
+import React, {Component, Fragment} from "react";
+import "tachyons";
 import PageHeader from "./components/PageHeader";
+import PageFooter from "./components/PageFooter";
 
 class App extends Component {
   render() {
     return (
-      <PageHeader/>
-
+      <Fragment>
+        <PageHeader />
+        <PageFooter />
+      </Fragment>
     );
   }
 }
