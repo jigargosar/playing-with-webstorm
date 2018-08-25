@@ -1,5 +1,6 @@
 import * as nanoid from 'nanoid'
 import {randomWords} from '../lib/fake'
+import {validate} from '../lib/validate'
 
 export function Task({
   id = `task_${nanoid()}`,
@@ -7,5 +8,6 @@ export function Task({
   done = false,
   createdAt = Date.now(),
 } = {}) {
+  validate(['SSBN'], [id, title, done, createdAt])
   return { id, title, done, createdAt }
 }
