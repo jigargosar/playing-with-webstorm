@@ -73,10 +73,7 @@ const enhance = compose(
 
 function TaskPage({ queries, actions }) {
   return (
-    <MainLayout
-      title={'FunDo'}
-      onKeyDown={actions.handleGlobalKeyDown}
-    >
+    <MainLayout title={'FunDo'}>
       <TaskList queries={queries} actions={actions} />
     </MainLayout>
   )
