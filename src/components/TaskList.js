@@ -14,11 +14,11 @@ const enhanceTaskItem = compose(
   }) => (
     <BaseComponent
       onFocus={compose(
-        tap(console.log),
+        tap(() => console.log('onFocus')),
         onFocus,
       )}
       onBlur={compose(
-        tap(console.log),
+        tap(() => console.log('onBlur')),
         onBlur,
       )}
       {...otherProps}
