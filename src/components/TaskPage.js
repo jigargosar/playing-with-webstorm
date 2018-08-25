@@ -10,7 +10,7 @@ import {
   eqProps,
   head,
   isNil,
-  pick,
+  propOr,
   times,
 } from 'ramda'
 import { MainLayout } from './MainLayout'
@@ -66,8 +66,11 @@ const enhance = compose(
             updateFocusedTaskId(null)
           },
           handleGlobalKeyDown: e => {},
-          onTaskToggleDone: task => e => {
-            console.log(pick(['code', 'key', 'which'])(e), e)
+          onTaskToggleDone: task => (e = {}) => {
+            const code = compose(propOr(null, 'code'))(e)
+            if (code === 'Space') {
+              e.preventDefault()
+            }
             updateTaskDone(!task.done, task)
           },
         },
