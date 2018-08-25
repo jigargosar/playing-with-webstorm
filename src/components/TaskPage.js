@@ -4,7 +4,7 @@ import { times } from 'ramda'
 import { MainLayout } from './MainLayout'
 import { TaskList } from './TaskList'
 
-export function TaskPage() {
+function TaskPage() {
   const tasks = times(createNewTaskWithDefaults)(30)
   return (
     <MainLayout title={'FunDo'}>
@@ -12,3 +12,5 @@ export function TaskPage() {
     </MainLayout>
   )
 }
+
+export default TaskPage
