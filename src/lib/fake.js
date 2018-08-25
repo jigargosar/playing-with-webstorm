@@ -3,7 +3,7 @@ import {Chance} from 'chance'
 
 import jsf from 'json-schema-faker'
 import nanoid from "nanoid";
-import {schema} from "../../data/schema";
+import {schema} from "../data/schema";
 
 
 const seed = Math.random()
