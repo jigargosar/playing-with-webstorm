@@ -147,7 +147,7 @@ function App() {
     <div className={'vh-100 overflow-hidden'}>
       <div className={"flex h-100 flex-column overflow-scroll bg-black-30"}>
         <div className={"bg-black-30"}>fixed header</div>
-        <div className={"flex overflow-scroll"}>
+        <div className={"flex"}>
           <div className={'overflow-scroll bg-black-30'}><SidebarContent /></div>
           <div className={'overflow-scroll'}><MainContent /></div>
         </div>
