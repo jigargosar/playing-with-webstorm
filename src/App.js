@@ -13,10 +13,12 @@ function TaskItem({ task }) {
   )
 }
 
-function BottomActionButton({ label }) {
+function BottomActionButton({ label, ...otherProps }) {
   return (
     <div className="ph2">
-      <button className="ph2">{label}</button>
+      <button className="ph2" {...otherProps}>
+        {label}
+      </button>
     </div>
   )
 }
