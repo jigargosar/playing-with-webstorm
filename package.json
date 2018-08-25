@@ -2,6 +2,11 @@
   "name": "playing-with-webstorm",
   "version": "0.1.0",
   "private": true,
+  "prettier": {
+    "trailingComma": "all",
+    "arrowParens": "avoid",
+    "singleQuote": true
+  },
   "dependencies": {
     "classname": "^0.0.0",
     "react": "^16.4.2",
