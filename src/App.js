@@ -17,6 +17,7 @@ function App() {
   return (
     <MainLayout title={'FunDo'}>
       <div className="flex flex-column h-100 ">
+        <div className="pa3 f3">subheader</div>
         <div className="overflow-scroll">
           {renderKeyedById(TaskItem, 'task', tasks)}
         </div>
