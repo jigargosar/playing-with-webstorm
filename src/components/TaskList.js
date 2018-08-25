@@ -2,13 +2,15 @@ import { BottomBarLayout } from './BottomBarLayout'
 import { TaskActionBar } from './TaskActionBar'
 import React from 'react'
 import { getTitle, isDone } from '../models/Task'
+import cn from 'classname'
 
-function TaskItem({ task, actions }) {
+function TaskItem({ task, queries, actions }) {
   const done = isDone(task)
   const onDoneChange = e => actions.setDone(e.target.checked, task)
 
+  const selected = queries.isTaskSelected(task)
   return (
-    <div className={`fdr iic`}>
+    <div className={`fdr iic` + cn({ 'bg-light-blue': selected })}>
       <div className="pa2">
         <input
           type="checkbox"
@@ -21,11 +23,16 @@ function TaskItem({ task, actions }) {
   )
 }
 
-export function TaskList({ tasks, actions }) {
+export function TaskList({ tasks, queries, actions }) {
   return (
     <BottomBarLayout bottom={<TaskActionBar />}>
       {tasks.map(task => (
-        <TaskItem key={task.id} task={task} actions={actions} />
+        <TaskItem
+          key={task.id}
+          task={task}
+          queries={queries}
+          actions={actions}
+        />
       ))}
     </BottomBarLayout>
   )
