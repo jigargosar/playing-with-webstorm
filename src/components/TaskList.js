@@ -12,7 +12,7 @@ function TaskItem({ task, queries, actions }) {
   const setSelectedTaskHandler = () => actions.setSelectedTask(task)
   return (
     <div
-      className={`fdr iic` + cn({ 'bg-light-blue': selected })}
+      className={cn('fdr iic', { 'bg-light-blue': selected })}
       onClick={setSelectedTaskHandler}
     >
       <div className="pa2">
