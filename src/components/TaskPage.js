@@ -1,6 +1,6 @@
 import { createNewTaskWithDefaults, setDone } from '../models/Task'
 import React from 'react'
-import { compose, times } from 'ramda'
+import { compose, curry, isNil, times } from 'ramda'
 import { MainLayout } from './MainLayout'
 import { TaskList } from './TaskList'
 import { withProps, withState } from 'recompose'
@@ -19,17 +19,26 @@ const enhance = compose(
       updateTasks,
       selectedTaskId,
       updateSelectedTaskId,
-    }) => ({
-      queries: {
-        isTaskSelected: ({ id }) => id === selectedTaskId,
-        selectedTask: findById(selectedTaskId)(tasks),
-      },
-      actions: {
-        setDone: (done, task) =>
-          updateTasks(overModel(task, setDone(done))),
-        setSelectedTask: ({ id }) => updateSelectedTaskId(id),
-      },
-    }),
+    }) => {
+      const setTaskDone = curry((done, task) =>
+        updateTasks(overModel(task, setDone(done))),
+      )
+      const selectedTask = findById(selectedTaskId)(tasks)
+      return {
+        queries: {
+          isTaskSelected: ({ id }) => id === selectedTaskId,
+          selectedTask,
+        },
+        actions: {
+          setDone: setTaskDone,
+          setSelectedTask: ({ id }) => updateSelectedTaskId(id),
+          setSelectedTaskDone: done => {
+            if (isNil(selectedTask)) return
+            return setTaskDone(done, selectedTask)
+          },
+        },
+      }
+    },
   ),
 )
 
