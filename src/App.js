@@ -71,6 +71,7 @@ function MainContent() {
     </div>
   );
 }
+
 function SidebarContent() {
   return (
     <div>
@@ -154,12 +155,20 @@ function App() {
   return (
     <Fragment>
       <div className={"flex flex-column vh-100 overflow-hidden bg-black-30"}>
-        <div className={"bg-black-30"}><HeaderContent/></div>
-        <div className={"flex"}>
-          <div className={'w-30 mw6 overflow-scroll '}><SidebarContent/></div>
-          <div className={'flex-auto overflow-scroll bg-black-30'}><MainContent/></div>
+        <div className={"bg-black-30"}>
+          <HeaderContent />
         </div>
-        <div className={'bg-black-30'}><FooterContent/></div>
+        <div className={"flex"}>
+          <div className={"w-30 mw6 overflow-scroll "}>
+            <SidebarContent />
+          </div>
+          <div className={"flex-auto overflow-scroll bg-black-30"}>
+            <MainContent />
+          </div>
+        </div>
+        <div className={"bg-black-30"}>
+          <FooterContent />
+        </div>
       </div>
     </Fragment>
   );
