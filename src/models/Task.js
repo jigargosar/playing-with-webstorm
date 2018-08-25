@@ -7,5 +7,5 @@ export function Task({
   done = false,
   createdAt = Date.now(),
 } = {}) {
-  return { id, title, done, dueAt, createdAt }
+  return { id, title, done, createdAt }
 }
