@@ -3,6 +3,7 @@ import 'tachyons'
 import {MainLayout} from './components/MainLayout'
 import {randomWords} from "./lib/fake";
 
+
 function RepeatString({ times = 30 }) {
   return (
     <div>
