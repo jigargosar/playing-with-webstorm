@@ -1,8 +1,11 @@
 import { createNewTaskWithDefaults } from '../models/Task'
 import React from 'react'
-import { times } from 'ramda'
+import { compose, times } from 'ramda'
 import { MainLayout } from './MainLayout'
 import { TaskList } from './TaskList'
+import { withStateHandlers } from 'recompose'
+
+const enhance = compose(withStateHandlers)
 
 function TaskPage() {
   const tasks = times(createNewTaskWithDefaults)(30)
@@ -13,4 +16,4 @@ function TaskPage() {
   )
 }
 
-export default TaskPage
+export default enhance(TaskPage)
