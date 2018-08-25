@@ -29,7 +29,7 @@ function App() {
         <div>
           <div className="pa2 frr bt b--silver">
             {buttons.map(b => (
-              <div className="ph2">
+              <div key={b.label} className="ph2">
                 <button className="ph2">{b.label}</button>
               </div>
             ))}
