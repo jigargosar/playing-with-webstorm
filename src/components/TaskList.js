@@ -32,7 +32,7 @@ function TaskItem({ task, queries, actions }) {
 
 export function TaskList({ tasks, queries, actions }) {
   return (
-    <BottomBarLayout bottom={<TaskActionBar />}>
+    <BottomBarLayout bottom={<TaskActionBar actions={actions} />}>
       {tasks.map(task => (
         <TaskItem
           key={task.id}
