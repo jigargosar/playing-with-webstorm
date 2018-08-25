@@ -17,3 +17,7 @@ body {
 .fa {
   flex: 1 1 auto;
 }
+
+.iic {
+  align-items: center;
+}
