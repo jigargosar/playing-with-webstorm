@@ -4,23 +4,17 @@ import React from 'react'
 import { getTitle, isDone } from '../models/Task'
 import cn from 'classname'
 import { HotKeys } from 'react-hotkeys'
-import { compose, identity, tap } from 'ramda'
+import { compose, tap } from 'ramda'
 
 const enhanceTaskItem = compose(
   BaseComponent => ({
-    onFocus = identity,
-    onBlur = identity,
+    // onFocus = identity,
+    // onBlur = identity,
     ...otherProps
   }) => (
     <BaseComponent
-      onFocus={compose(
-        tap(() => console.log('onFocus')),
-        onFocus,
-      )}
-      onBlur={compose(
-        tap(() => console.log('onBlur')),
-        onBlur,
-      )}
+      onFocus={compose(tap(() => console.log('onFocus')))}
+      onBlur={compose(tap(() => console.log('onBlur')))}
       {...otherProps}
     />
   ),
@@ -36,24 +30,23 @@ const TaskItem = enhanceTaskItem(function TaskItem({
     toggleDone: actions.onTaskToggleDone(task),
   }
   return (
-    <HotKeys handlers={handlers}>
-      <div
-        className={cn('fdr iic outline-0', 'bb b--black-10', {
-          'bg-light-blue': selected,
-        })}
-        tabIndex={-1}
-        onFocus={actions.onTaskFocus(task)}
-        onBlur={actions.onTaskBlur(task)}
-      >
-        <div className="pa2">
-          <input
-            type="checkbox"
-            checked={done}
-            onChange={actions.onTaskDoneChange(task)}
-          />
-        </div>
-        <div className="pa2 fa  ">{getTitle(task)}</div>
+    <HotKeys
+      handlers={handlers}
+      className={cn('fdr iic outline-0', 'bb b--black-10', {
+        'bg-light-blue': selected,
+      })}
+      tabIndex={-1}
+      onFocus={actions.onTaskFocus(task)}
+      onBlur={actions.onTaskBlur(task)}
+    >
+      <div className="pa2">
+        <input
+          type="checkbox"
+          checked={done}
+          onChange={actions.onTaskDoneChange(task)}
+        />
       </div>
+      <div className="pa2 fa  ">{getTitle(task)}</div>
     </HotKeys>
   )
 })
