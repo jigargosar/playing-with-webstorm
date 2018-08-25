@@ -22,7 +22,7 @@ function App() {
           {renderKeyedById(TaskItem, 'task', tasks)}
         </div>
         <div>
-          <div className="pa2 bt b--silver">
+          <div className="pa2 frr bt b--silver">
             <button>delete</button>
             <button>done</button>
             <button>add</button>
