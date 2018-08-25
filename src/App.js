@@ -7,6 +7,7 @@ function RepeatString({ times = 30 }) {
   return (
     <div>
       {new Array(times)
+        .fill(null)
         .map((s, i) => <div key={i}>{randomWords()}</div>)}
     </div>
   )
@@ -15,7 +16,7 @@ function RepeatString({ times = 30 }) {
 function App() {
   return (
     <MainLayout title={'FunDo'}>
-      <RepeatString value={'main content items'} times={3} />
+      <RepeatString times={3} />
     </MainLayout>
   )
 }
