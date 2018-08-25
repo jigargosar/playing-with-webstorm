@@ -1,13 +1,13 @@
 import React from 'react'
 import 'tachyons'
 import {MainLayout} from './components/MainLayout'
+import {randomWords} from "./lib/fake";
 
-function RepeatString({ value = 'default string', times = 30 }) {
+function RepeatString({ times = 30 }) {
   return (
     <div>
       {new Array(times)
-        .fill(value)
-        .map((s, i) => <div key={i}>{s}</div>)}
+        .map((s, i) => <div key={i}>{randomWords()}</div>)}
     </div>
   )
 }
