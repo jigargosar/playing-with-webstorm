@@ -6,7 +6,11 @@ import { partial, times } from 'ramda'
 import { renderKeyedById } from './lib/react-ext'
 
 function TaskItem({ task }) {
-  return <div className={`pa2 flex`}>{getTitle(task)}</div>
+  return (
+    <div className={`pa2 flex`}>
+      <div className="">{getTitle(task)}</div>
+    </div>
+  )
 }
 
 function App() {
