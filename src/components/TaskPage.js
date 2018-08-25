@@ -38,6 +38,7 @@ const enhance = compose(
         queries: {
           isTaskSelected: eqProps('id', selectedTask),
           selectedTask,
+          tasks,
         },
         actions: {
           setDone: curry((done, task) =>
@@ -57,10 +58,10 @@ const enhance = compose(
   ),
 )
 
-function TaskPage({ tasks, queries, actions }) {
+function TaskPage({ queries, actions }) {
   return (
     <MainLayout title={'FunDo'}>
-      <TaskList tasks={tasks} queries={queries} actions={actions} />
+      <TaskList queries={queries} actions={actions} />
     </MainLayout>
   )
 }
