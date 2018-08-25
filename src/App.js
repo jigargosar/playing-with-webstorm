@@ -21,6 +21,15 @@ function BottomActionBar({ b }) {
   )
 }
 
+function BottomBarLayout({ children, bottom }) {
+  return (
+    <div className="fdc-h-100">
+      <div className="overflow-scroll">{children}</div>
+      <div>{bottom}</div>
+    </div>
+  )
+}
+
 function App() {
   const tasks = times(partial(createTask)([]))(30)
   const buttons = [
@@ -30,16 +39,15 @@ function App() {
   ].map(b => merge({ id: b.label }, b))
   return (
     <MainLayout title={'FunDo'}>
-      <div className="fdc-h-100">
-        <div className="overflow-scroll">
-          {renderKeyedById(TaskItem, 'task', tasks)}
-        </div>
-        <div>
+      <BottomBarLayout
+        bottom={
           <div className="pa2 frr bt b--silver">
             {map(b => <BottomActionBar key={b.id} b={b} />)(buttons)}
           </div>
-        </div>
-      </div>
+        }
+      >
+        {renderKeyedById(TaskItem, 'task', tasks)}
+      </BottomBarLayout>
     </MainLayout>
   )
 }
