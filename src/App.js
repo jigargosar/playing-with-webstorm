@@ -15,6 +15,11 @@ function TaskItem({ task }) {
 
 function App() {
   const tasks = times(partial(createTask)([]))(30)
+  const buttons = [
+    { label: 'delete' },
+    { label: 'done' },
+    { label: 'add' },
+  ]
   return (
     <MainLayout title={'FunDo'}>
       <div className="fdc-h-100">
@@ -23,15 +28,11 @@ function App() {
         </div>
         <div>
           <div className="pa2 frr bt b--silver">
-            <div className="ph2">
-              <button className="ph2">delete</button>
-            </div>
-            <div className="ph2">
-              <button className="ph2">done</button>
-            </div>
-            <div className="ph2">
-              <button className="ph2">add</button>
-            </div>
+            {buttons.map(b => (
+              <div className="ph2">
+                <button className="ph2">{b.label}</button>
+              </div>
+            ))}
           </div>
         </div>
       </div>
