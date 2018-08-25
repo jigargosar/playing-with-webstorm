@@ -3,9 +3,9 @@ import React, { Fragment } from 'react'
 
 export function TaskActionBar() {
   const buttonProps = [
-    { label: 'delete' },
-    { label: 'done' },
     { label: 'add' },
+    { label: 'done' },
+    { label: 'delete' },
   ].map(b => merge({ id: b.label }, b))
   return (
     <div className="pa2 frr bt b--silver">
