@@ -11,3 +11,8 @@ export function Task({
   validate('SSBN', [id, title, done, createdAt])
   return { id, title, done, createdAt }
 }
+
+export function getTitle({ title }) {
+  validate('S', [title])
+  return title
+}
