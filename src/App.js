@@ -16,7 +16,7 @@ function App() {
   const tasks = times(partial(createTask)([]))(30)
   return (
     <MainLayout title={'FunDo'}>
-      <div className="flex w-100 h-100 bg-black-10 overflow-hidden">
+      <div className="w-100 h-100 bg-black-10 overflow-hidden">
         <div className="overflow-scroll w-100">
           {renderKeyedById(TaskItem, 'task', tasks)}
         </div>
