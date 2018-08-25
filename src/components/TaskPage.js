@@ -61,7 +61,7 @@ const enhance = compose(
             updateFocusedTaskId(null)
           },
           handleGlobalKeyDown: e => {},
-          onTaskToggleDone: () => task =>
+          onTaskToggleDone: task => () =>
             updateTaskDone(!task.done, task),
         },
       }
