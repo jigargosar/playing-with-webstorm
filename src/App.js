@@ -6,7 +6,7 @@ import { partial, times } from 'ramda'
 import { renderKeyedById } from './lib/react-ext'
 
 function ListItemLayout({ children }) {
-  return <div className="pa3 flex">{children}</div>
+  return <div className="pa2 flex">{children}</div>
 }
 
 function TaskItem({ task }) {
