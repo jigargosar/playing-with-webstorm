@@ -1,19 +1,26 @@
-import React, {Fragment} from 'react'
+import React from 'react'
 import 'tachyons'
-import {MainLayout} from './components/MainLayout'
-import {createTask, getTitle} from './models/Task'
-import {map, partial, times} from 'ramda'
+import { MainLayout } from './components/MainLayout'
+import { createTask, getTitle } from './models/Task'
+import { map, partial, times } from 'ramda'
 
-
-function TaskItem({task}) {
+function TaskItem({ task }) {
   return <div>{getTitle(task)}</div>
 }
+
+const renderKeyedById = (Component, propName, list) =>
+  map(model =>
+    React.createElement(Component, {
+      key: model.id,
+      [propName]: model,
+    }),
+  )(list)
 
 function App() {
   const tasks = times(partial(createTask)([]))(30)
   return (
     <MainLayout title={'FunDo'}>
-      {map(t => <Fragment key={t.id}><TaskItem task={t}/></Fragment>)(tasks)}
+      {renderKeyedById(TaskItem, 'task', tasks)}
     </MainLayout>
   )
 }
