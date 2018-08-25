@@ -6,7 +6,6 @@ export function MainLayout({ children, title = 'Playing With Webstorm', ...other
   return (
     <DrawerLayout
       header={<div className={'f2 ma2'}>{title}</div>}
-      // footer={<div className={"pa2 f4"}>fixed footer</div>}
       {...otherProps}
      children={children}/>
   )
