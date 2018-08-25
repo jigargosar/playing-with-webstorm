@@ -34,7 +34,7 @@ export function DrawerLayout({
           </div>
         )}
         <div
-          className={cn('flex-auto overflow-scroll ', {
+          className={cn('flex-auto overflow-hidden ', {
             'bg-black-50 ba bw1 b--green': debug,
           })}
         >
