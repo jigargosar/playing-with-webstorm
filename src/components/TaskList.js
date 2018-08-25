@@ -4,25 +4,24 @@ import React from 'react'
 import { getTitle, isDone } from '../models/Task'
 import cn from 'classname'
 import { HotKeys } from 'react-hotkeys'
-import { compose, tap } from 'ramda'
+import { compose } from 'ramda'
+import { withStateHandlers } from 'recompose'
 
 const enhanceTaskItem = compose(
-  BaseComponent => ({
-    // onFocus = identity,
-    // onBlur = identity,
-    ...otherProps
-  }) => (
-    <BaseComponent
-      onFocus={compose(tap(() => console.log('onFocus')))}
-      onBlur={compose(tap(() => console.log('onBlur')))}
-      {...otherProps}
-    />
+  withStateHandlers(
+    { hasFocus: false },
+    {
+      onFocus: () => () => ({ hasFocus: true }),
+      onBlur: () => () => ({ hasFocus: false }),
+    },
   ),
 )
 const TaskItem = enhanceTaskItem(function TaskItem({
   task,
   queries,
   actions,
+  onFocus,
+  onBlur,
 }) {
   const done = isDone(task)
   const selected = queries.isTaskSelected(task)
@@ -36,8 +35,14 @@ const TaskItem = enhanceTaskItem(function TaskItem({
         'bg-light-blue': selected,
       })}
       tabIndex={-1}
-      onFocus={actions.onTaskFocus(task)}
-      onBlur={actions.onTaskBlur(task)}
+      onFocus={compose(
+        actions.onTaskFocus(task),
+        onFocus,
+      )}
+      onBlur={compose(
+        actions.onTaskBlur(task),
+        onBlur,
+      )}
     >
       <div className="pa2">
         <input
@@ -50,6 +55,7 @@ const TaskItem = enhanceTaskItem(function TaskItem({
     </HotKeys>
   )
 })
+
 export function TaskList({ queries, actions }) {
   return (
     <BottomBarLayout
