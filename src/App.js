@@ -32,7 +32,7 @@ function BottomBarLayout({ children, bottom }) {
   )
 }
 
-function BottomActionBar({ buttonProps }) {
+function BottomActionBar() {
   const buttonProps = [
     { label: 'delete' },
     { label: 'done' },
