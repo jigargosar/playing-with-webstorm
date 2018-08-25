@@ -10,3 +10,5 @@ export const overModelId = curry(({ id }, fn, list) => {
   assert(taskIdx !== -1)
   return over(lensIndex(taskIdx), fn, list)
 })
+
+export const findById = id => find(propEq('id', id))

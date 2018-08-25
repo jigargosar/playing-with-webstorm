@@ -4,7 +4,7 @@ import { compose, times } from 'ramda'
 import { MainLayout } from './MainLayout'
 import { TaskList } from './TaskList'
 import { withProps, withState } from 'recompose'
-import { overModel } from '../models/TaskList'
+import { findById, overModel } from '../models/TaskList'
 
 const enhance = compose(
   withState(
@@ -20,7 +20,10 @@ const enhance = compose(
       selectedTaskId,
       updateSelectedTaskId,
     }) => ({
-      queries: { isTaskSelected: ({ id }) => id === selectedTaskId },
+      queries: {
+        isTaskSelected: ({ id }) => id === selectedTaskId,
+        selectedTask: findById(selectedTaskId)(tasks),
+      },
       actions: {
         setDone: (done, task) =>
           updateTasks(overModel(task, setDone(done))),
