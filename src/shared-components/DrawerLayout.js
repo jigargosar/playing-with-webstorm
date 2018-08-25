@@ -9,9 +9,11 @@ export function DrawerLayout({
   footer,
   sidebar,
   debug = false,
+  ...otherProps
 }) {
   return (
     <div
+      {...otherProps}
       className={cn(
         'flex flex-column vh-100 overflow-hidden ',
         styleClass,
