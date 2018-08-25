@@ -10,7 +10,7 @@ import {
   eqProps,
   head,
   isNil,
-  propOr,
+  prop,
   times,
 } from 'ramda'
 import { MainLayout } from './MainLayout'
@@ -67,8 +67,8 @@ const enhance = compose(
           },
           handleGlobalKeyDown: e => {},
           onTaskToggleDone: task => (e = {}) => {
-            const code = propOr(null, 'code')(e)
-
+            const code = prop('code')(e)
+            console.log(code)
             if (code === 'Space') {
               console.log(e)
               e.preventDefault()
