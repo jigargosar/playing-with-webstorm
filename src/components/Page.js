@@ -50,15 +50,11 @@ export const Page =
   enhance(function Page({ state }) {
     return (
       <ViewportHeightContainer>
-        <header>
-          <div>STATIC HEADER</div>
-        </header>
+        <div className="ma1">STATIC HEADER</div>
         <Models models={state.tasks}>
           {task => <Task task={task} />}
         </Models>
-        <header>
-          <div>STATIC Content</div>
-        </header>
+        <div className="ma1">STATIC Content</div>
         <div className="overflow-scroll ma3 ba b--silver">
           <div className="ma3 pa3 bg-light-purple">A</div>
           <div className="ma3 pa3 bg-light-blue">B</div>
@@ -66,9 +62,7 @@ export const Page =
           <div className="pa3">D</div>
           <div className="pa3">E</div>
         </div>
-        <footer>
-          <div>STATIC FOOTER</div>
-        </footer>
+        <div className="ma1">STATIC FOOTER</div>
       </ViewportHeightContainer>
     )
   })
