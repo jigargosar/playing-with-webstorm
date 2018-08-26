@@ -13,15 +13,15 @@ import { withStateReducer } from './withStateReducer'
 
 function Task({ task: { id, title, done }, dispatch }) {
   return (
-    <Fragment>
-      <div className="pa1">Float</div>
+    <div className="relative">
       <div
         className="mv2 pa3 f4 white bg-light-purple br3 hover-yellow shadow-hover"
         onClick={() => dispatch({ type: 'task.toggleDone', id })}
       >
         <div className={cn({ strike: done })}>{title}</div>
       </div>
-    </Fragment>
+      <div className="absolute top-0 left--2">Float</div>
+    </div>
   )
 }
 
