@@ -42,10 +42,10 @@ Models.propTypes = {
   children: PropTypes.func.isRequired,
 }
 
-function TaskList(props) {
+function TaskList({ tasks }) {
   return (
     <div className="ma3 ba b--silver">
-      <Models models={props.models}>{props.prop1}</Models>
+      <Models models={tasks}>{task => <Task task={task} />}</Models>
     </div>
   )
 }
@@ -61,10 +61,7 @@ export const Page =
       <ViewportHeightContainer>
         <div className="ma1">STATIC HEADER</div>
         <div className="overflow-scroll">
-          <TaskList
-            models={state.tasks}
-            prop1={task => <Task task={task} />}
-          />
+          <TaskList tasks={state.tasks} />
         </div>
         <div className="ma1">STATIC Content</div>
         <div className="overflow-scroll ma3 ba b--silver">
