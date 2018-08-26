@@ -1,7 +1,7 @@
 import { withReducer } from 'recompose'
 import { cond, propEq, T, times } from 'ramda'
 import { createNewTaskWithDefaults, toggleTaskDone } from '../models/Task'
-import { overModelWithId, overProp } from '../lib/ramda-ext'
+import { overItemInListWithId } from '../lib/ramda-ext'
 
 function reducer(state, action) {
   console.log('state', state)
@@ -12,14 +12,12 @@ function reducer(state, action) {
     [
       actionEq('task.toggleDone'),
       ({ id }) => {
-        const overCollectionModelWithId = (id) => (fn) => (cName) =>
-          overProp(cName)(overModelWithId(id)(fn))
-        return overCollectionModelWithId(id)(toggleTaskDone)('tasks')(state)
+        return overItemInListWithId(id)(toggleTaskDone)('tasks')(state)
       },
     ],
     [
       T,
-      (action) => {
+      action => {
         const message = `Invalid Action ${action.type}`
         console.error(message, action)
         throw new Error(message)

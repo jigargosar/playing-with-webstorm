@@ -35,3 +35,6 @@ export const overModelWithId = id => fn => list => {
 export const overProp = propName => over(lensProp(propName))
 
 export const toggleProp = propName => overProp(propName)(vNot)
+
+export const overItemInListWithId = id => fn => cName =>
+  overProp(cName)(overModelWithId(id)(fn))
