@@ -3,8 +3,8 @@ import { ViewportHeightContainer } from './containers'
 import { setDisplayName, withReducer } from 'recompose'
 import { compose, times } from 'ramda'
 import { createNewTaskWithDefaults } from '../models/Task'
-
-// import cn from "classname";
+import * as PropTypes from 'prop-types'
+import { cn } from '../lib/react-ext'
 
 function reducer(action, state) {
   return state
@@ -21,6 +21,16 @@ const enhance = compose(
   setDisplayName('Page'),
 )
 
+function Task({ task: { title, done } }) {
+  return (
+    <div className="ma3 pa3 white bg-light-purple">
+      <div className={cn({ strike: done })}>{title}</div>
+    </div>
+  )
+}
+
+Task.propTypes = { task: PropTypes.object.isRequired }
+
 export const Page =
   //
   enhance(function Page({ state }) {
@@ -32,9 +42,7 @@ export const Page =
         <div className="overflow-scroll ma3 ba b--silver">
           {state.tasks.map(task => (
             <Fragment key={task.id}>
-              <div className="ma3 pa3 bg-light-purple">
-                {task.title}
-              </div>
+              <Task task={task} />
             </Fragment>
           ))}
         </div>

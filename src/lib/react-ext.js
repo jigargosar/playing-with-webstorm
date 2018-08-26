@@ -1,4 +1,5 @@
 import React from 'react'
+import cn from 'classname'
 
 export const renderKeyedById = (Component, propName, list) =>
   list.map(model =>
@@ -7,3 +8,5 @@ export const renderKeyedById = (Component, propName, list) =>
       [propName]: model,
     }),
   )
+
+export { cn }
