@@ -7,16 +7,6 @@ import * as PropTypes from 'prop-types'
 import { cn } from '../lib/react-ext'
 import { Models } from '../shared-components/Models'
 
-function reducer(action, state) {
-  return state
-}
-
-function initialState() {
-  return {
-    tasks: times(createNewTaskWithDefaults)(8),
-  }
-}
-
 function Task({ task: { title, done } }) {
   return (
     <div className="ma3 pa3 white bg-light-purple">
@@ -36,6 +26,16 @@ function TaskList({ tasks }) {
 TaskList.propTypes = {
   models: PropTypes.any,
   prop1: PropTypes.func,
+}
+
+function reducer(action, state) {
+  return state
+}
+
+function initialState() {
+  return {
+    tasks: times(createNewTaskWithDefaults)(8),
+  }
 }
 
 const enhancePage = compose(
