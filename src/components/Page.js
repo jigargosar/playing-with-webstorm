@@ -51,13 +51,13 @@ export const Page =
     return (
       <ViewportHeightContainer>
         <header>
-          <h1>STATIC HEADER</h1>
+          <div>STATIC HEADER</div>
         </header>
         <Models models={state.tasks}>
           {task => <Task task={task} />}
         </Models>
         <header>
-          <h1>STATIC Content</h1>
+          <div>STATIC Content</div>
         </header>
         <div className="overflow-scroll ma3 ba b--silver">
           <div className="ma3 pa3 bg-light-purple">A</div>
@@ -67,7 +67,7 @@ export const Page =
           <div className="pa3">E</div>
         </div>
         <footer>
-          <h1>STATIC FOOTER</h1>
+          <div>STATIC FOOTER</div>
         </footer>
       </ViewportHeightContainer>
     )
