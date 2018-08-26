@@ -14,14 +14,14 @@ function Task({ task: { id, title, done }, dispatch }) {
         className="flex items-center child absolute z-1  "
         style={{ right: '0rem' }}
       >
-        <div className="flex items-center absolute">
-          <div className="ma2 lh-solid code shadow-1 pa2 br-pill bg-white-90">
+        <div className="absolute">
+          <div className="ma1 lh-solid code shadow-1 pa2 br-pill bg-white-90">
             X
           </div>
-          <div className="ma2 lh-solid code shadow-1 pa2 br-pill bg-white-90">
+          <div className="ma1 lh-solid code shadow-1 pa2 br-pill bg-white-90">
             X
           </div>
-          <div className="ma2 lh-solid code shadow-1 pa2 br-pill bg-white-90">
+          <div className="ma1 lh-solid code shadow-1 pa2 br-pill bg-white-90">
             X
           </div>
         </div>
