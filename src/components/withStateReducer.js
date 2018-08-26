@@ -4,7 +4,7 @@ import { createNewTaskWithDefaults } from '../models/Task'
 
 function reducer(state, action) {
   console.log('state', state)
-  console.log('action', action)
+  console.table(action)
   return state
 }
 
