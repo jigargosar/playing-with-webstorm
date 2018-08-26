@@ -1,9 +1,5 @@
-import React, { Fragment } from 'react'
-import {
-  FullHeightContainer,
-  ScrollContainer,
-  ViewportHeightContainer,
-} from './containers'
+import React from 'react'
+import { ScrollContainer, ViewportHeightContainer } from './containers'
 import { setDisplayName } from 'recompose'
 import { compose } from 'ramda'
 import * as PropTypes from 'prop-types'
