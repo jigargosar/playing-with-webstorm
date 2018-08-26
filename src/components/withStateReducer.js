@@ -1,7 +1,7 @@
 import { withReducer } from 'recompose'
 import {
   cond,
-  indexOf,
+  findIndex,
   lensIndex,
   over,
   propEq,
@@ -12,11 +12,9 @@ import {
   createNewTaskWithDefaults,
   setTaskDone,
 } from '../models/Task'
-import { findById } from '../models/TaskList'
 
 function lensById(id, list) {
-  const item = findById(id)(list)
-  return lensIndex(indexOf(item)(list))
+  return lensIndex(findIndex(propEq('id', id))(list))
 }
 
 function reducer(state, action) {
