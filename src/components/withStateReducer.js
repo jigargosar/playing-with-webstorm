@@ -2,11 +2,11 @@ import { withReducer } from 'recompose'
 import {
   cond,
   indexOf,
-  lensPath,
+  lensIndex,
+  over,
   propEq,
   T,
   times,
-  update,
 } from 'ramda'
 import {
   createNewTaskWithDefaults,
@@ -14,9 +14,9 @@ import {
 } from '../models/Task'
 import { findById } from '../models/TaskList'
 
-function createTaskLensById(id, state) {
-  const task = findById(id)(state.tasks)
-  return lensPath(['tasks', indexOf(task)(state.tasks)])
+function lensById(id, list) {
+  const item = findById(id)(list)
+  return lensIndex(indexOf(item)(list))
 }
 
 function reducer(state, action) {
@@ -27,12 +27,12 @@ function reducer(state, action) {
     [
       propEq('type', 'task.toggleDone'),
       ({ id }) => {
-        const taskLens = createTaskLensById(id, state.tasks)
         const tasks = state.tasks
-        const task = findById(id)(tasks)
-        const updateTask = update(indexOf(task)(tasks))
+        const taskLens = lensById(id, tasks)
         return {
-          tasks: updateTask(setTaskDone(!task.done, task))(tasks),
+          tasks: over(taskLens)(task =>
+            setTaskDone(!task.done, task),
+          )(tasks),
         }
       },
     ],
