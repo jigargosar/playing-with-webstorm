@@ -11,10 +11,10 @@ function Task({ task: { id, title, done }, dispatch }) {
   return (
     <div className="mv2 flex items-center relative hide-child">
       <div
-        className="flex items-center child absolute z-1  "
-        style={{ right: '0rem' }}
+        className="flex items-center child absolute z-1"
+        style={{ right: '2rem' }}
       >
-        <div className="absolute">
+        <div className="flex absolute">
           <div className="ma1 lh-solid code shadow-1 pa2 br-pill bg-white-90">
             X
           </div>
