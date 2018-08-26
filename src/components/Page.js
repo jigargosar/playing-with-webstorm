@@ -2,9 +2,9 @@ import React from 'react'
 import { withProps } from 'recompose'
 // import cn from "classname";
 
-const FullHeightContainer = withProps(() => ({
+const FullHeightContainer = withProps({
   className: 'h-100 overflow-hidden flex flex-column',
-}))
+})('div')
 
 export const Page = function Page() {
   return (
