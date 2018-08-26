@@ -57,7 +57,10 @@
     "babel-core": "^6.26.3",
     "babel-runtime": "^6.26.0",
     "husky": "^1.0.0-rc.13",
+    "jake": "^8.0.18",
     "lint-staged": "^7.2.2",
-    "nodemon": "^1.18.3"
+    "nodemon": "^1.18.3",
+    "plop": "^2.1.0",
+    "runjs": "^4.3.2"
   }
 }
