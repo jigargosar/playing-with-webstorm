@@ -8,12 +8,15 @@ import {
 } from 'ramda'
 import { vNot } from './ramda-safe'
 
-const findIndexById = findIndex(propEq('id'))
+const findIndexById = id => findIndex(propEq('id', id))
 
-export const overModelWithId = id => fn => list =>
-  over(lensIndex(findIndexById(id)(list)))(fn)(list)
+export const overModelWithId = id => fn => list => {
+  const idx = findIndexById(id)(list)
+  debugger
+  return over(lensIndex(idx))(fn)(list)
+}
 
-export const findById = find(propEq('id'))
+export const findById = id => find(propEq('id', id))
 
 export const overProp = propName => over(lensProp(propName))
 
