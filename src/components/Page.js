@@ -1,10 +1,10 @@
 import React from 'react'
-import { FullHeightContainer } from './containers'
+import { ViewportHeightContainer } from './containers'
 // import cn from "classname";
 
 export const Page = function Page() {
   return (
-    <FullHeightContainer>
+    <ViewportHeightContainer>
       <h1>STATIC</h1>
       <div className="overflow-scroll pa3 ma3 ba b--silver">
         <div className="ma3 pa5 bg-light-purple">A</div>
@@ -14,6 +14,6 @@ export const Page = function Page() {
         <div className="pa5">E</div>
       </div>
       <h1>STATIC</h1>
-    </FullHeightContainer>
+    </ViewportHeightContainer>
   )
 }
