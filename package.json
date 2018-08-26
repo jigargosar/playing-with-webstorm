@@ -4,7 +4,7 @@
   "private": true,
   "prettier": {
     "trailingComma": "all",
-    "arrowParens": "always",
+    "arrowParens": "avoid",
     "singleQuote": true,
     "semi": false,
     "printWidth": 80
