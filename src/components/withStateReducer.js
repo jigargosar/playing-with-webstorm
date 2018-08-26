@@ -16,7 +16,7 @@ function reducer(state, action) {
       actionEq('task.toggleDone'),
       ({ id }) => {
         return {
-          tasks: overModelById(id, toggleTaskDone, state.tasks),
+          tasks: overModelById(id)(toggleTaskDone)(state.tasks),
         }
       },
     ],
