@@ -15,13 +15,13 @@ function Task({ task: { id, title, done }, dispatch }) {
         style={{ right: '0rem' }}
       >
         <div className="flex items-center absolute">
-          <div className="lh-solid code shadow-1 pv2 ph2 br-pill bg-white-90">
+          <div className="ma2 lh-solid code shadow-1 pa2 br-pill bg-white-90">
             X
           </div>
-          <div className="lh-solid code shadow-1 pv2 ph2 br-pill bg-white-90">
+          <div className="ma2 lh-solid code shadow-1 pa2 br-pill bg-white-90">
             X
           </div>
-          <div className="lh-solid code shadow-1 pv2 ph2 br-pill bg-white-90">
+          <div className="ma2 lh-solid code shadow-1 pa2 br-pill bg-white-90">
             X
           </div>
         </div>
