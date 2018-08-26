@@ -9,7 +9,7 @@ import { findById } from '../models/TaskList'
 function reducer(state, action) {
   console.log('state', state)
   console.table(action)
-  cond([
+  return cond([
     //
     [
       propEq('type', 'task.toggleDone'),
@@ -30,8 +30,7 @@ function reducer(state, action) {
         throw new Error(message)
       },
     ],
-  ])
-  return state
+  ])(action)
 }
 
 function initialState() {
