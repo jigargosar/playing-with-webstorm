@@ -50,21 +50,19 @@ export const Page =
   enhancePage(function Page({ state, dispatch }) {
     return (
       <ViewportHeightContainer>
-        <FullHeightContainer>
-          <div className="pa3 bb b--silver">STATIC HEADER</div>
-          <ScrollContainer>
-            <TaskList tasks={state.tasks} dispatch={dispatch} />
-          </ScrollContainer>
-          {/*<div className="ma1">STATIC Content</div>*/}
-          {/*<div className="overflow-scroll ma3 ba b--silver">*/}
-          {/*<div className="ma3 pa3 bg-light-purple">A</div>*/}
-          {/*<div className="ma3 pa3 bg-light-blue">B</div>*/}
-          {/*<div className="pa3 bg-light-red">C</div>*/}
-          {/*<div className="pa3">D</div>*/}
-          {/*<div className="pa3">E</div>*/}
-          {/*</div>*/}
-          <div className="pa3 bt b--silver">STATIC FOOTER</div>
-        </FullHeightContainer>
+        <div className="pa3 bb b--silver">STATIC HEADER</div>
+        <ScrollContainer>
+          <TaskList tasks={state.tasks} dispatch={dispatch} />
+        </ScrollContainer>
+        {/*<div className="ma1">STATIC Content</div>*/}
+        {/*<div className="overflow-scroll ma3 ba b--silver">*/}
+        {/*<div className="ma3 pa3 bg-light-purple">A</div>*/}
+        {/*<div className="ma3 pa3 bg-light-blue">B</div>*/}
+        {/*<div className="pa3 bg-light-red">C</div>*/}
+        {/*<div className="pa3">D</div>*/}
+        {/*<div className="pa3">E</div>*/}
+        {/*</div>*/}
+        <div className="pa3 bt b--silver">STATIC FOOTER</div>
       </ViewportHeightContainer>
     )
   })
