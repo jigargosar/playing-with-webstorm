@@ -1,8 +1,20 @@
 import React from 'react'
 import { ViewportHeightContainer } from './containers'
+import { setDisplayName, withReducer } from 'recompose'
+import { compose } from 'ramda'
+
 // import cn from "classname";
 
-export const Page = function Page() {
+function reducer(action, state) {
+  return state
+}
+
+const enhance = compose(
+  withReducer('state', 'dispatch', reducer),
+  setDisplayName('Page'),
+)
+
+export const Page = enhance(function Page() {
   return (
     <ViewportHeightContainer>
       <header>
@@ -30,4 +42,4 @@ export const Page = function Page() {
       </footer>
     </ViewportHeightContainer>
   )
-}
+})
