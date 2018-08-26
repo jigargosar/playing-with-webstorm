@@ -1,7 +1,8 @@
 import React from 'react'
 import { ViewportHeightContainer } from './containers'
 import { setDisplayName, withReducer } from 'recompose'
-import { compose } from 'ramda'
+import { compose, times } from 'ramda'
+import { createNewTaskWithDefaults } from '../models/Task'
 
 // import cn from "classname";
 
@@ -9,8 +10,14 @@ function reducer(action, state) {
   return state
 }
 
+function initialState() {
+  return {
+    tasks: times(createNewTaskWithDefaults)(8),
+  }
+}
+
 const enhance = compose(
-  withReducer('state', 'dispatch', reducer),
+  withReducer('state', 'dispatch', reducer, initialState()),
   setDisplayName('Page'),
 )
 
