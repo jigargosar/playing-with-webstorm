@@ -41,16 +41,30 @@ Models.propTypes = {
   models: PropTypes.array.isRequired,
   children: PropTypes.func.isRequired,
 }
+
+function TaskList(props) {
+  return (
+    <div className="ma3 ba b--silver">
+      <Models models={props.models}>{props.prop1}</Models>
+    </div>
+  )
+}
+
+TaskList.propTypes = {
+  models: PropTypes.any,
+  prop1: PropTypes.func,
+}
 export const Page =
   //
   enhance(function Page({ state }) {
     return (
       <ViewportHeightContainer>
         <div className="ma1">STATIC HEADER</div>
-        <div className="overflow-scroll ma3 ba b--silver">
-          <Models models={state.tasks}>
-            {task => <Task task={task} />}
-          </Models>
+        <div className="overflow-scroll">
+          <TaskList
+            models={state.tasks}
+            prop1={task => <Task task={task} />}
+          />
         </div>
         <div className="ma1">STATIC Content</div>
         <div className="overflow-scroll ma3 ba b--silver">
