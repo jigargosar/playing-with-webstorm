@@ -23,7 +23,7 @@ const enhance = compose(
 
 export const Page =
   //
-  enhance(function Page() {
+  enhance(function Page({ state }) {
     return (
       <ViewportHeightContainer>
         <header>
