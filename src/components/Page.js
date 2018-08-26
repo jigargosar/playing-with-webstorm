@@ -7,9 +7,12 @@ import { cn } from '../lib/react-ext'
 import { Models } from '../shared-components/Models'
 import { withStateReducer } from './withStateReducer'
 
-function Task({ task: { title, done }, dispatch }) {
+function Task({ task: { id, title, done }, dispatch }) {
   return (
-    <div className="ma3 pa3 white bg-light-purple">
+    <div
+      className="ma3 pa3 white bg-light-purple"
+      onClick={() => dispatch({ type: 'task.toggleDone', id })}
+    >
       <div className={cn({ strike: done })}>{title}</div>
     </div>
   )
