@@ -49,7 +49,7 @@ export const Page =
   //
   enhancePage(function Page({ state, dispatch }) {
     return (
-      <ViewportHeightContainer>
+      <ViewportHeightContainer className="bg-light-gray">
         <div className="pa3 bb b--silver">STATIC HEADER</div>
         <ScrollContainer>
           <TaskList tasks={state.tasks} dispatch={dispatch} />
