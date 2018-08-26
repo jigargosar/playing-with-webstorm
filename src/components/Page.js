@@ -19,7 +19,7 @@ function Task({ task: { id, title, done }, dispatch }) {
         style={{ right: '1rem' }}
       >
         <div className="absolute ">
-          <div className="pa2 flex items-center bg-white-80 br-pill ">
+          <div className="pa2 flex items-center bg-white-80 br-pill shadow-1">
             {renderButon()}
             {renderButon()}
             {renderButon()}
