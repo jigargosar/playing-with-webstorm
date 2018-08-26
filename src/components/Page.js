@@ -1,10 +1,11 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { ViewportHeightContainer } from './containers'
 import { setDisplayName, withReducer } from 'recompose'
 import { compose, times } from 'ramda'
 import { createNewTaskWithDefaults } from '../models/Task'
 import * as PropTypes from 'prop-types'
 import { cn } from '../lib/react-ext'
+import { Models } from '../shared-components/Models'
 
 function reducer(action, state) {
   return state
@@ -30,17 +31,6 @@ function Task({ task: { title, done } }) {
 }
 
 Task.propTypes = { task: PropTypes.object.isRequired }
-
-function Models({ models, children: render }) {
-  return models.map(model => (
-    <Fragment key={model.id}>{render(model)}</Fragment>
-  ))
-}
-
-Models.propTypes = {
-  models: PropTypes.array.isRequired,
-  children: PropTypes.func.isRequired,
-}
 
 function TaskList({ tasks }) {
   return (
