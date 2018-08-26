@@ -4,11 +4,11 @@ import {
   findIndex,
   lensIndex,
   lensProp,
-  map,
   over,
   propEq,
 } from 'ramda'
 import { vNot } from './ramda-strict'
+import { assert } from './assert'
 
 export const idEq = propEq('id')
 
@@ -29,7 +29,7 @@ const overIndex = compose(
 
 export const overModelWithId = id => fn => list => {
   const idx = findIndexById(id)(list)
-
+  assert(idx !== -1)
   return overIndex(idx)(fn)(list)
 }
 
