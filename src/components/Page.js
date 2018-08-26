@@ -34,12 +34,12 @@ const enhancePage = compose(
 )
 export const Page =
   //
-  enhancePage(function Page({ state }) {
+  enhancePage(function Page({ state, dispatch }) {
     return (
       <ViewportHeightContainer>
         <div className="ma1">STATIC HEADER</div>
         <div className="overflow-scroll">
-          <TaskList tasks={state.tasks} />
+          <TaskList tasks={state.tasks} dispatch={dispatch} />
         </div>
         <div className="ma1">STATIC Content</div>
         <div className="overflow-scroll ma3 ba b--silver">
