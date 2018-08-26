@@ -23,7 +23,7 @@ export function getTitle({ title }) {
 }
 
 const vNot = boolean => {
-  validate('boolean', [boolean])
+  validate('B', [boolean])
   return not(boolean)
 }
 
@@ -31,13 +31,9 @@ const overProp = propName => over(lensProp(propName))
 
 const toggleProp = propName => overProp(propName)(vNot)
 
-export const setTaskDone = toggleProp('done')
-
 export function isDone({ done }) {
   validate('B', [done])
   return done
 }
 
-export function toggleTaskDone(task) {
-  return setTaskDone(!task.done, task)
-}
+export const toggleTaskDone = toggleProp('done')
