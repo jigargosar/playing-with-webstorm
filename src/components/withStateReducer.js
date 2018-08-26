@@ -1,10 +1,22 @@
 import { withReducer } from 'recompose'
-import { times } from 'ramda'
+import { cond, propEq, T, times } from 'ramda'
 import { createNewTaskWithDefaults } from '../models/Task'
 
 function reducer(state, action) {
   console.log('state', state)
   console.table(action)
+  cond([
+    //
+    [propEq('type', 'task.toggleDone'), ({ id }) => {}],
+    [
+      T,
+      action => {
+        const message = `Invalid Action ${action.type}`
+        console.error(message, action)
+        throw new Error(message)
+      },
+    ],
+  ])
   return state
 }
 
