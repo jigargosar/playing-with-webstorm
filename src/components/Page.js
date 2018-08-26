@@ -17,11 +17,6 @@ function initialState() {
   }
 }
 
-const enhancePage = compose(
-  withReducer('state', 'dispatch', reducer, initialState()),
-  setDisplayName('Page'),
-)
-
 function Task({ task: { title, done } }) {
   return (
     <div className="ma3 pa3 white bg-light-purple">
@@ -29,7 +24,6 @@ function Task({ task: { title, done } }) {
     </div>
   )
 }
-
 Task.propTypes = { task: PropTypes.object.isRequired }
 
 function TaskList({ tasks }) {
@@ -39,11 +33,15 @@ function TaskList({ tasks }) {
     </div>
   )
 }
-
 TaskList.propTypes = {
   models: PropTypes.any,
   prop1: PropTypes.func,
 }
+
+const enhancePage = compose(
+  withReducer('state', 'dispatch', reducer, initialState()),
+  setDisplayName('Page'),
+)
 export const Page =
   //
   enhancePage(function Page({ state }) {
