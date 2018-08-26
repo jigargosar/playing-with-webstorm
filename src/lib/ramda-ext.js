@@ -4,12 +4,11 @@ import {
   findIndex,
   lensIndex,
   lensProp,
-  not,
   over,
   propEq,
 } from 'ramda'
 import { assert } from './assert'
-import { validate } from './validate'
+import { vNot } from './ramda-safe'
 
 const findIndexById = id => findIndex(propEq('id', id))
 
@@ -22,10 +21,6 @@ export const overModel = curry(({ id }, fn, list) => {
   return over(lensIndex(taskIdx), fn, list)
 })
 export const findById = id => find(propEq('id', id))
-const vNot = boolean => {
-  validate('B', [boolean])
-  return not(boolean)
-}
-const overProp = propName => over(lensProp(propName))
+export const overProp = propName => over(lensProp(propName))
 
 export const toggleProp = propName => overProp(propName)(vNot)
