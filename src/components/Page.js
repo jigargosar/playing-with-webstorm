@@ -9,17 +9,15 @@ import { withStateReducer } from './withStateReducer'
 
 function Task({ task: { id, title, done }, dispatch }) {
   return (
-    <div className="flex items-center relative">
+    <div className="flex items-center relative hide-child">
+      <div className="child absolute z-1  " style={{ right: '-2rem' }}>
+        <div className="pa3 bg-gray">Float</div>
+      </div>
       <div
         className="flex-auto mv2 pa3 f4 white bg-light-purple br3 hover-yellow shadow-hover"
         onClick={() => dispatch({ type: 'task.toggleDone', id })}
       >
         <div className={cn({ strike: done })}>{title}</div>
-      </div>
-      <div className="absolute left--2">
-        <div className="relative left--2">
-          <div>Float</div>
-        </div>
       </div>
     </div>
   )
