@@ -2,7 +2,9 @@ import { withReducer } from 'recompose'
 import { times } from 'ramda'
 import { createNewTaskWithDefaults } from '../models/Task'
 
-function reducer(action, state) {
+function reducer(state, action) {
+  console.log('state', state)
+  console.log('action', action)
   return state
 }
 
