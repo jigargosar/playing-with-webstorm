@@ -7,7 +7,7 @@ import { cn } from '../lib/react-ext'
 import { Models } from '../shared-components/Models'
 import { withStateReducer } from './withStateReducer'
 
-function Task({ task: { title, done } }) {
+function Task({ task: { title, done }, dispatch }) {
   return (
     <div className="ma3 pa3 white bg-light-purple">
       <div className={cn({ strike: done })}>{title}</div>
@@ -16,10 +16,12 @@ function Task({ task: { title, done } }) {
 }
 Task.propTypes = { task: PropTypes.object.isRequired }
 
-function TaskList({ tasks }) {
+function TaskList({ tasks, dispatch }) {
   return (
     <div className="ma3 ba b--silver">
-      <Models models={tasks}>{task => <Task task={task} />}</Models>
+      <Models models={tasks}>
+        {task => <Task task={task} dispatch={dispatch} />}
+      </Models>
     </div>
   )
 }
