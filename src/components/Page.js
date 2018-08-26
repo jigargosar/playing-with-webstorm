@@ -11,7 +11,17 @@ function Task({ task: { id, title, done }, dispatch }) {
   return (
     <div className="flex items-center relative hide-child">
       <div className="child absolute z-1  " style={{ right: '-2rem' }}>
-        <div className="pa3 bg-gray">Float</div>
+        <div>
+          <div className="lh-solid code shadow-1 pv2 ph2 br-pill bg-white-90">
+            X
+          </div>
+          <div className="lh-solid code shadow-1 pv2 ph2 br-pill bg-white-90">
+            X
+          </div>
+          <div className="lh-solid code shadow-1 pv2 ph2 br-pill bg-white-90">
+            X
+          </div>
+        </div>
       </div>
       <div
         className="flex-auto mv2 pa3 f4 white bg-light-purple br3 hover-yellow shadow-hover"
