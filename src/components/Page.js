@@ -26,8 +26,8 @@ Task.propTypes = { task: PropTypes.object.isRequired }
 
 function TaskList({ tasks, dispatch }) {
   return (
-    <div className="center">
-      <div className="ma3 pa3 measure-wide br3 bg-white shadow-1 ">
+    <div className="center measure-wide">
+      <div className="ma3 pa3 br3 bg-white shadow-1 ">
         <div className="">Tasks</div>
         <Models models={tasks}>
           {task => <Task task={task} dispatch={dispatch} />}
