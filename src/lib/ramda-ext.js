@@ -38,3 +38,10 @@ export const toggleProp = propName => overProp(propName)(vNot)
 
 export const overItemInListWithId = id => fn => cName =>
   overProp(cName)(overModelWithId(id)(fn))
+
+export const overFst = overIndex(0)
+export const overSnd = overIndex(1)
+
+export const mapOverFst = mapOverNth(0)
+export const mapOverSnd = mapOverNth(1)
+export const mapOverNth = n => fn => map(overIndex(n)(fn))
