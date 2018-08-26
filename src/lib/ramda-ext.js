@@ -7,7 +7,7 @@ import {
   over,
   propEq,
 } from 'ramda'
-import { vNot } from './ramda-safe'
+import { vNot } from './ramda-strict'
 
 export const idEq = propEq('id')
 
