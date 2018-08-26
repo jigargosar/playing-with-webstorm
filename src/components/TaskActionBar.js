@@ -25,9 +25,7 @@ export function TaskActionBar({ queries, actions }) {
   return (
     <div className="pa2 frr bt b--silver">
       {map(({ label, handleClick }) => (
-        <Fragment key={label}>
-          {renderButton(label, handleClick)}
-        </Fragment>
+        <Fragment key={label}>{renderButton(label, handleClick)}</Fragment>
       ))(buttonProps)}
     </div>
   )

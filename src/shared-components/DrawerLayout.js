@@ -14,13 +14,9 @@ export function DrawerLayout({
   return (
     <div
       {...otherProps}
-      className={cn(
-        'flex flex-column vh-100 overflow-hidden ',
-        styleClass,
-        {
-          'bg-black-20': debug,
-        },
-      )}
+      className={cn('flex flex-column vh-100 overflow-hidden ', styleClass, {
+        'bg-black-20': debug,
+      })}
     >
       <div className={cn({ 'bg-black-20 ba bw1 b--blue': debug })}>
         {header}
@@ -43,9 +39,7 @@ export function DrawerLayout({
           {children}
         </div>
       </div>
-      <div className={cn({ 'bg-black-20 ba bw1 b--red': debug })}>
-        {footer}
-      </div>
+      <div className={cn({ 'bg-black-20 ba bw1 b--red': debug })}>{footer}</div>
     </div>
   )
 }

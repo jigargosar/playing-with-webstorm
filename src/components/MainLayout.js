@@ -1,6 +1,6 @@
-import {DrawerLayout} from '../shared-components/DrawerLayout'
+import { DrawerLayout } from '../shared-components/DrawerLayout'
 import React from 'react'
-import {PropTypes} from '../lib-exports/PropTypes'
+import { PropTypes } from '../lib-exports/PropTypes'
 
 export function MainLayout({
   children,

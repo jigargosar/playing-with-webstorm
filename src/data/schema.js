@@ -1,7 +1,7 @@
 export const schema = {
   type: 'object',
   properties: {
-    user: {$ref: '#/definitions/user'},
+    user: { $ref: '#/definitions/user' },
   },
   required: ['user'],
   definitions: {
@@ -11,7 +11,7 @@ export const schema = {
         id: {
           type: 'string',
           format: 'modelId',
-          modelName: 'user'
+          modelName: 'user',
         },
         name: {
           type: 'string',
