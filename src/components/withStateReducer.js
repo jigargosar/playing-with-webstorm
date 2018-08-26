@@ -13,8 +13,10 @@ import {
   setTaskDone,
 } from '../models/Task'
 
-function lensById(id, list) {
-  return lensIndex(findIndex(propEq('id', id))(list))
+const findIndexById = id => findIndex(propEq('id', id))
+
+function overItemById(id, fn, list) {
+  return over(lensIndex(findIndexById(id)(list)))(fn)(list)
 }
 
 function reducer(state, action) {
@@ -25,12 +27,12 @@ function reducer(state, action) {
     [
       propEq('type', 'task.toggleDone'),
       ({ id }) => {
-        const tasks = state.tasks
-        const taskLens = lensById(id, tasks)
         return {
-          tasks: over(taskLens)(task =>
-            setTaskDone(!task.done, task),
-          )(tasks),
+          tasks: overItemById(
+            id,
+            task => setTaskDone(!task.done, task),
+            state.tasks,
+          ),
         }
       },
     ],
