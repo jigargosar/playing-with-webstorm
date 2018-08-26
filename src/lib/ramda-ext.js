@@ -11,7 +11,7 @@ import { vNot } from './ramda-safe'
 
 const findIndexById = id => findIndex(propEq('id', id))
 
-export const overItemById = curry((id, fn, list) =>
+export const overModelById = curry((id, fn, list) =>
   over(lensIndex(findIndexById(id)(list)))(fn)(list),
 )
 

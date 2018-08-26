@@ -4,7 +4,7 @@ import {
   createNewTaskWithDefaults,
   toggleTaskDone,
 } from '../models/Task'
-import { overItemById } from '../lib/ramda-ext'
+import { overModelById } from '../lib/ramda-ext'
 
 function reducer(state, action) {
   console.log('state', state)
@@ -16,7 +16,7 @@ function reducer(state, action) {
       actionEq('task.toggleDone'),
       ({ id }) => {
         return {
-          tasks: overItemById(id, toggleTaskDone, state.tasks),
+          tasks: overModelById(id, toggleTaskDone, state.tasks),
         }
       },
     ],
