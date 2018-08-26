@@ -12,7 +12,7 @@ const findIndexById = id => findIndex(propEq('id', id))
 
 export const overModelWithId = id => fn => list => {
   const idx = findIndexById(id)(list)
-  debugger
+
   return over(lensIndex(idx))(fn)(list)
 }
 
