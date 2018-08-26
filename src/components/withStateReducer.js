@@ -1,23 +1,10 @@
 import { withReducer } from 'recompose'
-import {
-  cond,
-  findIndex,
-  lensIndex,
-  over,
-  propEq,
-  T,
-  times,
-} from 'ramda'
+import { cond, propEq, T, times } from 'ramda'
 import {
   createNewTaskWithDefaults,
   setTaskDone,
 } from '../models/Task'
-
-const findIndexById = id => findIndex(propEq('id', id))
-
-function overItemById(id, fn, list) {
-  return over(lensIndex(findIndexById(id)(list)))(fn)(list)
-}
+import { overItemById } from '../lib/ramda-ext'
 
 function reducer(state, action) {
   console.log('state', state)
