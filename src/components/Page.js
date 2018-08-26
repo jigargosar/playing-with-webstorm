@@ -18,8 +18,8 @@ function Task({ task: { id, title, done }, dispatch }) {
         className="child absolute z-1  flex items-center "
         style={{ right: '0rem' }}
       >
-        <div className="absolute flex items-center bg-white-80 br-pill">
-          <div className="pa1">
+        <div className="absolute ">
+          <div className="pa2 flex items-center bg-white-80 br-pill ">
             {renderButon()}
             {renderButon()}
             {renderButon()}
