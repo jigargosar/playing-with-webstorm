@@ -9,5 +9,5 @@ export const ViewportHeightContainer = withProps({
 })('div')
 
 export const ScrollContainer = withProps({
-  className: 'overflow-scroll',
+  className: 'overflow-scroll flex-grow-1',
 })('div')
