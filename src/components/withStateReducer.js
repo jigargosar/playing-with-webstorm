@@ -15,7 +15,9 @@ function reducer(state, action) {
     [
       actionEq('task.toggleDone'),
       ({ id }) => {
-        return overProp('tasks')(overModelWithId(id)(toggleTaskDone))(
+        const overCollectionModelWithId = id => fn => cName =>
+          overProp(cName)(overModelWithId(id)(fn))
+        return overCollectionModelWithId(id)(toggleTaskDone)('tasks')(
           state,
         )
       },
