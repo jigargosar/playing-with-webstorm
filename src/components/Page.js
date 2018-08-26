@@ -1,11 +1,11 @@
 import React from 'react'
 import { ViewportHeightContainer } from './containers'
-import { setDisplayName, withReducer } from 'recompose'
-import { compose, times } from 'ramda'
-import { createNewTaskWithDefaults } from '../models/Task'
+import { setDisplayName } from 'recompose'
+import { compose } from 'ramda'
 import * as PropTypes from 'prop-types'
 import { cn } from '../lib/react-ext'
 import { Models } from '../shared-components/Models'
+import { withStateReducer } from './withStateReducer'
 
 function Task({ task: { title, done } }) {
   return (
@@ -28,18 +28,8 @@ TaskList.propTypes = {
   prop1: PropTypes.func,
 }
 
-function reducer(action, state) {
-  return state
-}
-
-function initialState() {
-  return {
-    tasks: times(createNewTaskWithDefaults)(8),
-  }
-}
-
 const enhancePage = compose(
-  withReducer('state', 'dispatch', reducer, initialState()),
+  withStateReducer(),
   setDisplayName('Page'),
 )
 export const Page =
