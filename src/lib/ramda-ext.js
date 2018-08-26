@@ -21,10 +21,15 @@ export const findIndexById = compose(
   idEq,
 )
 
+const overIndex = compose(
+  over,
+  lensIndex,
+)
+
 export const overModelWithId = id => fn => list => {
   const idx = findIndexById(id)(list)
 
-  return over(lensIndex(idx))(fn)(list)
+  return overIndex(idx)(fn)(list)
 }
 
 export const overProp = propName => over(lensProp(propName))
