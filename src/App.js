@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import TaskPage from './components/TaskPage'
+import { Page } from './components/Page'
 
 class App extends Component {
   state = {
     hasError: false,
   }
   render() {
-    return this.state.hasError ? 'Error' : <TaskPage />
+    return this.state.hasError ? 'Error' : <Page />
   }
 
   componentDidCatch(error, info) {
