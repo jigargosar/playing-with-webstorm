@@ -31,19 +31,19 @@ function Task({ task: { title, done } }) {
 
 Task.propTypes = { task: PropTypes.object.isRequired }
 
-function NewComponent({ models, renderModel }) {
+function Models({ models, children: render }) {
   return (
     <div className="overflow-scroll ma3 ba b--silver">
       {models.map(model => (
-        <Fragment key={model.id}>{renderModel(model)}</Fragment>
+        <Fragment key={model.id}>{render(model)}</Fragment>
       ))}
     </div>
   )
 }
 
-NewComponent.propTypes = {
+Models.propTypes = {
   models: PropTypes.array.isRequired,
-  renderModel: PropTypes.func.isRequired,
+  children: PropTypes.func.isRequired,
 }
 export const Page =
   //
@@ -53,10 +53,9 @@ export const Page =
         <header>
           <h1>STATIC HEADER</h1>
         </header>
-        <NewComponent
-          models={state.tasks}
-          renderModel={task => <Task task={task} />}
-        />
+        <Models models={state.tasks}>
+          {task => <Task task={task} />}
+        </Models>
         <header>
           <h1>STATIC Content</h1>
         </header>
