@@ -8,9 +8,7 @@ import { Models } from '../shared-components/Models'
 import { withStateReducer } from './withStateReducer'
 
 function renderButon() {
-  return (
-    <div className="ma1 lh-solid code shadow-1 pa2 br-pill bg-white-90">X</div>
-  )
+  return <div className="ma1 pa2 pointer code shadow-1 br-pill bg-white">X</div>
 }
 
 function Task({ task: { id, title, done }, dispatch }) {
