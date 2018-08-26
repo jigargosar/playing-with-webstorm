@@ -4,6 +4,7 @@ import {
   findIndex,
   lensIndex,
   lensProp,
+  map,
   over,
   propEq,
 } from 'ramda'
