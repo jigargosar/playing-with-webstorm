@@ -15,7 +15,7 @@ function Task({ task: { id, title, done }, dispatch }) {
   return (
     <div className="mv2 flex items-center relative hide-child">
       <div
-        className="flex items-center child absolute z-1"
+        className="child absolute z-1  flex items-center "
         style={{ right: '2rem' }}
       >
         <div className="flex absolute">
