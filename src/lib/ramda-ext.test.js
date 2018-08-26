@@ -10,7 +10,7 @@ describe('findIndexById', function() {
 })
 
 describe('arrayToPairs', function() {
-  it('should convert array to index,obj pair', function() {
+  it('should convert array to [index,obj] pair', function() {
     const indexPairs = toPairs(['a', 'b'])
     expect(indexPairs).toEqual([['0', 'a'], ['1', 'b']])
   })
