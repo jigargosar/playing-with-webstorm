@@ -31,6 +31,6 @@ export function isDone({ done }) {
   return done
 }
 
-export function toggleTaskDone() {
-  return task => setTaskDone(!task.done, task)
+export function toggleTaskDone(task) {
+  return setTaskDone(!task.done, task)
 }

@@ -16,7 +16,7 @@ function reducer(state, action) {
       actionEq('task.toggleDone'),
       ({ id }) => {
         return {
-          tasks: overItemById(id, toggleTaskDone(), state.tasks),
+          tasks: overItemById(id, toggleTaskDone, state.tasks),
         }
       },
     ],
