@@ -1,5 +1,5 @@
 import React from 'react'
-import { ViewportHeightContainer } from './containers'
+import { ScrollContainer, ViewportHeightContainer } from './containers'
 import { setDisplayName } from 'recompose'
 import { compose } from 'ramda'
 import * as PropTypes from 'prop-types'
@@ -43,9 +43,9 @@ export const Page =
     return (
       <ViewportHeightContainer>
         <div className="ma1">STATIC HEADER</div>
-        <div className="overflow-scroll">
+        <ScrollContainer>
           <TaskList tasks={state.tasks} dispatch={dispatch} />
-        </div>
+        </ScrollContainer>
         <div className="ma1">STATIC Content</div>
         <div className="overflow-scroll ma3 ba b--silver">
           <div className="ma3 pa3 bg-light-purple">A</div>
