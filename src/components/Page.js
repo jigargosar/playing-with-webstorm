@@ -5,7 +5,9 @@ import { ViewportHeightContainer } from './containers'
 export const Page = function Page() {
   return (
     <ViewportHeightContainer>
-      <h1>STATIC</h1>
+      <header>
+        <h1>STATIC HEADER</h1>
+      </header>
       <div className="overflow-scroll ma3 ba b--silver">
         <div className="ma3 pa5 bg-light-purple">A</div>
         <div className="ma3 pa5 bg-light-blue">B</div>
@@ -13,7 +15,9 @@ export const Page = function Page() {
         <div className="pa5">D</div>
         <div className="pa5">E</div>
       </div>
-      <h1>STATIC</h1>
+      <footer>
+        <h1>STATIC FOOTER</h1>
+      </footer>
     </ViewportHeightContainer>
   )
 }
