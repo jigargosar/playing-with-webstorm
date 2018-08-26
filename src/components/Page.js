@@ -10,8 +10,11 @@ import { withStateReducer } from './withStateReducer'
 function Task({ task: { id, title, done }, dispatch }) {
   return (
     <div className="flex items-center relative hide-child">
-      <div className="child absolute z-1  " style={{ right: '-2rem' }}>
-        <div>
+      <div
+        className="flex items-center child absolute z-1  "
+        style={{ right: '0rem' }}
+      >
+        <div className="flex items-center absolute">
           <div className="lh-solid code shadow-1 pv2 ph2 br-pill bg-white-90">
             X
           </div>
