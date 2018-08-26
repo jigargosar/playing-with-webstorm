@@ -21,7 +21,7 @@ Task.propTypes = { task: PropTypes.object.isRequired }
 
 function TaskList({ tasks, dispatch }) {
   return (
-    <div className="ma3 ba b--silver">
+    <div className="">
       <Models models={tasks}>
         {task => <Task task={task} dispatch={dispatch} />}
       </Models>
@@ -42,7 +42,7 @@ export const Page =
   enhancePage(function Page({ state, dispatch }) {
     return (
       <ViewportHeightContainer>
-        <div className="ma1">STATIC HEADER</div>
+        <div className="ma3">STATIC HEADER</div>
         <ScrollContainer>
           <TaskList tasks={state.tasks} dispatch={dispatch} />
         </ScrollContainer>
@@ -54,7 +54,7 @@ export const Page =
         {/*<div className="pa3">D</div>*/}
         {/*<div className="pa3">E</div>*/}
         {/*</div>*/}
-        <div className="ma1">STATIC FOOTER</div>
+        <div className="ma3">STATIC FOOTER</div>
       </ViewportHeightContainer>
     )
   })
