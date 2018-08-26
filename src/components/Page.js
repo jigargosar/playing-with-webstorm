@@ -32,13 +32,9 @@ function Task({ task: { title, done } }) {
 Task.propTypes = { task: PropTypes.object.isRequired }
 
 function Models({ models, children: render }) {
-  return (
-    <div className="overflow-scroll ma3 ba b--silver">
-      {models.map(model => (
-        <Fragment key={model.id}>{render(model)}</Fragment>
-      ))}
-    </div>
-  )
+  return models.map(model => (
+    <Fragment key={model.id}>{render(model)}</Fragment>
+  ))
 }
 
 Models.propTypes = {
@@ -51,9 +47,11 @@ export const Page =
     return (
       <ViewportHeightContainer>
         <div className="ma1">STATIC HEADER</div>
-        <Models models={state.tasks}>
-          {task => <Task task={task} />}
-        </Models>
+        <div className="overflow-scroll ma3 ba b--silver">
+          <Models models={state.tasks}>
+            {task => <Task task={task} />}
+          </Models>
+        </div>
         <div className="ma1">STATIC Content</div>
         <div className="overflow-scroll ma3 ba b--silver">
           <div className="ma3 pa3 bg-light-purple">A</div>
