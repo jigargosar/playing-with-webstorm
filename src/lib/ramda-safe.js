@@ -6,4 +6,4 @@ const tapValidateArgs = spec => fn => (...args) => {
   return fn(...args)
 }
 
-export const vNot = tapValidateArgs('B')(boolean => not(boolean))
+export const vNot = tapValidateArgs('B')(not)
