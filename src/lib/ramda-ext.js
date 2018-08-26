@@ -1,4 +1,5 @@
 import {
+  compose,
   find,
   findIndex,
   lensIndex,
@@ -8,7 +9,10 @@ import {
 } from 'ramda'
 import { vNot } from './ramda-safe'
 
-export const findIndexById = id => findIndex(propEq('id', id))
+export const findIndexById = compose(
+  findIndex,
+  propEq('id'),
+)
 
 export const overModelWithId = id => fn => list => {
   const idx = findIndexById(id)(list)
