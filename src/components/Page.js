@@ -18,10 +18,12 @@ function Task({ task: { id, title, done }, dispatch }) {
         className="child absolute z-1  flex items-center "
         style={{ right: '0rem' }}
       >
-        <div className="absolute flex items-center bg-white-50">
-          {renderButon()}
-          {renderButon()}
-          {renderButon()}
+        <div className="absolute flex items-center bg-white-80 br-pill">
+          <div className="pa1">
+            {renderButon()}
+            {renderButon()}
+            {renderButon()}
+          </div>
         </div>
       </div>
       <div
