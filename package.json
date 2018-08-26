@@ -2,6 +2,16 @@
   "name": "playing-with-webstorm",
   "version": "0.1.0",
   "private": true,
+  "babel": {
+    "presets": [
+      "env"
+    ]
+  },
+  "runjs": {
+    "requires": [
+      "./node_modules/babel-register"
+    ]
+  },
   "prettier": {
     "trailingComma": "all",
     "arrowParens": "avoid",

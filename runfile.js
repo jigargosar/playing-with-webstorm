@@ -1,4 +1,4 @@
-const { run } = require('runjs')
+import { run } from 'runjs'
 
 function hello(name = 'Mysterious') {
   console.log(`Hello ${name}!`)
