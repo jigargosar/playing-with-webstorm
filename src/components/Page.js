@@ -7,6 +7,12 @@ import { cn } from '../lib/react-ext'
 import { Models } from '../shared-components/Models'
 import { withStateReducer } from './withStateReducer'
 
+function renderButon() {
+  return (
+    <div className="ma1 lh-solid code shadow-1 pa2 br-pill bg-white-90">X</div>
+  )
+}
+
 function Task({ task: { id, title, done }, dispatch }) {
   return (
     <div className="mv2 flex items-center relative hide-child">
@@ -15,15 +21,9 @@ function Task({ task: { id, title, done }, dispatch }) {
         style={{ right: '2rem' }}
       >
         <div className="flex absolute">
-          <div className="ma1 lh-solid code shadow-1 pa2 br-pill bg-white-90">
-            X
-          </div>
-          <div className="ma1 lh-solid code shadow-1 pa2 br-pill bg-white-90">
-            X
-          </div>
-          <div className="ma1 lh-solid code shadow-1 pa2 br-pill bg-white-90">
-            X
-          </div>
+          {renderButon()}
+          {renderButon()}
+          {renderButon()}
         </div>
       </div>
       <div
