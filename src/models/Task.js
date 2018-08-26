@@ -1,7 +1,7 @@
 import * as nanoid from 'nanoid'
 import { randomWords } from '../lib/fake'
 import { validate } from '../lib/validate'
-import { lensProp, not, over } from 'ramda'
+import { toggleProp } from '../lib/ramda-ext'
 
 export function createTask({
   id = `task_${nanoid()}`,
@@ -21,15 +21,6 @@ export function getTitle({ title }) {
   validate('S', [title])
   return title
 }
-
-const vNot = boolean => {
-  validate('B', [boolean])
-  return not(boolean)
-}
-
-const overProp = propName => over(lensProp(propName))
-
-const toggleProp = propName => overProp(propName)(vNot)
 
 export function isDone({ done }) {
   validate('B', [done])
