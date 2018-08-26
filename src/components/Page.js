@@ -10,7 +10,7 @@ import { withStateReducer } from './withStateReducer'
 function Task({ task: { id, title, done }, dispatch }) {
   return (
     <div
-      className="ma3 pa3 white bg-light-purple br3"
+      className="mv2 pa3 br3 f4 white bg-light-purple "
       onClick={() => dispatch({ type: 'task.toggleDone', id })}
     >
       <div className={cn({ strike: done })}>{title}</div>
