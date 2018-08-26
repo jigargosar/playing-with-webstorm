@@ -14,6 +14,6 @@ export const ViewportHeightContainer = withAdditionalClassName(
   'vh-100 overflow-hidden flex flex-column',
 )('div')
 
-export const ScrollContainer = withProps({
-  className: 'overflow-scroll flex-grow-1',
-})('div')
+export const ScrollContainer = withAdditionalClassName(
+  'overflow-scroll flex-grow-1',
+)('div')
