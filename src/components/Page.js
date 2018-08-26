@@ -7,8 +7,8 @@ import { cn } from '../lib/react-ext'
 import { Models } from '../shared-components/Models'
 import { withStateReducer } from './withStateReducer'
 
-function renderButon() {
-  return <div className="ma1 pa2 pointer code shadow-1 br-pill bg-white">X</div>
+function renderButton() {
+  return <div className="ma1 pv1 ph2 orange pointer code ">X</div>
 }
 
 function Task({ task: { id, title, done }, dispatch }) {
@@ -20,9 +20,9 @@ function Task({ task: { id, title, done }, dispatch }) {
       >
         <div className="absolute ">
           <div className="pa2 flex items-center bg-white-80 br-pill shadow-1">
-            {renderButon()}
-            {renderButon()}
-            {renderButon()}
+            {renderButton()}
+            {renderButton()}
+            {renderButton()}
           </div>
         </div>
       </div>
