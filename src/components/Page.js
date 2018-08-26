@@ -17,7 +17,7 @@ function initialState() {
   }
 }
 
-const enhance = compose(
+const enhancePage = compose(
   withReducer('state', 'dispatch', reducer, initialState()),
   setDisplayName('Page'),
 )
@@ -46,7 +46,7 @@ TaskList.propTypes = {
 }
 export const Page =
   //
-  enhance(function Page({ state }) {
+  enhancePage(function Page({ state }) {
     return (
       <ViewportHeightContainer>
         <div className="ma1">STATIC HEADER</div>
