@@ -9,9 +9,16 @@ import {
 } from 'ramda'
 import { vNot } from './ramda-safe'
 
+const idEq = propEq('id')
+
+export const findById = compose(
+  find,
+  idEq,
+)
+
 export const findIndexById = compose(
   findIndex,
-  propEq('id'),
+  idEq,
 )
 
 export const overModelWithId = id => fn => list => {
@@ -19,8 +26,6 @@ export const overModelWithId = id => fn => list => {
 
   return over(lensIndex(idx))(fn)(list)
 }
-
-export const findById = id => find(propEq('id', id))
 
 export const overProp = propName => over(lensProp(propName))
 
