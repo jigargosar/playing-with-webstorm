@@ -16,9 +16,9 @@ function Task({ task: { id, title, done }, dispatch }) {
     <div className="mv2 flex items-center relative hide-child">
       <div
         className="child absolute z-1  flex items-center "
-        style={{ right: '2rem' }}
+        style={{ right: '0rem' }}
       >
-        <div className="flex absolute">
+        <div className="flex items-center bg-white-50">
           {renderButon()}
           {renderButon()}
           {renderButon()}
