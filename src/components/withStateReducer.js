@@ -1,13 +1,27 @@
 import { withReducer } from 'recompose'
-import { cond, propEq, T, times } from 'ramda'
-import { createNewTaskWithDefaults } from '../models/Task'
+import { cond, indexOf, propEq, T, times, update } from 'ramda'
+import {
+  createNewTaskWithDefaults,
+  setTaskDone,
+} from '../models/Task'
+import { findById } from '../models/TaskList'
 
 function reducer(state, action) {
   console.log('state', state)
   console.table(action)
   cond([
     //
-    [propEq('type', 'task.toggleDone'), ({ id }) => {}],
+    [
+      propEq('type', 'task.toggleDone'),
+      ({ id }) => {
+        const tasks = state.tasks
+        const task = findById(id)(tasks)
+        const updateTask = update(indexOf(task)(tasks))
+        return {
+          tasks: updateTask(setTaskDone(!task.done, task))(tasks),
+        }
+      },
+    ],
     [
       T,
       action => {
