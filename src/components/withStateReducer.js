@@ -9,10 +9,11 @@ import { overItemById } from '../lib/ramda-ext'
 function reducer(state, action) {
   console.log('state', state)
   console.table(action)
+  const actionEq = propEq('type')
   return cond([
     //
     [
-      propEq('type', 'task.toggleDone'),
+      actionEq('task.toggleDone'),
       ({ id }) => {
         return {
           tasks: overItemById(
