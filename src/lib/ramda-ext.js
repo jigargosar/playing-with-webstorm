@@ -42,6 +42,6 @@ export const overItemInListWithId = id => fn => cName =>
 export const overFst = overIndex(0)
 export const overSnd = overIndex(1)
 
+export const mapOverNth = n => fn => map(overIndex(n)(fn))
 export const mapOverFst = mapOverNth(0)
 export const mapOverSnd = mapOverNth(1)
-export const mapOverNth = n => fn => map(overIndex(n)(fn))
