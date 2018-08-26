@@ -30,3 +30,7 @@ export function isDone({ done }) {
   validate('B', [done])
   return done
 }
+
+export function toggleTaskDone() {
+  return task => setTaskDone(!task.done, task)
+}

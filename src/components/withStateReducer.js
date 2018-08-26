@@ -2,7 +2,7 @@ import { withReducer } from 'recompose'
 import { cond, propEq, T, times } from 'ramda'
 import {
   createNewTaskWithDefaults,
-  setTaskDone,
+  toggleTaskDone,
 } from '../models/Task'
 import { overItemById } from '../lib/ramda-ext'
 
@@ -16,11 +16,7 @@ function reducer(state, action) {
       actionEq('task.toggleDone'),
       ({ id }) => {
         return {
-          tasks: overItemById(
-            id,
-            task => setTaskDone(!task.done, task),
-            state.tasks,
-          ),
+          tasks: overItemById(id, toggleTaskDone(), state.tasks),
         }
       },
     ],
