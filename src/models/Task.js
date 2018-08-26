@@ -1,7 +1,7 @@
 import * as nanoid from 'nanoid'
 import { randomWords } from '../lib/fake'
 import { validate } from '../lib/validate'
-import { curry, merge } from 'ramda'
+import { curry, lensProp, merge, not, over } from 'ramda'
 
 export function createTask({
   id = `task_${nanoid()}`,
@@ -21,6 +21,15 @@ export function getTitle({ title }) {
   validate('S', [title])
   return title
 }
+
+const vNot = boolean => {
+  validate('boolean', [boolean])
+  return not(boolean)
+}
+
+const overProp = propName => over(lensProp(propName))
+
+const toggleBoolProp = propName => overProp(propName)(vNot)
 
 export const setTaskDone = curry((done, task) => {
   validate('BO', [done, task])
