@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import {
   FullHeightContainer,
   ScrollContainer,
@@ -13,12 +13,15 @@ import { withStateReducer } from './withStateReducer'
 
 function Task({ task: { id, title, done }, dispatch }) {
   return (
-    <div
-      className="mv2 pa3 f4 white bg-light-purple br3 hover-yellow shadow-hover"
-      onClick={() => dispatch({ type: 'task.toggleDone', id })}
-    >
-      <div className={cn({ strike: done })}>{title}</div>
-    </div>
+    <Fragment>
+      <div className="pa1">Float</div>
+      <div
+        className="mv2 pa3 f4 white bg-light-purple br3 hover-yellow shadow-hover"
+        onClick={() => dispatch({ type: 'task.toggleDone', id })}
+      >
+        <div className={cn({ strike: done })}>{title}</div>
+      </div>
+    </Fragment>
   )
 }
 
