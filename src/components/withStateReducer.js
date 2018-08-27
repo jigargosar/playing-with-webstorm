@@ -22,7 +22,7 @@ function reducer(state, action) {
       ({ id }) => overItemInListWithId(id)(toggleTaskDone)('tasks')(state),
     ],
     conditionInvalidAction,
-  ])(action)
+  ])(action, state)
 }
 
 function initialState() {
