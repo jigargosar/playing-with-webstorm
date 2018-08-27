@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Page } from './components/Page'
+import { Page } from './components/FrePage'
 
 class App extends Component {
   state = {

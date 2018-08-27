@@ -1,9 +1,10 @@
 import { withReducer } from 'recompose'
-import { cond, difference, is, omit, propEq, T, times } from 'ramda'
-import { createNewTaskWithDefaults, toggleTaskDone } from '../models/Task'
+import { cond, difference, is, omit, propEq, T } from 'ramda'
+import { toggleTaskDone } from '../models/Task'
 import { overItemInListWithId } from '../lib/ramda-ext'
 import assert from 'power-assert'
 import { validate } from '../lib/validate'
+import { initialState } from './simple-state'
 
 const conditionInvalidAction = [
   T,
@@ -39,12 +40,6 @@ function wrapReducer(reducer) {
     } finally {
       console.groupEnd()
     }
-  }
-}
-
-function initialState() {
-  return {
-    tasks: times(createNewTaskWithDefaults)(8),
   }
 }
 
