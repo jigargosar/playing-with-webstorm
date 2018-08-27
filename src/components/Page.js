@@ -101,10 +101,7 @@ const Task = enhanceTask(function Task({
 Task.propTypes = { task: PropTypes.object.isRequired }
 
 const enhanceTaskList = compose(injectState)
-const TaskList = enhanceTaskList(function TaskList({
-  state: { tasks, selectedTaskIdx },
-  effects,
-}) {
+const TaskList = enhanceTaskList(function TaskList({ state: { tasks } }) {
   return (
     <div className="center measure-wide mv3">
       <div className="pa3 br3 bg-white shadow-1 ">
