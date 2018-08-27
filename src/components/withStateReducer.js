@@ -2,6 +2,7 @@ import { withReducer } from 'recompose'
 import { cond, propEq, T, times } from 'ramda'
 import { createNewTaskWithDefaults, toggleTaskDone } from '../models/Task'
 import { overItemInListWithId } from '../lib/ramda-ext'
+import assert from 'power-assert'
 
 function reducer(state, action) {
   console.log('state', state)
@@ -18,9 +19,7 @@ function reducer(state, action) {
     [
       T,
       action => {
-        const message = `Invalid Action ${action.type}`
-        console.error(message, action)
-        throw new Error(message)
+        assert.fail(action, 'Invalid Action')
       },
     ],
   ])(action)

@@ -21,7 +21,7 @@ export const i = installCommonPackages
 export function rewired(cmdName, ...options) {
   assert(['start', 'build', 'test'].includes(cmdName))
   const command = `react-app-rewired ${cmdName} `
-  run(compose(command))
+  run(command)
 }
 
 export const dev = () => {
