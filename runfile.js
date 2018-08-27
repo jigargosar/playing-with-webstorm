@@ -9,3 +9,5 @@ export function installCommonPackages() {
     'yarn add -D react-app-rewired power-assert babel-plugin-empower-assert babel-plugin-espower',
   )
 }
+
+export const i = installCommonPackages
