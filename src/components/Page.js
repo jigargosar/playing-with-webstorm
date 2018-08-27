@@ -1,7 +1,7 @@
 import React from 'react'
 import { ScrollContainer, ViewportHeightContainer } from './containers'
-import { setDisplayName } from 'recompose'
-import { compose, identity } from 'ramda'
+import { setDisplayName, withStateHandlers } from 'recompose'
+import { compose } from 'ramda'
 import * as PropTypes from 'prop-types'
 import { cn } from '../lib/react-ext'
 import { Models } from '../shared-components/Models'
@@ -63,14 +63,24 @@ const Task = enhanceTask(function Task({
 })
 Task.propTypes = { task: PropTypes.object.isRequired }
 
-const enhanceTaskList = compose(identity)
-const TaskList = enhanceTaskList(function TaskList({ tasks, dispatch }) {
+const enhanceTaskList = compose(withStateHandlers({ index: 0 }))
+const TaskList = enhanceTaskList(function TaskList({
+  tasks,
+  dispatch,
+  index: selectedIndex,
+}) {
   return (
     <div className="center measure-wide">
       <div className="ma3 pa3 br3 bg-white shadow-1 ">
         <div className="">Tasks</div>
         <Models models={tasks}>
-          {task => <Task task={task} dispatch={dispatch} />}
+          {(task, index) => (
+            <Task
+              task={task}
+              selected={index === selectedIndex}
+              dispatch={dispatch}
+            />
+          )}
         </Models>
       </div>
     </div>
