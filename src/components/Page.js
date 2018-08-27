@@ -11,6 +11,7 @@ import {
   handleSelectedTaskDelete,
   handleSelectedTaskToggleDone,
   handleSelectTask,
+  sId,
   state,
   xr,
 } from './withMobX'
@@ -74,7 +75,7 @@ const Task = compose(
   mouseOver,
 }) {
   // const handleToggleDone = () => dispatch({ type: 'task.toggleDone', id })
-  const selected = state.sId === id
+  const selected = sId() === id
   const handleSelect = handleSelectTask(id)
   return (
     <div

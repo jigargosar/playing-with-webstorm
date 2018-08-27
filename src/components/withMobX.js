@@ -1,7 +1,7 @@
 import * as x from 'mobx'
 import * as mobXReact from 'mobx-react'
 import { createNewTaskWithDefaults } from '../models/Task'
-import { clamp, isEmpty, path, times } from 'ramda'
+import { clamp, isEmpty, path, prop, times } from 'ramda'
 import { findIndexById } from '../lib/ramda-ext'
 
 const xr = mobXReact
@@ -24,6 +24,7 @@ export const state = x.observable.object({
 
 const tasks = () => x.computed(() => state.tasks).get()
 const sTask = () => x.computed(() => state.tasks[state.clampedSIdx]).get()
+export const sId = () => x.computed(() => prop('id')(sTask)).get()
 
 export const handleSelectTask = id => () =>
   (state.sIdx = findIndexById(id)(tasks()))
