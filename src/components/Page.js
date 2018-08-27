@@ -20,6 +20,12 @@ function FloatingActionsContainer({ children }) {
   )
 }
 
+function FloatingAction(props) {
+  return (
+    <div className="ma1 pv1 ph1 orange pointer no-select code " {...props} />
+  )
+}
+
 function renderButton(content, clickHandler) {
   return (
     <div
