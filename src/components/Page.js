@@ -34,7 +34,7 @@ const Task = enhanceTask(function Task({
     <div
       className={cn(
         'mv2 flex items-center relative',
-        mouseOver ? 'yellow' : 'white',
+        mouseOver || selected ? 'yellow' : 'white',
       )}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
