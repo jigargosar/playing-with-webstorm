@@ -1,11 +1,12 @@
 import React from 'react'
 import { ScrollContainer, ViewportHeightContainer } from './containers'
-import { setDisplayName, withStateHandlers } from 'recompose'
+import { setDisplayName } from 'recompose'
 import { compose } from 'ramda'
 import * as PropTypes from 'prop-types'
 import { cn } from '../lib/react-ext'
 import { Models } from '../shared-components/Models'
 import { withStateReducer } from './withStateReducer'
+import { withMouseOverHandlers } from './withMouseOverHandlers'
 
 function renderButton(content, clickHandler) {
   return (
@@ -17,18 +18,6 @@ function renderButton(content, clickHandler) {
     </div>
   )
 }
-
-const withMouseOverHandlers = withStateHandlers(
-  { mouseOver: false },
-  {
-    handleMouseEnter: () => () => {
-      return { mouseOver: true }
-    },
-    handleMouseLeave: () => () => {
-      return { mouseOver: false }
-    },
-  },
-)
 
 const enhanceTask = compose(withMouseOverHandlers)
 
