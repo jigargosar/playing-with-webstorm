@@ -65,14 +65,14 @@ function chainEvent(...eventHandlers) {
 
 const Task = enhanceTask(function Task({
   task: { id, title, done },
-  state: { isTaskSelected },
+  state: { selectedTaskId },
   effects,
   handleMouseEnter,
   handleMouseLeave,
   mouseOver,
 }) {
   // const handleToggleDone = () => dispatch({ type: 'task.toggleDone', id })
-  const selected = isTaskSelected(id)
+  const selected = selectedTaskId === id
   const handleSelectTask = () => effects.selectTaskWithId(id)
   return (
     <div
