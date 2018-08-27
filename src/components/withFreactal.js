@@ -42,8 +42,8 @@ export const withAppState = provideState({
       const id = getSelectedTaskId(state)
       return overItemInListWithId(id)(toggleTaskDone)('tasks')(state)
     }),
-    deleteSelectedTask: update((state, id) => ({
-      tasks: rejectById(id)(state.tasks),
+    deleteSelectedTask: update(state => ({
+      tasks: rejectById(getSelectedTaskId(state))(state.tasks),
     })),
     selectTaskWithId: update((state, id) => ({
       selectedTaskIdx: findIndexById(id)(state.tasks),
