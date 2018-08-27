@@ -27,26 +27,13 @@ function tasksReducer(state, action) {
   )
   return is(Function)(newStateOrFn) ? newStateOrFn(state) : newStateOrFn
 }
-
-function reducer(state, action) {
-  validate('OO', [state, action])
-  console.groupCollapsed(`[action] ${action.type}`)
-  try {
-    console.log(action)
-    console.log('state', state)
-    return tasksReducer(state, action)
-  } finally {
-    console.groupEnd()
-  }
-}
-
 function wrapReducer(reducer) {
   return function(state, action) {
     validate('OO', [state, action])
     console.groupCollapsed(`[action] ${action.type}`)
     try {
-      console.debug(action)
-      console.debug('state', state)
+      console.log(action)
+      console.log('state', state)
       return reducer(state, action)
     } finally {
       console.groupEnd()
