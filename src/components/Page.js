@@ -56,7 +56,7 @@ const Task = enhanceTask(function Task({
         <FloatingActionsContainer>
           {renderButton('Done', handleToggleDone)}
           {/*{renderButton('Schedule')}*/}
-          {renderButton('Delete')}
+          {renderButton('Delete', handleDelete)}
         </FloatingActionsContainer>
       )}
       <div
