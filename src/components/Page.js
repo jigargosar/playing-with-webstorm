@@ -55,7 +55,7 @@ const Task = enhanceTask(function Task({
           style={{ right: '0.5rem' }}
         >
           <div className="absolute ">
-            <div className="pa2 flex_ items-center bg-white-80 br3 _br-pill shadow-1">
+            <div className="pa2 bg-white-80 br3 shadow-1">
               {renderButton('Done', handleToggleDone)}
               {renderButton('Schedule')}
               {renderButton('Delete')}
