@@ -1,8 +1,8 @@
 import React from 'react'
 import { ScrollContainer, ViewportHeightContainer } from './containers'
-import { compose, forEach } from 'ramda'
+import { compose } from 'ramda'
 import * as PropTypes from 'prop-types'
-import { cn } from '../lib/react-ext'
+import { chainEvent, cn } from '../lib/react-ext'
 import { Models } from '../shared-components/Models'
 import { withMouseOverHandlers } from './withMouseOverHandlers'
 import Radium from 'radium'
@@ -36,12 +36,6 @@ const FloatingActionsContainer = Radium(function FloatingActionsContainer({
     </div>
   )
 })
-
-function chainEvent(...eventHandlers) {
-  return function(event) {
-    forEach(handler => handler(event))(eventHandlers)
-  }
-}
 
 const Task = compose(
   withMouseOverHandlers,

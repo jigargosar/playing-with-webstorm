@@ -1,5 +1,6 @@
 import React from 'react'
 import cn from 'classname'
+import { forEach } from 'ramda'
 
 export const renderKeyedById = (Component, propName, list) =>
   list.map(model =>
@@ -10,3 +11,9 @@ export const renderKeyedById = (Component, propName, list) =>
   )
 
 export { cn }
+
+export function chainEvent(...eventHandlers) {
+  return function(event) {
+    forEach(handler => handler(event))(eventHandlers)
+  }
+}
