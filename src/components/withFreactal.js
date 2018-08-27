@@ -26,11 +26,11 @@ export const withAppState = provideState({
     ),
   },
   effects: {
-    toggleTaskDone: (effects, id) =>
-      overItemInListWithId(id)(toggleTaskDone)('tasks'),
-    deleteTask: update((state, id) => ({
-      tasks: rejectById(id)(state.tasks),
-    })),
+    // toggleTaskDone: (effects, id) =>
+    //   overItemInListWithId(id)(toggleTaskDone)('tasks'),
+    // deleteTask: update((state, id) => ({
+    //   tasks: rejectById(id)(state.tasks),
+    // })),
 
     toggleSelectedTaskDone: update(state => {
       const { selectedTaskIdx, tasks } = state
