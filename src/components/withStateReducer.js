@@ -12,30 +12,45 @@ const conditionInvalidAction = [
   },
 ]
 
+function tasksReducer(state, action) {
+  const actionEq = propEq('type')
+  const conditions = [
+    //
+    [
+      actionEq('task.toggleDone'),
+      ({ id }) => overItemInListWithId(id)(toggleTaskDone)('tasks')(state),
+    ],
+  ]
+  const newStateOrFn = cond([...conditions, conditionInvalidAction])(
+    action,
+    state,
+  )
+  return is(Function)(newStateOrFn) ? newStateOrFn(state) : newStateOrFn
+}
+
 function reducer(state, action) {
   validate('OO', [state, action])
   console.groupCollapsed(`[action] ${action.type}`)
   try {
-    console.debug(action)
-    console.debug('state', state)
-    const actionEq = propEq('type')
-    const conditions = [
-      //
-      [
-        actionEq('task.toggleDone'),
-        ({ id }) => overItemInListWithId(id)(toggleTaskDone)('tasks')(state),
-      ],
-    ]
-    const newStateOrFn = cond([...conditions, conditionInvalidAction])(
-      action,
-      state,
-    )
-    if (is(Function)(newStateOrFn)) {
-      return newStateOrFn(state)
-    }
-    return newStateOrFn
+    console.log(action)
+    console.log('state', state)
+    return tasksReducer(state, action)
   } finally {
     console.groupEnd()
+  }
+}
+
+function wrapReducer(reducer) {
+  return function(state, action) {
+    validate('OO', [state, action])
+    console.groupCollapsed(`[action] ${action.type}`)
+    try {
+      console.debug(action)
+      console.debug('state', state)
+      return reducer(state, action)
+    } finally {
+      console.groupEnd()
+    }
   }
 }
 
@@ -46,5 +61,10 @@ function initialState() {
 }
 
 export function withStateReducer() {
-  return withReducer('state', 'dispatch', reducer, initialState())
+  return withReducer(
+    'state',
+    'dispatch',
+    wrapReducer(tasksReducer),
+    initialState(),
+  )
 }
