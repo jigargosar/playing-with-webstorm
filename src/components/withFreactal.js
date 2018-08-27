@@ -40,7 +40,6 @@ export const withAppState = provideState({
     deleteSelectedTask: update((state, id) => ({
       tasks: rejectById(id)(state.tasks),
     })),
-
     selectTaskWithId: update((state, id) => ({
       selectedTaskIdx: findIndexById(id)(state.tasks),
     })),
