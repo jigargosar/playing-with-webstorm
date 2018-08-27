@@ -25,12 +25,7 @@ export const state = x.observable.object({
 export const handleSelectTask = id => () =>
   (state.sIdx = findIndexById(id)(state.tasks))
 
-function xToggleProp(p, task) {
-  task[p] = !task[p]
-}
-function xTogglePath(p, obj) {
-  Object.assign(obj, togglePath(p)(obj))
-}
+const xTogglePath = (p, obj) => Object.assign(obj, togglePath(p)(obj))
 
 export const handleSelectedTaskToggleDone = () =>
   xTogglePath(['sTask', 'done'])(state)
