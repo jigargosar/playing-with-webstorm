@@ -45,9 +45,6 @@ const Task = enhanceTask(function Task({
   mouseOver,
 }) {
   // const handleToggleDone = () => dispatch({ type: 'task.toggleDone', id })
-  const handleToggleDone = () => effects.toggleTaskDone(id)
-  const handleDelete = () => effects.deleteTask(id)
-  const handleSelect = () => effects.selectTask(id)
   return (
     <div
       className={cn(
@@ -59,14 +56,14 @@ const Task = enhanceTask(function Task({
     >
       {mouseOver && (
         <FloatingActionsContainer>
-          {renderButton('Done', handleToggleDone)}
+          {renderButton('Done', () => effects.toggleTaskDone(id))}
           {/*{renderButton('Schedule')}*/}
-          {renderButton('Delete', handleDelete)}
+          {renderButton('Delete', () => effects.deleteTask(id))}
         </FloatingActionsContainer>
       )}
       <div
         className="flex-auto pa2 f5 bg-light-purple br2 "
-        onClick={handleSelect}
+        onClick={() => effects.selectTask(id)}
       >
         <div className={cn({ strike: done })}>{title}</div>
       </div>
