@@ -5,9 +5,8 @@ import { compose } from 'ramda'
 import * as PropTypes from 'prop-types'
 import { cn } from '../lib/react-ext'
 import { Models } from '../shared-components/Models'
-import { withStateReducer } from './withStateReducer'
 import { withMouseOverHandlers } from './withMouseOverHandlers'
-import { wrapComponentWithState } from './withFreactal'
+import { injectState, wrapComponentWithState } from './withFreactal'
 
 function FloatingActionsContainer({ children }) {
   return (
@@ -101,8 +100,9 @@ TaskList.propTypes = {
 }
 
 const enhancePage = compose(
-  withStateReducer(),
+  // withStateReducer(),
   wrapComponentWithState,
+  injectState,
 )
 export const Page =
   //
