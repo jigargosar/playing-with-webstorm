@@ -24,8 +24,8 @@ export const withAppState = provideState({
 export const withIndexState = provideState({
   initialState: { index: 1 },
   effects: {
-    setIndex: update((state, index) => {
-      index
-    }),
+    setIndex: update((state, index) => ({
+      index,
+    })),
   },
 })
