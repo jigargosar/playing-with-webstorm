@@ -65,7 +65,7 @@ function chainEvent(...eventHandlers) {
 
 const Task = enhanceTask(function Task({
   task: { id, title, done },
-  state: { isTaskSelected, selectedTaskId, selectedTaskIdx },
+  state: { isTaskSelected },
   effects,
   handleMouseEnter,
   handleMouseLeave,
