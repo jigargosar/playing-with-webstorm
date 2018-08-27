@@ -7,8 +7,8 @@ import { cn } from '../lib/react-ext'
 import { Models } from '../shared-components/Models'
 import { withStateReducer } from './withStateReducer'
 
-function renderButton() {
-  return <div className="ma1 pv1 ph2 orange pointer code ">X</div>
+function renderButton(content) {
+  return <div className="ma1 pv1 ph1 orange pointer code ">{content}</div>
 }
 
 function Task({ task: { id, title, done }, dispatch }) {
@@ -20,9 +20,9 @@ function Task({ task: { id, title, done }, dispatch }) {
       >
         <div className="absolute ">
           <div className="pa2 flex items-center bg-white-80 br-pill shadow-1">
-            {renderButton()}
-            {renderButton()}
-            {renderButton()}
+            {renderButton('Done')}
+            {renderButton('Schedule')}
+            {renderButton('Delete')}
           </div>
         </div>
       </div>
