@@ -4,6 +4,6 @@ export function hello(name = 'Mysterious') {
   console.log(`Hello ${name}!`)
 }
 
-function addCommon() {
+function installCommonPackages() {
   run('yarn add ')
 }
