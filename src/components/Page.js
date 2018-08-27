@@ -63,7 +63,8 @@ const Task = enhanceTask(function Task({
 })
 Task.propTypes = { task: PropTypes.object.isRequired }
 
-const TaskList = compose(identity)(function TaskList({ tasks, dispatch }) {
+const enhanceTaskList = compose(identity)
+const TaskList = enhanceTaskList(function TaskList({ tasks, dispatch }) {
   return (
     <div className="center measure-wide">
       <div className="ma3 pa3 br3 bg-white shadow-1 ">
