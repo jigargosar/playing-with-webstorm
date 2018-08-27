@@ -54,7 +54,8 @@
     "react-scripts": "1.1.5",
     "react-treebeard": "^2.1.0",
     "recompose": "^0.28.2",
-    "tachyons": "^4.11.1"
+    "tachyons": "^4.11.1",
+    "webpack-chain": "^4.9.0"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^3.4.10",

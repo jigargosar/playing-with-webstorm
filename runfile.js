@@ -9,7 +9,10 @@ export function hello(name = 'Mysterious') {
 
 export function installCommonPackages() {
   run(
-    'yarn add -D react-app-rewired power-assert babel-plugin-empower-assert babel-plugin-espower',
+    `yarn add -D \\
+    webpack-chain \\
+    react-app-rewired \\
+    power-assert babel-plugin-empower-assert babel-plugin-espower \\`,
   )
 }
 
@@ -17,7 +20,8 @@ export const i = installCommonPackages
 
 export function rewired(cmdName, ...options) {
   assert(['start', 'build', 'test'].includes(cmdName))
-  run(`react-app-rewired ${cmdName}`)
+  const command = `react-app-rewired ${cmdName} `
+  run(compose(command))
 }
 
 export const dev = () => {

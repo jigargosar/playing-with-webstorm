@@ -2984,6 +2984,10 @@ deep-is@~0.1.3:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/deep-is/-/deep-is-0.1.3.tgz#b369d6fb5dbc13eecf524f91b070feedc357cf34"
 
+deepmerge@^1.5.2:
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-1.5.2.tgz#10499d868844cdad4fee0842df8c7f6f0c95a753"
+
 default-require-extensions@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/default-require-extensions/-/default-require-extensions-2.0.0.tgz#f5f8fbb18a7d6d50b21f641f649ebb522cfe24f7"
@@ -5461,6 +5465,10 @@ jake@^8.0.18:
     filelist "0.0.x"
     minimatch "3.x"
     utilities "1.0.x"
+
+javascript-stringify@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/javascript-stringify/-/javascript-stringify-1.6.0.tgz#142d111f3a6e3dae8f4a9afd77d45855b5a9cce3"
 
 jest-changed-files@^20.0.3:
   version "20.0.3"
@@ -9961,6 +9969,13 @@ webidl-conversions@^3.0.0:
 webidl-conversions@^4.0.0:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-4.0.2.tgz#a855980b1f0b6b359ba1d5d9fb39ae941faa63ad"
+
+webpack-chain@^4.9.0:
+  version "4.9.0"
+  resolved "https://registry.yarnpkg.com/webpack-chain/-/webpack-chain-4.9.0.tgz#2f0794d34d79a7cc5db1416f497b76ad33df30ee"
+  dependencies:
+    deepmerge "^1.5.2"
+    javascript-stringify "^1.6.0"
 
 webpack-dev-middleware@1.12.2, webpack-dev-middleware@^1.12.2:
   version "1.12.2"
