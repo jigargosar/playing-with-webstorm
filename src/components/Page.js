@@ -28,7 +28,6 @@ const FloatingActionsContainer = Radium(function FloatingActionsContainer({
     </div>
   )
 })
-console.log(tr)
 
 const buttonStyle = {
   base: [
