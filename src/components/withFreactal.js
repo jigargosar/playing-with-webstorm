@@ -5,7 +5,7 @@ import {
   rejectById,
 } from '../lib/ramda-ext'
 import { createNewTaskWithDefaults, toggleTaskDone } from '../models/Task'
-import { head, times } from 'ramda'
+import { equals, head, times } from 'ramda'
 
 export { injectState }
 
