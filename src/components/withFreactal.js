@@ -11,8 +11,7 @@ export { injectState }
 
 function getSelectedTaskId(state) {
   const { selectedTaskIdx, tasks } = state
-  const id = prop('id')(tasks[selectedTaskIdx] || tasks[0])
-  return id
+  return prop('id')(tasks[selectedTaskIdx] || tasks[0])
 }
 
 export const withAppState = provideState({
