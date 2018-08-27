@@ -8,7 +8,7 @@ import { xRemoveAt, xToggleProp } from './xUtils'
 const xr = mobXReact
 export { xr }
 
-const computedFn = cfn => x.computed(cfn).get()
+const computedFn = cfn => () => x.computed(cfn).get()
 
 export const state = x.observable.object(
   {
@@ -24,8 +24,8 @@ const sIdx = () => x.computed(() => state.sIdx).get()
 const clampedSIdx = computedFn(
   () => (isEmpty(tasks()) ? NaN : clamp(0, tasks().length - 1)(sIdx())),
 )
-const sTask = () => x.computed(() => state.tasks[clampedSIdx()]).get()
-export const sId = () => x.computed(() => prop('id')(sTask)).get()
+const sTask = computedFn(() => tasks()[clampedSIdx()])
+export const sId = computedFn(() => prop('id')(sTask))
 
 const setSIdx = idx => (state.sIdx = idx)
 
