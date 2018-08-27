@@ -31,7 +31,6 @@ const FloatingActionsContainer = Radium(function FloatingActionsContainer({
 
 const buttonStyle = {
   base: [
-    //
     tr['.button-reset'],
     tr['.bg-transparent'],
     tr['.bn'],
