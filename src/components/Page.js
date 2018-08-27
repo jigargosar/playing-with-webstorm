@@ -40,8 +40,8 @@ const buttonStyle = {
     tr['.no-select'],
     tr['.pointer'],
     tr['.code'],
-    tr['.link'],
     {
+      ...tr['.link'],
       ':focus': tr['.link:focus'],
     },
   ],
