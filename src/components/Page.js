@@ -78,7 +78,7 @@ const TaskList = enhanceTaskList(function TaskList({
   effects,
 }) {
   return (
-    <div className="center measure-wide mv4">
+    <div className="center measure-wide mv3">
       <div className="pa3 br3 bg-white shadow-1 ">
         <div className="">Tasks</div>
         <Models models={tasks}>{task => <Task task={task} />}</Models>
