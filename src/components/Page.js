@@ -52,10 +52,6 @@ const Btn = Radium(function FloatingAction(props) {
   return <button style={[buttonStyle.base, buttonStyle.warning]} {...props} />
 })
 
-function renderButton(content, clickHandler) {
-  return <Btn onClick={clickHandler}>{content}</Btn>
-}
-
 const enhanceTask = compose(
   withMouseOverHandlers,
   injectState,
@@ -89,8 +85,8 @@ const Task = enhanceTask(function Task({
     >
       {mouseOver && (
         <FloatingActionsContainer>
-          {renderButton('Done', effects.toggleSelectedTaskDone)}
-          {renderButton('Delete', () => effects.deleteTask(id))}
+          <Btn onClick={effects.toggleSelectedTaskDone}>{'Done'}</Btn>
+          <Btn onClick={effects.deleteSelectedTask}>{'Delete'}</Btn>
         </FloatingActionsContainer>
       )}
       <div
