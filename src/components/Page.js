@@ -55,7 +55,6 @@ const Task = enhanceTask(function Task({
 }) {
   // const handleToggleDone = () => dispatch({ type: 'task.toggleDone', id })
   const selected = isTaskSelected(id)
-  console.log({ id, isTaskSelected, selectedTaskIdx, selectedTaskId })
   const handleSelectTask = () => effects.selectTaskWithId(id)
   return (
     <div
