@@ -1,6 +1,6 @@
 import React from 'react'
 import { ScrollContainer, ViewportHeightContainer } from './containers'
-import { compose } from 'ramda'
+import { compose, forEach } from 'ramda'
 import * as PropTypes from 'prop-types'
 import { cn } from '../lib/react-ext'
 import { Models } from '../shared-components/Models'
@@ -35,6 +35,13 @@ const enhanceTask = compose(
   withMouseOverHandlers,
   injectState,
 )
+
+function chainEvent(...eventHandlers) {
+  return function(event) {
+    forEach(handler => handler(event))(eventHandlers)
+  }
+}
+
 const Task = enhanceTask(function Task({
   task: { id, title, done },
   state: { isTaskSelected, selectedTaskId, selectedTaskIdx },
@@ -46,13 +53,14 @@ const Task = enhanceTask(function Task({
   // const handleToggleDone = () => dispatch({ type: 'task.toggleDone', id })
   const selected = isTaskSelected(id)
   console.log({ id, isTaskSelected, selectedTaskIdx, selectedTaskId })
+  const handleSelectTask = () => effects.selectTaskWithId(id)
   return (
     <div
       className={cn(
         'mv2 flex items-center relative',
         mouseOver || selected ? 'yellow' : 'white',
       )}
-      onMouseEnter={handleMouseEnter}
+      onMouseEnter={chainEvent(handleMouseEnter, handleSelectTask)}
       onMouseLeave={handleMouseLeave}
     >
       {mouseOver && (
@@ -63,7 +71,7 @@ const Task = enhanceTask(function Task({
       )}
       <div
         className="flex-auto pa2 f5 bg-light-purple br2 "
-        onClick={() => effects.selectTaskWithId(id)}
+        onClick={handleSelectTask}
       >
         <div className={cn({ strike: done })}>{title}</div>
       </div>
