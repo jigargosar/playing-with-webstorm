@@ -16,10 +16,8 @@ export const withAppState = provideState({
   }),
   computed: {
     firstTask: ({ tasks }) => head(tasks),
-    selectedTask: ({ tasks, selectedTaskIdx, firstTask }) => {
-      debugger
-      return tasks[selectedTaskIdx] || firstTask
-    },
+    selectedTask: ({ tasks, selectedTaskIdx, firstTask }) =>
+      tasks[selectedTaskIdx] || firstTask,
     selectedTaskId: path(['selectedTask', 'id']),
     isTaskSelected: ({ selectedTaskId }) => equals(selectedTaskId),
   },
