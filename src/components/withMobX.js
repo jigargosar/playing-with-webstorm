@@ -1,7 +1,7 @@
 import * as x from 'mobx'
 import * as mobXReact from 'mobx-react'
 import { createNewTaskWithDefaults } from '../models/Task'
-import { clamp, isEmpty, path, prop, times } from 'ramda'
+import { clamp, isEmpty, prop, times } from 'ramda'
 import { findIndexById } from '../lib/ramda-ext'
 import { xRemoveAt, xToggleProp } from './xUtils'
 
@@ -16,12 +16,6 @@ export const state = x.observable.object(
     get clampedSIdx() {
       if (isEmpty(state.tasks)) return NaN
       return clamp(0, state.tasks.length - 1)(state.sIdx)
-    },
-    get sTask() {
-      return state.tasks[state.clampedSIdx]
-    },
-    get sId() {
-      return path(['sTask', 'id'])(state)
     },
   },
   {},
