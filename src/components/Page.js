@@ -88,8 +88,8 @@ function TaskList({ tasks, dispatch }) {
 }
 
 TaskList.propTypes = {
-  models: PropTypes.any,
-  prop1: PropTypes.func,
+  tasks: PropTypes.array.isRequired,
+  dispatch: PropTypes.func.isRequired,
 }
 
 const enhancePage = compose(
