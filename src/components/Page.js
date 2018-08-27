@@ -33,12 +33,10 @@ const buttonStyle = {
   base: [
     tr['.button-reset'],
     tr['.bg-transparent'],
-    tr['.bn'],
+    tr['.code'],
     tr['.ma1'],
     tr['.pa1'],
-    { userSelect: 'none' },
-    tr['.pointer'],
-    tr['.code'],
+    { userSelect: 'none', border: 'none', cursor: 'pointer' },
     trLink,
   ],
   warning: {
