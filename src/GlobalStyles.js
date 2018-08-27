@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react'
-import Style from 'radium/es/components/style'
-import tachyonsRules from 'tachyons'
-import indexRules from './index.css'
+import { Style } from 'radium'
+import tachyonsRules from '!radium-loader!css-loader!tachyons' // eslint-disable-line
+import indexRules from '!radium-loader!css-loader!./index.css' // eslint-disable-line
 
-export { tachyonsRules, indexRules }
+export { tachyonsRules as tr, indexRules }
 
 export function GlobalStyles() {
   return (
