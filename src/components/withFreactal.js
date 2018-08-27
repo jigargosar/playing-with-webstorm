@@ -16,8 +16,9 @@ export const withAppState = provideState({
   }),
   computed: {
     firstTask: path(['tasks', 0]),
-    selectedTask: ({ tasks, selectedTaskIdx, firstTask }) =>
-      tasks[selectedTaskIdx] || firstTask,
+    selectedTask: ({ tasks, selectedTaskIdx, firstTask } = { tasks: [] }) => {
+      return (tasks || [])[selectedTaskIdx] || firstTask
+    },
     selectedTaskId: path(['selectedTask', 'id']),
     isTaskSelected: compose(
       equals,
@@ -27,10 +28,11 @@ export const withAppState = provideState({
   effects: {
     toggleTaskDone: (effects, id) =>
       overItemInListWithId(id)(toggleTaskDone)('tasks'),
-    toggleSelectedTaskDone: effects => ({ selectedTaskIdx, tasks }) => {
+    toggleSelectedTaskDone: update(state => {
+      const { selectedTaskIdx, tasks } = state
       const id = prop('id')(tasks[selectedTaskIdx] || tasks[0])
-      return effects.toggleTaskDone(id)
-    },
+      return overItemInListWithId(id)(toggleTaskDone)('tasks')(state)
+    }),
     deleteTask: update((state, id) => ({
       tasks: rejectById(id)(state.tasks),
     })),
