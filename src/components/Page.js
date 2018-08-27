@@ -10,7 +10,7 @@ import { injectState, withAppState } from './withFreactal'
 function FloatingActionsContainer({ children }) {
   return (
     <div
-      className="absolute z-1  flex items-center "
+      className="absolute z-1 flex items-center "
       style={{ right: '0.5rem' }}
     >
       <div className="absolute ">
