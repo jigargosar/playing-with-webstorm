@@ -29,18 +29,33 @@ const FloatingActionsContainer = Radium(function FloatingActionsContainer({
   )
 })
 
+const style = {
+  button: [
+    //
+    tr['.ma1'],
+    tr['.pa1'],
+    tr['.link'],
+    tr['.button-reset'],
+    tr['.bg-transparent'],
+    tr['.bn'],
+    tr['.no-select'],
+    tr['.pointer'],
+    tr['.code'],
+  ],
+}
+
 const FloatingAction = Radium(function FloatingAction(props) {
   return (
     <button
       className="
-        pa1 orange link
-        button-reset bg-transparent bn no-select
-        pointer code
+        orange
+
         "
       style={[
         //
-        tr['.ma1'],
-        tr['.pa1'],
+        // tr['.ma1'],
+        // tr['.pa1'],
+        style.button,
       ]}
       {...props}
     />
