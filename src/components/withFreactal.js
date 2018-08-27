@@ -15,7 +15,7 @@ export const withAppState = provideState({
     selectedTaskIdx: 0,
   }),
   computed: {
-    firstTask: path('tasks', 0),
+    firstTask: path(['tasks', 0]),
     selectedTask: ({ tasks, selectedTaskIdx, firstTask }) =>
       tasks[selectedTaskIdx] || firstTask,
     selectedTaskId: path(['selectedTask', 'id']),
