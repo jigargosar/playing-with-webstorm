@@ -6,7 +6,7 @@ import { cn } from '../lib/react-ext'
 import { Models } from '../shared-components/Models'
 import { withMouseOverHandlers } from './withMouseOverHandlers'
 import Radium from 'radium'
-import { tr, trLink } from '../GlobalStyles'
+import { tr } from '../GlobalStyles'
 import {
   handleSelectedTaskDelete,
   handleSelectedTaskToggleDone,
@@ -15,6 +15,7 @@ import {
   tasks,
   xr,
 } from './withMobX'
+import { Btn } from './Btn'
 
 const FloatingActionsContainer = Radium(function FloatingActionsContainer({
   children,
@@ -34,29 +35,6 @@ const FloatingActionsContainer = Radium(function FloatingActionsContainer({
       </div>
     </div>
   )
-})
-
-const buttonStyle = {
-  base: [
-    // tr['.button-reset'],
-    tr['.code'],
-    tr['.ma1'],
-    tr['.pa1'],
-    {
-      background: 'transparent',
-      userSelect: 'none',
-      border: 'none',
-      cursor: 'pointer',
-    },
-    trLink,
-  ],
-  warning: {
-    ...tr['.orange'],
-  },
-}
-
-const Btn = Radium(function FloatingAction(props) {
-  return <button style={[buttonStyle.base, buttonStyle.warning]} {...props} />
 })
 
 function chainEvent(...eventHandlers) {
