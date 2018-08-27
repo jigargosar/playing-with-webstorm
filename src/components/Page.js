@@ -8,6 +8,19 @@ import { Models } from '../shared-components/Models'
 import { withStateReducer } from './withStateReducer'
 import { withMouseOverHandlers } from './withMouseOverHandlers'
 
+function FloatingActionsContainer({ children }) {
+  return (
+    <div
+      className="absolute z-1  flex items-center "
+      style={{ right: '0.5rem' }}
+    >
+      <div className="absolute ">
+        <div className="pa2 bg-white-80 br3 shadow-1">{children}</div>
+      </div>
+    </div>
+  )
+}
+
 function renderButton(content, clickHandler) {
   return (
     <div
@@ -15,23 +28,6 @@ function renderButton(content, clickHandler) {
       onClick={clickHandler}
     >
       {content}
-    </div>
-  )
-}
-
-function renderFloatingActions(handleToggleDone) {
-  return (
-    <div
-      className="absolute z-1  flex items-center "
-      style={{ right: '0.5rem' }}
-    >
-      <div className="absolute ">
-        <div className="pa2 bg-white-80 br3 shadow-1">
-          {renderButton('Done', handleToggleDone)}
-          {/*{renderButton('Schedule')}*/}
-          {renderButton('Delete')}
-        </div>
-      </div>
     </div>
   )
 }
@@ -56,7 +52,13 @@ const Task = enhanceTask(function Task({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {mouseOver && renderFloatingActions(handleToggleDone, handleDelete)}
+      {mouseOver && (
+        <FloatingActionsContainer>
+          {renderButton('Done', handleToggleDone)}
+          {/*{renderButton('Schedule')}*/}
+          {renderButton('Delete')}
+        </FloatingActionsContainer>
+      )}
       <div
         className="flex-auto pa2 f5 bg-light-purple br2 "
         onClick={handleToggleDone}
