@@ -25,14 +25,14 @@ export const state = x.observable.object({
 export const handleSelectTask = id => () =>
   (state.sIdx = findIndexById(id)(state.tasks))
 
-function xToggleProp(p, task) {
-  task[p] = !task[p]
-}
-
 export const handleSelectedTaskToggleDone = () =>
   xToggleProp('done', state.sTask)
+
 export const handleSelectedTaskDelete = () => {
   state.tasks.splice(state.clampedSIdx, 1)
 }
-
 export { xr }
+
+function xToggleProp(p, task) {
+  task[p] = !task[p]
+}
