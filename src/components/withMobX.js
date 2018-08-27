@@ -18,8 +18,8 @@ export const state = x.observable.object(
   {},
   { name: 'state' },
 )
-const tasks = () => x.computed(() => state.tasks).get()
-const sIdx = () => x.computed(() => state.sIdx).get()
+const tasks = () => computedFn(() => state.tasks)
+const sIdx = () => computedFn(() => state.sIdx)
 
 const clampedSIdx = computedFn(
   () => (isEmpty(tasks()) ? NaN : clamp(0, tasks().length - 1)(sIdx())),
