@@ -5,7 +5,7 @@ import {
   rejectById,
 } from '../lib/ramda-ext'
 import { createNewTaskWithDefaults, toggleTaskDone } from '../models/Task'
-import { equals, path, times } from 'ramda'
+import { equals, path, prop, times } from 'ramda'
 
 export { injectState }
 
@@ -24,6 +24,10 @@ export const withAppState = provideState({
   effects: {
     toggleTaskDone: (effects, id) =>
       overItemInListWithId(id)(toggleTaskDone)('tasks'),
+    toggleSelectedTaskDone: effects => ({ selectedTaskIdx, tasks }) => {
+      const id = prop('id')(tasks[selectedTaskIdx] || tasks[0])
+      return effects.toggleTaskDone(id)
+    },
     deleteTask: update((state, id) => ({
       tasks: rejectById(id)(state.tasks),
     })),

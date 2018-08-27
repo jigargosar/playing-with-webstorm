@@ -71,7 +71,7 @@ const Task = enhanceTask(function Task({
     >
       {mouseOver && (
         <FloatingActionsContainer>
-          {renderButton('Done', () => effects.toggleTaskDone(id))}
+          {renderButton('Done', effects.toggleSelectedTaskDone)}
           {renderButton('Delete', () => effects.deleteTask(id))}
         </FloatingActionsContainer>
       )}
