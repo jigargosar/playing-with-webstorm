@@ -7,7 +7,7 @@ import { Models } from '../shared-components/Models'
 import { withMouseOverHandlers } from './withMouseOverHandlers'
 import { injectState, withAppState } from './withFreactal'
 import Radium from 'radium'
-import { tr } from '../GlobalStyles'
+import { tr, trLink } from '../GlobalStyles'
 
 const FloatingActionsContainer = Radium(function FloatingActionsContainer({
   children,
@@ -29,6 +29,7 @@ const FloatingActionsContainer = Radium(function FloatingActionsContainer({
   )
 })
 console.log(tr)
+
 const buttonStyle = {
   base: [
     //
@@ -40,10 +41,7 @@ const buttonStyle = {
     tr['.no-select'],
     tr['.pointer'],
     tr['.code'],
-    {
-      ...tr['.link'],
-      ':focus': tr['.link:focus'],
-    },
+    trLink,
   ],
   warning: {
     ...tr['.orange'],

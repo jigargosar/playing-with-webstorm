@@ -13,3 +13,8 @@ export function GlobalStyles() {
     </Fragment>
   )
 }
+
+export const trLink = {
+  ...tr['.link'],
+  ':focus': tr['.link:focus'],
+}
