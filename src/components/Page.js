@@ -28,7 +28,7 @@ const FloatingActionsContainer = Radium(function FloatingActionsContainer({
     </div>
   )
 })
-console.log(tr['.link'])
+console.log(tr)
 const buttonStyle = {
   base: [
     //
@@ -41,6 +41,9 @@ const buttonStyle = {
     tr['.pointer'],
     tr['.code'],
     tr['.link'],
+    {
+      ':focus': tr['.link:focus'],
+    },
   ],
   warning: {
     ...tr['.orange'],
