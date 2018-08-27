@@ -9,6 +9,12 @@ import { compose, equals, path, prop, times } from 'ramda'
 
 export { injectState }
 
+function getSelectedTaskId(state) {
+  const { selectedTaskIdx, tasks } = state
+  const id = prop('id')(tasks[selectedTaskIdx] || tasks[0])
+  return id
+}
+
 export const withAppState = provideState({
   initialState: () => ({
     tasks: times(createNewTaskWithDefaults)(8),
@@ -16,7 +22,7 @@ export const withAppState = provideState({
   }),
   computed: {
     firstTask: path(['tasks', 0]),
-    selectedTask: ({ tasks, selectedTaskIdx, firstTask } = { tasks: [] }) => {
+    selectedTask: ({ tasks, selectedTaskIdx, firstTask }) => {
       return (tasks || [])[selectedTaskIdx] || firstTask
     },
     selectedTaskId: path(['selectedTask', 'id']),
@@ -33,8 +39,7 @@ export const withAppState = provideState({
     // })),
 
     toggleSelectedTaskDone: update(state => {
-      const { selectedTaskIdx, tasks } = state
-      const id = prop('id')(tasks[selectedTaskIdx] || tasks[0])
+      const id = getSelectedTaskId(state)
       return overItemInListWithId(id)(toggleTaskDone)('tasks')(state)
     }),
     deleteSelectedTask: update((state, id) => ({
