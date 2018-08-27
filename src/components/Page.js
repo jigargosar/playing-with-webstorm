@@ -43,6 +43,7 @@ const Task = enhanceTask(function Task({
 }) {
   const handleToggleDone = () => dispatch({ type: 'task.toggleDone', id })
   const handleDelete = () => dispatch({ type: 'task.delete', id })
+  const handleSelect = () => dispatch({ type: 'task.select', id })
   return (
     <div
       className={cn(
@@ -61,7 +62,7 @@ const Task = enhanceTask(function Task({
       )}
       <div
         className="flex-auto pa2 f5 bg-light-purple br2 "
-        onClick={handleToggleDone}
+        onClick={handleSelect}
       >
         <div className={cn({ strike: done })}>{title}</div>
       </div>
