@@ -4,6 +4,13 @@ import { createNewTaskWithDefaults, toggleTaskDone } from '../models/Task'
 import { overItemInListWithId } from '../lib/ramda-ext'
 import assert from 'power-assert'
 
+const conditionInvalidAction = [
+  T,
+  action => {
+    assert.fail(action, 'Invalid Action')
+  },
+]
+
 function reducer(state, action) {
   console.log('state', state)
   console.table(action)
@@ -14,12 +21,7 @@ function reducer(state, action) {
       actionEq('task.toggleDone'),
       ({ id }) => overItemInListWithId(id)(toggleTaskDone)('tasks')(state),
     ],
-    [
-      T,
-      action => {
-        assert.fail(action, 'Invalid Action')
-      },
-    ],
+    conditionInvalidAction,
   ])(action)
 }
 
