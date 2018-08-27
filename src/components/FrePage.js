@@ -103,13 +103,12 @@ TaskList.propTypes = {
 }
 
 const enhancePage = compose(
-  // withStateReducer(),
   withAppState,
   // injectState,
 )
 export const Page =
   //
-  enhancePage(function Page({}) {
+  enhancePage(function Page() {
     return (
       <ViewportHeightContainer className="bg-light-gray">
         <div className="pa3 shadow-1">STATIC HEADER</div>

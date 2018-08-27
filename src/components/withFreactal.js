@@ -21,7 +21,7 @@ export const withAppState = provideState({
 
 export const withIndexState = (indexName = 'index') =>
   provideState({
-    initialState: { [indexName]: 1 },
+    initialState: () => ({ [indexName]: 1 }),
     effects: {
       setIndex: update((state, index) => ({ [indexName]: index })),
     },
