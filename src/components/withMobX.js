@@ -3,8 +3,10 @@ import * as mobXReact from 'mobx-react'
 import { createNewTaskWithDefaults } from '../models/Task'
 import { clamp, isEmpty, path, prop, times } from 'ramda'
 import { findIndexById } from '../lib/ramda-ext'
+import { xRemoveAt, xToggleProp } from './xUtils'
 
 const xr = mobXReact
+export { xr }
 
 export const state = x.observable.object(
   {
@@ -30,16 +32,9 @@ const tasks = () => x.computed(() => state.tasks).get()
 const sTask = () => x.computed(() => state.tasks[state.clampedSIdx]).get()
 export const sId = () => x.computed(() => prop('id')(sTask)).get()
 
-export const handleSelectTask = id => () =>
-  (state.sIdx = findIndexById(id)(tasks()))
+const setSIdx = idx => (state.sIdx = idx)
 
+export const handleSelectTask = id => () => setSIdx(findIndexById(id)(tasks()))
 export const handleSelectedTaskToggleDone = () => xToggleProp('done', sTask())
-
-export const handleSelectedTaskDelete = () => {
-  tasks().splice(state.clampedSIdx, 1)
-}
-export { xr }
-
-function xToggleProp(p, task) {
-  task[p] = !task[p]
-}
+export const handleSelectedTaskDelete = () =>
+  xRemoveAt(state.clampedSIdx, tasks())
