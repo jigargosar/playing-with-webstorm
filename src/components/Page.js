@@ -57,7 +57,7 @@ const Task = enhanceTask(function Task({
           <div className="absolute ">
             <div className="pa2 bg-white-80 br3 shadow-1">
               {renderButton('Done', handleToggleDone)}
-              {renderButton('Schedule')}
+              {/*{renderButton('Schedule')}*/}
               {renderButton('Delete')}
             </div>
           </div>
