@@ -12,6 +12,7 @@ function renderButton(content) {
 }
 
 function Task({ task: { id, title, done }, dispatch }) {
+  const handleToggleDone = () => dispatch({ type: 'task.toggleDone', id })
   return (
     <div className="mv2 flex items-center relative hide-child">
       <div
@@ -20,7 +21,7 @@ function Task({ task: { id, title, done }, dispatch }) {
       >
         <div className="absolute ">
           <div className="pa2 flex items-center bg-white-80 br-pill shadow-1">
-            {renderButton('Done')}
+            {renderButton('Done', handleToggleDone)}
             {renderButton('Schedule')}
             {renderButton('Delete')}
           </div>
@@ -28,7 +29,7 @@ function Task({ task: { id, title, done }, dispatch }) {
       </div>
       <div
         className="flex-auto pa2 f4 white bg-light-purple br3 hover-yellow shadow-hover"
-        onClick={() => dispatch({ type: 'task.toggleDone', id })}
+        onClick={handleToggleDone}
       >
         <div className={cn({ strike: done })}>{title}</div>
       </div>
