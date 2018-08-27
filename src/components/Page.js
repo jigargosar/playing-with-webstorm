@@ -69,13 +69,12 @@ const Task = compose(
   xr.observer,
 )(function Task({
   task: { id, title, done },
-  state: { sId },
   handleMouseEnter,
   handleMouseLeave,
   mouseOver,
 }) {
   // const handleToggleDone = () => dispatch({ type: 'task.toggleDone', id })
-  const selected = sId === id
+  const selected = state.sId === id
   const handleSelect = handleSelectTask(id)
   return (
     <div
