@@ -3,6 +3,7 @@ import { cond, is, propEq, T, times } from 'ramda'
 import { createNewTaskWithDefaults, toggleTaskDone } from '../models/Task'
 import { overItemInListWithId } from '../lib/ramda-ext'
 import assert from 'power-assert'
+import { validate } from '../lib/validate'
 
 const conditionInvalidAction = [
   T,
@@ -12,6 +13,7 @@ const conditionInvalidAction = [
 ]
 
 function reducer(state, action) {
+  validate('OO', [state, action])
   console.groupCollapsed(`[action] ${action.type}`)
   try {
     console.debug(action)
