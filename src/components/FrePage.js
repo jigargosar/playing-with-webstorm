@@ -5,7 +5,7 @@ import * as PropTypes from 'prop-types'
 import { cn } from '../lib/react-ext'
 import { Models } from '../shared-components/Models'
 import { withMouseOverHandlers } from './withMouseOverHandlers'
-import { injectState, withAppState, withTaskSelection } from './withFreactal'
+import { injectState, withAppState } from './withFreactal'
 
 function FloatingActionsContainer({ children }) {
   return (
@@ -58,13 +58,12 @@ const Task = enhanceTask(function Task({
       {mouseOver && (
         <FloatingActionsContainer>
           {renderButton('Done', () => effects.toggleTaskDone(id))}
-          {/*{renderButton('Schedule')}*/}
           {renderButton('Delete', () => effects.deleteTask(id))}
         </FloatingActionsContainer>
       )}
       <div
         className="flex-auto pa2 f5 bg-light-purple br2 "
-        onClick={handleSelectTask}
+        onClick={() => effects.selectTaskWithId(id)}
       >
         <div className={cn({ strike: done })}>{title}</div>
       </div>
@@ -73,10 +72,7 @@ const Task = enhanceTask(function Task({
 })
 Task.propTypes = { task: PropTypes.object.isRequired }
 
-const enhanceTaskList = compose(
-  withTaskSelection,
-  injectState,
-)
+const enhanceTaskList = compose(injectState)
 const TaskList = enhanceTaskList(function TaskList({
   state: { tasks, selectedTaskIdx },
   effects,
