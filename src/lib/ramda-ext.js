@@ -3,6 +3,7 @@ import {
   find,
   findIndex,
   lensIndex,
+  lensPath,
   lensProp,
   over,
   propEq,
@@ -40,8 +41,10 @@ export const overModelWithId = id => fn => list => {
 }
 
 export const overProp = propName => over(lensProp(propName))
+export const overPath = pathArr => over(lensPath(pathArr))
 
 export const toggleProp = propName => overProp(propName)(vNot)
+export const togglePath = pathArr => overPath(pathArr)(vNot)
 
 export const overItemInListWithId = id => fn => cName =>
   overProp(cName)(overModelWithId(id)(fn))
