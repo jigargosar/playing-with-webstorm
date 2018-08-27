@@ -29,8 +29,8 @@ const FloatingActionsContainer = Radium(function FloatingActionsContainer({
   )
 })
 
-const style = {
-  button: [
+const buttonStyle = {
+  base: [
     //
     tr['.ma1'],
     tr['.pa1'],
@@ -55,7 +55,7 @@ const FloatingAction = Radium(function FloatingAction(props) {
         //
         // tr['.ma1'],
         // tr['.pa1'],
-        style.button,
+        buttonStyle.button,
       ]}
       {...props}
     />
