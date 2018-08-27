@@ -6,6 +6,7 @@ import {
   lensProp,
   over,
   propEq,
+  reject,
 } from 'ramda'
 import { vNot } from './ramda-strict'
 import { assert } from './assert'
@@ -14,6 +15,11 @@ export const idEq = propEq('id')
 
 export const findById = compose(
   find,
+  idEq,
+)
+
+export const rejectById = compose(
+  reject,
   idEq,
 )
 

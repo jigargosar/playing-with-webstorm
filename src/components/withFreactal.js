@@ -1,6 +1,10 @@
-import { injectState, provideState } from 'freactal'
+import { injectState, provideState, update } from 'freactal'
 import { initialState } from './simple-state'
-import { overItemInListWithId } from '../lib/ramda-ext'
+import {
+  findIndexById,
+  overItemInListWithId,
+  rejectById,
+} from '../lib/ramda-ext'
 import { toggleTaskDone } from '../models/Task'
 
 export { injectState }
@@ -10,5 +14,9 @@ export const wrapComponentWithState = provideState({
   effects: {
     toggleTaskDone: (effects, id) =>
       overItemInListWithId(id)(toggleTaskDone)('tasks'),
+    deleteTask: update((state, id) => ({ tasks: rejectById(id)(state.tasks) })),
+    selectTask: update((state, id) => ({
+      selectedIndex: findIndexById(id)(state.tasks),
+    })),
   },
 })
