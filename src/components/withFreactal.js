@@ -5,7 +5,7 @@ import {
   rejectById,
 } from '../lib/ramda-ext'
 import { createNewTaskWithDefaults, toggleTaskDone } from '../models/Task'
-import { equals, head, times } from 'ramda'
+import { equals, head, path, times } from 'ramda'
 
 export { injectState }
 
@@ -15,10 +15,12 @@ export const withAppState = provideState({
     selectedTaskIdx: 0,
   }),
   computed: {
-    firstTask: tasks => head(tasks),
-    selectedTaskId: ({ tasks, selectedTaskIdx, firstTask }) => {
+    firstTask: ({ tasks }) => head(tasks),
+    selectedTask: ({ tasks, selectedTaskIdx, firstTask }) => {
+      debugger
       return tasks[selectedTaskIdx] || firstTask
     },
+    selectedTaskId: path(['selectedTask', 'id']),
     isTaskSelected: ({ selectedTaskId }) => equals(selectedTaskId),
   },
   effects: {

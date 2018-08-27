@@ -37,7 +37,7 @@ const enhanceTask = compose(
 )
 const Task = enhanceTask(function Task({
   task: { id, title, done },
-  isTaskSelected,
+  state: { isTaskSelected, selectedTaskId, selectedTaskIdx },
   effects,
   handleMouseEnter,
   handleMouseLeave,
@@ -45,6 +45,7 @@ const Task = enhanceTask(function Task({
 }) {
   // const handleToggleDone = () => dispatch({ type: 'task.toggleDone', id })
   const selected = isTaskSelected(id)
+  console.log({ id, isTaskSelected, selectedTaskIdx, selectedTaskId })
   return (
     <div
       className={cn(
