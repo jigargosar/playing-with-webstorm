@@ -47,6 +47,7 @@
     "json-schema-faker": "^0.5.0-rc15",
     "nanoid": "^1.2.1",
     "prop-types": "latest",
+    "radium": "latest",
     "ramda": "^0.25.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
@@ -77,6 +78,7 @@
     "nodemon": "^1.18.3",
     "plop": "^2.1.0",
     "power-assert": "^1.6.0",
+    "radium-loader": "^1.0.10",
     "react-app-rewired": "^1.5.2",
     "runjs": "^4.3.2"
   }
