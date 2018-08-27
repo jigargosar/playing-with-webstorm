@@ -1,7 +1,10 @@
 import * as x from 'mobx'
+import * as mobXReact from 'mobx-react'
 import { createNewTaskWithDefaults } from '../models/Task'
 import { clamp, isEmpty, times } from 'ramda'
 import { findIndexById } from '../lib/ramda-ext'
+
+export const xr = mobXReact
 
 export const state = x.observable.object({
   tasks: times(createNewTaskWithDefaults)(16),

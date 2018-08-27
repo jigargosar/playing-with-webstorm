@@ -5,7 +5,7 @@ import * as PropTypes from 'prop-types'
 import { cn } from '../lib/react-ext'
 import { Models } from '../shared-components/Models'
 import { withMouseOverHandlers } from './withMouseOverHandlers'
-import { injectState, withAppState } from './withFreactal'
+import { injectState } from './withFreactal'
 import Radium from 'radium'
 import { tr, trLink } from '../GlobalStyles'
 
@@ -116,7 +116,7 @@ TaskList.propTypes = {
 }
 
 const enhancePage = compose(
-  withAppState,
+  xr.observer,
   // injectState,
 )
 export const Page =
