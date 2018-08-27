@@ -1,6 +1,6 @@
 import React from 'react'
 import { ScrollContainer, ViewportHeightContainer } from './containers'
-import { setDisplayName } from 'recompose'
+import { setDisplayName, withStateHandlers } from 'recompose'
 import { compose } from 'ramda'
 import * as PropTypes from 'prop-types'
 import { cn } from '../lib/react-ext'
@@ -18,22 +18,48 @@ function renderButton(content, clickHandler) {
   )
 }
 
-function Task({ task: { id, title, done }, dispatch }) {
+const enhanceTask = compose(
+  withStateHandlers(
+    { mouseOver: false },
+    {
+      handleMouseEnter: () => () => {
+        return { mouseOver: true }
+      },
+      handleMouseLeave: () => () => {
+        return { mouseOver: false }
+      },
+    },
+  ),
+)
+
+const Task = enhanceTask(function Task({
+  task: { id, title, done },
+  dispatch,
+  handleMouseEnter,
+  handleMouseLeave,
+  mouseOver,
+}) {
   const handleToggleDone = () => dispatch({ type: 'task.toggleDone', id })
   return (
-    <div className="mv2 flex items-center relative hide-child">
-      <div
-        className="child absolute z-1  flex items-center "
-        style={{ right: '1rem' }}
-      >
-        <div className="absolute ">
-          <div className="pa2 flex items-center bg-white-80 br-pill shadow-1">
-            {renderButton('Done', handleToggleDone)}
-            {renderButton('Schedule')}
-            {renderButton('Delete')}
+    <div
+      className="mv2 flex items-center relative"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      {mouseOver && (
+        <div
+          className="absolute z-1  flex items-center "
+          style={{ right: '1rem' }}
+        >
+          <div className="absolute ">
+            <div className="pa2 flex items-center bg-white-80 br-pill shadow-1">
+              {renderButton('Done', handleToggleDone)}
+              {renderButton('Schedule')}
+              {renderButton('Delete')}
+            </div>
           </div>
         </div>
-      </div>
+      )}
       <div
         className="flex-auto pa2 f4 white bg-light-purple br3 "
         onClick={handleToggleDone}
@@ -42,8 +68,7 @@ function Task({ task: { id, title, done }, dispatch }) {
       </div>
     </div>
   )
-}
-
+})
 Task.propTypes = { task: PropTypes.object.isRequired }
 
 function TaskList({ tasks, dispatch }) {
