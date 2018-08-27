@@ -10,7 +10,7 @@ export { xr }
 
 const computedFn = cfn => () => x.computed(cfn).get()
 
-export const state = x.observable.object(
+const state = x.observable.object(
   {
     tasks: times(createNewTaskWithDefaults)(16),
     sIdx: 0,
@@ -18,7 +18,7 @@ export const state = x.observable.object(
   {},
   { name: 'state' },
 )
-const tasks = computedFn(() => state.tasks)
+export const tasks = computedFn(() => state.tasks)
 const sIdx = computedFn(() => state.sIdx)
 
 const clampedSIdx = computedFn(

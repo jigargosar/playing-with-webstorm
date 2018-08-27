@@ -12,7 +12,7 @@ import {
   handleSelectedTaskToggleDone,
   handleSelectTask,
   sId,
-  state,
+  tasks,
   xr,
 } from './withMobX'
 
@@ -107,7 +107,7 @@ const TaskList = compose(xr.observer)(function TaskList() {
     <div className="center measure-wide mv3">
       <div className="pa3 br3 bg-white shadow-1 ">
         <div className="">Tasks</div>
-        <Models models={state.tasks}>{task => <Task task={task} />}</Models>
+        <Models models={tasks()}>{task => <Task task={task} />}</Models>
       </div>
     </div>
   )
