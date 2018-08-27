@@ -19,8 +19,6 @@ function renderButton(content, clickHandler) {
   )
 }
 
-const enhanceTask = compose(withMouseOverHandlers)
-
 function renderFloatingActions(handleToggleDone) {
   return (
     <div
@@ -38,6 +36,7 @@ function renderFloatingActions(handleToggleDone) {
   )
 }
 
+const enhanceTask = compose(withMouseOverHandlers)
 const Task = enhanceTask(function Task({
   task: { id, title, done },
   selected,
