@@ -27,14 +27,7 @@ function FloatingAction(props) {
 }
 
 function renderButton(content, clickHandler) {
-  return (
-    <div
-      className="ma1 pv1 ph1 orange pointer no-select code "
-      onClick={clickHandler}
-    >
-      {content}
-    </div>
-  )
+  return <FloatingAction onClick={clickHandler}>{content}</FloatingAction>
 }
 
 const enhanceTask = compose(
