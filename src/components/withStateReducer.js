@@ -1,5 +1,5 @@
 import { withReducer } from 'recompose'
-import { cond, is, propEq, T, times } from 'ramda'
+import { cond, is, omit, propEq, T, times } from 'ramda'
 import { createNewTaskWithDefaults, toggleTaskDone } from '../models/Task'
 import { overItemInListWithId } from '../lib/ramda-ext'
 import assert from 'power-assert'
@@ -30,7 +30,7 @@ function tasksReducer(state, action) {
 function wrapReducer(reducer) {
   return function(state, action) {
     validate('OO', [state, action])
-    console.groupCollapsed(`[action] ${action.type}`)
+    console.groupCollapsed(`[action] ${action.type}`, omit(['type'])(action))
     try {
       console.log(action)
       console.log('state', state)
