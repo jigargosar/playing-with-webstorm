@@ -28,19 +28,20 @@ const FloatingActionsContainer = Radium(function FloatingActionsContainer({
     </div>
   )
 })
-function FloatingAction(props) {
+
+const FloatingAction = Radium(function FloatingAction(props) {
   return (
     <button
       className="
-        ma1 pa1 orange link
+        pa1 orange link
         button-reset bg-transparent bn no-select
         pointer code
         "
+      style={[tr['.ma1'], tr['.pa1']]}
       {...props}
     />
   )
-}
-
+})
 function renderButton(content, clickHandler) {
   return <FloatingAction onClick={clickHandler}>{content}</FloatingAction>
 }
