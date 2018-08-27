@@ -5,7 +5,7 @@ import * as PropTypes from 'prop-types'
 import { cn } from '../lib/react-ext'
 import { Models } from '../shared-components/Models'
 import { withMouseOverHandlers } from './withMouseOverHandlers'
-import { injectState, withAppState } from './withFreactal'
+import { injectState, withAppState, withIndexState } from './withFreactal'
 
 function FloatingActionsContainer({ children }) {
   return (
@@ -38,6 +38,7 @@ const enhanceTask = compose(
 const Task = enhanceTask(function Task({
   task: { id, title, done },
   selected,
+  handleSelectTask,
   dispatch,
   effects,
   handleMouseEnter,
@@ -63,7 +64,7 @@ const Task = enhanceTask(function Task({
       )}
       <div
         className="flex-auto pa2 f5 bg-light-purple br2 "
-        onClick={() => effects.selectTask(id)}
+        onClick={handleSelectTask}
       >
         <div className={cn({ strike: done })}>{title}</div>
       </div>
@@ -72,15 +73,25 @@ const Task = enhanceTask(function Task({
 })
 Task.propTypes = { task: PropTypes.object.isRequired }
 
-const enhanceTaskList = compose(injectState)
-const TaskList = enhanceTaskList(function TaskList({ tasks, selectedIndex }) {
+const enhanceTaskList = compose(
+  withIndexState('selectedIdx'),
+  injectState,
+)
+const TaskList = enhanceTaskList(function TaskList({
+  state: { tasks, selectedIdx },
+  effects,
+}) {
   return (
     <div className="center measure-wide">
       <div className="ma3 pa3 br3 bg-white shadow-1 ">
         <div className="">Tasks</div>
         <Models models={tasks}>
-          {(task, index) => (
-            <Task task={task} selected={index === selectedIndex} />
+          {(task, idx) => (
+            <Task
+              task={task}
+              selected={selectedIdx === idx}
+              handleSelectTask={() => effects.setIndex(idx)}
+            />
           )}
         </Models>
       </div>
@@ -88,22 +99,22 @@ const TaskList = enhanceTaskList(function TaskList({ tasks, selectedIndex }) {
   )
 })
 TaskList.propTypes = {
-  tasks: PropTypes.array.isRequired,
+  // tasks: PropTypes.array.isRequired,
 }
 
 const enhancePage = compose(
   // withStateReducer(),
   withAppState,
-  injectState,
+  // injectState,
 )
 export const Page =
   //
-  enhancePage(function Page({ state, dispatch }) {
+  enhancePage(function Page({}) {
     return (
       <ViewportHeightContainer className="bg-light-gray">
         <div className="pa3 shadow-1">STATIC HEADER</div>
         <ScrollContainer>
-          <TaskList tasks={state.tasks} dispatch={dispatch} />
+          <TaskList />
         </ScrollContainer>
         <div className="pa3 shadow-1">STATIC FOOTER</div>
       </ViewportHeightContainer>
