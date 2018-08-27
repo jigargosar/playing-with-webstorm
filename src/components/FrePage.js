@@ -32,16 +32,21 @@ function renderButton(content, clickHandler) {
   )
 }
 
-const enhanceTask = compose(withMouseOverHandlers)
+const enhanceTask = compose(
+  withMouseOverHandlers,
+  injectState,
+)
 const Task = enhanceTask(function Task({
   task: { id, title, done },
   selected,
   dispatch,
+  effects,
   handleMouseEnter,
   handleMouseLeave,
   mouseOver,
 }) {
-  const handleToggleDone = () => dispatch({ type: 'task.toggleDone', id })
+  // const handleToggleDone = () => dispatch({ type: 'task.toggleDone', id })
+  const handleToggleDone = () => effects.toggleTaskDone(id)
   const handleDelete = () => dispatch({ type: 'task.delete', id })
   const handleSelect = () => dispatch({ type: 'task.select', id })
   return (
