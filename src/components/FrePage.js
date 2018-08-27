@@ -5,7 +5,7 @@ import * as PropTypes from 'prop-types'
 import { cn } from '../lib/react-ext'
 import { Models } from '../shared-components/Models'
 import { withMouseOverHandlers } from './withMouseOverHandlers'
-import { injectState, wrapComponentWithState } from './withFreactal'
+import { injectState, withAppState } from './withFreactal'
 
 function FloatingActionsContainer({ children }) {
   return (
@@ -93,7 +93,7 @@ TaskList.propTypes = {
 
 const enhancePage = compose(
   // withStateReducer(),
-  wrapComponentWithState,
+  withAppState,
   injectState,
 )
 export const Page =

@@ -9,7 +9,7 @@ import { toggleTaskDone } from '../models/Task'
 
 export { injectState }
 
-export const wrapComponentWithState = provideState({
+export const withAppState = provideState({
   initialState,
   effects: {
     toggleTaskDone: (effects, id) =>
