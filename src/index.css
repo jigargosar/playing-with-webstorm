@@ -4,28 +4,6 @@ body {
   font-family: sans-serif;
 }
 
-.fdc-h-100 {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-.fdr {
-  display: flex;
-  flex-direction: row;
-}
-.frr {
-  display: flex;
-  flex-direction: row-reverse;
-}
-
-.fa {
-  flex: 1 1 auto;
-}
-
-.iic {
-  align-items: center;
-}
-
 .no-select {
   user-select: none;
 }

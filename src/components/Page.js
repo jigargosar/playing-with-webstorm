@@ -42,17 +42,20 @@ const Task = enhanceTask(function Task({
   const handleToggleDone = () => dispatch({ type: 'task.toggleDone', id })
   return (
     <div
-      className="mv2 flex items-center relative"
+      className={cn(
+        'mv2 flex items-center relative',
+        mouseOver ? 'yellow' : 'white',
+      )}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       {mouseOver && (
         <div
           className="absolute z-1  flex items-center "
-          style={{ right: '1rem' }}
+          style={{ right: '0.5rem' }}
         >
           <div className="absolute ">
-            <div className="pa2 flex items-center bg-white-80 br-pill shadow-1">
+            <div className="pa2 flex_ items-center bg-white-80 br3 _br-pill shadow-1">
               {renderButton('Done', handleToggleDone)}
               {renderButton('Schedule')}
               {renderButton('Delete')}
@@ -61,7 +64,7 @@ const Task = enhanceTask(function Task({
         </div>
       )}
       <div
-        className="flex-auto pa2 f4 white bg-light-purple br3 "
+        className="flex-auto pa2 f5 bg-light-purple br3 "
         onClick={handleToggleDone}
       >
         <div className={cn({ strike: done })}>{title}</div>
