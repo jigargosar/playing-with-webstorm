@@ -1,6 +1,5 @@
 import React from 'react'
 import { ScrollContainer, ViewportHeightContainer } from './containers'
-import { withStateHandlers } from 'recompose'
 import { compose } from 'ramda'
 import * as PropTypes from 'prop-types'
 import { cn } from '../lib/react-ext'
@@ -47,8 +46,8 @@ const Task = enhanceTask(function Task({
 }) {
   // const handleToggleDone = () => dispatch({ type: 'task.toggleDone', id })
   const handleToggleDone = () => effects.toggleTaskDone(id)
-  const handleDelete = () => dispatch({ type: 'task.delete', id })
-  const handleSelect = () => dispatch({ type: 'task.select', id })
+  const handleDelete = () => effects.deleteTask(id)
+  const handleSelect = () => effects.selectTask(id)
   return (
     <div
       className={cn(
@@ -76,11 +75,8 @@ const Task = enhanceTask(function Task({
 })
 Task.propTypes = { task: PropTypes.object.isRequired }
 
-const enhanceTaskList = compose(withStateHandlers({ index: 0 }))
-const TaskList = enhanceTaskList(function TaskList({
-  tasks,
-  index: selectedIndex,
-}) {
+const enhanceTaskList = compose(injectState)
+const TaskList = enhanceTaskList(function TaskList({ tasks, selectedIndex }) {
   return (
     <div className="center measure-wide">
       <div className="ma3 pa3 br3 bg-white shadow-1 ">
