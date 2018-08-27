@@ -81,15 +81,7 @@ const TaskList = enhanceTaskList(function TaskList({
     <div className="center measure-wide">
       <div className="ma3 pa3 br3 bg-white shadow-1 ">
         <div className="">Tasks</div>
-        <Models models={tasks}>
-          {(task, idx) => (
-            <Task
-              task={task}
-              selected={selectedTaskIdx === idx}
-              handleSelectTask={() => effects.setSelectedTaskIdx(idx)}
-            />
-          )}
-        </Models>
+        <Models models={tasks}>{task => <Task task={task} />}</Models>
       </div>
     </div>
   )
