@@ -47,6 +47,7 @@ const Task = enhanceTask(function Task({
   mouseOver,
 }) {
   const handleToggleDone = () => dispatch({ type: 'task.toggleDone', id })
+  const handleDelete = () => dispatch({ type: 'task.delete', id })
   return (
     <div
       className={cn(
@@ -56,7 +57,7 @@ const Task = enhanceTask(function Task({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {mouseOver && renderFloatingActions(handleToggleDone)}
+      {mouseOver && renderFloatingActions(handleToggleDone, handleDelete)}
       <div
         className="flex-auto pa2 f5 bg-light-purple br2 "
         onClick={handleToggleDone}
