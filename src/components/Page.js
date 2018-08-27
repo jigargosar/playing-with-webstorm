@@ -105,14 +105,6 @@ export const Page =
         <ScrollContainer>
           <TaskList tasks={state.tasks} dispatch={dispatch} />
         </ScrollContainer>
-        {/*<div className="ma1">STATIC Content</div>*/}
-        {/*<div className="overflow-scroll ma3 ba b--silver">*/}
-        {/*<div className="ma3 pa3 bg-light-purple">A</div>*/}
-        {/*<div className="ma3 pa3 bg-light-blue">B</div>*/}
-        {/*<div className="pa3 bg-light-red">C</div>*/}
-        {/*<div className="pa3">D</div>*/}
-        {/*<div className="pa3">E</div>*/}
-        {/*</div>*/}
         <div className="pa3 shadow-1">STATIC FOOTER</div>
       </ViewportHeightContainer>
     )
