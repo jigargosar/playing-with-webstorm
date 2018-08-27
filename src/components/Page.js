@@ -48,8 +48,9 @@ const buttonStyle = {
 }
 
 const FloatingAction = Radium(function FloatingAction(props) {
-  return <button style={[buttonStyle.button, buttonStyle.warning]} {...props} />
+  return <button style={[buttonStyle.base, buttonStyle.warning]} {...props} />
 })
+
 function renderButton(content, clickHandler) {
   return <FloatingAction onClick={clickHandler}>{content}</FloatingAction>
 }
