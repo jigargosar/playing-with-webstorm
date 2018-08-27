@@ -7,8 +7,15 @@ import { cn } from '../lib/react-ext'
 import { Models } from '../shared-components/Models'
 import { withStateReducer } from './withStateReducer'
 
-function renderButton(content) {
-  return <div className="ma1 pv1 ph1 orange pointer code ">{content}</div>
+function renderButton(content, clickHandler) {
+  return (
+    <div
+      className="ma1 pv1 ph1 orange pointer no-select code "
+      onClick={clickHandler}
+    >
+      {content}
+    </div>
+  )
 }
 
 function Task({ task: { id, title, done }, dispatch }) {
@@ -28,7 +35,7 @@ function Task({ task: { id, title, done }, dispatch }) {
         </div>
       </div>
       <div
-        className="flex-auto pa2 f4 white bg-light-purple br3 hover-yellow shadow-hover"
+        className="flex-auto pa2 f4 white bg-light-purple br3 "
         onClick={handleToggleDone}
       >
         <div className={cn({ strike: done })}>{title}</div>
