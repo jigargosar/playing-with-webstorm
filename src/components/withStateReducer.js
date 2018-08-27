@@ -1,5 +1,5 @@
 import { withReducer } from 'recompose'
-import { cond, propEq, T, times } from 'ramda'
+import { cond, is, propEq, T, times } from 'ramda'
 import { createNewTaskWithDefaults, toggleTaskDone } from '../models/Task'
 import { overItemInListWithId } from '../lib/ramda-ext'
 import assert from 'power-assert'
@@ -12,17 +12,26 @@ const conditionInvalidAction = [
 ]
 
 function reducer(state, action) {
-  console.log('state', state)
-  console.table(action)
-  const actionEq = propEq('type')
-  return cond([
-    //
-    [
-      actionEq('task.toggleDone'),
-      ({ id }) => overItemInListWithId(id)(toggleTaskDone)('tasks')(state),
-    ],
-    conditionInvalidAction,
-  ])(action, state)
+  console.groupCollapsed(`[action] ${action.type}`)
+  try {
+    console.debug(action)
+    console.debug('state', state)
+    const actionEq = propEq('type')
+    const newStateOrFn = cond([
+      //
+      [
+        actionEq('task.toggleDone'),
+        ({ id }) => overItemInListWithId(id)(toggleTaskDone)('tasks')(state),
+      ],
+      conditionInvalidAction,
+    ])(action, state)
+    if (is(Function)(newStateOrFn)) {
+      return newStateOrFn(state)
+    }
+    return newStateOrFn
+  } finally {
+    console.groupEnd()
+  }
 }
 
 function initialState() {
