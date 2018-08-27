@@ -18,19 +18,18 @@ function renderButton(content, clickHandler) {
   )
 }
 
-const enhanceTask = compose(
-  withStateHandlers(
-    { mouseOver: false },
-    {
-      handleMouseEnter: () => () => {
-        return { mouseOver: true }
-      },
-      handleMouseLeave: () => () => {
-        return { mouseOver: false }
-      },
+const withMouseOverHandlers = withStateHandlers(
+  { mouseOver: false },
+  {
+    handleMouseEnter: () => () => {
+      return { mouseOver: true }
     },
-  ),
+    handleMouseLeave: () => () => {
+      return { mouseOver: false }
+    },
+  },
 )
+const enhanceTask = compose(withMouseOverHandlers)
 
 const Task = enhanceTask(function Task({
   task: { id, title, done },
