@@ -23,6 +23,7 @@ const enhanceTask = compose(withMouseOverHandlers)
 
 const Task = enhanceTask(function Task({
   task: { id, title, done },
+  selected,
   dispatch,
   handleMouseEnter,
   handleMouseLeave,
@@ -53,7 +54,7 @@ const Task = enhanceTask(function Task({
         </div>
       )}
       <div
-        className="flex-auto pa2 f5 bg-light-purple br3 "
+        className="flex-auto pa2 f5 bg-light-purple br2 "
         onClick={handleToggleDone}
       >
         <div className={cn({ strike: done })}>{title}</div>
