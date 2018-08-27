@@ -6,21 +6,25 @@ import { findIndexById } from '../lib/ramda-ext'
 
 const xr = mobXReact
 
-export const state = x.observable.object({
-  tasks: times(createNewTaskWithDefaults)(16),
-  sIdx: 0,
+export const state = x.observable.object(
+  {
+    tasks: times(createNewTaskWithDefaults)(16),
+    sIdx: 0,
 
-  get clampedSIdx() {
-    if (isEmpty(state.tasks)) return NaN
-    return clamp(0, state.tasks.length - 1)(state.sIdx)
+    get clampedSIdx() {
+      if (isEmpty(state.tasks)) return NaN
+      return clamp(0, state.tasks.length - 1)(state.sIdx)
+    },
+    get sTask() {
+      return state.tasks[state.clampedSIdx]
+    },
+    get sId() {
+      return path(['sTask', 'id'])(state)
+    },
   },
-  get sTask() {
-    return state.tasks[state.clampedSIdx]
-  },
-  get sId() {
-    return path(['sTask', 'id'])(state)
-  },
-})
+  {},
+  { name: 'state' },
+)
 
 const tasks = () => x.computed(() => state.tasks).get()
 const sTask = () => x.computed(() => state.tasks[state.clampedSIdx]).get()
