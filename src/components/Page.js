@@ -74,7 +74,6 @@ const Task = compose(
   handleMouseLeave,
   mouseOver,
 }) {
-  // const handleToggleDone = () => dispatch({ type: 'task.toggleDone', id })
   const selected = sId() === id
   const handleSelect = handleSelectTask(id)
   return (
