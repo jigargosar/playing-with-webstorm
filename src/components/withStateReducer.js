@@ -12,9 +12,7 @@ function reducer(state, action) {
     //
     [
       actionEq('task.toggleDone'),
-      ({ id }) => {
-        return overItemInListWithId(id)(toggleTaskDone)('tasks')(state)
-      },
+      ({ id }) => overItemInListWithId(id)(toggleTaskDone)('tasks')(state),
     ],
     [
       T,
