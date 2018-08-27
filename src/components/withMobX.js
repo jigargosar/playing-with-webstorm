@@ -12,23 +12,24 @@ export const state = x.observable.object(
   {
     tasks: times(createNewTaskWithDefaults)(16),
     sIdx: 0,
-
-    get clampedSIdx() {
-      if (isEmpty(state.tasks)) return NaN
-      return clamp(0, state.tasks.length - 1)(state.sIdx)
-    },
   },
   {},
   { name: 'state' },
 )
 
 const tasks = () => x.computed(() => state.tasks).get()
-const sTask = () => x.computed(() => state.tasks[state.clampedSIdx]).get()
+const clampedSIdx = () =>
+  x
+    .computed(() => {
+      if (isEmpty(state.tasks)) return NaN
+      return clamp(0, state.tasks.length - 1)(state.sIdx)
+    })
+    .get()
+const sTask = () => x.computed(() => state.tasks[clampedSIdx()]).get()
 export const sId = () => x.computed(() => prop('id')(sTask)).get()
 
 const setSIdx = idx => (state.sIdx = idx)
 
 export const handleSelectTask = id => () => setSIdx(findIndexById(id)(tasks()))
 export const handleSelectedTaskToggleDone = () => xToggleProp('done', sTask())
-export const handleSelectedTaskDelete = () =>
-  xRemoveAt(state.clampedSIdx, tasks())
+export const handleSelectedTaskDelete = () => xRemoveAt(clampedSIdx(), tasks())
