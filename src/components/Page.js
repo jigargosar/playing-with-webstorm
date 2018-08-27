@@ -28,19 +28,19 @@ const FloatingActionsContainer = Radium(function FloatingActionsContainer({
     </div>
   )
 })
-
+console.log(tr['.link'])
 const buttonStyle = {
   base: [
     //
-    tr['.ma1'],
-    tr['.pa1'],
-    tr['.link'],
     tr['.button-reset'],
     tr['.bg-transparent'],
     tr['.bn'],
+    tr['.ma1'],
+    tr['.pa1'],
     tr['.no-select'],
     tr['.pointer'],
     tr['.code'],
+    tr['.link'],
   ],
   warning: {
     ...tr['.orange'],
