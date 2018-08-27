@@ -19,7 +19,10 @@ export const withAppState = provideState({
     selectedTask: ({ tasks, selectedTaskIdx, firstTask }) =>
       tasks[selectedTaskIdx] || firstTask,
     selectedTaskId: path(['selectedTask', 'id']),
-    isTaskSelected: ({ selectedTaskId }) => equals(selectedTaskId),
+    isTaskSelected: compose(
+      equals,
+      prop('selectedTaskId'),
+    ),
   },
   effects: {
     toggleTaskDone: (effects, id) =>
