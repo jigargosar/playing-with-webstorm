@@ -22,7 +22,14 @@ function FloatingActionsContainer({ children }) {
 
 function FloatingAction(props) {
   return (
-    <div className="ma1 pv1 ph1 orange pointer no-select code " {...props} />
+    <button
+      className="
+        ma1 pa1 orange link
+        button-reset bg-transparent bn no-select
+        pointer code
+        "
+      {...props}
+    />
   )
 }
 
