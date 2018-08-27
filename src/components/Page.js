@@ -42,24 +42,13 @@ const buttonStyle = {
     tr['.pointer'],
     tr['.code'],
   ],
+  warning: {
+    ...tr['.orange'],
+  },
 }
 
 const FloatingAction = Radium(function FloatingAction(props) {
-  return (
-    <button
-      className="
-        orange
-
-        "
-      style={[
-        //
-        // tr['.ma1'],
-        // tr['.pa1'],
-        buttonStyle.button,
-      ]}
-      {...props}
-    />
-  )
+  return <button style={[buttonStyle.button, buttonStyle.warning]} {...props} />
 })
 function renderButton(content, clickHandler) {
   return <FloatingAction onClick={clickHandler}>{content}</FloatingAction>
