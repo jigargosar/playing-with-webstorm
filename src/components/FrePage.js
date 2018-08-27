@@ -79,7 +79,6 @@ Task.propTypes = { task: PropTypes.object.isRequired }
 const enhanceTaskList = compose(withStateHandlers({ index: 0 }))
 const TaskList = enhanceTaskList(function TaskList({
   tasks,
-  dispatch,
   index: selectedIndex,
 }) {
   return (
@@ -88,11 +87,7 @@ const TaskList = enhanceTaskList(function TaskList({
         <div className="">Tasks</div>
         <Models models={tasks}>
           {(task, index) => (
-            <Task
-              task={task}
-              selected={index === selectedIndex}
-              dispatch={dispatch}
-            />
+            <Task task={task} selected={index === selectedIndex} />
           )}
         </Models>
       </div>
@@ -101,7 +96,6 @@ const TaskList = enhanceTaskList(function TaskList({
 })
 TaskList.propTypes = {
   tasks: PropTypes.array.isRequired,
-  dispatch: PropTypes.func.isRequired,
 }
 
 const enhancePage = compose(

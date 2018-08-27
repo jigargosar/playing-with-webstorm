@@ -10,5 +10,7 @@ export const wrapComponentWithState = provideState({
   effects: {
     toggleTaskDone: (effects, id) =>
       overItemInListWithId(id)(toggleTaskDone)('tasks'),
+    handleToggleDone: effects => state => id =>
+      overItemInListWithId(id)(toggleTaskDone)('tasks')(state),
   },
 })
