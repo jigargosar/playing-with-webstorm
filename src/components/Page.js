@@ -102,7 +102,7 @@ const Task = compose(
 })
 Task.propTypes = { task: PropTypes.object.isRequired }
 
-const TaskList = compose(xr.observer)(function TaskList() {
+const MainContent = compose(xr.observer)(function MainContent() {
   return (
     <div className="center measure-wide mv3">
       <div className="pa3 br3 bg-white shadow-1 ">
@@ -118,7 +118,7 @@ export const Page = compose(xr.observer)(function Page() {
     <ViewportHeightContainer className="bg-light-gray">
       <div className="pa3 shadow-1">STATIC HEADER</div>
       <ScrollContainer>
-        <TaskList />
+        <MainContent />
       </ScrollContainer>
       <div className="pa3 shadow-1">STATIC FOOTER</div>
     </ViewportHeightContainer>
