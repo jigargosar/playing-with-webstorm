@@ -29,6 +29,7 @@ const withMouseOverHandlers = withStateHandlers(
     },
   },
 )
+
 const enhanceTask = compose(withMouseOverHandlers)
 
 const Task = enhanceTask(function Task({
