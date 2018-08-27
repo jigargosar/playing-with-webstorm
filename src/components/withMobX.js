@@ -29,7 +29,7 @@ export const handleSelectedTaskToggleDone = () => {
   const task = state.sTask
   task.done = !task.done
 }
-export const handleSelectedTaskDelete = id => () => {
+export const handleSelectedTaskDelete = () => {
   state.tasks.splice(state.clampedSIdx, 1)
 }
 
