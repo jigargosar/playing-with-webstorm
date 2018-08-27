@@ -17,14 +17,17 @@ function reducer(state, action) {
     console.debug(action)
     console.debug('state', state)
     const actionEq = propEq('type')
-    const newStateOrFn = cond([
+    const conditions = [
       //
       [
         actionEq('task.toggleDone'),
         ({ id }) => overItemInListWithId(id)(toggleTaskDone)('tasks')(state),
       ],
-      conditionInvalidAction,
-    ])(action, state)
+    ]
+    const newStateOrFn = cond([...conditions, conditionInvalidAction])(
+      action,
+      state,
+    )
     if (is(Function)(newStateOrFn)) {
       return newStateOrFn(state)
     }
