@@ -19,10 +19,11 @@ export const withAppState = provideState({
   },
 })
 
-export const withIndexState = (indexName = 'index') =>
-  provideState({
-    initialState: () => ({ [indexName]: 1 }),
-    effects: {
-      setIndex: update((state, index) => ({ [indexName]: index })),
-    },
-  })
+export const withTaskSelection = provideState({
+  initialState: () => ({ selectedTaskIdx: 1 }),
+  effects: {
+    setSelectedTaskIdx: update((state, selectedTaskIdx) => ({
+      selectedTaskIdx,
+    })),
+  },
+})

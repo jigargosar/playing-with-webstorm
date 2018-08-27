@@ -5,7 +5,7 @@ import * as PropTypes from 'prop-types'
 import { cn } from '../lib/react-ext'
 import { Models } from '../shared-components/Models'
 import { withMouseOverHandlers } from './withMouseOverHandlers'
-import { injectState, withAppState, withIndexState } from './withFreactal'
+import { injectState, withAppState, withTaskSelection } from './withFreactal'
 
 function FloatingActionsContainer({ children }) {
   return (
@@ -74,11 +74,11 @@ const Task = enhanceTask(function Task({
 Task.propTypes = { task: PropTypes.object.isRequired }
 
 const enhanceTaskList = compose(
-  withIndexState('selectedIdx'),
+  withTaskSelection,
   injectState,
 )
 const TaskList = enhanceTaskList(function TaskList({
-  state: { tasks, selectedIdx },
+  state: { tasks, selectedTaskIdx },
   effects,
 }) {
   return (
@@ -89,8 +89,8 @@ const TaskList = enhanceTaskList(function TaskList({
           {(task, idx) => (
             <Task
               task={task}
-              selected={selectedIdx === idx}
-              handleSelectTask={() => effects.setIndex(idx)}
+              selected={selectedTaskIdx === idx}
+              handleSelectTask={() => effects.setSelectedTaskIdx(idx)}
             />
           )}
         </Models>
