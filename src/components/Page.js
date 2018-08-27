@@ -36,7 +36,7 @@ const buttonStyle = {
     tr['.bn'],
     tr['.ma1'],
     tr['.pa1'],
-    tr['.no-select'],
+    { userSelect: 'none' },
     tr['.pointer'],
     tr['.code'],
     trLink,
