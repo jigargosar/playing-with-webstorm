@@ -29,6 +29,7 @@ const xTogglePath = (p, obj) => Object.assign(obj, togglePath(p)(obj))
 
 export const handleSelectedTaskToggleDone = () =>
   xTogglePath(['sTask', 'done'])(state)
+
 export const handleSelectedTaskDelete = () =>
   state.tasks.splice(state.clampedSIdx, 1)
 
