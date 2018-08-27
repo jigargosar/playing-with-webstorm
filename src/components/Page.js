@@ -37,7 +37,11 @@ const FloatingAction = Radium(function FloatingAction(props) {
         button-reset bg-transparent bn no-select
         pointer code
         "
-      style={[tr['.ma1'], tr['.pa1']]}
+      style={[
+        //
+        tr['.ma1'],
+        tr['.pa1'],
+      ]}
       {...props}
     />
   )
