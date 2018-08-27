@@ -21,10 +21,10 @@ export const withAppState = provideState({
   }),
   computed: {
     firstTask: path(['tasks', 0]),
-    selectedTask: ({ tasks, selectedTaskIdx, firstTask }) => {
+    sTask: ({ tasks, selectedTaskIdx, firstTask }) => {
       return tasks[selectedTaskIdx] || firstTask
     },
-    selectedTaskId: path(['selectedTask', 'id']),
+    selectedTaskId: path(['sTask', 'id']),
     isTaskSelected: compose(
       equals,
       prop('selectedTaskId'),

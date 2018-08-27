@@ -5,9 +5,15 @@ import * as PropTypes from 'prop-types'
 import { cn } from '../lib/react-ext'
 import { Models } from '../shared-components/Models'
 import { withMouseOverHandlers } from './withMouseOverHandlers'
-import { injectState } from './withFreactal'
 import Radium from 'radium'
 import { tr, trLink } from '../GlobalStyles'
+import {
+  handleSelectedTaskDelete,
+  handleSelectedTaskToggleDone,
+  handleSelectTask,
+  state,
+  xr,
+} from './withMobX'
 
 const FloatingActionsContainer = Radium(function FloatingActionsContainer({
   children,
@@ -52,46 +58,43 @@ const Btn = Radium(function FloatingAction(props) {
   return <button style={[buttonStyle.base, buttonStyle.warning]} {...props} />
 })
 
-const enhanceTask = compose(
-  withMouseOverHandlers,
-  injectState,
-)
-
 function chainEvent(...eventHandlers) {
   return function(event) {
     forEach(handler => handler(event))(eventHandlers)
   }
 }
 
-const Task = enhanceTask(function Task({
+const Task = compose(
+  withMouseOverHandlers,
+  xr.observer,
+)(function Task({
   task: { id, title, done },
-  state: { selectedTaskId },
-  effects,
+  state: { sId },
   handleMouseEnter,
   handleMouseLeave,
   mouseOver,
 }) {
   // const handleToggleDone = () => dispatch({ type: 'task.toggleDone', id })
-  const selected = selectedTaskId === id
-  const handleSelectTask = () => effects.selectTaskWithId(id)
+  const selected = sId === id
+  const handleSelect = handleSelectTask(id)
   return (
     <div
       className={cn(
         'mv2 flex items-center relative',
         mouseOver || selected ? 'yellow' : 'white',
       )}
-      onMouseEnter={chainEvent(handleMouseEnter, handleSelectTask)}
+      onMouseEnter={chainEvent(handleMouseEnter, handleSelect)}
       onMouseLeave={handleMouseLeave}
     >
       {mouseOver && (
         <FloatingActionsContainer>
-          <Btn onClick={effects.toggleSelectedTaskDone}>{'Done'}</Btn>
-          <Btn onClick={effects.deleteSelectedTask}>{'Delete'}</Btn>
+          <Btn onClick={handleSelectedTaskToggleDone}>{'Done'}</Btn>
+          <Btn onClick={handleSelectedTaskDelete}>{'Delete'}</Btn>
         </FloatingActionsContainer>
       )}
       <div
         className="flex-auto pa2 f5 bg-light-purple br2 "
-        onClick={handleSelectTask}
+        onClick={handleSelect}
       >
         <div className={cn({ strike: done })}>{title}</div>
       </div>
@@ -100,8 +103,7 @@ const Task = enhanceTask(function Task({
 })
 Task.propTypes = { task: PropTypes.object.isRequired }
 
-const enhanceTaskList = compose(injectState)
-const TaskList = enhanceTaskList(function TaskList({ state }) {
+const TaskList = compose(xr.observer)(function TaskList() {
   return (
     <div className="center measure-wide mv3">
       <div className="pa3 br3 bg-white shadow-1 ">
@@ -111,24 +113,15 @@ const TaskList = enhanceTaskList(function TaskList({ state }) {
     </div>
   )
 })
-TaskList.propTypes = {
-  // tasks: PropTypes.array.isRequired,
-}
 
-const enhancePage = compose(
-  xr.observer,
-  // injectState,
-)
-export const Page =
-  //
-  enhancePage(function Page() {
-    return (
-      <ViewportHeightContainer className="bg-light-gray">
-        <div className="pa3 shadow-1">STATIC HEADER</div>
-        <ScrollContainer>
-          <TaskList />
-        </ScrollContainer>
-        <div className="pa3 shadow-1">STATIC FOOTER</div>
-      </ViewportHeightContainer>
-    )
-  })
+export const Page = compose(xr.observer)(function Page() {
+  return (
+    <ViewportHeightContainer className="bg-light-gray">
+      <div className="pa3 shadow-1">STATIC HEADER</div>
+      <ScrollContainer>
+        <TaskList />
+      </ScrollContainer>
+      <div className="pa3 shadow-1">STATIC FOOTER</div>
+    </ViewportHeightContainer>
+  )
+})
