@@ -21,6 +21,23 @@ function renderButton(content, clickHandler) {
 
 const enhanceTask = compose(withMouseOverHandlers)
 
+function renderFloatingActions(handleToggleDone) {
+  return (
+    <div
+      className="absolute z-1  flex items-center "
+      style={{ right: '0.5rem' }}
+    >
+      <div className="absolute ">
+        <div className="pa2 bg-white-80 br3 shadow-1">
+          {renderButton('Done', handleToggleDone)}
+          {/*{renderButton('Schedule')}*/}
+          {renderButton('Delete')}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 const Task = enhanceTask(function Task({
   task: { id, title, done },
   selected,
@@ -39,20 +56,7 @@ const Task = enhanceTask(function Task({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {mouseOver && (
-        <div
-          className="absolute z-1  flex items-center "
-          style={{ right: '0.5rem' }}
-        >
-          <div className="absolute ">
-            <div className="pa2 bg-white-80 br3 shadow-1">
-              {renderButton('Done', handleToggleDone)}
-              {/*{renderButton('Schedule')}*/}
-              {renderButton('Delete')}
-            </div>
-          </div>
-        </div>
-      )}
+      {mouseOver && renderFloatingActions(handleToggleDone)}
       <div
         className="flex-auto pa2 f5 bg-light-purple br2 "
         onClick={handleToggleDone}
