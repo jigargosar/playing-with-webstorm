@@ -105,6 +105,7 @@ const Task = compose(
       onMouseLeave={handleMouseLeave}
       onClickCapture={expr(() => handleSelectTask(task.id))}
       task={task}
+      key={task.id}
     >
       {mouseOver && <TaskActions />}
       <TaskContent task={task} />
