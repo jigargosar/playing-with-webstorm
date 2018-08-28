@@ -67,7 +67,6 @@ const Task = compose(
       onMouseLeave={handleMouseLeave}
     >
       <Fragment>
-        {' '}
         {mouseOver && (
           <FloatingActionsContainer>
             <Btn onClick={handleSelectedTaskToggleDone}>{'Done'}</Btn>
