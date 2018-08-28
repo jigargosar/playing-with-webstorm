@@ -15,9 +15,7 @@ const buttonStyle = {
     tr['.ph2'],
     trLink,
   ],
-  warning: {
-    ...tr['.orange'],
-  },
+  warning: [tr['.orange']],
 }
 export const Btn = Radium(function FloatingAction(props) {
   return <button style={[buttonStyle.base, buttonStyle.warning]} {...props} />
