@@ -1,4 +1,4 @@
-import { tr, trCode, trLink } from '../GlobalStyles'
+import { tr, trCode } from '../GlobalStyles'
 import Radium from 'radium'
 import React from 'react'
 import { secondaryColor } from '../theme'
@@ -14,7 +14,7 @@ const buttonStyle = {
     trCode,
     tr['.mh1'],
     tr['.ph2'],
-    trLink,
+    // trLink,
   ],
   warning: [secondaryColor],
 }
