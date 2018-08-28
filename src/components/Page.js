@@ -37,15 +37,18 @@ const FloatingActionsContainer = Radium(function FloatingActionsContainer({
   )
 })
 
-const TaskContent = xr.observer(function TaskContent({ task, handleSelect }) {
+const TaskContent = xr.observer(function TaskContent({
+  task: { done, title },
+  handleSelect,
+}) {
   return (
     <div
       className={cn('flex-auto pa2 f5 bg-light-purple br2', {
-        strike: task.done,
+        strike: done,
       })}
       onClick={handleSelect}
     >
-      {task.title}
+      {title}
     </div>
   )
 })
