@@ -17,6 +17,7 @@ import {
 import { Btn } from './Btn'
 import { observer } from 'mobx-react'
 import { expr } from 'mobx-utils'
+import { primaryBgColor } from '../theme'
 
 const FloatingActionsContainer = Radium(function FloatingActionsContainer({
   children,
@@ -41,7 +42,7 @@ const FloatingActionsContainer = Radium(function FloatingActionsContainer({
 const TaskContent = observer(function TaskContent({ task: { done, title } }) {
   return (
     <div
-      className={cn('flex-auto pa2 f5 bg-light-purple br2', {
+      className={cn('flex-auto pa2 f5 br2', {
         strike: done,
       })}
       style={[primaryBgColor]}
