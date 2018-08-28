@@ -6,8 +6,9 @@ const buttonStyle = {
   base: [
     // tr['.button-reset'],
     trCode,
-    tr['.ma1'],
-    tr['.pa1'],
+
+    tr['.mh1'],
+    tr['.ph2'],
     {
       background: 'transparent',
       userSelect: 'none',

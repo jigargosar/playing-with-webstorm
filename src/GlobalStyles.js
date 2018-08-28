@@ -24,3 +24,4 @@ export const trLink = {
   ':focus': tr['.link:focus'],
 }
 export const trCode = tr['.code']
+export const lhCopy = tr['.lh-copy']
