@@ -44,6 +44,7 @@ const TaskContent = observer(function TaskContent({ task: { done, title } }) {
       className={cn('flex-auto pa2 f5 bg-light-purple br2', {
         strike: done,
       })}
+      style={[primaryBgColor]}
     >
       {title}
     </div>
