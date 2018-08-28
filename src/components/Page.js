@@ -89,13 +89,13 @@ const Task = compose(
   observer,
 )(function Task({ task, handleMouseEnter, handleMouseLeave, mouseOver }) {
   const id = task.id
-  const selected = sId() === id
   const handleSelect = expr(() => handleSelectTask(task.id))
   return (
     <TaskContainer
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClickCapture={handleSelect}
+      selected={sId() === id}
     >
       {mouseOver && <TaskActions />}
       <TaskContent task={task} />
