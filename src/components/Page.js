@@ -51,10 +51,7 @@ const TaskContent = observer(function TaskContent({ task: { done, title } }) {
   )
 })
 
-const TaskActions = observer(function TaskActions({
-  handleSelectedTaskDelete,
-  handleSelectedTaskToggleDone,
-}) {
+const TaskActions = observer(function TaskActions() {
   return (
     <FloatingActionsContainer>
       <Btn onClick={handleSelectedTaskToggleDone}>{'Done'}</Btn>
@@ -68,23 +65,13 @@ TaskActions.propTypes = {
   handleSelectedTaskToggleDone: PropTypes.func,
 }
 
-TaskActions.defaultProps = {
-  handleSelectedTaskDelete,
-  handleSelectedTaskToggleDone,
-}
-
 const Task = compose(
   withMouseOverHandlers,
   observer,
-)(function Task({
-  task,
-  handleMouseEnter,
-  handleMouseLeave,
-  mouseOver,
-  handleSelect = expr(() => handleSelectTask(task.id)),
-}) {
+)(function Task({ task, handleMouseEnter, handleMouseLeave, mouseOver }) {
   const id = task.id
   const selected = sId() === id
+  const handleSelect = expr(() => handleSelectTask(task.id))
   return (
     <div
       className={cn(
