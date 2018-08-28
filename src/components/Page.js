@@ -79,10 +79,15 @@ TaskActions.defaultProps = {
 const Task = compose(
   withMouseOverHandlers,
   observer,
-)(function Task({ task, handleMouseEnter, handleMouseLeave, mouseOver }) {
+)(function Task({
+  task,
+  handleMouseEnter,
+  handleMouseLeave,
+  mouseOver,
+  handleSelect = expr(() => handleSelectTask(id)),
+}) {
   const id = task.id
   const selected = sId() === id
-  const handleSelect = expr(() => handleSelectTask(id))
   return (
     <div
       className={cn(
@@ -97,7 +102,10 @@ const Task = compose(
     </div>
   )
 })
-Task.propTypes = { task: PropTypes.object.isRequired }
+Task.propTypes = {
+  task: PropTypes.object.isRequired,
+  handleSelect: PropTypes.func,
+}
 
 const MainContent = compose(observer)(function MainContent() {
   return (
