@@ -8,6 +8,9 @@ const state = observable.object(
   {
     tasks: times(createNewTaskWithDefaults)(16),
     _sIdx: 0,
+    get sIdx() {
+      return clampIdx(state._sIdx)(state.tasks)
+    },
   },
   {},
   { name: 'state' },
@@ -16,9 +19,8 @@ const state = observable.object(
 const computedFn = fn => () => computed(fn).get()
 
 export const tasks = computedFn(() => state.tasks)
-const sIdx = computedFn(() => state._sIdx)
 
-const clampedSIdx = computedFn(() => clampIdx(sIdx())(tasks()))
+const clampedSIdx = computedFn(() => clampIdx(state._sIdx)(tasks()))
 const sTask = computedFn(() => tasks()[clampedSIdx()])
 export const sId = computedFn(() => prop('id')(sTask()))
 
