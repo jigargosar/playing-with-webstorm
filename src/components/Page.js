@@ -97,12 +97,14 @@ const Task = compose(
   Radium,
   observer,
 )(function Task({ task, handleMouseEnter, handleMouseLeave, mouseOver }) {
+  const selected = sId() === task.id
+  console.log('selected', selected)
   return (
     <TaskContainer
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClickCapture={expr(() => handleSelectTask(task.id))}
-      selected={sId() === task.id}
+      selected={selected}
     >
       {mouseOver && <TaskActions />}
       <TaskContent task={task} />
