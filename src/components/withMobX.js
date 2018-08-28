@@ -13,17 +13,17 @@ const state = observable.object(
   { name: 'state' },
 )
 
-const computedFn = fn => computed(fn).get()
+const computedFn = fn => () => computed(fn).get()
 
-export const tasks = () => computedFn(() => state.tasks)
-const sIdx = () => computedFn(() => state.sIdx)
+export const tasks = computedFn(() => state.tasks)
+const sIdx = computedFn(() => state.sIdx)
 
-const clampedSIdx = () =>
-  computedFn(
-    () => (isEmpty(tasks()) ? NaN : clamp(0, tasks().length - 1)(sIdx())),
-  )
-const sTask = () => computedFn(() => tasks()[clampedSIdx()])
-export const sId = () => computedFn(() => prop('id')(sTask()))
+const clampIdx = idx => list =>
+  isEmpty(list) ? NaN : clamp(0, list.length - 1)(idx)
+
+const clampedSIdx = computedFn(() => clampIdx(sIdx())(tasks()))
+const sTask = computedFn(() => tasks()[clampedSIdx()])
+export const sId = computedFn(() => prop('id')(sTask()))
 
 const setSIdx = idx => (state.sIdx = idx)
 
