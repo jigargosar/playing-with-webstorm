@@ -39,7 +39,10 @@ const FloatingActionsContainer = Radium(function FloatingActionsContainer({
   )
 })
 
-const TaskContent = observer(function TaskContent({ task: { done, title } }) {
+const TaskContent = compose(
+  Radium,
+  observer,
+)(function TaskContent({ task: { done, title } }) {
   console.log(primaryBgColor)
   return (
     <div
