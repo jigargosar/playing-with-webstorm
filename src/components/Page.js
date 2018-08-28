@@ -15,8 +15,8 @@ import {
   tasks,
 } from './withMobX'
 import { Btn } from './Btn'
-import { expr } from 'mobx-utils'
 import { observer } from 'mobx-react'
+import { computed } from 'mobx'
 
 const FloatingActionsContainer = Radium(function FloatingActionsContainer({
   children,
@@ -80,7 +80,7 @@ const Task = compose(
   handleMouseEnter,
   handleMouseLeave,
   mouseOver,
-  handleSelect = expr(() => handleSelectTask(task.id)),
+  handleSelect = () => computed(() => handleSelectTask(task.id)).get(),
 }) {
   const id = task.id
   const selected = sId() === id
@@ -88,7 +88,7 @@ const Task = compose(
     <div
       className={cn(
         'mv2 flex items-center relative',
-        mouseOver || selected ? 'yellow' : 'white',
+        selected ? 'yellow' : 'white',
       )}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
