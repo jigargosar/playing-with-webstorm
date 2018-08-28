@@ -1,11 +1,11 @@
-import { tr, trLink } from '../GlobalStyles'
+import { tr, trCode, trLink } from '../GlobalStyles'
 import Radium from 'radium'
 import React from 'react'
 
 const buttonStyle = {
   base: [
     // tr['.button-reset'],
-    tr['.code'],
+    trCode,
     tr['.ma1'],
     tr['.pa1'],
     {

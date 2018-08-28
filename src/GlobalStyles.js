@@ -23,3 +23,4 @@ export const trLink = {
   ...tr['.link'],
   ':focus': tr['.link:focus'],
 }
+export const trCode = tr['.code']
