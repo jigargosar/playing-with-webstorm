@@ -118,7 +118,7 @@ const MainContent = observer(function MainContent() {
     <div className="center measure-wide mv3">
       <div className="pa3 br3 bg-white shadow-1 ">
         <div className="">Tasks</div>
-        <Models models={store.tasks}>{task => <Task task={task} />}</Models>
+        <TaskItems />
       </div>
     </div>
   )
