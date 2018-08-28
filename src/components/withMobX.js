@@ -18,17 +18,16 @@ const state = observable.object(
 
 const computedFn = fn => () => computed(fn).get()
 
-export const tasks = computedFn(() => state.tasks)
-
-const clampedSIdx = computedFn(() => clampIdx(state._sIdx)(tasks()))
-const sTask = computedFn(() => tasks()[clampedSIdx()])
+const clampedSIdx = computedFn(() => clampIdx(state._sIdx)(state.tasks))
+const sTask = computedFn(() => state.tasks[clampedSIdx()])
 export const sId = computedFn(() => prop('id')(sTask()))
 
 const setSIdx = idx => (state._sIdx = idx)
 
 export const handleSelectTask = id => () => {
-  const idx = findIndexById(id)(tasks())
+  const idx = findIndexById(id)(state.tasks)
   return setSIdx(idx)
 }
 export const handleSelectedTaskToggleDone = () => xToggleProp('done', sTask())
-export const handleSelectedTaskDelete = () => xRemoveAt(clampedSIdx(), tasks())
+export const handleSelectedTaskDelete = () =>
+  xRemoveAt(clampedSIdx(), state.tasks)
