@@ -12,6 +12,7 @@ import {
   handleSelectedTaskToggleDone,
   handleSelectTask,
   sId,
+  store,
 } from './store'
 import { Btn } from './Btn'
 import { observer } from 'mobx-react'
@@ -113,7 +114,7 @@ const MainContent = observer(function MainContent() {
     <div className="center measure-wide mv3">
       <div className="pa3 br3 bg-white shadow-1 ">
         <div className="">Tasks</div>
-        <Models models={state.tasks}>{task => <Task task={task} />}</Models>
+        <Models models={store.tasks}>{task => <Task task={task} />}</Models>
       </div>
     </div>
   )
