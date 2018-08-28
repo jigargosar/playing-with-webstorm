@@ -39,10 +39,16 @@ const FloatingActionsContainer = Radium(function FloatingActionsContainer({
   )
 })
 
-const TaskContent = compose(
-  Radium,
-  observer,
-)(function TaskContent({ task: { done, title } }) {
+const composeHOC = (...hocs) =>
+  compose(
+    ...hocs,
+    Radium,
+    observer,
+  )
+
+const TaskContent = composeHOC()(function TaskContent({
+  task: { done, title },
+}) {
   return (
     <div
       className={cn('flex-auto pa2 f5 br2', {
@@ -61,10 +67,7 @@ TaskContent.propTypes = {
   }).isRequired,
 }
 
-const TaskActions = compose(
-  Radium,
-  observer,
-)(function TaskActions() {
+const TaskActions = composeHOC()(function TaskActions() {
   return (
     <FloatingActionsContainer>
       <Btn onClick={handleToggleDoneSelectedTask}>{'Done'}</Btn>
@@ -78,10 +81,10 @@ TaskActions.propTypes = {
   handleSelectedTaskToggleDone: PropTypes.func,
 }
 
-const TaskContainer = compose(
-  Radium,
-  observer,
-)(function TaskContainer({ selected, ...otherProps }) {
+const TaskContainer = composeHOC()(function TaskContainer({
+  selected,
+  ...otherProps
+}) {
   return (
     <div
       className={cn(
@@ -118,17 +121,11 @@ Task.propTypes = {
   task: PropTypes.shape({ id: PropTypes.string.isRequired }).isRequired,
 }
 
-const TaskItems = compose(
-  Radium,
-  observer,
-)(function TaskItems() {
+const TaskItems = composeHOC()(function TaskItems() {
   return <Models models={store.tasks}>{task => <Task task={task} />}</Models>
 })
 
-const MainContent = compose(
-  Radium,
-  observer,
-)(function MainContent() {
+const MainContent = composeHOC()(function MainContent() {
   return (
     <div className="center measure-wide mv3">
       <div className="pa3 br3 bg-white shadow-1 ">
@@ -139,10 +136,7 @@ const MainContent = compose(
   )
 })
 
-export const Page = compose(
-  Radium,
-  observer,
-)(function Page() {
+export const Page = composeHOC()(function Page() {
   return (
     <ViewportHeightContainer className="bg-light-gray">
       <div className="pa3 shadow-1">STATIC HEADER</div>
