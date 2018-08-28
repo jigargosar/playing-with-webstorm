@@ -4,9 +4,7 @@ import React from 'react'
 
 const buttonStyle = {
   base: [
-    // tr['.button-reset'],
     trCode,
-
     tr['.mh1'],
     tr['.ph2'],
     {
