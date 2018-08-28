@@ -1,15 +1,10 @@
-import * as x from 'mobx'
-import * as mobXReact from 'mobx-react'
 import { createNewTaskWithDefaults } from '../models/Task'
 import { clamp, isEmpty, prop, times } from 'ramda'
 import { findIndexById } from '../lib/ramda-ext'
 import { xRemoveAt, xToggleProp } from './xUtils'
 import * as xu from 'mobx-utils'
+import * as x from 'mobx'
 
-const xr = mobXReact
-export { xr }
-
-const computedFn = cfn => () => x.computed(cfn).get()
 export const expr = xu.expr
 // export const expr = fn => x.computed(fn).get()
 
@@ -21,14 +16,13 @@ const state = x.observable.object(
   {},
   { name: 'state' },
 )
-export const tasks = computedFn(() => state.tasks)
-const sIdx = computedFn(() => state.sIdx)
+export const tasks = () => expr(() => state.tasks)
+const sIdx = () => expr(() => state.sIdx)
 
-const clampedSIdx = computedFn(
-  () => (isEmpty(tasks()) ? NaN : clamp(0, tasks().length - 1)(sIdx())),
-)
-const sTask = computedFn(() => tasks()[clampedSIdx()])
-export const sId = computedFn(() => prop('id')(sTask))
+const clampedSIdx = () =>
+  expr(() => (isEmpty(tasks()) ? NaN : clamp(0, tasks().length - 1)(sIdx())))
+const sTask = () => expr(() => tasks()[clampedSIdx()])
+export const sId = () => expr(() => prop('id')(sTask))
 
 const setSIdx = idx => (state.sIdx = idx)
 
