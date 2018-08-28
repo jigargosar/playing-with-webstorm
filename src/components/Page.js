@@ -37,13 +37,13 @@ const FloatingActionsContainer = Radium(function FloatingActionsContainer({
   )
 })
 
-const TaskContent = xr.observer(function TaskContent({ task }) {
+const TaskContent = xr.observer(function TaskContent({ task, handleSelect }) {
   return (
     <div
       className={cn('flex-auto pa2 f5 bg-light-purple br2', {
         strike: task.done,
       })}
-      onClick={task.onClick}
+      onClick={handleSelect}
     >
       {task.title}
     </div>
@@ -53,13 +53,8 @@ const TaskContent = xr.observer(function TaskContent({ task }) {
 const Task = compose(
   withMouseOverHandlers,
   xr.observer,
-)(function Task({
-  task: { id, title, done },
-  handleMouseEnter,
-  handleMouseLeave,
-  mouseOver,
-}) {
-  const selected = sId() === id
+)(function Task({ task, handleMouseEnter, handleMouseLeave, mouseOver }) {
+  const selected = sId() === task.id
   const handleSelect = handleSelectTask(id)
   return (
     <div
@@ -76,7 +71,7 @@ const Task = compose(
           <Btn onClick={handleSelectedTaskDelete}>{'Delete'}</Btn>
         </FloatingActionsContainer>
       )}
-      <TaskContent onClick={handleSelect} strike={done} title={title} />
+      <TaskContent task={task} handleSelect={handleSelect} />
     </div>
   )
 })
