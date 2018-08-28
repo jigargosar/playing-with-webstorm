@@ -76,6 +76,7 @@ TaskActions.propTypes = {
 }
 
 const TaskContainer = composeHOC()(function TaskContainer({
+  task,
   selected,
   ...otherProps
 }) {
@@ -83,7 +84,7 @@ const TaskContainer = composeHOC()(function TaskContainer({
     <div
       className={cn('mv2 flex items-center relative')}
       {...otherProps}
-      style={[selected && secondaryColor]}
+      style={[expr(() => sId() === task.id) && secondaryColor]}
     />
   )
 })
@@ -97,14 +98,12 @@ const Task = compose(
   Radium,
   observer,
 )(function Task({ task, handleMouseEnter, handleMouseLeave, mouseOver }) {
-  const selected = expr(() => sId() === task.id)
-  console.log('selected', selected)
   return (
     <TaskContainer
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClickCapture={expr(() => handleSelectTask(task.id))}
-      selected={selected}
+      task={task}
     >
       {mouseOver && <TaskActions />}
       <TaskContent task={task} />
