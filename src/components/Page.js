@@ -8,9 +8,9 @@ import { withMouseOverHandlers } from './withMouseOverHandlers'
 import Radium from 'radium'
 import { tr } from '../GlobalStyles'
 import {
-  handleSelectedTaskDelete,
-  handleSelectedTaskToggleDone,
+  handleDeleteSelectedTask,
   handleSelectTask,
+  handleToggleDoneSelectedTask,
   sId,
   store,
 } from './store'
@@ -59,8 +59,8 @@ TaskContent.propTypes = {
 const TaskActions = observer(function TaskActions() {
   return (
     <FloatingActionsContainer>
-      <Btn onClick={handleSelectedTaskToggleDone}>{'Done'}</Btn>
-      <Btn onClick={handleSelectedTaskDelete}>{'Delete'}</Btn>
+      <Btn onClick={handleToggleDoneSelectedTask}>{'Done'}</Btn>
+      <Btn onClick={handleDeleteSelectedTask}>{'Delete'}</Btn>
     </FloatingActionsContainer>
   )
 })

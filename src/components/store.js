@@ -25,6 +25,6 @@ export const sId = computedFn(() => prop('id')(sTask()))
 
 export const handleSelectTask = id => () =>
   store.setSIdx(findIndexById(id)(store.tasks))
-export const handleSelectedTaskToggleDone = () => xToggleProp('done', sTask())
-export const handleSelectedTaskDelete = () =>
+export const handleToggleDoneSelectedTask = () => xToggleProp('done', sTask())
+export const handleDeleteSelectedTask = () =>
   xRemoveAt(clampedSIdx(), store.tasks)
