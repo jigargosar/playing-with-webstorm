@@ -16,6 +16,7 @@ import {
   xr,
 } from './withMobX'
 import { Btn } from './Btn'
+import * as x from 'mobx'
 
 const FloatingActionsContainer = Radium(function FloatingActionsContainer({
   children,
@@ -68,7 +69,7 @@ const Task = compose(
 )(function Task({ task, handleMouseEnter, handleMouseLeave, mouseOver }) {
   const id = task.id
   const selected = sId() === id
-  const handleSelect = handleSelectTask(id)
+  const handleSelect = x.computed(() => handleSelectTask(id)).get()
   return (
     <div
       className={cn(
