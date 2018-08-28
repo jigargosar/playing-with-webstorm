@@ -2,10 +2,8 @@ import { createNewTaskWithDefaults } from '../models/Task'
 import { clamp, isEmpty, prop, times } from 'ramda'
 import { findIndexById } from '../lib/ramda-ext'
 import { xRemoveAt, xToggleProp } from './xUtils'
-import * as xu from 'mobx-utils'
+import { expr } from 'mobx-utils'
 import { observable } from 'mobx'
-
-export const expr = xu.expr
 
 const state = observable.object(
   {
