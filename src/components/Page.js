@@ -16,7 +16,7 @@ import {
 } from './withMobX'
 import { Btn } from './Btn'
 import { observer } from 'mobx-react'
-import { computed } from 'mobx'
+import { expr } from 'mobx-utils'
 
 const FloatingActionsContainer = Radium(function FloatingActionsContainer({
   children,
@@ -81,7 +81,7 @@ const Task = compose(
   handleMouseEnter,
   handleMouseLeave,
   mouseOver,
-  handleSelect = computed(() => handleSelectTask(task.id)).get(),
+  handleSelect = expr(() => handleSelectTask(task.id)),
 }) {
   const id = task.id
   const selected = sId() === id
