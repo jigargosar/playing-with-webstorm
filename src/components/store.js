@@ -4,30 +4,30 @@ import { clampIdx, findIndexById } from '../lib/ramda-ext'
 import { xRemoveAt, xToggleProp } from './xUtils'
 import { computed, observable } from 'mobx'
 
-const state = observable.object(
+export const store = observable.object(
   {
     tasks: times(createNewTaskWithDefaults)(16),
     _sIdx: 0,
     get sIdx() {
-      return clampIdx(state._sIdx)(state.tasks)
+      return clampIdx(store._sIdx)(store.tasks)
     },
   },
   {},
-  { name: 'state' },
+  { name: 'store' },
 )
 
 const computedFn = fn => () => computed(fn).get()
 
-const clampedSIdx = computedFn(() => clampIdx(state._sIdx)(state.tasks))
-const sTask = computedFn(() => state.tasks[clampedSIdx()])
+const clampedSIdx = computedFn(() => clampIdx(store._sIdx)(store.tasks))
+const sTask = computedFn(() => store.tasks[clampedSIdx()])
 export const sId = computedFn(() => prop('id')(sTask()))
 
-const setSIdx = idx => (state._sIdx = idx)
+const setSIdx = idx => (store._sIdx = idx)
 
 export const handleSelectTask = id => () => {
-  const idx = findIndexById(id)(state.tasks)
+  const idx = findIndexById(id)(store.tasks)
   return setSIdx(idx)
 }
 export const handleSelectedTaskToggleDone = () => xToggleProp('done', sTask())
 export const handleSelectedTaskDelete = () =>
-  xRemoveAt(clampedSIdx(), state.tasks)
+  xRemoveAt(clampedSIdx(), store.tasks)

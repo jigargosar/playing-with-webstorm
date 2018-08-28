@@ -12,7 +12,7 @@ import {
   handleSelectedTaskToggleDone,
   handleSelectTask,
   sId,
-} from './withMobX'
+} from './store'
 import { Btn } from './Btn'
 import { observer } from 'mobx-react'
 import { expr } from 'mobx-utils'
