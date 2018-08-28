@@ -61,7 +61,10 @@ TaskContent.propTypes = {
   }).isRequired,
 }
 
-const TaskActions = observer(function TaskActions() {
+const TaskActions = compose(
+  Radium,
+  observer,
+)(function TaskActions() {
   return (
     <FloatingActionsContainer>
       <Btn onClick={handleToggleDoneSelectedTask}>{'Done'}</Btn>
@@ -75,10 +78,10 @@ TaskActions.propTypes = {
   handleSelectedTaskToggleDone: PropTypes.func,
 }
 
-const TaskContainer = observer(function TaskContainer({
-  selected,
-  ...otherProps
-}) {
+const TaskContainer = compose(
+  Radium,
+  observer,
+)(function TaskContainer({ selected, ...otherProps }) {
   return (
     <div
       className={cn(
