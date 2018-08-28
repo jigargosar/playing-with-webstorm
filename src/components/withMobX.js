@@ -24,9 +24,8 @@ export const sId = () => computed(() => prop('id')(sTask())).get()
 
 const setSIdx = idx => (state.sIdx = idx)
 
-export const handleSelectTask = id => {
+export const handleSelectTask = id => () => {
   const idx = findIndexById(id)(tasks())
-  debugger
   return setSIdx(idx)
 }
 export const handleSelectedTaskToggleDone = () => xToggleProp('done', sTask())
