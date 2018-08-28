@@ -64,7 +64,7 @@ const Task = compose(
         </FloatingActionsContainer>
       )}
       <div
-        className="flex-auto pa2 f5 bg-light-purple br2 "
+        className="flex-auto pa2 f5 bg-light-purple br2"
         onClick={handleSelect}
       >
         <div className={cn({ strike: done })}>{title}</div>
