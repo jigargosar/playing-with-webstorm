@@ -92,7 +92,7 @@ Task.propTypes = {
   handleSelect: PropTypes.func,
 }
 
-const MainContent = compose(observer)(function MainContent() {
+const MainContent = observer(function MainContent() {
   return (
     <div className="center measure-wide mv3">
       <div className="pa3 br3 bg-white shadow-1 ">
@@ -103,7 +103,7 @@ const MainContent = compose(observer)(function MainContent() {
   )
 })
 
-export const Page = compose(observer)(function Page() {
+export const Page = observer(function Page() {
   return (
     <ViewportHeightContainer className="bg-light-gray">
       <div className="pa3 shadow-1">STATIC HEADER</div>
