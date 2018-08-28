@@ -80,7 +80,7 @@ const TaskContainer = composeHOC()(function TaskContainer({
 }) {
   return (
     <div
-      className={cn('mv2 flex items-center relative', { yellow: 'selected' })}
+      className={cn('mv2 flex items-center relative', { yellow: selected })}
       {...otherProps}
     />
   )
