@@ -67,8 +67,8 @@ const TaskActions = observer(function TaskActions({
 })
 
 TaskActions.propTypes = {
-  handleSelectedTaskDelete: PropTypes.func.isRequired,
-  handleSelectedTaskToggleDone: PropTypes.func.isRequired,
+  handleSelectedTaskDelete: PropTypes.func,
+  handleSelectedTaskToggleDone: PropTypes.func,
 }
 
 TaskActions.defaultProps = {
