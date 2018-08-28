@@ -7,7 +7,7 @@ import { computed, observable } from 'mobx'
 const state = observable.object(
   {
     tasks: times(createNewTaskWithDefaults)(16),
-    sIdx: 0,
+    _sIdx: 0,
   },
   {},
   { name: 'state' },
@@ -16,13 +16,13 @@ const state = observable.object(
 const computedFn = fn => () => computed(fn).get()
 
 export const tasks = computedFn(() => state.tasks)
-const sIdx = computedFn(() => state.sIdx)
+const sIdx = computedFn(() => state._sIdx)
 
 const clampedSIdx = computedFn(() => clampIdx(sIdx())(tasks()))
 const sTask = computedFn(() => tasks()[clampedSIdx()])
 export const sId = computedFn(() => prop('id')(sTask()))
 
-const setSIdx = idx => (state.sIdx = idx)
+const setSIdx = idx => (state._sIdx = idx)
 
 export const handleSelectTask = id => () => {
   const idx = findIndexById(id)(tasks())
