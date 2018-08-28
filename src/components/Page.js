@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { ScrollContainer, ViewportHeightContainer } from './containers'
 import { compose } from 'ramda'
 import * as PropTypes from 'prop-types'
@@ -50,6 +50,15 @@ const TaskContent = xr.observer(function TaskContent({ task, handleSelect }) {
   )
 })
 
+function TaskActions() {
+  return (
+    <FloatingActionsContainer>
+      <Btn onClick={handleSelectedTaskToggleDone}>{'Done'}</Btn>
+      <Btn onClick={handleSelectedTaskDelete}>{'Delete'}</Btn>
+    </FloatingActionsContainer>
+  )
+}
+
 const Task = compose(
   withMouseOverHandlers,
   xr.observer,
@@ -66,14 +75,7 @@ const Task = compose(
       onMouseEnter={chainEvent(handleMouseEnter, handleSelect)}
       onMouseLeave={handleMouseLeave}
     >
-      <Fragment>
-        {mouseOver && (
-          <FloatingActionsContainer>
-            <Btn onClick={handleSelectedTaskToggleDone}>{'Done'}</Btn>
-            <Btn onClick={handleSelectedTaskDelete}>{'Delete'}</Btn>
-          </FloatingActionsContainer>
-        )}
-      </Fragment>
+      {mouseOver && <TaskActions />}
       <TaskContent task={task} handleSelect={handleSelect} />
     </div>
   )
