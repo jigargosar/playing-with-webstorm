@@ -8,6 +8,7 @@ import { withMouseOverHandlers } from './withMouseOverHandlers'
 import Radium from 'radium'
 import { tr } from '../GlobalStyles'
 import {
+  expr,
   handleSelectedTaskDelete,
   handleSelectedTaskToggleDone,
   handleSelectTask,
@@ -16,7 +17,6 @@ import {
   xr,
 } from './withMobX'
 import { Btn } from './Btn'
-import * as x from 'mobx'
 
 const FloatingActionsContainer = Radium(function FloatingActionsContainer({
   children,
@@ -69,7 +69,7 @@ const Task = compose(
 )(function Task({ task, handleMouseEnter, handleMouseLeave, mouseOver }) {
   const id = task.id
   const selected = sId() === id
-  const handleSelect = x.computed(() => handleSelectTask(id)).get()
+  const handleSelect = expr(() => handleSelectTask(id))
   return (
     <div
       className={cn(

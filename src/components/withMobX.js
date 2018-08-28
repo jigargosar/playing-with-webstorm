@@ -9,6 +9,7 @@ const xr = mobXReact
 export { xr }
 
 const computedFn = cfn => () => x.computed(cfn).get()
+export const expr = fn => x.computed(fn).get()
 
 const state = x.observable.object(
   {
