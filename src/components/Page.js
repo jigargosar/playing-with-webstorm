@@ -84,7 +84,7 @@ const Task = compose(
   handleMouseEnter,
   handleMouseLeave,
   mouseOver,
-  handleSelect = expr(() => handleSelectTask(id)),
+  handleSelect = expr(() => handleSelectTask(task.id)),
 }) {
   const id = task.id
   const selected = sId() === id
