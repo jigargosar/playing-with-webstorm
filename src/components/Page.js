@@ -43,7 +43,6 @@ const TaskContent = compose(
   Radium,
   observer,
 )(function TaskContent({ task: { done, title } }) {
-  console.log(primaryBgColor)
   return (
     <div
       className={cn('flex-auto pa2 f5 br2', {
