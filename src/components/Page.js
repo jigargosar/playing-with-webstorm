@@ -65,6 +65,25 @@ TaskActions.propTypes = {
   handleSelectedTaskToggleDone: PropTypes.func,
 }
 
+const TaskContainer = observer(function TaskContainer({
+  selected,
+  ...otherProps
+}) {
+  return (
+    <div
+      className={cn(
+        'mv2 flex items-center relative',
+        selected ? 'yellow' : 'white',
+      )}
+      {...otherProps}
+    />
+  )
+})
+
+TaskContainer.propTypes = {
+  selected: PropTypes.bool.isRequired,
+}
+
 const Task = compose(
   withMouseOverHandlers,
   observer,
@@ -73,18 +92,14 @@ const Task = compose(
   const selected = sId() === id
   const handleSelect = expr(() => handleSelectTask(task.id))
   return (
-    <div
-      className={cn(
-        'mv2 flex items-center relative',
-        selected ? 'yellow' : 'white',
-      )}
+    <TaskContainer
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClickCapture={handleSelect}
     >
       {mouseOver && <TaskActions />}
       <TaskContent task={task} />
-    </div>
+    </TaskContainer>
   )
 })
 Task.propTypes = {
