@@ -82,6 +82,7 @@ const TaskContainer = composeHOC()(function TaskContainer({
 }) {
   return (
     <div
+      key={task.id}
       className={cn('mv2 flex items-center relative')}
       {...otherProps}
       style={[expr(() => sId() === task.id) && secondaryColor]}
@@ -90,7 +91,7 @@ const TaskContainer = composeHOC()(function TaskContainer({
 })
 
 TaskContainer.propTypes = {
-  selected: PropTypes.bool.isRequired,
+  task: PropTypes.object.isRequired,
 }
 
 const Task = compose(
