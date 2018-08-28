@@ -101,7 +101,7 @@ const Task = compose(
   )
 })
 Task.propTypes = {
-  task: PropTypes.object.isRequired,
+  task: PropTypes.shape({ id: PropTypes.string.isRequired }).isRequired,
 }
 
 const MainContent = observer(function MainContent() {
