@@ -1,7 +1,9 @@
 import {
+  clamp,
   compose,
   find,
   findIndex,
+  isEmpty,
   lensIndex,
   lensProp,
   over,
@@ -52,3 +54,5 @@ export const overItemInListWithId = id => fn => cName =>
 // export const mapOverNth = n => fn => map(overIndex(n)(fn))
 // export const mapOverFst = mapOverNth(0)
 // export const mapOverSnd = mapOverNth(1)
+export const clampIdx = idx => list =>
+  isEmpty(list) ? NaN : clamp(0, list.length - 1)(idx)
