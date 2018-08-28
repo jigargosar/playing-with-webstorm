@@ -4,12 +4,14 @@ import { createNewTaskWithDefaults } from '../models/Task'
 import { clamp, isEmpty, prop, times } from 'ramda'
 import { findIndexById } from '../lib/ramda-ext'
 import { xRemoveAt, xToggleProp } from './xUtils'
+import * as xu from 'mobx-utils'
 
 const xr = mobXReact
 export { xr }
 
 const computedFn = cfn => () => x.computed(cfn).get()
-export const expr = fn => x.computed(fn).get()
+export const expr = xu.expr
+// export const expr = fn => x.computed(fn).get()
 
 const state = x.observable.object(
   {

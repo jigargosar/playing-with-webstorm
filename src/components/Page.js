@@ -8,15 +8,15 @@ import { withMouseOverHandlers } from './withMouseOverHandlers'
 import Radium from 'radium'
 import { tr } from '../GlobalStyles'
 import {
-  expr,
   handleSelectedTaskDelete,
   handleSelectedTaskToggleDone,
   handleSelectTask,
   sId,
   tasks,
-  xr,
 } from './withMobX'
 import { Btn } from './Btn'
+import { expr } from 'mobx-utils'
+import { observer } from 'mobx-react'
 
 const FloatingActionsContainer = Radium(function FloatingActionsContainer({
   children,
@@ -38,7 +38,7 @@ const FloatingActionsContainer = Radium(function FloatingActionsContainer({
   )
 })
 
-const TaskContent = xr.observer(function TaskContent({
+const TaskContent = observer(function TaskContent({
   task: { done, title },
   handleSelect,
 }) {
@@ -54,7 +54,7 @@ const TaskContent = xr.observer(function TaskContent({
   )
 })
 
-const TaskActions = xr.observer(function TaskActions() {
+const TaskActions = observer(function TaskActions() {
   return (
     <FloatingActionsContainer>
       <Btn onClick={handleSelectedTaskToggleDone}>{'Done'}</Btn>
@@ -65,7 +65,7 @@ const TaskActions = xr.observer(function TaskActions() {
 
 const Task = compose(
   withMouseOverHandlers,
-  xr.observer,
+  observer,
 )(function Task({ task, handleMouseEnter, handleMouseLeave, mouseOver }) {
   const id = task.id
   const selected = sId() === id
@@ -86,7 +86,7 @@ const Task = compose(
 })
 Task.propTypes = { task: PropTypes.object.isRequired }
 
-const MainContent = compose(xr.observer)(function MainContent() {
+const MainContent = compose(observer)(function MainContent() {
   return (
     <div className="center measure-wide mv3">
       <div className="pa3 br3 bg-white shadow-1 ">
@@ -97,7 +97,7 @@ const MainContent = compose(xr.observer)(function MainContent() {
   )
 })
 
-export const Page = compose(xr.observer)(function Page() {
+export const Page = compose(observer)(function Page() {
   return (
     <ViewportHeightContainer className="bg-light-gray">
       <div className="pa3 shadow-1">STATIC HEADER</div>
