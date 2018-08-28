@@ -25,6 +25,6 @@ export function rewired(cmdName, ...options) {
 }
 
 export const dev = () => {
-  var cmdName = 'start'
+  const cmdName = 'start'
   rewired(cmdName)
 }
