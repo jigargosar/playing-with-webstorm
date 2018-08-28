@@ -6,7 +6,6 @@ import * as xu from 'mobx-utils'
 import { observable } from 'mobx'
 
 export const expr = xu.expr
-// export const expr = fn => x.computed(fn).get()
 
 const state = observable.object(
   {
