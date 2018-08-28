@@ -54,7 +54,8 @@ const Task = compose(
   withMouseOverHandlers,
   xr.observer,
 )(function Task({ task, handleMouseEnter, handleMouseLeave, mouseOver }) {
-  const selected = sId() === task.id
+  const id = task.id
+  const selected = sId() === id
   const handleSelect = handleSelectTask(id)
   return (
     <div
