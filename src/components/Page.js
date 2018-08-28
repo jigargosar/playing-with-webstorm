@@ -37,7 +37,7 @@ const FloatingActionsContainer = Radium(function FloatingActionsContainer({
   )
 })
 
-function TaskContent({ task }) {
+const TaskContent = xr.observer(function TaskContent({ task }) {
   return (
     <div
       className="flex-auto pa2 f5 bg-light-purple br2"
@@ -46,8 +46,7 @@ function TaskContent({ task }) {
       <div className={cn({ strike: task.done })}>{task.title}</div>
     </div>
   )
-}
-
+})
 const Task = compose(
   withMouseOverHandlers,
   xr.observer,
