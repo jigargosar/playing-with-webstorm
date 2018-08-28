@@ -12,6 +12,9 @@ const state = observable.object(
   {},
   { name: 'state' },
 )
+
+const computedFn = fn => computed(fn).get()
+
 export const tasks = () => computed(() => state.tasks).get()
 const sIdx = () => computed(() => state.sIdx).get()
 
