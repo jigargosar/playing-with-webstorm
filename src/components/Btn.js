@@ -4,15 +4,15 @@ import React from 'react'
 
 const buttonStyle = {
   base: [
-    trCode,
-    tr['.mh1'],
-    tr['.ph2'],
     {
       background: 'transparent',
       userSelect: 'none',
       border: 'none',
       cursor: 'pointer',
     },
+    trCode,
+    tr['.mh1'],
+    tr['.ph2'],
     trLink,
   ],
   warning: {
