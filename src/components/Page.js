@@ -39,7 +39,6 @@ const FloatingActionsContainer = Radium(function FloatingActionsContainer({
 })
 
 const TaskContent = observer(function TaskContent({ task: { done, title } }) {
-  console.log('done', done)
   return (
     <div
       className={cn('flex-auto pa2 f5 bg-light-purple br2', {
