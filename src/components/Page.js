@@ -73,8 +73,8 @@ TaskActions.propTypes = {
 
 TaskActions.defaultProps = {
   handleSelectedTaskDelete,
+  handleSelectedTaskToggleDone,
 }
-handleSelectedTaskToggleDone
 
 const Task = compose(
   withMouseOverHandlers,
