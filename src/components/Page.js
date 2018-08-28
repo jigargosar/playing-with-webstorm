@@ -109,6 +109,10 @@ Task.propTypes = {
   task: PropTypes.shape({ id: PropTypes.string.isRequired }).isRequired,
 }
 
+const TaskItems = observer(function TaskItems() {
+  return <Models models={store.tasks}>{task => <Task task={task} />}</Models>
+})
+
 const MainContent = observer(function MainContent() {
   return (
     <div className="center measure-wide mv3">
