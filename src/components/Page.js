@@ -99,6 +99,7 @@ TaskContainer.propTypes = {
 
 const Task = compose(
   withMouseOverHandlers,
+  Radium,
   observer,
 )(function Task({ task, handleMouseEnter, handleMouseLeave, mouseOver }) {
   return (
@@ -117,11 +118,17 @@ Task.propTypes = {
   task: PropTypes.shape({ id: PropTypes.string.isRequired }).isRequired,
 }
 
-const TaskItems = observer(function TaskItems() {
+const TaskItems = compose(
+  Radium,
+  observer,
+)(function TaskItems() {
   return <Models models={store.tasks}>{task => <Task task={task} />}</Models>
 })
 
-const MainContent = observer(function MainContent() {
+const MainContent = compose(
+  Radium,
+  observer,
+)(function MainContent() {
   return (
     <div className="center measure-wide mv3">
       <div className="pa3 br3 bg-white shadow-1 ">
@@ -132,7 +139,10 @@ const MainContent = observer(function MainContent() {
   )
 })
 
-export const Page = observer(function Page() {
+export const Page = compose(
+  Radium,
+  observer,
+)(function Page() {
   return (
     <ViewportHeightContainer className="bg-light-gray">
       <div className="pa3 shadow-1">STATIC HEADER</div>
