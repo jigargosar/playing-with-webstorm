@@ -102,7 +102,6 @@ const Task = compose(
 })
 Task.propTypes = {
   task: PropTypes.object.isRequired,
-  handleSelect: PropTypes.func,
 }
 
 const MainContent = observer(function MainContent() {
