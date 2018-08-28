@@ -11,6 +11,7 @@ export const store = observable.object(
     get sIdx() {
       return clampIdx(store._sIdx)(store.tasks)
     },
+    setSIdx: idx => (store._sIdx = idx),
   },
   {},
   { name: 'store' },
