@@ -2,7 +2,7 @@ import React from 'react'
 import { ScrollContainer, ViewportHeightContainer } from './containers'
 import { compose } from 'ramda'
 import * as PropTypes from 'prop-types'
-import { chainEvent, cn } from '../lib/react-ext'
+import { cn } from '../lib/react-ext'
 import { Models } from '../shared-components/Models'
 import { withMouseOverHandlers } from './withMouseOverHandlers'
 import Radium from 'radium'
@@ -38,16 +38,12 @@ const FloatingActionsContainer = Radium(function FloatingActionsContainer({
   )
 })
 
-const TaskContent = observer(function TaskContent({
-  task: { done, title },
-  handleSelect,
-}) {
+const TaskContent = observer(function TaskContent({ task: { done, title } }) {
   return (
     <div
       className={cn('flex-auto pa2 f5 bg-light-purple br2', {
         strike: done,
       })}
-      onClick={handleSelect}
     >
       {title}
     </div>
@@ -94,11 +90,12 @@ const Task = compose(
         'mv2 flex items-center relative',
         mouseOver || selected ? 'yellow' : 'white',
       )}
-      onMouseEnter={chainEvent(handleMouseEnter, handleSelect)}
+      onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onClick={handleSelect}
     >
       {mouseOver && <TaskActions />}
-      <TaskContent task={task} handleSelect={handleSelect} />
+      <TaskContent task={task} />
     </div>
   )
 })
