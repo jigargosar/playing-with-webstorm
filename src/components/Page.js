@@ -50,6 +50,12 @@ const TaskContent = observer(function TaskContent({ task: { done, title } }) {
     </div>
   )
 })
+TaskContent.propTypes = {
+  task: PropTypes.shape({
+    done: PropTypes.bool.isRequired,
+    title: PropTypes.string.isRequired,
+  }).isRequired,
+}
 
 const TaskActions = observer(function TaskActions() {
   return (
