@@ -93,7 +93,7 @@ const Task = compose(
       )}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      onClick={handleSelect}
+      onClickCapture={handleSelect}
     >
       {mouseOver && <TaskActions />}
       <TaskContent task={task} />
