@@ -50,14 +50,14 @@ const TaskContent = xr.observer(function TaskContent({ task, handleSelect }) {
   )
 })
 
-function TaskActions() {
+const TaskActions = xr.observer(function TaskActions() {
   return (
     <FloatingActionsContainer>
       <Btn onClick={handleSelectedTaskToggleDone}>{'Done'}</Btn>
       <Btn onClick={handleSelectedTaskDelete}>{'Delete'}</Btn>
     </FloatingActionsContainer>
   )
-}
+})
 
 const Task = compose(
   withMouseOverHandlers,
