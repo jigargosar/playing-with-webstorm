@@ -20,12 +20,12 @@ class App extends Component {
         {this.state.hasError ? (
           'Error'
         ) : (
-          <Fragment>
-            <Provider theme={theme}>
+          <Provider theme={theme}>
+            <Fragment>
               <GlobalStyles />
               <Page />
-            </Provider>
-          </Fragment>
+            </Fragment>
+          </Provider>
         )}
       </Fragment>
     )
