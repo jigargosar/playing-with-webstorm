@@ -18,6 +18,9 @@ export const store = (() => {
       get sIdx() {
         return clampIdx(store._sIdx)(store.tasks)
       },
+      get sTask() {
+        return xGet(store, `tasks.${store.sIdx}`)
+      },
     },
     {},
     { name: 'store' },
