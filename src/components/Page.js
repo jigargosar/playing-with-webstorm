@@ -4,7 +4,6 @@ import { compose } from 'ramda'
 import * as PropTypes from 'prop-types'
 import { cn } from '../lib/react-ext'
 import { Models } from '../shared-components/Models'
-import { withMouseOverHandlers } from './withMouseOverHandlers'
 import Radium from 'radium'
 import {
   handleMouseLeaveTask,
@@ -77,7 +76,6 @@ TaskContainer.propTypes = {
 }
 
 const Task = compose(
-  withMouseOverHandlers,
   Radium,
   observer,
 )(function Task({ task }) {
@@ -87,7 +85,6 @@ const Task = compose(
       onMouseLeave={handleMouseLeaveTask(task.id)}
       onClickCapture={expr(() => handleSelectTask(task.id))}
       task={task}
-      key={task.id}
     >
       {expr(() => store.isTaskHovered(task.id)) && <TaskActions />}
       <TaskContent task={task} />
