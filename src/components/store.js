@@ -1,5 +1,5 @@
 import { createNewTaskWithDefaults } from '../models/Task'
-import { curryN, prop, times } from 'ramda'
+import { curryN, times } from 'ramda'
 import { clampIdx, findIndexById } from '../lib/ramda-ext'
 import { xRemoveAt, xToggleProp } from './xUtils'
 import { computed, extendObservable, observable } from 'mobx'
@@ -32,11 +32,11 @@ export const store = (() => {
 const computedFn = fn => () => computed(fn).get()
 
 const clampedSIdx = computedFn(() => clampIdx(store._sIdx)(store.tasks))
-const sTask = computedFn(() => store.tasks[clampedSIdx()])
-export const sId = computedFn(() => prop('id')(sTask()))
+export const sId = computedFn(() => xGet(store, 'sTask.id'))
 
 export const handleSelectTask = id => () =>
   store.setSIdx(findIndexById(id)(store.tasks))
-export const handleToggleDoneSelectedTask = () => xToggleProp('done', sTask())
+export const handleToggleDoneSelectedTask = () =>
+  xToggleProp('done', store.sTask)
 export const handleDeleteSelectedTask = () =>
   xRemoveAt(clampedSIdx(), store.tasks)
