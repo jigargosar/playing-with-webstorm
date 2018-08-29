@@ -30,7 +30,7 @@ export const store = (() => {
       )
     },
     get hTask() {
-      const idx = clampIdx(store._sIdx)(store.tasks)
+      const idx = clampIdx(store._hIdx)(store.tasks)
       return sGet(['tasks', idx])
     },
     get hId() {
@@ -38,14 +38,16 @@ export const store = (() => {
     },
     get isTaskHovered() {
       return compose(
-        equals(sGet('hId')),
+        equals(store.hId),
         prop('id'),
       )
     },
     setSIdx: xSet(store)('_sIdx'),
     setHIdx: xSet(store)('_hIdx'),
     setSId: id => store.setSIdx(findIndexById(id)(store.tasks)),
-    setHId: id => store.setHIdx(findIndexById(id)(store.tasks)),
+    setHId: id => {
+      return store.setHIdx(findIndexById(id)(store.tasks))
+    },
     unSetHId: id => {
       if (id === sGet('_hId')) {
         store.setHIdx(NaN)
