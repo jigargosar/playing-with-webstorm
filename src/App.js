@@ -2,6 +2,13 @@ import React, { Component, Fragment } from 'react'
 import { Page } from './components/Page'
 import { GlobalStyles } from './GlobalStyles'
 import * as xr from 'mobx-react'
+import { Provider } from 'reakit'
+
+const theme = {
+  Button: `
+    color: tomato;
+  `,
+}
 
 class App extends Component {
   state = {
@@ -13,10 +20,10 @@ class App extends Component {
         {this.state.hasError ? (
           'Error'
         ) : (
-          <Fragment>
+          <Provider theme={theme}>
             <GlobalStyles />
             <Page />
-          </Fragment>
+          </Provider>
         )}
       </Fragment>
     )
