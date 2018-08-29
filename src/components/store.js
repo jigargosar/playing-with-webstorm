@@ -49,7 +49,7 @@ export const store = (() => {
       return store.setHIdx(findIndexById(id)(store.tasks))
     },
     unSetHId: id => {
-      if (id === sGet('_hId')) {
+      if (id === store.hId) {
         store.setHIdx(NaN)
       }
     },
