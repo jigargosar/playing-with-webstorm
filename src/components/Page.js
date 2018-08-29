@@ -73,7 +73,6 @@ TaskContainer.propTypes = {
 }
 
 const Task = composeHOC()(function Task({ task }) {
-  console.log(store.isTaskHovered(task.id))
   return (
     <TaskContainer
       onMouseEnter={handleMouseOverTask(task.id)}
@@ -81,7 +80,7 @@ const Task = composeHOC()(function Task({ task }) {
       onClickCapture={expr(() => handleSelectTask(task.id))}
       task={task}
     >
-      {expr(() => store.isTaskHovered(task.id)) && <TaskActions />}
+      {expr(() => store.isTaskHovered(task)) && <TaskActions />}
       <TaskContent task={task} />
     </TaskContainer>
   )
