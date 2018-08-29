@@ -1,4 +1,3 @@
-import { tr, trCode } from '../GlobalStyles'
 import Radium from 'radium'
 import React from 'react'
 import { secondaryColor } from '../theme'
@@ -11,13 +10,15 @@ const buttonStyle = {
       border: 'none',
       cursor: 'pointer',
     },
-    trCode,
-    tr['.mh1'],
-    tr['.ph2'],
-    // trLink,
   ],
   warning: [secondaryColor],
 }
 export const Btn = Radium(function FloatingAction(props) {
-  return <button style={[buttonStyle.base, buttonStyle.warning]} {...props} />
+  return (
+    <button
+      className={'code mh1 ph1'}
+      style={[buttonStyle.base, buttonStyle.warning]}
+      {...props}
+    />
+  )
 })
