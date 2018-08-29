@@ -133,7 +133,10 @@ const MainContent = composeHOC()(function MainContent() {
 export const Page = composeHOC()(function Page() {
   return (
     <ViewportHeightContainer className="bg-light-gray">
-      <div className="pa3 shadow-1">STATIC HEADER</div>
+      <div className="pa3 shadow-1">
+        <div>STATIC HEADER</div>
+        <Btn onClick={store.deleteAll}>Delete All</Btn>
+      </div>
       <ScrollContainer>
         <MainContent />
       </ScrollContainer>

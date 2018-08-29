@@ -36,6 +36,7 @@ export const store = (() => {
       )
     },
     setSIdx: xSet(store)('_sIdx'),
+    deleteAll: () => store.tasks.clear(),
   })
   return store
 })()
