@@ -1,10 +1,11 @@
 import { Button as BaseButton, styled } from 'reakit'
 
-export const Button = styled(BaseButton.as('button')).attrs({ type: 'button' })`
+export const Button = styled(BaseButton)`
   // text-transform: uppercase;
   color: tomato;
-  font-size: 14px;
-  // height: 2em;
+  // font-size: 14px;
+  height: 2em;
+  font-family: inherit;
 `
 
 // export const ButtonRounded = styled(Button)`
