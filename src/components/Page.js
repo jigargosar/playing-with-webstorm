@@ -37,16 +37,10 @@ const TaskContent = composeHOC()(function TaskContent({
   task: { done, title },
 }) {
   return (
-    <div
-      className={cn('flex-auto pa2 f5 br2', {
-        strike: done,
-      })}
-      // style={[primaryBgColor]}
-    >
-      {title}
-    </div>
+    <div className={cn('flex-auto pa2 f5 br2', { strike: done })}>{title}</div>
   )
 })
+
 TaskContent.propTypes = {
   task: PropTypes.shape({
     done: PropTypes.bool.isRequired,
