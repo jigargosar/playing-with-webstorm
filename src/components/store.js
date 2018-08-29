@@ -34,8 +34,6 @@ export const store = (() => {
 
 const computedFn = fn => () => computed(fn).get()
 
-export const sId = computedFn(() => xGet(store, 'sTask.id'))
-
 export const handleSelectTask = id => () =>
   store.setSIdx(findIndexById(id)(store.tasks))
 export const handleToggleDoneSelectedTask = () =>
