@@ -80,7 +80,7 @@ const Task = compose(
   withMouseOverHandlers,
   Radium,
   observer,
-)(function Task({ task, mouseOver }) {
+)(function Task({ task }) {
   return (
     <TaskContainer
       onMouseEnter={handleMouseOverTask(task.id)}
@@ -89,7 +89,7 @@ const Task = compose(
       task={task}
       key={task.id}
     >
-      {mouseOver && <TaskActions />}
+      {expr(() => store.isTaskHovered(task.id)) && <TaskActions />}
       <TaskContent task={task} />
     </TaskContainer>
   )
