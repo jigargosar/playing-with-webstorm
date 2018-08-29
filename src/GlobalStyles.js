@@ -4,11 +4,6 @@ import indexRules from '!radium-loader!css-loader!./index.css' // eslint-disable
 //
 import React, { Fragment } from 'react'
 import { Style } from 'radium'
-import { __, pick } from 'ramda'
-
-const tr = tachyonsRules
-const trs = pick(__)(tr)
-export { tr, trs, indexRules }
 
 export function GlobalStyles() {
   return (
@@ -18,10 +13,3 @@ export function GlobalStyles() {
     </Fragment>
   )
 }
-
-export const trLink = {
-  ...tr['.link'],
-  ':focus': tr['.link:focus'],
-}
-export const trCode = tr['.code']
-// export const lhCopy = tr['.lh-copy']
