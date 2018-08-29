@@ -4,14 +4,13 @@ const {
 const { curry, compose } = require('ramda')
 const injectBabelPlugin = curry(injectBabelPluginUnCurried)
 const webpack = require('webpack')
-const WebpackMessages = require('webpack-messages')
 
-export function getWebpackMessagesPlugin() {
-  return new WebpackMessages({
-    name: 'client',
-    logger: str => console.log(`>> ${str}`),
-  })
-}
+// function getWebpackMessagesPlugin() {
+//   return new require('webpack-messages')({
+//     name: 'client',
+//     logger: str => console.log(`>> ${str}`),
+//   })
+// }
 
 module.exports = {
   webpack: config => {
