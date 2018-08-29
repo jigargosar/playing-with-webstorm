@@ -39,4 +39,4 @@ export const handleSelectTask = id => () =>
 export const handleToggleDoneSelectedTask = () =>
   xToggleProp('done', store.sTask)
 export const handleDeleteSelectedTask = () =>
-  rejectById(xRemoveAt(store.sId), store.tasks)
+  rejectById(xRemoveAt(findIndexById(store.sId)), store.tasks)
