@@ -7,12 +7,7 @@ import { Models } from '../shared-components/Models'
 import { withMouseOverHandlers } from './withMouseOverHandlers'
 import Radium from 'radium'
 import { tr } from '../GlobalStyles'
-import {
-  handleDeleteSelectedTask,
-  handleSelectTask,
-  handleToggleDoneSelectedTask,
-  store,
-} from './store'
+import { handleDeleteSelectedTask, handleSelectTask, store } from './store'
 import { Btn } from './Btn'
 import { observer } from 'mobx-react'
 import { expr } from 'mobx-utils'
@@ -62,7 +57,7 @@ TaskContent.propTypes = {
 const TaskActions = composeHOC()(function TaskActions() {
   return (
     <FloatingActionsContainer>
-      <Btn onClick={handleToggleDoneSelectedTask}>{'Done'}</Btn>
+      <Btn onClick={store.toggleSeletectedTaskDone}>{'Done'}</Btn>
       <Btn onClick={handleDeleteSelectedTask}>{'Delete'}</Btn>
     </FloatingActionsContainer>
   )
