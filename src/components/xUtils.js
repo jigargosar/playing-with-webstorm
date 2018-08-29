@@ -12,7 +12,7 @@ export const xRemoveAt = curry((idx, list) => {
   return list.splice(idx, 1)
 })
 
-const xRemoveById = curry((id, list) =>
+export const xRemoveById = curry((id, list) =>
   xRemoveAt(findIndexById(id)(list))(list),
 )
 export const xSet = curryN(3, dset)
