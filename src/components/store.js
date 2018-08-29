@@ -22,11 +22,9 @@ export const store = (() => {
   )
   const sGet = xGet(store)
   extendObservable(store, {
-    get sIdx() {
-      return clampIdx(store._sIdx)(store.tasks)
-    },
     get sTask() {
-      return sGet(['tasks', store.sIdx])
+      const idx = clampIdx(store._sIdx)(store.tasks)
+      return sGet(['tasks', idx])
     },
     get sId() {
       return sGet('sTask.id')
