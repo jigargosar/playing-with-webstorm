@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react'
 import { Page } from './components/Page'
 import { GlobalStyles } from './GlobalStyles'
-import * as xr from 'mobx-react'
 import { Provider } from 'reakit'
+import { observer } from 'mobx-react'
 
 const theme = {
   Button: `
@@ -20,10 +20,12 @@ class App extends Component {
         {this.state.hasError ? (
           'Error'
         ) : (
-          <Provider theme={theme}>
-            <GlobalStyles />
-            <Page />
-          </Provider>
+          <Fragment>
+            <Provider theme={theme}>
+              <GlobalStyles />
+              <Page />
+            </Provider>
+          </Fragment>
         )}
       </Fragment>
     )
@@ -35,4 +37,4 @@ class App extends Component {
   }
 }
 
-export default xr.observer(App)
+export default observer(App)
