@@ -121,6 +121,7 @@ export const Page = composeHOC()(function Page() {
       <div className="pa3 shadow-1">
         <div>STATIC HEADER</div>
         <Button onClick={store.deleteAll}>Delete All</Button>
+        <Button onClick={store.deleteAll}>Delete All</Button>
       </div>
       <ScrollContainer>
         <MainContent />
