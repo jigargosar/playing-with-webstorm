@@ -1,37 +1,37 @@
-import { Button as BaseButton, Grid, styled } from 'reakit'
+import { Button as BaseButton, styled } from 'reakit'
 import React from 'react'
 
 export const Button = styled(BaseButton)`
-  text-transform: uppercase;
-  font-weight: 600;
+  // text-transform: uppercase;
+  // font-weight: 400;
 `
 
-export const ButtonRounded = styled(Button)`
-  border-radius: 1.25em;
-  padding: 0 1.375em;
-`
-
-export const ButtonLarge = styled(Button)`
-  font-size: 22px;
-`
-
-export const ButtonPrimary = styled(Button)`
-  background-color: #fc4577;
-  border: none;
-  color: white;
-`
-
-export default () => (
-  <Grid gap={20} justifyContent="center">
-    <Button>Button</Button>
-    <ButtonLarge>Large</ButtonLarge>
-    <ButtonRounded>Rounded</ButtonRounded>
-    <ButtonPrimary>Primary</ButtonPrimary>
-    <ButtonLarge as={ButtonRounded}>Large + Rounded</ButtonLarge>
-    <ButtonRounded as={ButtonPrimary}>Rounded + Primary</ButtonRounded>
-    <ButtonLarge as={ButtonPrimary}>Large + Primary</ButtonLarge>
-    <ButtonLarge as={[ButtonRounded, ButtonPrimary]}>
-      Large + Rounded + Primary
-    </ButtonLarge>
-  </Grid>
-)
+// export const ButtonRounded = styled(Button)`
+//   border-radius: 1.25em;
+//   padding: 0 1.375em;
+// `
+//
+// export const ButtonLarge = styled(Button)`
+//   font-size: 22px;
+// `
+//
+// export const ButtonPrimary = styled(Button)`
+//   background-color: #fc4577;
+//   border: none;
+//   color: white;
+// `
+//
+// export default () => (
+//   <Grid gap={20} justifyContent="center">
+//     <Button>Button</Button>
+//     <ButtonLarge>Large</ButtonLarge>
+//     <ButtonRounded>Rounded</ButtonRounded>
+//     <ButtonPrimary>Primary</ButtonPrimary>
+//     <ButtonLarge as={ButtonRounded}>Large + Rounded</ButtonLarge>
+//     <ButtonRounded as={ButtonPrimary}>Rounded + Primary</ButtonRounded>
+//     <ButtonLarge as={ButtonPrimary}>Large + Primary</ButtonLarge>
+//     <ButtonLarge as={[ButtonRounded, ButtonPrimary]}>
+//       Large + Rounded + Primary
+//     </ButtonLarge>
+//   </Grid>
+// )
