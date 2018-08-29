@@ -1,10 +1,8 @@
 import React from 'react'
 import { ScrollContainer, ViewportHeightContainer } from './containers'
-import { compose } from 'ramda'
 import * as PropTypes from 'prop-types'
 import { cn } from '../lib/react-ext'
 import { Models } from '../shared-components/Models'
-import Radium from 'radium'
 import {
   handleMouseLeaveTask,
   handleMouseOverTask,
@@ -12,7 +10,6 @@ import {
   store,
 } from './store'
 import { Btn } from './Btn'
-import { observer } from 'mobx-react'
 import { expr } from 'mobx-utils'
 import { composeHOC } from './composeHOC'
 import { Button } from '../reakit-components/Button'
@@ -75,10 +72,8 @@ TaskContainer.propTypes = {
   task: PropTypes.object.isRequired,
 }
 
-const Task = compose(
-  Radium,
-  observer,
-)(function Task({ task }) {
+const Task = composeHOC()(function Task({ task }) {
+  console.log(store.isTaskHovered(task.id))
   return (
     <TaskContainer
       onMouseEnter={handleMouseOverTask(task.id)}

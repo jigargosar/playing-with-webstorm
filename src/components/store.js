@@ -34,7 +34,7 @@ export const store = (() => {
       return sGet(['tasks', idx])
     },
     get hId() {
-      return sGet('sTask.id')
+      return sGet('hTask.id')
     },
     get isTaskHovered() {
       return compose(
