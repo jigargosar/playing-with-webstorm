@@ -2,10 +2,6 @@ import { run } from 'runjs'
 
 process.env['REACT_EDITOR'] = 'webstorm'
 
-export function hello(name = 'Mysterious') {
-  console.log(`Hello ${name}!`)
-}
-
 export function installCommonPackages() {
   run(
     `yarn add -D \\
