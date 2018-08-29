@@ -1,15 +1,8 @@
 import { createNewTaskWithDefaults } from '../models/Task'
-import { compose, curryN, equals, prop, times } from 'ramda'
+import { compose, equals, prop, times } from 'ramda'
 import { clampIdx, findIndexById } from '../lib/ramda-ext'
-import { xRemoveAt, xToggleProp } from './xUtils'
-import { computed, extendObservable, observable } from 'mobx'
-import dset from 'dset'
-import dget from 'dlv'
-
-export const xSet = curryN(3, dset)
-export const xGet = curryN(2, dget)
-export const xGetOr = curryN(3, dget)
-export const computedFn = fn => () => computed(fn).get()
+import { xGet, xRemoveAt, xSet, xToggleProp } from './xUtils'
+import { extendObservable, observable } from 'mobx'
 
 export const store = (() => {
   const store = observable.object(
