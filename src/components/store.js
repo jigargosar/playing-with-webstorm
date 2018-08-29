@@ -1,5 +1,5 @@
 import { createNewTaskWithDefaults } from '../models/Task'
-import { curryN, times } from 'ramda'
+import { compose, curryN, prop, times } from 'ramda'
 import { clampIdx, findIndexById } from '../lib/ramda-ext'
 import { xRemoveAt, xToggleProp } from './xUtils'
 import { computed, extendObservable, observable } from 'mobx'
@@ -24,6 +24,12 @@ export const store = (() => {
       },
       get sId() {
         return xGet(store, `sTask.id`)
+      },
+      get isTaskSelected() {
+        return compose(
+          equals(xGet(store, `sTask.id`)),
+          prop('id'),
+        )
       },
     },
     {},
