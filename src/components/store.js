@@ -1,7 +1,7 @@
 import { createNewTaskWithDefaults } from '../models/Task'
 import { compose, equals, prop, times } from 'ramda'
-import { clampIdx, findIndexById } from '../lib/ramda-ext'
-import { xGet, xRemoveAt, xSet, xToggleProp } from './xUtils'
+import { clampIdx, findIndexById, rejectById } from '../lib/ramda-ext'
+import { xGet, xSet, xToggleProp } from './xUtils'
 import { extendObservable, observable } from 'mobx'
 
 export const store = (() => {
@@ -38,4 +38,4 @@ export const handleSelectTask = id => () =>
   store.setSIdx(findIndexById(id)(store.tasks))
 export const handleToggleDoneSelectedTask = () =>
   xToggleProp('done', store.sTask)
-export const handleDeleteSelectedTask = () => xRemoveAt(store.sIdx, store.tasks)
+export const handleDeleteSelectedTask = () => rejectById(store.id, store.tasks)
