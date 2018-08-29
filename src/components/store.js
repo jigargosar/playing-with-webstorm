@@ -9,6 +9,7 @@ export const store = (() => {
     {
       tasks: times(createNewTaskWithDefaults)(16),
       _sIdx: 0,
+      _hIdx: 0,
     },
     {},
     { name: 'store' },
@@ -24,7 +25,20 @@ export const store = (() => {
     },
     get isTaskSelected() {
       return compose(
-        equals(sGet('sTask.id')),
+        equals(sGet('sId')),
+        prop('id'),
+      )
+    },
+    get hTask() {
+      const idx = clampIdx(store._sIdx)(store.tasks)
+      return sGet(['tasks', idx])
+    },
+    get hId() {
+      return sGet('sTask.id')
+    },
+    get isTaskHovered() {
+      return compose(
+        equals(sGet('hId')),
         prop('id'),
       )
     },
