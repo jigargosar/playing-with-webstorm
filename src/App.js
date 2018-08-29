@@ -6,8 +6,7 @@ import { observer } from 'mobx-react'
 
 const theme = {
   Button: `
-    color: tomato;
-    height: 2rem;
+    
   `,
 }
 
@@ -25,7 +24,9 @@ class App extends Component {
           <Provider theme={theme}>
             <Fragment>
               <GlobalStyles />
-              <Page />
+              <div style={{ fontFamily: 'Source Sans Pro' }}>
+                <Page />
+              </div>
             </Fragment>
           </Provider>
         )}

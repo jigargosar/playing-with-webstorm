@@ -2,8 +2,9 @@ import { Button as BaseButton, styled } from 'reakit'
 
 export const Button = styled(BaseButton.as('button')).attrs({ type: 'button' })`
   // text-transform: uppercase;
-  height: 2rem;
   color: tomato;
+  font-size: 14px;
+  // height: 2em;
 `
 
 // export const ButtonRounded = styled(Button)`
