@@ -1,21 +1,31 @@
 import { createNewTaskWithDefaults } from '../models/Task'
-import { prop, times } from 'ramda'
+import { curryN, prop, times } from 'ramda'
 import { clampIdx, findIndexById } from '../lib/ramda-ext'
 import { xRemoveAt, xToggleProp } from './xUtils'
-import { computed, observable } from 'mobx'
+import { computed, extendObservable, observable } from 'mobx'
+import dset from 'dset'
+import dget from 'dlv'
 
-export const store = observable.object(
-  {
-    tasks: times(createNewTaskWithDefaults)(16),
-    _sIdx: 0,
-    get sIdx() {
-      return clampIdx(store._sIdx)(store.tasks)
+export const xSet = curryN(3, dset)
+export const xGet = curryN(2, dget)
+export const xGetOr = curryN(3, dget)
+
+export const store = (() => {
+  const store = observable.object(
+    {
+      tasks: times(createNewTaskWithDefaults)(16),
+      _sIdx: 0,
+      get sIdx() {
+        return clampIdx(store._sIdx)(store.tasks)
+      },
     },
-    setSIdx: idx => (store._sIdx = idx),
-  },
-  {},
-  { name: 'store' },
-)
+    {},
+    { name: 'store' },
+  )
+  const storeActions = { setSIdx: xSet(store)('_sIdx') }
+  extendObservable(store, { storeActions })
+  return store
+})()
 
 const computedFn = fn => () => computed(fn).get()
 
