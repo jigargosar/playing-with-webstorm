@@ -6,32 +6,26 @@ import { cn } from '../lib/react-ext'
 import { Models } from '../shared-components/Models'
 import { withMouseOverHandlers } from './withMouseOverHandlers'
 import Radium from 'radium'
-import { tr } from '../GlobalStyles'
 import { handleSelectTask, store } from './store'
 import { Btn } from './Btn'
 import { observer } from 'mobx-react'
 import { expr } from 'mobx-utils'
 import { composeHOC } from './composeHOC'
 
-const FloatingActionsContainer = Radium(function FloatingActionsContainer({
-  children,
-}) {
-  return (
-    <div
-      style={[
-        { right: '2rem' },
-        tr['.absolute'],
-        tr['.z-1'],
-        tr['.flex'],
-        tr['.items-center'],
-      ]}
-    >
-      <div className="absolute ">
-        <div className="pa2 bg-white-80 br3 shadow-1">{children}</div>
+const FloatingActionsContainer = composeHOC()(
+  function FloatingActionsContainer({ children }) {
+    return (
+      <div
+        className={'absolute z-1 flex items-center'}
+        style={{ right: '2rem' }}
+      >
+        <div className="absolute ">
+          <div className="pa2 bg-white-80 br3 shadow-1">{children}</div>
+        </div>
       </div>
-    </div>
-  )
-})
+    )
+  },
+)
 
 const TaskContent = composeHOC()(function TaskContent({
   task: { done, title },
