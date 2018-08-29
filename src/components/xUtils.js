@@ -2,10 +2,14 @@ import { computed } from 'mobx'
 import { curry, curryN } from 'ramda'
 import dset from 'dset'
 import dget from 'dlv'
+import { validate } from '../lib/validate'
 
 export const xToggleProp = curry((p, task) => (task[p] = !task[p]))
 
-export const xRemoveAt = curry((idx, list) => list.splice(idx, 1))
+export const xRemoveAt = curry((idx, list) => {
+  validate('NA', [idx, list])
+  return list.splice(idx, 1)
+})
 
 export const xSet = curryN(3, dset)
 export const xGet = curryN(2, dget)
