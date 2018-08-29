@@ -18,7 +18,6 @@ import { Btn } from './Btn'
 import { observer } from 'mobx-react'
 import { expr } from 'mobx-utils'
 import { composeHOC } from './composeHOC'
-import { secondaryColor } from '../theme'
 
 const FloatingActionsContainer = Radium(function FloatingActionsContainer({
   children,
@@ -83,9 +82,10 @@ const TaskContainer = composeHOC()(function TaskContainer({
   return (
     <div
       key={task.id}
-      className={cn('mv2 flex items-center relative')}
+      className={cn('mv2 flex items-center relative', {
+        orange: expr(() => sId() === task.id),
+      })}
       {...otherProps}
-      style={[expr(() => sId() === task.id) && secondaryColor]}
     />
   )
 })
