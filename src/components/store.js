@@ -29,6 +29,9 @@ export const store = (() => {
       )
     },
     setSIdx: xSet(store)('_sIdx'),
+    setSId: id => store.setSIdx(findIndexById(id)(store.tasks)),
+    setHId: id => {},
+    unSetHId: id => {},
     deleteAll: () => store.tasks.clear(),
     toggleSelectedTaskDone: () => xToggleProp('done', store.sTask),
     deleteSelectedTask: () => xRemoveById(store.sId)(store.tasks),
@@ -36,11 +39,8 @@ export const store = (() => {
   return store
 })()
 
-export const handleSelectTask = id => () =>
-  store.setSIdx(findIndexById(id)(store.tasks))
+export const handleSelectTask = id => () => store.setSId(id)
 
-export const handleMouseOverTask = id => () =>
-  store.setSIdx(findIndexById(id)(store.tasks))
+export const handleMouseOverTask = id => () => store.setHId(id)
 
-export const handleMouseLeaveTask = id => () =>
-  store.setSIdx(findIndexById(id)(store.tasks))
+export const handleMouseLeaveTask = id => () => store.unSetHId(id)
