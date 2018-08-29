@@ -6,6 +6,13 @@ const injectBabelPlugin = curry(injectBabelPluginUnCurried)
 const webpack = require('webpack')
 const WebpackMessages = require('webpack-messages')
 
+function getWebpackMessagesPlugin() {
+  return new WebpackMessages({
+    name: 'client',
+    logger: str => console.log(`>> ${str}`),
+  })
+}
+
 module.exports = {
   webpack: config => {
     const newConfig = compose(
@@ -15,12 +22,7 @@ module.exports = {
     newConfig.plugins.push(
       new webpack['ContextReplacementPlugin'](/power-assert-formatter/),
     )
-    newConfig.plugins.push(
-      new WebpackMessages({
-        name: 'client',
-        logger: str => console.log(`>> ${str}`),
-      }),
-    )
+    newConfig.plugins.push(getWebpackMessagesPlugin())
     return newConfig
   },
 }
