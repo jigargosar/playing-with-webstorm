@@ -3,7 +3,7 @@ import React from 'react'
 
 export const Button = styled(BaseButton.as('button'))`
   text-transform: uppercase;
-  // font-weight: 400;
+  height: 1.5rem;
 `
 
 // export const ButtonRounded = styled(Button)`
