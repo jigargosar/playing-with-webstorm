@@ -26,14 +26,14 @@ export const store = (() => {
       return clampIdx(store._sIdx)(store.tasks)
     },
     get sTask() {
-      return sGet(`tasks.${store.sIdx}`)
+      return sGet(['tasks', store.sIdx])
     },
     get sId() {
-      return sGet(`sTask.id`)
+      return sGet('sTask.id')
     },
     get isTaskSelected() {
       return compose(
-        equals(sGet(`sTask.id`)),
+        equals(sGet('sTask.id')),
         prop('id'),
       )
     },
