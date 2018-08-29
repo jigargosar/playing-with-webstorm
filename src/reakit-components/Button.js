@@ -1,8 +1,8 @@
 import { Button as BaseButton, styled } from 'reakit'
 import React from 'react'
 
-export const Button = styled(BaseButton)`
-  // text-transform: uppercase;
+export const Button = styled(BaseButton.as('button'))`
+  text-transform: uppercase;
   // font-weight: 400;
 `
 
