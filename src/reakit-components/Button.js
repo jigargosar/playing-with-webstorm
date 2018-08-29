@@ -5,7 +5,6 @@ export const Button = styled(BaseButton)`
   color: tomato;
   // font-size: 14px;
   height: 2em;
-  // font-family: inherit;
 `
 
 // export const ButtonRounded = styled(Button)`
