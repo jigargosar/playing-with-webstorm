@@ -16,7 +16,7 @@ module.exports = {
       new webpack['ContextReplacementPlugin'](/power-assert-formatter/),
     )
     newConfig.plugins.push(
-      new new WebpackMessages({
+      new WebpackMessages({
         name: 'client',
         logger: str => console.log(`>> ${str}`),
       })(),

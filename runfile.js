@@ -25,6 +25,5 @@ export function rewired(cmdName, ...options) {
 }
 
 export const dev = () => {
-  const cmdName = 'start'
-  rewired(cmdName)
+  rewired(`nodemon -w config-overrides.js -x react-app-rewired start`)
 }
