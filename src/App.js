@@ -24,7 +24,10 @@ class App extends Component {
           <Provider theme={theme}>
             <Fragment>
               <GlobalStyles />
-              <div style={{ fontFamily: 'Source Sans Pro' }}>
+              <div
+                className={'sans-serif'}
+                style={{ fontFamily: 'Source Sans Pro' }}
+              >
                 <Page />
               </div>
             </Fragment>
