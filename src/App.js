@@ -7,6 +7,7 @@ import { observer } from 'mobx-react'
 const theme = {
   Button: `
     color: tomato;
+    height: 2rem;
   `,
 }
 
@@ -14,6 +15,7 @@ class App extends Component {
   state = {
     hasError: false,
   }
+
   render() {
     return (
       <Fragment>
