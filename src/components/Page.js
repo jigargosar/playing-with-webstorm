@@ -57,7 +57,7 @@ TaskContent.propTypes = {
 const TaskActions = composeHOC()(function TaskActions() {
   return (
     <FloatingActionsContainer>
-      <Btn onClick={store.toggleSeletectedTaskDone}>{'Done'}</Btn>
+      <Btn onClick={store.toggleSelectedTaskDone}>{'Done'}</Btn>
       <Btn onClick={handleDeleteSelectedTask}>{'Delete'}</Btn>
     </FloatingActionsContainer>
   )

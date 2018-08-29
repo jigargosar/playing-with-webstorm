@@ -30,14 +30,12 @@ export const store = (() => {
     },
     setSIdx: xSet(store)('_sIdx'),
     deleteAll: () => store.tasks.clear(),
-    toggleSeletectedTaskDone: () => xToggleProp('done', store.sTask),
+    toggleSelectedTaskDone: () => xToggleProp('done', store.sTask),
   })
   return store
 })()
 
 export const handleSelectTask = id => () =>
   store.setSIdx(findIndexById(id)(store.tasks))
-export const handleToggleDoneSelectedTask = () =>
-  xToggleProp('done', store.sTask)
 export const handleDeleteSelectedTask = () =>
   xRemoveById(store.sId)(store.tasks)
