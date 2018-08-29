@@ -9,7 +9,7 @@ export const store = (() => {
     {
       tasks: times(createNewTaskWithDefaults)(16),
       _sIdx: 0,
-      _hIdx: 0,
+      _hIdx: NaN,
     },
     {},
     { name: 'store' },
@@ -43,9 +43,14 @@ export const store = (() => {
       )
     },
     setSIdx: xSet(store)('_sIdx'),
+    setHIdx: xSet(store)('_hIdx'),
     setSId: id => store.setSIdx(findIndexById(id)(store.tasks)),
-    setHId: id => {},
-    unSetHId: id => {},
+    setHId: id => store.setHIdx(findIndexById(id)(store.tasks)),
+    unSetHId: id => {
+      if (id === sGet('_hId')) {
+        store.setHIdx(NaN)
+      }
+    },
     deleteAll: () => store.tasks.clear(),
     toggleSelectedTaskDone: () => xToggleProp('done', store.sTask),
     deleteSelectedTask: () => xRemoveById(store.sId)(store.tasks),
