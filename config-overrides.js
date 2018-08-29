@@ -19,7 +19,7 @@ module.exports = {
       new WebpackMessages({
         name: 'client',
         logger: str => console.log(`>> ${str}`),
-      })(),
+      }),
     )
     return newConfig
   },
