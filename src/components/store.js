@@ -37,10 +37,13 @@ export const store = (() => {
       return sGet('hTask.id')
     },
     get isTaskHovered() {
-      return compose(
-        equals(store.hId),
-        prop('id'),
-      )
+      return id => {
+        console.log('id', id)
+        return compose(
+          equals(store.hId),
+          prop('id'),
+        )(id)
+      }
     },
     setSIdx: xSet(store)('_sIdx'),
     setHIdx: xSet(store)('_hIdx'),
