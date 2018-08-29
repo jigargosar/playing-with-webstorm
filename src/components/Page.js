@@ -6,7 +6,12 @@ import { cn } from '../lib/react-ext'
 import { Models } from '../shared-components/Models'
 import { withMouseOverHandlers } from './withMouseOverHandlers'
 import Radium from 'radium'
-import { handleSelectTask, store } from './store'
+import {
+  handleMouseLeaveTask,
+  handleMouseOverTask,
+  handleSelectTask,
+  store,
+} from './store'
 import { Btn } from './Btn'
 import { observer } from 'mobx-react'
 import { expr } from 'mobx-utils'
@@ -81,11 +86,11 @@ const Task = compose(
   withMouseOverHandlers,
   Radium,
   observer,
-)(function Task({ task, handleMouseEnter, handleMouseLeave, mouseOver }) {
+)(function Task({ task, mouseOver }) {
   return (
     <TaskContainer
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onMouseEnter={handleMouseOverTask(task.id)}
+      onMouseLeave={handleMouseLeaveTask(task.id)}
       onClickCapture={expr(() => handleSelectTask(task.id))}
       task={task}
       key={task.id}

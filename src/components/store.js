@@ -38,5 +38,9 @@ export const store = (() => {
 
 export const handleSelectTask = id => () =>
   store.setSIdx(findIndexById(id)(store.tasks))
-export const handleDeleteSelectedTask = () =>
-  xRemoveById(store.sId)(store.tasks)
+
+export const handleMouseOverTask = id => () =>
+  store.setSIdx(findIndexById(id)(store.tasks))
+
+export const handleMouseLeaveTask = id => () =>
+  store.setSIdx(findIndexById(id)(store.tasks))
