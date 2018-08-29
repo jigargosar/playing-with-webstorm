@@ -11,6 +11,7 @@ import { Btn } from './Btn'
 import { observer } from 'mobx-react'
 import { expr } from 'mobx-utils'
 import { composeHOC } from './composeHOC'
+import { Button } from 'reakit'
 
 const FloatingActionsContainer = composeHOC()(
   function FloatingActionsContainer({ children }) {
@@ -119,7 +120,7 @@ export const Page = composeHOC()(function Page() {
     <ViewportHeightContainer className="bg-light-gray">
       <div className="pa3 shadow-1">
         <div>STATIC HEADER</div>
-        <Btn onClick={store.deleteAll}>Delete All</Btn>
+        <Button onClick={store.deleteAll}>Delete All</Button>
       </div>
       <ScrollContainer>
         <MainContent />
