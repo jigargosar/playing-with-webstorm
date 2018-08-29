@@ -16,26 +16,29 @@ export const store = (() => {
     {
       tasks: times(createNewTaskWithDefaults)(16),
       _sIdx: 0,
-      get sIdx() {
-        return clampIdx(store._sIdx)(store.tasks)
-      },
-      get sTask() {
-        return xGet(store, `tasks.${store.sIdx}`)
-      },
-      get sId() {
-        return xGet(store, `sTask.id`)
-      },
-      get isTaskSelected() {
-        return compose(
-          equals(xGet(store, `sTask.id`)),
-          prop('id'),
-        )
-      },
     },
     {},
     { name: 'store' },
   )
-  extendObservable(store, { setSIdx: xSet(store)('_sIdx') })
+  const sGet = xGet(store)
+  extendObservable(store, {
+    get sIdx() {
+      return clampIdx(store._sIdx)(store.tasks)
+    },
+    get sTask() {
+      return sGet(`tasks.${store.sIdx}`)
+    },
+    get sId() {
+      return sGet(`sTask.id`)
+    },
+    get isTaskSelected() {
+      return compose(
+        equals(sGet(`sTask.id`)),
+        prop('id'),
+      )
+    },
+    setSIdx: xSet(store)('_sIdx'),
+  })
   return store
 })()
 
