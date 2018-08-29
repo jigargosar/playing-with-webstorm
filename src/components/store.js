@@ -21,6 +21,9 @@ export const store = (() => {
       get sTask() {
         return xGet(store, `tasks.${store.sIdx}`)
       },
+      get sId() {
+        return xGet(store, `sTask.id`)
+      },
     },
     {},
     { name: 'store' },

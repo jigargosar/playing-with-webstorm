@@ -11,7 +11,6 @@ import {
   handleDeleteSelectedTask,
   handleSelectTask,
   handleToggleDoneSelectedTask,
-  sId,
   store,
 } from './store'
 import { Btn } from './Btn'
@@ -83,7 +82,7 @@ const TaskContainer = composeHOC()(function TaskContainer({
     <div
       key={task.id}
       className={cn('mv2 flex items-center relative', {
-        orange: expr(() => sId() === task.id),
+        orange: expr(() => store.sId === task.id),
       })}
       {...otherProps}
     />
