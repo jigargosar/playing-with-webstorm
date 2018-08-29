@@ -42,6 +42,9 @@
   "dependencies": {
     "chance": "^1.0.16",
     "classname": "^0.0.0",
+    "constate": "^0.8.0",
+    "dlv": "^1.1.2",
+    "dset": "^1.0.1",
     "faker": "^4.1.0",
     "freactal": "^2.0.3",
     "json-schema-faker": "^0.5.0-rc15",
@@ -56,9 +59,12 @@
     "react-dom": "^16.4.2",
     "react-fuzzy": "^0.5.2",
     "react-hotkeys": "^1.1.4",
+    "react-icons": "^3.0.5",
     "react-scripts": "1.1.5",
     "react-treebeard": "^2.1.0",
+    "reakit": "^0.14.5",
     "recompose": "^0.28.2",
+    "styled-components": "^3.4.5",
     "tachyons": "^4.11.1",
     "webpack-chain": "^4.9.0"
   },
@@ -83,6 +89,7 @@
     "power-assert": "^1.6.0",
     "radium-loader": "^1.0.10",
     "react-app-rewired": "^1.5.2",
-    "runjs": "^4.3.2"
+    "runjs": "^4.3.2",
+    "webpack-messages": "^2.0.2"
   }
 }
