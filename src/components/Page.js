@@ -11,7 +11,7 @@ import { Btn } from './Btn'
 import { observer } from 'mobx-react'
 import { expr } from 'mobx-utils'
 import { composeHOC } from './composeHOC'
-import { Button } from 'reakit'
+import { Button } from '../reakit-components/Button'
 
 const FloatingActionsContainer = composeHOC()(
   function FloatingActionsContainer({ children }) {

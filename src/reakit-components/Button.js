@@ -1,21 +1,21 @@
 import { Button as BaseButton, Grid, styled } from 'reakit'
 import React from 'react'
 
-const Button = styled(BaseButton)`
+export const Button = styled(BaseButton)`
   text-transform: uppercase;
   font-weight: 600;
 `
 
-const ButtonRounded = styled(Button)`
+export const ButtonRounded = styled(Button)`
   border-radius: 1.25em;
   padding: 0 1.375em;
 `
 
-const ButtonLarge = styled(Button)`
+export const ButtonLarge = styled(Button)`
   font-size: 22px;
 `
 
-const ButtonPrimary = styled(Button)`
+export const ButtonPrimary = styled(Button)`
   background-color: #fc4577;
   border: none;
   color: white;
