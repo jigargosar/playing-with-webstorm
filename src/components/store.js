@@ -22,8 +22,7 @@ export const store = (() => {
     {},
     { name: 'store' },
   )
-  const storeActions = { setSIdx: xSet(store)('_sIdx') }
-  extendObservable(store, storeActions)
+  extendObservable(store, { setSIdx: xSet(store)('_sIdx') })
   return store
 })()
 
