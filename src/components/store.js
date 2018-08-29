@@ -31,7 +31,6 @@ export const store = (() => {
 
 const computedFn = fn => () => computed(fn).get()
 
-const clampedSIdx = computedFn(() => clampIdx(store._sIdx)(store.tasks))
 export const sId = computedFn(() => xGet(store, 'sTask.id'))
 
 export const handleSelectTask = id => () =>
