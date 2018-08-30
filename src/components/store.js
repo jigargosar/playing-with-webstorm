@@ -1,5 +1,5 @@
 import { createNewTaskWithDefaults } from '../models/Task'
-import { filter, groupBy, prop, reject, times } from 'ramda'
+import { compose, filter, groupBy, prop, reject, times } from 'ramda'
 import { findIndexById } from '../lib/ramda-ext'
 import { xRemoveById, xSet, xTogglePropById } from './xUtils'
 import { observable } from 'mobx'
@@ -38,7 +38,14 @@ export const store = (() => {
         }
       },
       getTaskGroups: () => {
-        const taskGroups = groupBy(prop('done'))(store._tasks)
+        const taskGroups = compose(
+          groupBy(
+            compose(
+              b => (b ? 'Done' : 'Pending'),
+              prop('done'),
+            ),
+          ),
+        )(store._tasks)
         console.log(taskGroups)
       },
     },
