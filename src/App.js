@@ -27,7 +27,7 @@ class App extends Component {
               <div
                 className={'sans-serif'}
                 style={{
-                  fontFamily: ['Roboto', 'Source Sans Pro'],
+                  fontFamily: ['Source Sans Pro', 'Roboto'],
                   fontSize: 16,
                 }}
               >
