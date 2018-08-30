@@ -26,7 +26,10 @@ class App extends Component {
               <GlobalStyles />
               <div
                 className={'sans-serif'}
-                style={{ fontFamily: ['Roboto', 'Source Sans Pro'] }}
+                style={{
+                  fontFamily: ['Roboto', 'Source Sans Pro'],
+                  fontSize: 16,
+                }}
               >
                 <Page />
               </div>
