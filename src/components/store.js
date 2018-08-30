@@ -84,10 +84,6 @@ export const store = (() => {
     getDoneTasks: () => expr(() => filter(prop('done'))(store._tasks)),
     isTaskSelected: store.isTaskAtSelectedIdx,
     isTaskHovered: store.isTaskAtHoveredIdx,
-    // isTaskHovered: ({ id }) =>
-    //   expr(() => propSOr('')('hoveredTaskId')(store) === id),
-    // isTaskSelected: ({ id }) =>
-    //   expr(() => propS('selectedTaskId')(store) === id),
     deleteAllTasks: () => store._tasks.clear(),
     addMoreTasks: () => store._tasks.unshift(...createSampleTasks()),
     toggleSelectedTaskDone: () =>
