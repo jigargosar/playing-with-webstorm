@@ -51,10 +51,12 @@ export const store = (() => {
         return clampIdx(store._hoveredTaskIdx, store.flattenedTasks)
       },
       get selectedTaskId() {
-        return pathS(['flattenedTasks', store.selectedTaskIdx])(store)
+        return pathS(['flattenedTasks', store.selectedTaskIdx, 'id'])(store)
       },
       get hoveredTaskId() {
-        return pathSOr('')(['flattenedTasks', store.hoveredTaskIdx])(store)
+        return pathSOr('')(['flattenedTasks', store.hoveredTaskIdx, 'id'])(
+          store,
+        )
       },
       isTaskAtSelected: ({ id }) => {
         return expr(() => store.selectedTaskId === id)
