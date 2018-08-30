@@ -17,7 +17,7 @@ import { findIndexById } from '../lib/ramda-ext'
 import { xRemoveById, xSet, xTogglePropById } from './xUtils'
 import { observable } from 'mobx'
 import { expr } from 'mobx-utils'
-import { clampIdx, findIdByClampedIdx, propS } from '../lib/ramda-strict'
+import { clampIdx, pathS, pathSOr, propS } from '../lib/ramda-strict'
 
 const createSampleTasks = () => times(createNewTaskWithDefaults)(16)
 
@@ -41,15 +41,6 @@ export const store = (() => {
           pluck('tasks'),
         )(store.taskGroups)
       },
-      get selectedTaskId() {
-        return findIdByClampedIdx(store._selectedTaskIdx, store.flattenedTasks)
-      },
-      get hoveredTaskId() {
-        if (Number.isNaN(store._hoveredTaskIdx)) {
-          return null
-        }
-        return findIdByClampedIdx(store._hoveredTaskIdx, store.flattenedTasks)
-      },
       get selectedTaskIdx() {
         return clampIdx(store._selectedTaskIdx, store.flattenedTasks)
       },
@@ -59,17 +50,17 @@ export const store = (() => {
         }
         return clampIdx(store._hoveredTaskIdx, store.flattenedTasks)
       },
-      isTaskAtSelectedIdx: ({ id }) => {
-        return expr(
-          () =>
-            store.selectedTaskIdx === findIndexById(id)(store.flattenedTasks),
-        )
+      get selectedTaskId() {
+        return pathS(['flattenedTasks', store.selectedTaskIdx])(store)
       },
-      isTaskAtHoveredIdx: ({ id }) => {
-        return expr(
-          () =>
-            store.hoveredTaskIdx === findIndexById(id)(store.flattenedTasks),
-        )
+      get hoveredTaskId() {
+        return pathSOr('')(['flattenedTasks', store.hoveredTaskIdx])(store)
+      },
+      isTaskAtSelected: ({ id }) => {
+        return expr(() => store.selectedTaskId === id)
+      },
+      isTaskAtHovered: ({ id }) => {
+        return expr(() => store.hoveredTaskId === id)
       },
       setSelectedTaskId: id =>
         xSet(store)('_selectedTaskIdx')(
@@ -91,8 +82,8 @@ export const store = (() => {
   return {
     getTodoTasks: () => expr(() => reject(prop('done'))(store._tasks)),
     getDoneTasks: () => expr(() => filter(prop('done'))(store._tasks)),
-    isTaskSelected: store.isTaskAtSelectedIdx,
-    isTaskHovered: store.isTaskAtHoveredIdx,
+    isTaskSelected: store.isTaskAtSelected,
+    isTaskHovered: store.isTaskAtHovered,
     deleteAllTasks: () => store._tasks.clear(),
     addMoreTasks: () => store._tasks.unshift(...createSampleTasks()),
     toggleSelectedTaskDone: () =>
