@@ -17,7 +17,7 @@ import { findIndexById } from '../lib/ramda-ext'
 import { xRemoveById, xSet, xTogglePropById } from './xUtils'
 import { observable } from 'mobx'
 import { expr } from 'mobx-utils'
-import { findIdByClampedIdx, propS } from '../lib/ramda-strict'
+import { clampIdx, findIdByClampedIdx, propS } from '../lib/ramda-strict'
 
 const createSampleTasks = () => times(createNewTaskWithDefaults)(16)
 
@@ -49,6 +49,15 @@ export const store = (() => {
           return null
         }
         return findIdByClampedIdx(store._hoveredTaskIdx, store.flattenedTasks)
+      },
+      get selectedTaskIdx() {
+        return clampIdx(store._selectedTaskIdx, store.flattenedTasks)
+      },
+      get hoveredTaskIdx() {
+        if (Number.isNaN(store._hoveredTaskIdx)) {
+          return null
+        }
+        return clampIdx(store._hoveredTaskIdx, store.flattenedTasks)
       },
       isTaskAtSelectedIdx: ({ id }) => {
         return expr(
