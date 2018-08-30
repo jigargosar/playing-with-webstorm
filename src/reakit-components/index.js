@@ -11,7 +11,7 @@ export const Button = styled(BaseButton)`
 `
 
 export const FlexCenter = styled(Flex)`
-  align-items: 'center';
+  align-items: center;
 `
 
 // export const ButtonRounded = styled(Button)`
