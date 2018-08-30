@@ -41,8 +41,8 @@ export const store = (() => {
   )
 
   return {
-    getTodoTasks: () => reject(prop('done'))(store._tasks),
-    getDoneTasks: () => filter(prop('done'))(store._tasks),
+    getTodoTasks: () => expr(() => reject(prop('done'))(store._tasks)),
+    getDoneTasks: () => expr(() => filter(prop('done'))(store._tasks)),
     isTaskHovered: ({ id }) =>
       expr(() => propSOr('')('hoveredTaskId')(store) === id),
     isTaskSelected: ({ id }) =>
