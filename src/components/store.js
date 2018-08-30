@@ -52,13 +52,15 @@ export const store = (() => {
   }
 
   extendObservable(store, {
-    isTaskHovered: task => expr(() => taskId.getHoveredTaskId() === task.id),
-    isTaskSelected: task => expr(() => taskId.getSelectedTaskId() === task.id),
+    isTaskHovered: task =>
+      expr(() => pathS(['hoveredTaskId'])(taskId) === task.id),
+    isTaskSelected: task =>
+      expr(() => pathS(['selectedTaskId'])(taskId) === task.id),
     deleteAll: () => store.tasks.clear(),
     toggleSelectedTaskDone: () =>
       xTogglePropById('done', pathS(['selectedTaskId'])(taskId), store.tasks),
     deleteSelectedTask: () =>
-      xRemoveById(taskId.getSelectedTaskId())(store.tasks),
+      xRemoveById(pathS(['selectedTaskId'])(taskId))(store.tasks),
     selectTask: ({ id }) => taskId.setSelectedTaskId(id),
     mouseEnterTask: ({ id }) => taskId.setHoveredTaskWithId(id),
     mouseLeaveTask: ({ id }) => taskId.unSetHoveredTaskWithId(id),
