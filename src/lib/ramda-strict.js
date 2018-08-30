@@ -1,9 +1,11 @@
 import { validate } from './validate'
 import { curry, defaultTo, map as _map, not as _not, path } from 'ramda'
 
-const validateIO = spec => fn => (...args) => {
-  validate(spec, args)
-  return fn(...args)
+const validateIO = (inputSpecs, outputSpecs = '*') => fn => (...args) => {
+  validate(inputSpecs, args)
+  const result = fn(...args)
+  validate(outputSpecs, [result])
+  return result
 }
 
 export const not = validateIO('B')(_not)
