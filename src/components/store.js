@@ -6,8 +6,12 @@ import { extendObservable, observable } from 'mobx'
 import { expr } from 'mobx-utils'
 
 function findIdByClampedModelIdx(idx, collectionName, store) {
+  return path('id')(findByClampedModelIdx(idx, collectionName, store))
+}
+
+function findByClampedModelIdx(idx, collectionName, store) {
   const clampedIdx = clampIdx(idx)(store[collectionName])
-  return xGet(store)([collectionName, clampedIdx, 'id'])
+  return xGet(store)([collectionName, clampedIdx])
 }
 
 export const store = (() => {
