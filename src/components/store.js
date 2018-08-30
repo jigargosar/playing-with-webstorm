@@ -50,42 +50,32 @@ export const store = (() => {
         return taskGroups
       },
       get selectedTaskId() {
-        return findIdByClampedIdx(
-          store._selectedTaskIdx,
-          store.getFlattenedTasks(),
-        )
+        return findIdByClampedIdx(store._selectedTaskIdx, store.flattenedTasks)
       },
       get hoveredTaskId() {
         if (Number.isNaN(store._hoveredTaskIdx)) {
           return null
         }
-        return findIdByClampedIdx(
-          store._hoveredTaskIdx,
-          store.getFlattenedTasks(),
-        )
+        return findIdByClampedIdx(store._hoveredTaskIdx, store.flattenedTasks)
       },
       isTaskAtSelectedIdx: ({ id }) => {
         return expr(
           () =>
-            store._selectedTaskIdx ===
-            findIndexById(id)(store.getFlattenedTasks()),
+            store._selectedTaskIdx === findIndexById(id)(store.flattenedTasks),
         )
       },
       isTaskAtHoveredIdx: ({ id }) => {
         return expr(
           () =>
-            store._hoveredTaskIdx ===
-            findIndexById(id)(store.getFlattenedTasks()),
+            store._hoveredTaskIdx === findIndexById(id)(store.flattenedTasks),
         )
       },
       setSelectedTaskId: id =>
         xSet(store)('_selectedTaskIdx')(
-          findIndexById(id)(store.getFlattenedTasks()),
+          findIndexById(id)(store.flattenedTasks),
         ),
       setHoveredTaskWithId: id =>
-        xSet(store)('_hoveredTaskIdx')(
-          findIndexById(id)(store.getFlattenedTasks()),
-        ),
+        xSet(store)('_hoveredTaskIdx')(findIndexById(id)(store.flattenedTasks)),
       unSetHoveredTaskWithId: id => {
         if (id === store.hoveredTaskId) {
           xSet(store)('_hoveredTaskIdx')(NaN)
@@ -97,13 +87,12 @@ export const store = (() => {
           pluck('tasks'),
         )(store.taskGroups)
       },
-      getFlattenedTasks: () => store.flattenedTasks,
     },
     {},
     { name: 'store' },
   )
 
-  console.log('getFlattenedTasks', store.getFlattenedTasks())
+  console.log('getFlattenedTasks', store.flattenedTasks)
   return {
     getTodoTasks: () => expr(() => reject(prop('done'))(store._tasks)),
     getDoneTasks: () => expr(() => filter(prop('done'))(store._tasks)),
