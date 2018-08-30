@@ -56,6 +56,7 @@ const TaskActions = composeHOC()(function TaskActions() {
 
 const Task = composeHOC()(function Task({ task }) {
   const selected = expr(() => store.isTaskSelected(task))
+  const hovered = expr(() => store.isTaskHovered(task))
   return (
     <FlexCenter
       relative
@@ -64,7 +65,7 @@ const Task = composeHOC()(function Task({ task }) {
       onMouseLeave={handleMouseLeaveTask(task.id)}
       onClickCapture={expr(() => handleSelectTask(task.id))}
     >
-      {expr(() => store.isTaskHovered(task)) && <TaskActions />}
+      {hovered && <TaskActions />}
       <TaskContent task={task} />
     </FlexCenter>
   )
