@@ -17,3 +17,5 @@ export const dev = () => {
     `nodemon -w package.json -w config-overrides.js -x react-app-rewired start`,
   )
 }
+
+export const start = dev
