@@ -22,13 +22,13 @@ export const store = (() => {
   const setHIdx = sSet('_hIdx')
 
   extendObservable(store, {
-    get sTask() {
-      const idx = clampIdx(store._sIdx)(store.tasks)
-      return sGet(['tasks', idx])
-    },
     get sId() {
       const idx = clampIdx(store._sIdx)(store.tasks)
       return sGet(['tasks', idx, 'id'])
+    },
+    get selectedTask() {
+      const idx = clampIdx(store._sIdx)(store.tasks)
+      return sGet(['tasks', idx])
     },
     get hId() {
       const idx = clampIdx(store._hIdx)(store.tasks)
@@ -44,7 +44,7 @@ export const store = (() => {
       }
     },
     deleteAll: () => store.tasks.clear(),
-    toggleSelectedTaskDone: () => xToggleProp('done', store.sTask),
+    toggleSelectedTaskDone: () => xToggleProp('done', store.selectedTask),
     deleteSelectedTask: () => xRemoveById(store.sId)(store.tasks),
   })
   return store
