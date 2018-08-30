@@ -17,7 +17,7 @@ import {
   FlexCenter,
   Group,
   highlightColor,
-  primaryColor,
+  primary,
 } from '../reakit-components'
 import { Flex, Heading } from 'reakit'
 
@@ -66,7 +66,7 @@ const Task = composeHOC()(function Task({ task }) {
   return (
     <FlexCenter
       relative
-      color={selected ? primaryColor : null}
+      color={selected ? primary : null}
       backgroundColor={hovered ? highlightColor : null}
       onMouseEnter={handleMouseOverTask(task.id)}
       onMouseLeave={handleMouseLeaveTask(task.id)}
