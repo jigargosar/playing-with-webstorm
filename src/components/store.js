@@ -15,29 +15,24 @@ export const store = (() => {
     {},
     { name: 'store' },
   )
-  const sGet = xGet(store)
-  const sSet = xSet(store)
-
-  const setSIdx = sSet('_sIdx')
-  const setHIdx = sSet('_hIdx')
 
   const taskId = {
-    setSelected: id => setSIdx(findIndexById(id)(store.tasks)),
-    setHovered: id => setHIdx(findIndexById(id)(store.tasks)),
+    setSelected: id => xSet(store)('_sIdx')(findIndexById(id)(store.tasks)),
+    setHovered: id => xSet(store)('_hIdx')(findIndexById(id)(store.tasks)),
     unSetHovered: id => {
       if (id === taskId.isHovered()) {
-        setHIdx(NaN)
+        xSet(store)('_hIdx')(NaN)
       }
     },
     isSelected: xComputedFn(() => {
       const idx = store._sIdx
       const clampedIdx = clampIdx(idx)(store.tasks)
-      return sGet(['tasks', clampedIdx, 'id'])
+      return xGet(store)(['tasks', clampedIdx, 'id'])
     }),
     isHovered: xComputedFn(() => {
       const idx = store._hIdx
       const clampedIdx = clampIdx(idx)(store.tasks)
-      return sGet(['tasks', clampedIdx, 'id'])
+      return xGet(store)(['tasks', clampedIdx, 'id'])
     }),
   }
 
