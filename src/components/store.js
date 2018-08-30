@@ -74,15 +74,16 @@ export const store = (() => {
             ),
           ),
         )(store._tasks)
-        console.log(taskGroups)
+        console.log('taskGroups', taskGroups)
+        return taskGroups
       },
     },
     {},
     { name: 'store' },
   )
 
+  console.log('getFlattenedTasks', store.getFlattenedTasks())
   return {
-    getTaskGroups: store.getTaskGroups,
     getTodoTasks: () => expr(() => reject(prop('done'))(store._tasks)),
     getDoneTasks: () => expr(() => filter(prop('done'))(store._tasks)),
     isTaskHovered: ({ id }) =>
@@ -101,5 +102,3 @@ export const store = (() => {
     mouseLeaveTask: ({ id }) => store.unSetHoveredTaskWithId(id),
   }
 })()
-
-store.getTaskGroups()
