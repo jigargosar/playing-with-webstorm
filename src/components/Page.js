@@ -106,8 +106,8 @@ export const Page = composeHOC()(function Page() {
         <Shadow depth={1} />
         <div>STATIC HEADER</div>
         <Group>
-          <Button onClick={store.deleteAll}>Delete All</Button>
-          <Button onClick={store.deleteAll}>Delete All</Button>
+          <Button onClick={store.addMoreTasks}>Add More</Button>
+          <Button onClick={store.deleteAllTasks}>Delete All</Button>
         </Group>
       </div>
       <ScrollContainer>

@@ -6,10 +6,12 @@ import { observable } from 'mobx'
 import { expr } from 'mobx-utils'
 import { findIdByClampedIdx, propS, propSOr } from '../lib/ramda-strict'
 
+const createSampleTasks = () => times(createNewTaskWithDefaults)(16)
+
 export const store = (() => {
   const store = observable.object(
     {
-      _tasks: times(createNewTaskWithDefaults)(16),
+      _tasks: createSampleTasks(),
       _selectedTaskIdx: 0,
       _hoveredTaskIdx: NaN,
       get selectedTaskId() {
@@ -44,7 +46,8 @@ export const store = (() => {
       expr(() => propSOr('')('hoveredTaskId')(store) === id),
     isTaskSelected: ({ id }) =>
       expr(() => propS('selectedTaskId')(store) === id),
-    deleteAll: () => store._tasks.clear(),
+    deleteAllTasks: () => store._tasks.clear(),
+    addMoreTasks: () => store._tasks.push(...createSampleTasks()),
     toggleSelectedTaskDone: () =>
       xTogglePropById('done', propS('selectedTaskId')(store), store._tasks),
     deleteSelectedTask: () =>
