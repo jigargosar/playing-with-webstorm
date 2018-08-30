@@ -1,6 +1,6 @@
 import { createNewTaskWithDefaults } from '../models/Task'
 import { times } from 'ramda'
-import { clampIdx, findIndexById } from '../lib/ramda-ext'
+import { clampIdx, findById, findIndexById } from '../lib/ramda-ext'
 import { xGet, xRemoveById, xSet, xToggleProp } from './xUtils'
 import { extendObservable, observable } from 'mobx'
 import { expr } from 'mobx-utils'
@@ -27,8 +27,7 @@ export const store = (() => {
       return sGet(['tasks', idx, 'id'])
     },
     get selectedTask() {
-      const idx = clampIdx(store._sIdx)(store.tasks)
-      return sGet(['tasks', idx])
+      return findById(id)(store.tasks)
     },
     get hId() {
       const idx = clampIdx(store._hIdx)(store.tasks)
