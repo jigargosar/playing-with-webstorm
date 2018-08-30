@@ -1,4 +1,6 @@
-import { Button as BaseButton, Group as GroupBase, styled } from 'reakit'
+import { Button as BaseButton, Flex, Group, styled } from 'reakit'
+
+export { Flex, Group }
 
 export const primaryColor = 'tomato'
 export const Button = styled(BaseButton)`
@@ -7,8 +9,6 @@ export const Button = styled(BaseButton)`
   // font-size: 14px;
   height: 2em;
 `
-
-export const Group = GroupBase
 
 // export const ButtonRounded = styled(Button)`
 //   border-radius: 1.25em;

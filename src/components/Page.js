@@ -59,7 +59,7 @@ const TaskContainer = composeHOC()(function TaskContainer({
 }) {
   const selected = expr(() => store.isTaskSelected(task))
   return (
-    <div
+    <Flex
       className={cn('mv2 flex items-center relative')}
       {...otherProps}
       style={{
