@@ -47,7 +47,7 @@ export const store = (() => {
     isTaskSelected: ({ id }) =>
       expr(() => propS('selectedTaskId')(store) === id),
     deleteAllTasks: () => store._tasks.clear(),
-    addMoreTasks: () => store._tasks.push(...createSampleTasks()),
+    addMoreTasks: () => store._tasks.unshift(...createSampleTasks()),
     toggleSelectedTaskDone: () =>
       xTogglePropById('done', propS('selectedTaskId')(store), store._tasks),
     deleteSelectedTask: () =>
