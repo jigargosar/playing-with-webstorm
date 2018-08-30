@@ -50,7 +50,7 @@ export const store = (() => {
     deleteSelectedTask: () => xRemoveById(taskId.selected())(store.tasks),
     selectTask: ({ id }) => taskId.setSelected(id),
     mouseEnterTask: ({ id }) => taskId.setHovered(id),
-    mouseLeaveTask: ({ id }) => store.unSetHovered(id),
+    mouseLeaveTask: ({ id }) => taskId.unSetHovered(id),
   })
   return store
 })()
