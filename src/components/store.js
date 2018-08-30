@@ -92,7 +92,7 @@ export const store = (() => {
         }
       },
       get flattenedTasks() {
-        compose(
+        return compose(
           flatten,
           pluck('tasks'),
         )(store.taskGroups)
