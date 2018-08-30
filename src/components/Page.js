@@ -95,7 +95,7 @@ export const Page = composeHOC()(function Page() {
   return (
     <ViewportHeightContainer className="bg-light-gray">
       <div className="pa3 relative">
-        <Shadow />
+        <Shadow depth={1} />
         <div>STATIC HEADER</div>
         <Group>
           <Button onClick={store.deleteAll}>Delete All</Button>
@@ -106,7 +106,7 @@ export const Page = composeHOC()(function Page() {
         <MainContent />
       </ScrollContainer>
       <div className="pa3 relative">
-        <Shadow />
+        <Shadow depth={1} />
         STATIC FOOTER
       </div>
     </ViewportHeightContainer>
