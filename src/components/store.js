@@ -14,26 +14,28 @@ export const store = (() => {
   const store = observable.object(
     {
       tasks: times(createNewTaskWithDefaults)(16),
-      _sIdx: 0,
-      _hIdx: NaN,
+      _selectedTaskIdx: 0,
+      _hoveredTaskIdx: NaN,
     },
     {},
     { name: 'store' },
   )
 
   const taskId = {
-    setSelected: id => xSet(store)('_sIdx')(findIndexById(id)(store.tasks)),
-    setHovered: id => xSet(store)('_hIdx')(findIndexById(id)(store.tasks)),
+    setSelected: id =>
+      xSet(store)('_selectedTaskIdx')(findIndexById(id)(store.tasks)),
+    setHovered: id =>
+      xSet(store)('_hoveredTaskIdx')(findIndexById(id)(store.tasks)),
     unSetHovered: id => {
       if (id === taskId.hovered()) {
-        xSet(store)('_hIdx')(NaN)
+        xSet(store)('_hoveredTaskIdx')(NaN)
       }
     },
     selected: xComputedFn(() => {
-      return findIdByClampedModelIdx(store._sIdx, 'tasks', store)
+      return findIdByClampedModelIdx(store._selectedTaskIdx, 'tasks', store)
     }),
     hovered: xComputedFn(() => {
-      return findIdByClampedModelIdx(store._hIdx, 'tasks', store)
+      return findIdByClampedModelIdx(store._hoveredTaskIdx, 'tasks', store)
     }),
   }
 
