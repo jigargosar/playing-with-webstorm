@@ -18,7 +18,7 @@ import { findIndexById } from '../lib/ramda-ext'
 import { xRemoveById, xSet, xTogglePropById } from './xUtils'
 import { observable } from 'mobx'
 import { expr } from 'mobx-utils'
-import { findIdByClampedIdx, propS, propSOr } from '../lib/ramda-strict'
+import { findIdByClampedIdx, propS } from '../lib/ramda-strict'
 
 const createSampleTasks = () => times(createNewTaskWithDefaults)(16)
 
@@ -44,12 +44,21 @@ export const store = (() => {
             findIndexById(id)(store.getFlattenedTasks()),
         )
       },
+      isTaskAtHoveredIdx: ({ id }) => {
+        return expr(
+          () =>
+            store._hoveredTaskIdx ===
+            findIndexById(id)(store.getFlattenedTasks()),
+        )
+      },
       setSelectedTaskId: id =>
         xSet(store)('_selectedTaskIdx')(
           findIndexById(id)(store.getFlattenedTasks()),
         ),
       setHoveredTaskWithId: id =>
-        xSet(store)('_hoveredTaskIdx')(findIndexById(id)(store._tasks)),
+        xSet(store)('_hoveredTaskIdx')(
+          findIndexById(id)(store.getFlattenedTasks()),
+        ),
       unSetHoveredTaskWithId: id => {
         if (id === store.hoveredTaskId) {
           xSet(store)('_hoveredTaskIdx')(NaN)
@@ -90,9 +99,10 @@ export const store = (() => {
   return {
     getTodoTasks: () => expr(() => reject(prop('done'))(store._tasks)),
     getDoneTasks: () => expr(() => filter(prop('done'))(store._tasks)),
-    isTaskHovered: ({ id }) =>
-      expr(() => propSOr('')('hoveredTaskId')(store) === id),
     isTaskSelected: store.isTaskAtSelectedIdx,
+    isTaskHovered: store.isTaskAtHoveredIdx,
+    // isTaskHovered: ({ id }) =>
+    //   expr(() => propSOr('')('hoveredTaskId')(store) === id),
     // isTaskSelected: ({ id }) =>
     //   expr(() => propS('selectedTaskId')(store) === id),
     deleteAllTasks: () => store._tasks.clear(),
