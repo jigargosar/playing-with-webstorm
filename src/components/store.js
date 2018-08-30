@@ -27,7 +27,8 @@ export const store = (() => {
       return sGet(['tasks', idx])
     },
     get sId() {
-      return sGet('sTask.id')
+      const idx = clampIdx(store._sIdx)(store.tasks)
+      return sGet(['tasks', idx, 'id'])
     },
     get hId() {
       const idx = clampIdx(store._hIdx)(store.tasks)
