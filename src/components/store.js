@@ -1,5 +1,5 @@
 import { createNewTaskWithDefaults } from '../models/Task'
-import { compose, equals, prop, times } from 'ramda'
+import { times } from 'ramda'
 import { clampIdx, findIndexById } from '../lib/ramda-ext'
 import { xGet, xRemoveById, xSet, xToggleProp } from './xUtils'
 import { extendObservable, observable } from 'mobx'
@@ -29,12 +29,6 @@ export const store = (() => {
     get sId() {
       return sGet('sTask.id')
     },
-    get isTaskSelected() {
-      return compose(
-        equals(sGet('sId')),
-        prop('id'),
-      )
-    },
     get hTask() {
       const idx = clampIdx(store._hIdx)(store.tasks)
       return sGet(['tasks', idx])
@@ -43,6 +37,7 @@ export const store = (() => {
       return sGet('hTask.id')
     },
     isTaskHovered: task => expr(() => store.hId === task.id),
+    isTaskSelected: task => expr(() => store.sId === task.id),
     setSId: id => setSIdx(findIndexById(id)(store.tasks)),
     setHId: id => setHIdx(findIndexById(id)(store.tasks)),
     unSetHId: id => {
