@@ -37,13 +37,7 @@ export const store = (() => {
     get hId() {
       return sGet('hTask.id')
     },
-    get _isTaskHovered() {
-      return compose(
-        equals(store.hId),
-        prop('id'),
-      )
-    },
-    isTaskHovered: task => expr(() => store._isTaskHovered(task)),
+    isTaskHovered: task => expr(() => store.hId === task.id),
     setSIdx: xSet(store)('_sIdx'),
     setHIdx: xSet(store)('_hIdx'),
     setSId: id => store.setSIdx(findIndexById(id)(store.tasks)),
