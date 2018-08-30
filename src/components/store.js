@@ -27,7 +27,7 @@ export const store = (() => {
       return sGet(['tasks', idx, 'id'])
     },
     get selectedTask() {
-      return findById(id)(store.tasks)
+      return findById(store.sId)(store.tasks)
     },
     get hId() {
       const idx = clampIdx(store._hIdx)(store.tasks)
