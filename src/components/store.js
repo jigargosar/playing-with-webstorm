@@ -18,6 +18,10 @@ export const pathS = curry((paths, obj) => {
   return result
 })
 
+export const propS = curry((p, obj) => {
+  return pathS([p], obj)
+})
+
 export const pathSOr = curry((def, paths, obj) => {
   validate('SAO', [def, paths, obj])
   const result = path(paths, obj)
