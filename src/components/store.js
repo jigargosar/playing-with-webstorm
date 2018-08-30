@@ -75,7 +75,7 @@ export const store = (() => {
           flatten,
           pluck('tasks'),
         )(store.getTaskGroups()),
-      getTaskGroups: () => {
+      get taskGroups() {
         const titleOrder = ['Todo', 'Done']
         const taskGroups = compose(
           sortBy(
@@ -96,6 +96,7 @@ export const store = (() => {
         console.log('taskGroups', taskGroups)
         return taskGroups
       },
+      getTaskGroups: () => store.taskGroups,
     },
     {},
     { name: 'store' },
