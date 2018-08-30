@@ -1,11 +1,14 @@
 import { createNewTaskWithDefaults } from '../models/Task'
 import {
+  __,
   compose,
   filter,
   groupBy,
+  indexOf,
   mapObjIndexed,
   prop,
   reject,
+  sortBy,
   times,
   values,
 } from 'ramda'
@@ -47,7 +50,14 @@ export const store = (() => {
         }
       },
       getTaskGroups: () => {
+        const titleOrder = ['Todo', 'Done']
         const taskGroups = compose(
+          sortBy(
+            compose(
+              indexOf(__, titleOrder),
+              prop('title'),
+            ),
+          ),
           values,
           mapObjIndexed((tasks, title) => ({ title, tasks })),
           groupBy(
