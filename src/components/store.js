@@ -5,8 +5,10 @@ import { computedFn, xRemoveById, xSet, xTogglePropById } from './xUtils'
 import { extendObservable, observable } from 'mobx'
 import { expr } from 'mobx-utils'
 import { pathS, propA, propS, propSOr } from '../lib/ramda-strict'
+import { validate } from '../lib/validate'
 
 function findIdByClampedIdx(idx, list) {
+  validate('NA', [idx, list])
   const clampedIdx = clampIdx(idx)(list)
   return pathS([clampedIdx, 'id'])(list)
 }
