@@ -3,9 +3,13 @@ import { curry, curryN } from 'ramda'
 import dset from 'dset'
 import dget from 'dlv'
 import { validate } from '../lib/validate'
-import { findIndexById } from '../lib/ramda-ext'
+import { findById, findIndexById } from '../lib/ramda-ext'
 
-export const xToggleProp = curry((p, task) => (task[p] = !task[p]))
+export const xToggleProp = curry((p, obj) => (obj[p] = !obj[p]))
+
+export const xTogglePropById = curry((p, id, list) =>
+  xToggleProp(p, findById(id)(list)),
+)
 
 export const xRemoveAt = curry((idx, list) => {
   validate('NA', [idx, list])

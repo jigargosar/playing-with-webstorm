@@ -1,7 +1,7 @@
 import { createNewTaskWithDefaults } from '../models/Task'
 import { times } from 'ramda'
 import { clampIdx, findById, findIndexById } from '../lib/ramda-ext'
-import { xGet, xRemoveById, xSet, xToggleProp } from './xUtils'
+import { xGet, xRemoveById, xSet, xTogglePropById } from './xUtils'
 import { extendObservable, observable } from 'mobx'
 import { expr } from 'mobx-utils'
 
@@ -43,7 +43,8 @@ export const store = (() => {
       }
     },
     deleteAll: () => store.tasks.clear(),
-    toggleSelectedTaskDone: () => xToggleProp('done', store.selectedTask),
+    toggleSelectedTaskDone: () =>
+      xTogglePropById('done', store.sId, store.tasks),
     deleteSelectedTask: () => xRemoveById(store.sId)(store.tasks),
   })
   return store
