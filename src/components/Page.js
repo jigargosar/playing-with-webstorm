@@ -61,6 +61,7 @@ const Task = composeHOC()(function Task({ task }) {
     <FlexCenter
       relative
       color={selected ? primaryColor : null}
+      backgroundColor={hovered ? 'yellow' : null}
       onMouseEnter={handleMouseOverTask(task.id)}
       onMouseLeave={handleMouseLeaveTask(task.id)}
       onClickCapture={expr(() => handleSelectTask(task.id))}
