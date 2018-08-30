@@ -3,6 +3,7 @@ import { compose, equals, prop, times } from 'ramda'
 import { clampIdx, findIndexById } from '../lib/ramda-ext'
 import { xGet, xRemoveById, xSet, xToggleProp } from './xUtils'
 import { extendObservable, observable } from 'mobx'
+import { expr } from 'mobx-utils'
 
 export const store = (() => {
   const store = observable.object(
@@ -36,12 +37,13 @@ export const store = (() => {
     get hId() {
       return sGet('hTask.id')
     },
-    get isTaskHovered() {
+    get _isTaskHovered() {
       return compose(
         equals(store.hId),
         prop('id'),
       )
     },
+    isTaskHovered: task => expr(() => store._isTaskHovered(task)),
     setSIdx: xSet(store)('_sIdx'),
     setHIdx: xSet(store)('_hIdx'),
     setSId: id => store.setSIdx(findIndexById(id)(store.tasks)),

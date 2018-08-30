@@ -7,6 +7,7 @@ import {
   handleMouseLeaveTask,
   handleMouseOverTask,
   handleSelectTask,
+  isTaskHovered,
   store,
 } from './store'
 import { Btn } from './Btn'
@@ -60,7 +61,7 @@ const TaskActions = composeHOC()(function TaskActions() {
 
 const Task = composeHOC()(function Task({ task }) {
   const selected = expr(() => store.isTaskSelected(task))
-  const hovered = expr(() => store.isTaskHovered(task))
+  const hovered = store.isTaskHovered(task)
   return (
     <FlexCenter
       className={cn('br2')}
