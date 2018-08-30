@@ -28,7 +28,7 @@ export const store = (() => {
       _selectedTaskIdx: 0,
       _hoveredTaskIdx: NaN,
       get taskGroups() {
-        const taskGroups = compose(
+        return compose(
           sortBy(group => indexOf(group.title, ['Todo', 'Done'])),
           values,
           mapObjIndexed((tasks, title) => ({ title, tasks })),
@@ -39,8 +39,6 @@ export const store = (() => {
             ),
           ),
         )(store._tasks)
-        console.log('taskGroups', taskGroups)
-        return taskGroups
       },
       get flattenedTasks() {
         return compose(
