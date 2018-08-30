@@ -104,6 +104,10 @@ const MainContent = composeHOC()(function MainContent() {
               console.log('hide', ...args)
               return _tabProps.hide(...args)
             },
+            toggle: (...args) => {
+              console.log('toggle', ...args)
+              return _tabProps.toggle(...args)
+            },
           }
           console.log('tabProps.getCurrentId()', tabProps.getCurrentId())
           return (
