@@ -43,8 +43,16 @@ export const store = (() => {
     isTaskHovered: task => expr(() => store.hId === task.id),
     setSIdx: sSet('_sIdx'),
     setHIdx: sSet('_hIdx'),
-    setSId: id => store.setSIdx(taskIndexById(id)),
-    setHId: id => store.setHIdx(taskIndexById(id)),
+    setSId: id =>
+      compose(
+        store.setSIdx,
+        taskIndexById,
+      )(id),
+    setHId: id =>
+      compose(
+        store.setHIdx,
+        taskIndexById,
+      )(id),
     unSetHId: id => {
       if (id === store.hId) {
         store.setHIdx(NaN)
