@@ -54,24 +54,6 @@ const TaskActions = composeHOC()(function TaskActions() {
   )
 })
 
-const TaskContainer = composeHOC()(function TaskContainer({
-  task,
-  ...otherProps
-}) {
-  const selected = expr(() => store.isTaskSelected(task))
-  return (
-    <FlexCenter
-      relative
-      color={selected ? primaryColor : null}
-      {...otherProps}
-    />
-  )
-})
-
-TaskContainer.propTypes = {
-  task: PropTypes.object.isRequired,
-}
-
 const Task = composeHOC()(function Task({ task }) {
   const selected = expr(() => store.isTaskSelected(task))
   return (
