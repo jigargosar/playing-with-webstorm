@@ -87,7 +87,7 @@ const TaskItems = composeHOC()(function TaskItems({ tasks }) {
 const MainContent = composeHOC()(function MainContent() {
   return (
     <Fragment>
-      <Tabs.Container>
+      <Tabs.Container initialState={{ current: 0 }}>
         {tabProps => (
           <Fragment>
             <Tabs>
