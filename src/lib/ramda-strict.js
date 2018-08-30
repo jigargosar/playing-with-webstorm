@@ -1,5 +1,5 @@
 import { validate } from './validate'
-import { curryN, path, pathOr } from 'ramda'
+import { clamp, curryN, isEmpty, path, pathOr } from 'ramda'
 
 const validateIO = (inputSpecs, outputSpecs = '*') => fn => {
   return curryN(fn.length)((...args) => {
@@ -22,4 +22,11 @@ export const pathAOr = validateIO('SAO|SAA', 'A|Z')(pathOr)
 export const propA = validateIO('SO|SA', 'A')((p, obj) => pathA([p], obj))
 export const propAOr = validateIO('SSO|SSA', 'A')((def, p, obj) =>
   pathAOr(def, [p], obj),
+)
+
+export const findIdByClampedIdx = validateIO('NA', 'S')((idx, list) => {
+  return pathS([clampIdx(idx)(list), 'id'])(list)
+})
+export const clampIdx = validateIO('NA', 'N')(
+  (idx, list) => (isEmpty(list) ? NaN : clamp(0, list.length - 1)(idx)),
 )
