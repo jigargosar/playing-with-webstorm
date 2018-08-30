@@ -1,5 +1,13 @@
 import { createNewTaskWithDefaults } from '../models/Task'
-import { compose, filter, groupBy, prop, reject, times } from 'ramda'
+import {
+  compose,
+  filter,
+  groupBy,
+  mapObjIndexed,
+  prop,
+  reject,
+  times,
+} from 'ramda'
 import { findIndexById } from '../lib/ramda-ext'
 import { xRemoveById, xSet, xTogglePropById } from './xUtils'
 import { observable } from 'mobx'
@@ -39,6 +47,7 @@ export const store = (() => {
       },
       getTaskGroups: () => {
         const taskGroups = compose(
+          mapObjIndexed((tasks, title) => ({ title, tasks })),
           groupBy(
             compose(
               b => (b ? 'Done' : 'Todo'),
