@@ -16,6 +16,7 @@ export const store = (() => {
     { name: 'store' },
   )
   const sGet = xGet(store)
+  const taskIndexById = id => findIndexById(id)(store.tasks)
   extendObservable(store, {
     get sTask() {
       const idx = clampIdx(store._sIdx)(store.tasks)
@@ -40,8 +41,8 @@ export const store = (() => {
     isTaskHovered: task => expr(() => store.hId === task.id),
     setSIdx: xSet(store)('_sIdx'),
     setHIdx: xSet(store)('_hIdx'),
-    setSId: id => store.setSIdx(findIndexById(id)(store.tasks)),
-    setHId: id => store.setHIdx(findIndexById(id)(store.tasks)),
+    setSId: id => store.setSIdx(taskIndexById(id)),
+    setHId: id => store.setHIdx(taskIndexById(id)),
     unSetHId: id => {
       if (id === store.hId) {
         store.setHIdx(NaN)
