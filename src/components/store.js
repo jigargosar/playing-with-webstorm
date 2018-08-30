@@ -29,13 +29,19 @@ export const store = (() => {
       _selectedTaskIdx: 0,
       _hoveredTaskIdx: NaN,
       get selectedTaskId() {
-        return findIdByClampedIdx(store._selectedTaskIdx, store._tasks)
+        return findIdByClampedIdx(
+          store._selectedTaskIdx,
+          store.getFlattenedTasks(),
+        )
       },
       get hoveredTaskId() {
         if (Number.isNaN(store._hoveredTaskIdx)) {
           return null
         }
-        return findIdByClampedIdx(store._hoveredTaskIdx, store._tasks)
+        return findIdByClampedIdx(
+          store._hoveredTaskIdx,
+          store.getFlattenedTasks(),
+        )
       },
       isTaskAtSelectedIdx: ({ id }) => {
         return expr(
