@@ -5,6 +5,11 @@ import { xComputedFn, xGet, xRemoveById, xSet, xTogglePropById } from './xUtils'
 import { extendObservable, observable } from 'mobx'
 import { expr } from 'mobx-utils'
 
+function findIdByClampedModelIdx(idx, collectionName, store) {
+  const clampedIdx = clampIdx(idx)(store[collectionName])
+  return xGet(store)([collectionName, clampedIdx, 'id'])
+}
+
 export const store = (() => {
   const store = observable.object(
     {
@@ -20,29 +25,25 @@ export const store = (() => {
     setSelected: id => xSet(store)('_sIdx')(findIndexById(id)(store.tasks)),
     setHovered: id => xSet(store)('_hIdx')(findIndexById(id)(store.tasks)),
     unSetHovered: id => {
-      if (id === taskId.isHovered()) {
+      if (id === taskId.hovered()) {
         xSet(store)('_hIdx')(NaN)
       }
     },
-    isSelected: xComputedFn(() => {
-      const idx = store._sIdx
-      const clampedIdx = clampIdx(idx)(store.tasks)
-      return xGet(store)(['tasks', clampedIdx, 'id'])
+    selected: xComputedFn(() => {
+      return findIdByClampedModelIdx(store._sIdx, 'tasks', store)
     }),
-    isHovered: xComputedFn(() => {
-      const idx = store._hIdx
-      const clampedIdx = clampIdx(idx)(store.tasks)
-      return xGet(store)(['tasks', clampedIdx, 'id'])
+    hovered: xComputedFn(() => {
+      return findIdByClampedModelIdx(store._hIdx, 'tasks', store)
     }),
   }
 
   extendObservable(store, {
-    isTaskHovered: task => expr(() => taskId.isHovered() === task.id),
-    isTaskSelected: task => expr(() => taskId.isSelected() === task.id),
+    isTaskHovered: task => expr(() => taskId.hovered() === task.id),
+    isTaskSelected: task => expr(() => taskId.selected() === task.id),
     deleteAll: () => store.tasks.clear(),
     toggleSelectedTaskDone: () =>
-      xTogglePropById('done', taskId.isSelected(), store.tasks),
-    deleteSelectedTask: () => xRemoveById(taskId.isSelected())(store.tasks),
+      xTogglePropById('done', taskId.selected(), store.tasks),
+    deleteSelectedTask: () => xRemoveById(taskId.selected())(store.tasks),
     selectTask: ({ id }) => taskId.setSelected(id),
     mouseEnterTask: ({ id }) => taskId.setHovered(id),
     mouseLeaveTask: ({ id }) => taskId.unSetHovered(id),
