@@ -22,6 +22,8 @@ export const store = (() => {
   const setHIdx = sSet('_hIdx')
 
   const taskId = {
+    setSelected: id => setSIdx(findIndexById(id)(store.tasks)),
+    setHovered: id => setHIdx(findIndexById(id)(store.tasks)),
     selected: xComputedFn(() => {
       const idx = store._sIdx
       const clampedIdx = clampIdx(idx)(store.tasks)
