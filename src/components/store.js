@@ -80,7 +80,6 @@ export const store = (() => {
     { name: 'store' },
   )
 
-  console.log('getFlattenedTasks', store.flattenedTasks)
   return {
     getTodoTasks: () => expr(() => reject(prop('done'))(store._tasks)),
     getDoneTasks: () => expr(() => filter(prop('done'))(store._tasks)),
