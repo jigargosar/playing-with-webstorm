@@ -16,3 +16,10 @@ export const propS = validateIO('SO', 'S')((p, obj) => pathS([p], obj))
 export const propSOr = validateIO('SSO', 'S')((def, p, obj) =>
   pathSOr(def, [p], obj),
 )
+
+export const pathA = validateIO('AO', 'A')(path)
+export const pathAOr = validateIO('SAO', 'A|Z')(pathOr)
+export const propA = validateIO('SO', 'A')((p, obj) => pathA([p], obj))
+export const propAOr = validateIO('SSO', 'A')((def, p, obj) =>
+  pathAOr(def, [p], obj),
+)
