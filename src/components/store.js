@@ -68,12 +68,12 @@ export const store = (() => {
     isTaskHovered: task =>
       expr(() => pathSOr('')(['hoveredTaskId'])(taskId) === task.id),
     isTaskSelected: task =>
-      expr(() => pathS(['selectedTaskId'])(taskId) === task.id),
+      expr(() => propS('selectedTaskId')(taskId) === task.id),
     deleteAll: () => store.tasks.clear(),
     toggleSelectedTaskDone: () =>
-      xTogglePropById('done', pathS(['selectedTaskId'])(taskId), store.tasks),
+      xTogglePropById('done', propS('selectedTaskId')(taskId), store.tasks),
     deleteSelectedTask: () =>
-      xRemoveById(pathS(['selectedTaskId'])(taskId))(store.tasks),
+      xRemoveById(propS('selectedTaskId')(taskId))(store.tasks),
     selectTask: ({ id }) => taskId.setSelectedTaskId(id),
     mouseEnterTask: ({ id }) => taskId.setHoveredTaskWithId(id),
     mouseLeaveTask: ({ id }) => taskId.unSetHoveredTaskWithId(id),
