@@ -54,7 +54,7 @@ const TaskActions = composeHOC()(function TaskActions() {
 })
 
 const Task = composeHOC()(function Task({ task }) {
-  const selected = expr(() => store.isTaskSelected(task))
+  const selected = store.isTaskSelected(task)
   const hovered = store.isTaskHovered(task)
   return (
     <FlexCenter
