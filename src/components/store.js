@@ -47,10 +47,10 @@ export const store = (() => {
   }
 
   extendObservable(store, {
-    isTaskHovered: task =>
-      expr(() => propSOr('')('hoveredTaskId')(taskId) === task.id),
-    isTaskSelected: task =>
-      expr(() => propS('selectedTaskId')(taskId) === task.id),
+    isTaskHovered: ({ id }) =>
+      expr(() => propSOr('')('hoveredTaskId')(taskId) === id),
+    isTaskSelected: ({ id }) =>
+      expr(() => propS('selectedTaskId')(taskId) === id),
     deleteAll: () => store.tasks.clear(),
     toggleSelectedTaskDone: () =>
       xTogglePropById('done', propS('selectedTaskId')(taskId), store.tasks),
