@@ -2,7 +2,7 @@ import { createNewTaskWithDefaults } from '../models/Task'
 import { times } from 'ramda'
 import { findIndexById } from '../lib/ramda-ext'
 import { computedFn, xRemoveById, xSet, xTogglePropById } from './xUtils'
-import { extendObservable, observable } from 'mobx'
+import { observable } from 'mobx'
 import { expr } from 'mobx-utils'
 import { findIdByClampedIdx, propA, propS, propSOr } from '../lib/ramda-strict'
 
@@ -42,7 +42,7 @@ export const store = (() => {
     { name: 'store' },
   )
 
-  extendObservable(store, {
+  return {
     isTaskHovered: ({ id }) =>
       expr(() => propSOr('')('hoveredTaskId')(store) === id),
     isTaskSelected: ({ id }) =>
@@ -55,6 +55,5 @@ export const store = (() => {
     selectTask: ({ id }) => store.setSelectedTaskId(id),
     mouseEnterTask: ({ id }) => store.setHoveredTaskWithId(id),
     mouseLeaveTask: ({ id }) => store.unSetHoveredTaskWithId(id),
-  })
-  return store
+  }
 })()
