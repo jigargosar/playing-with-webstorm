@@ -91,7 +91,9 @@ const MainContent = composeHOC()(function MainContent() {
         <Tabs.Tab tab={'todo'}>TODO</Tabs.Tab>
         <Tabs.Tab tab={'done'}>DONE</Tabs.Tab>
       </Tabs>
-      <Tabs.Panel tab={'todo'}>TOOOOOOO</Tabs.Panel>
+      <Tabs.Panel tab={'todo'} isCurrent={() => true}>
+        TOOOOOOO
+      </Tabs.Panel>
       <Tabs.Panel tab={'done'}>DOOOOOOOO</Tabs.Panel>
 
       <div className="center measure mv3">
