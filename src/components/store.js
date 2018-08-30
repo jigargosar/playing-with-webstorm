@@ -22,33 +22,34 @@ export const store = (() => {
   )
 
   const taskId = {
-    setSelected: id =>
+    setSelectedTaskId: id =>
       xSet(store)('_selectedTaskIdx')(findIndexById(id)(store.tasks)),
-    setHovered: id =>
+    setHoveredTaskWithId: id =>
       xSet(store)('_hoveredTaskIdx')(findIndexById(id)(store.tasks)),
-    unSetHovered: id => {
-      if (id === taskId.getHoveredId()) {
+    unSetHoveredTaskWithId: id => {
+      if (id === taskId.getHoveredTaskId()) {
         xSet(store)('_hoveredTaskIdx')(NaN)
       }
     },
-    getSelectedId: computedFn(() => {
+    getSelectedTaskId: computedFn(() => {
       return findIdByClampedModelIdx(store._selectedTaskIdx, 'tasks', store)
     }),
-    getHoveredId: computedFn(() => {
+    getHoveredTaskId: computedFn(() => {
       return findIdByClampedModelIdx(store._hoveredTaskIdx, 'tasks', store)
     }),
   }
 
   extendObservable(store, {
-    isTaskHovered: task => expr(() => taskId.getHoveredId() === task.id),
-    isTaskSelected: task => expr(() => taskId.getSelectedId() === task.id),
+    isTaskHovered: task => expr(() => taskId.getHoveredTaskId() === task.id),
+    isTaskSelected: task => expr(() => taskId.getSelectedTaskId() === task.id),
     deleteAll: () => store.tasks.clear(),
     toggleSelectedTaskDone: () =>
-      xTogglePropById('done', taskId.getSelectedId(), store.tasks),
-    deleteSelectedTask: () => xRemoveById(taskId.getSelectedId())(store.tasks),
-    selectTask: ({ id }) => taskId.setSelected(id),
-    mouseEnterTask: ({ id }) => taskId.setHovered(id),
-    mouseLeaveTask: ({ id }) => taskId.unSetHovered(id),
+      xTogglePropById('done', taskId.getSelectedTaskId(), store.tasks),
+    deleteSelectedTask: () =>
+      xRemoveById(taskId.getSelectedTaskId())(store.tasks),
+    selectTask: ({ id }) => taskId.setSelectedTaskId(id),
+    mouseEnterTask: ({ id }) => taskId.setHoveredTaskWithId(id),
+    mouseLeaveTask: ({ id }) => taskId.unSetHoveredTaskWithId(id),
   })
   return store
 })()
