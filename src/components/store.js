@@ -32,12 +32,7 @@ export const store = (() => {
           sortBy(group => indexOf(group.title, ['Todo', 'Done'])),
           values,
           mapObjIndexed((tasks, title) => ({ title, tasks })),
-          groupBy(
-            compose(
-              b => (b ? 'Done' : 'Todo'),
-              prop('done'),
-            ),
-          ),
+          groupBy(task => (task.done ? 'Done' : 'Todo')),
         )(store._tasks)
       },
       get flattenedTasks() {
