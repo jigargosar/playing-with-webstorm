@@ -14,9 +14,18 @@ function findIdByClampedModelIdx(idx, collectionName, store) {
 export const store = (() => {
   const store = observable.object(
     {
-      tasks: times(createNewTaskWithDefaults)(16),
+      _tasks: times(createNewTaskWithDefaults)(16),
       _selectedTaskIdx: 0,
       _hoveredTaskIdx: NaN,
+      get selectedTaskId() {
+        return store.getSelectedTaskId()
+      },
+      get hoveredTaskId() {
+        return store.getHoveredTaskId()
+      },
+      get tasks() {
+        return store._tasks
+      },
       setSelectedTaskId: id =>
         xSet(store)('_selectedTaskIdx')(findIndexById(id)(store.tasks)),
       setHoveredTaskWithId: id =>
@@ -32,12 +41,6 @@ export const store = (() => {
       getHoveredTaskId: computedFn(() => {
         return findIdByClampedModelIdx(store._hoveredTaskIdx, 'tasks', store)
       }),
-      get selectedTaskId() {
-        return store.getSelectedTaskId()
-      },
-      get hoveredTaskId() {
-        return store.getHoveredTaskId()
-      },
     },
     {},
     { name: 'store' },
