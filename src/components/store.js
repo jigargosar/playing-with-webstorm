@@ -39,7 +39,9 @@ export const store = (() => {
       },
       isTaskAtSelectedIdx: ({ id }) => {
         return expr(
-          () => store._selectedTaskIdx === findIndexById(id)(store._tasks),
+          () =>
+            store._selectedTaskIdx ===
+            findIndexById(id)(store.getFlattenedTasks()),
         )
       },
       setSelectedTaskId: id =>
