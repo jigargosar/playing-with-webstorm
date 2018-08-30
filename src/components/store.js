@@ -49,10 +49,9 @@ export const store = (() => {
     toggleSelectedTaskDone: () =>
       xTogglePropById('done', taskId.selected(), store.tasks),
     deleteSelectedTask: () => xRemoveById(taskId.selected())(store.tasks),
-    handleSelectTask: id => () => taskId.setSelected(id),
     selectTask: ({ id }) => taskId.setSelected(id),
-    handleMouseOverTask: id => () => store.setHId(id),
-    handleMouseLeaveTask: id => () => store.unSetHId(id),
+    mouseEnterTask: ({ id }) => store.setHId(id),
+    mouseLeaveTask: ({ id }) => store.unSetHId(id),
   })
   return store
 })()

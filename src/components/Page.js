@@ -67,8 +67,8 @@ const Task = composeHOC()(function Task({ task }) {
         : hovered
           ? { backgroundColor: primaryLight }
           : {})}
-      onMouseEnter={store.handleMouseOverTask(task.id)}
-      onMouseLeave={store.handleMouseLeaveTask(task.id)}
+      onMouseEnter={linkEvent(store.mouseEnterTask, task)}
+      onMouseLeave={linkEvent(store.mouseLeaveTask, task)}
       onClickCapture={linkEvent(store.selectTask, task)}
     >
       {hovered && <TaskActions />}
