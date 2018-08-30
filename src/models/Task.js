@@ -15,13 +15,3 @@ export function createTask({
 export function createNewTaskWithDefaults() {
   return createTask()
 }
-
-export function getTitle({ title }) {
-  validate('S', [title])
-  return title
-}
-
-export function isDone({ done }) {
-  validate('B', [done])
-  return done
-}
