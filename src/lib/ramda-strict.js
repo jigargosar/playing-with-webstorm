@@ -14,17 +14,17 @@ export const defaultToS = curry((def, val) => {
   return defaultTo(def, val)
 })
 
-export const pathS = curry((paths, obj) => {
-  validate('AO', [paths, obj])
-  const result = path(paths, obj)
-  validate('S', [result])
-  return result
-})
-export const pathSOr = curry((def, paths, obj) => {
-  validate('SAO', [def, paths, obj])
-  const result = path(paths, obj)
-  validate('S|Z', [result])
-  return defaultTo(def)(result)
-})
+export const pathS = curry(
+  tapValidateArgs('AO')((paths, obj) => {
+    const result = path(paths, obj)
+    validate('S', [result])
+    return result
+  }),
+)
+export const pathSOr = curry(
+  tapValidateArgs('SAO')((def, paths, obj) => {
+    return defaultToS(def)(path(paths, obj))
+  }),
+)
 export const propS = curry((p, obj) => pathS([p], obj))
 export const propSOr = curry((def, p, obj) => pathSOr(def, [p], obj))
