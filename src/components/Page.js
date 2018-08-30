@@ -61,7 +61,6 @@ const TaskContainer = composeHOC()(function TaskContainer({
   const selected = expr(() => store.isTaskSelected(task))
   return (
     <FlexCenter
-      itemsCenter
       relative
       color={selected ? primaryColor : null}
       {...otherProps}
