@@ -49,6 +49,12 @@ export const store = (() => {
         console.log('taskGroups', taskGroups)
         return taskGroups
       },
+      get flattenedTasks() {
+        return compose(
+          flatten,
+          pluck('tasks'),
+        )(store.taskGroups)
+      },
       get selectedTaskId() {
         return findIdByClampedIdx(store._selectedTaskIdx, store.flattenedTasks)
       },
@@ -80,12 +86,6 @@ export const store = (() => {
         if (id === store.hoveredTaskId) {
           xSet(store)('_hoveredTaskIdx')(NaN)
         }
-      },
-      get flattenedTasks() {
-        return compose(
-          flatten,
-          pluck('tasks'),
-        )(store.taskGroups)
       },
     },
     {},
