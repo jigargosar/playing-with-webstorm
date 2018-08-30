@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { ScrollContainer, ViewportHeightContainer } from './containers'
 import * as PropTypes from 'prop-types'
 import { cn } from '../lib/react-ext'
@@ -80,22 +80,30 @@ Task.propTypes = {
   task: PropTypes.shape({ id: PropTypes.string.isRequired }).isRequired,
 }
 
-const TaskItems = composeHOC()(function TaskItems() {
-  return (
-    <Models models={store.getAllTasks()}>{task => <Task task={task} />}</Models>
-  )
+const TaskItems = composeHOC()(function TaskItems({ tasks }) {
+  return <Models models={tasks}>{task => <Task task={task} />}</Models>
 })
 
 const MainContent = composeHOC()(function MainContent() {
   return (
-    <div className="center measure-wide mv3">
-      <div className="pa3 br3 bg-white shadow-1 ">
-        <Flex marginBottom={'1rem'} as={[Heading, 'h3']}>
-          Tasks
-        </Flex>
-        <TaskItems />
+    <Fragment>
+      <div className="center measure-wide mv3">
+        <div className="pa3 br3 bg-white shadow-1 ">
+          <Flex marginBottom={'1rem'} as={[Heading, 'h3']}>
+            Todo
+          </Flex>
+          <TaskItems tasks={store.getTodoTasks()} />
+        </div>
       </div>
-    </div>
+      <div className="center measure-wide mv3">
+        <div className="pa3 br3 bg-white shadow-1 ">
+          <Flex marginBottom={'1rem'} as={[Heading, 'h3']}>
+            Done
+          </Flex>
+          <TaskItems tasks={store.getDoneTasks()} />
+        </div>
+      </div>
+    </Fragment>
   )
 })
 
