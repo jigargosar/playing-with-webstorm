@@ -14,6 +14,7 @@ import {
   secondaryDark,
 } from '../reakit-components'
 import { Flex, Heading, Shadow } from 'reakit'
+import { tap } from 'ramda'
 
 const FloatingActionsContainer = composeHOC()(
   function FloatingActionsContainer({ children }) {
@@ -52,6 +53,8 @@ const TaskActions = composeHOC()(function TaskActions() {
   )
 })
 
+const linkEvent = (fn, ...args) => tap(e => fn(...args, e))
+
 const Task = composeHOC()(function Task({ task }) {
   const selected = store.isTaskSelected(task)
   const hovered = store.isTaskHovered(task)
@@ -66,7 +69,7 @@ const Task = composeHOC()(function Task({ task }) {
           : {})}
       onMouseEnter={store.handleMouseOverTask(task.id)}
       onMouseLeave={store.handleMouseLeaveTask(task.id)}
-      onClickCapture={store.handleSelectTask(task.id)}
+      onClickCapture={linkEvent(store.selectTask, task)}
     >
       {hovered && <TaskActions />}
       <TaskContent task={task} />
