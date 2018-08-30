@@ -13,7 +13,7 @@ import {
   primaryLight,
   secondaryDark,
 } from '../reakit-components'
-import { Flex, Heading, Shadow } from 'reakit'
+import { Flex, Heading, Shadow, Tabs } from 'reakit'
 import { tap } from 'ramda'
 
 const FloatingActionsContainer = composeHOC()(
@@ -87,6 +87,13 @@ const TaskItems = composeHOC()(function TaskItems({ tasks }) {
 const MainContent = composeHOC()(function MainContent() {
   return (
     <Fragment>
+      <Tabs>
+        <Tabs.Tab tab={'todo'}>TODO</Tabs.Tab>
+        <Tabs.Tab tab={'done'}>DONE</Tabs.Tab>
+      </Tabs>
+      <Tabs.Panel tab={'todo'}>TOOOOOOO</Tabs.Panel>
+      <Tabs.Panel tab={'done'}>DOOOOOOOO</Tabs.Panel>
+
       <div className="center measure mv3">
         <div className="pa3 br3 bg-white shadow-1 ">
           <Flex marginBottom={'1rem'} as={[Heading, 'h3']}>
