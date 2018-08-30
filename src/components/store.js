@@ -7,6 +7,7 @@ import {
   prop,
   reject,
   times,
+  values,
 } from 'ramda'
 import { findIndexById } from '../lib/ramda-ext'
 import { xRemoveById, xSet, xTogglePropById } from './xUtils'
@@ -47,6 +48,7 @@ export const store = (() => {
       },
       getTaskGroups: () => {
         const taskGroups = compose(
+          values,
           mapObjIndexed((tasks, title) => ({ title, tasks })),
           groupBy(
             compose(

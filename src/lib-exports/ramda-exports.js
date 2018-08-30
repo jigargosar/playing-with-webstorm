@@ -8,4 +8,6 @@ export {
   equals,
   pathOr,
   curryN,
+  values,
+  valuesIn,
 } from 'ramda'
