@@ -15,6 +15,7 @@ import {
 } from '../reakit-components'
 import { Flex, Heading, Shadow, Tabs } from 'reakit'
 import { tap } from 'ramda'
+import { Observer } from 'mobx-react'
 
 const FloatingActionsContainer = composeHOC()(
   function FloatingActionsContainer({ children }) {
@@ -87,38 +88,42 @@ const TaskItems = composeHOC()(function TaskItems({ tasks }) {
 const MainContent = composeHOC()(function MainContent() {
   return (
     <Fragment>
-      <Tabs.Container initialState={{ current: 0 }}>
+      <Tabs.Container initialState={{ current: 1 }}>
         {tabProps => (
-          <Fragment>
-            <Tabs>
-              <Tabs.Tab tab={'todo'} {...tabProps}>
-                TODO
-              </Tabs.Tab>
-              <Tabs.Tab tab={'done'} {...tabProps}>
-                DONE
-              </Tabs.Tab>
-            </Tabs>
-            <Tabs.Panel tab={'todo'} {...tabProps}>
-              <div className="center measure mv3">
-                <div className="pa3 br3 bg-white shadow-1 ">
-                  <Flex marginBottom={'1rem'} as={[Heading, 'h3']}>
-                    Todo
-                  </Flex>
-                  <TaskItems tasks={store.getTodoTasks()} />
-                </div>
-              </div>
-            </Tabs.Panel>
-            <Tabs.Panel tab={'done'} {...tabProps}>
-              <div className="center measure mv3">
-                <div className="pa3 br3 bg-white shadow-1 ">
-                  <Flex marginBottom={'1rem'} as={[Heading, 'h3']}>
-                    Done
-                  </Flex>
-                  <TaskItems tasks={store.getDoneTasks()} />
-                </div>
-              </div>
-            </Tabs.Panel>
-          </Fragment>
+          <Observer>
+            {() => (
+              <Fragment>
+                <Tabs>
+                  <Tabs.Tab tab={'todo'} {...tabProps}>
+                    TODO
+                  </Tabs.Tab>
+                  <Tabs.Tab tab={'done'} {...tabProps}>
+                    DONE
+                  </Tabs.Tab>
+                </Tabs>
+                <Tabs.Panel tab={'todo'} {...tabProps}>
+                  <div className="center measure mv3">
+                    <div className="pa3 br3 bg-white shadow-1 ">
+                      <Flex marginBottom={'1rem'} as={[Heading, 'h3']}>
+                        Todo
+                      </Flex>
+                      <TaskItems tasks={store.getTodoTasks()} />
+                    </div>
+                  </div>
+                </Tabs.Panel>
+                <Tabs.Panel tab={'done'} {...tabProps}>
+                  <div className="center measure mv3">
+                    <div className="pa3 br3 bg-white shadow-1 ">
+                      <Flex marginBottom={'1rem'} as={[Heading, 'h3']}>
+                        Done
+                      </Flex>
+                      <TaskItems tasks={store.getDoneTasks()} />
+                    </div>
+                  </div>
+                </Tabs.Panel>
+              </Fragment>
+            )}
+          </Observer>
         )}
       </Tabs.Container>
     </Fragment>
