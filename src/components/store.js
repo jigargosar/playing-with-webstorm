@@ -62,13 +62,13 @@ export const store = (() => {
       isTaskAtSelectedIdx: ({ id }) => {
         return expr(
           () =>
-            store._selectedTaskIdx === findIndexById(id)(store.flattenedTasks),
+            store.selectedTaskIdx === findIndexById(id)(store.flattenedTasks),
         )
       },
       isTaskAtHoveredIdx: ({ id }) => {
         return expr(
           () =>
-            store._hoveredTaskIdx === findIndexById(id)(store.flattenedTasks),
+            store.hoveredTaskIdx === findIndexById(id)(store.flattenedTasks),
         )
       },
       setSelectedTaskId: id =>
