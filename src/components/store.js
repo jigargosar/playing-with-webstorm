@@ -37,6 +37,9 @@ export const store = (() => {
         xSet(store)('_hoveredTaskIdx')(NaN)
       }
     },
+    get selectedTaskId() {
+      return taskId.getSelectedTaskId
+    },
     getSelectedTaskId: computedFn(() => {
       return findIdByClampedModelIdx(store._selectedTaskIdx, 'tasks', store)
     }),
@@ -50,7 +53,7 @@ export const store = (() => {
     isTaskSelected: task => expr(() => taskId.getSelectedTaskId() === task.id),
     deleteAll: () => store.tasks.clear(),
     toggleSelectedTaskDone: () =>
-      xTogglePropById('done', taskId.getSelectedTaskId(), store.tasks),
+      xTogglePropById('done', pathS(['selectedTaskId'])(taskId), store.tasks),
     deleteSelectedTask: () =>
       xRemoveById(taskId.getSelectedTaskId())(store.tasks),
     selectTask: ({ id }) => taskId.setSelectedTaskId(id),
