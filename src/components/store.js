@@ -24,6 +24,11 @@ export const store = (() => {
   const taskId = {
     setSelected: id => setSIdx(findIndexById(id)(store.tasks)),
     setHovered: id => setHIdx(findIndexById(id)(store.tasks)),
+    unSetHovered: id => {
+      if (id === taskId.hovered()) {
+        setHIdx(NaN)
+      }
+    },
     selected: xComputedFn(() => {
       const idx = store._sIdx
       const clampedIdx = clampIdx(idx)(store.tasks)
@@ -39,19 +44,13 @@ export const store = (() => {
   extendObservable(store, {
     isTaskHovered: task => expr(() => taskId.hovered() === task.id),
     isTaskSelected: task => expr(() => taskId.selected() === task.id),
-    setHId: id => setHIdx(findIndexById(id)(store.tasks)),
-    unSetHId: id => {
-      if (id === taskId.hovered()) {
-        setHIdx(NaN)
-      }
-    },
     deleteAll: () => store.tasks.clear(),
     toggleSelectedTaskDone: () =>
       xTogglePropById('done', taskId.selected(), store.tasks),
     deleteSelectedTask: () => xRemoveById(taskId.selected())(store.tasks),
     selectTask: ({ id }) => taskId.setSelected(id),
-    mouseEnterTask: ({ id }) => store.setHId(id),
-    mouseLeaveTask: ({ id }) => store.unSetHId(id),
+    mouseEnterTask: ({ id }) => taskId.setHovered(id),
+    mouseLeaveTask: ({ id }) => store.unSetHovered(id),
   })
   return store
 })()
