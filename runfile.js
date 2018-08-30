@@ -12,10 +12,11 @@ export function installCommonPackages() {
 }
 export const i = installCommonPackages
 
-export const dev = () => {
+export const start = () => {
   run(
     `nodemon -w package.json -w config-overrides.js -x react-app-rewired start`,
   )
 }
 
-export const start = dev
+export const dev = start
+export const s = start
