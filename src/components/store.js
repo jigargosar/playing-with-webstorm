@@ -41,7 +41,7 @@ export const store = (() => {
         const taskGroups = compose(
           groupBy(
             compose(
-              b => (b ? 'Done' : 'Pending'),
+              b => (b ? 'Done' : 'Todo'),
               prop('done'),
             ),
           ),
