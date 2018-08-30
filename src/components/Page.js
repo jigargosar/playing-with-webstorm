@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { ScrollContainer, ViewportHeightContainer } from './containers'
 import * as PropTypes from 'prop-types'
 import { cn } from '../lib/react-ext'
@@ -88,14 +88,16 @@ const TaskItems = composeHOC()(function TaskItems() {
 
 const MainContent = composeHOC()(function MainContent() {
   return (
-    <div className="center measure-wide mv3">
-      <div className="pa3 br3 bg-white shadow-1 ">
-        <Flex marginBottom={'1rem'} as={[Heading, 'h3']}>
-          Tasks
-        </Flex>
-        <TaskItems />
+    <Fragment>
+      <div className="center measure-wide mv3">
+        <div className="pa3 br3 bg-white shadow-1 ">
+          <Flex marginBottom={'1rem'} as={[Heading, 'h3']}>
+            Tasks
+          </Flex>
+          <TaskItems />
+        </div>
       </div>
-    </div>
+    </Fragment>
   )
 })
 
