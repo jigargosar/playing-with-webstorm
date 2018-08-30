@@ -44,7 +44,6 @@ export const store = (() => {
       return sGet('hTask.id')
     },
     isTaskHovered: task => expr(() => store.hId === task.id),
-
     setSId: compose(
       setSIdx,
       taskIndexById,
