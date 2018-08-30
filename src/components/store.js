@@ -1,6 +1,5 @@
 import { createNewTaskWithDefaults } from '../models/Task'
 import {
-  __,
   compose,
   filter,
   flatten,
@@ -29,14 +28,8 @@ export const store = (() => {
       _selectedTaskIdx: 0,
       _hoveredTaskIdx: NaN,
       get taskGroups() {
-        const titleOrder = ['Todo', 'Done']
         const taskGroups = compose(
-          sortBy(
-            compose(
-              indexOf(__, titleOrder),
-              prop('title'),
-            ),
-          ),
+          sortBy(group => indexOf(group.title, ['Todo', 'Done'])),
           values,
           mapObjIndexed((tasks, title) => ({ title, tasks })),
           groupBy(
