@@ -100,6 +100,10 @@ const MainContent = composeHOC()(function MainContent() {
               console.log('show', ...args)
               return _tabProps.show(...args)
             },
+            hide: (...args) => {
+              console.log('hide', ...args)
+              return _tabProps.hide(...args)
+            },
           }
           console.log(tabProps.getCurrentId())
           return (
