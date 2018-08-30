@@ -55,15 +55,16 @@ const TaskActions = composeHOC()(function TaskActions() {
 
 const TaskContainer = composeHOC()(function TaskContainer({
   task,
-  selected,
   ...otherProps
 }) {
+  const selected = expr(() => store.isTaskSelected(task))
   return (
     <div
-      className={cn('mv2 flex items-center relative', {
-        [primaryColor]: expr(() => store.isTaskSelected(task)),
-      })}
+      className={cn('mv2 flex items-center relative')}
       {...otherProps}
+      style={{
+        ...(selected ? { color: primaryColor } : {}),
+      }}
     />
   )
 })
