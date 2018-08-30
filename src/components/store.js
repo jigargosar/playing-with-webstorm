@@ -27,31 +27,27 @@ export const store = (() => {
       const clampedIdx = clampIdx(idx)(store.tasks)
       return sGet(['tasks', clampedIdx, 'id'])
     }),
-    hovered: 1,
+    hovered: xComputedFn(() => {
+      const idx = store._hIdx
+      const clampedIdx = clampIdx(idx)(store.tasks)
+      return sGet(['tasks', clampedIdx, 'id'])
+    }),
   }
 
   extendObservable(store, {
-    get sId() {
-      const idx = clampIdx(store._sIdx)(store.tasks)
-      return sGet(['tasks', idx, 'id'])
-    },
-    get hId() {
-      const idx = clampIdx(store._hIdx)(store.tasks)
-      return sGet(['tasks', idx, 'id'])
-    },
-    isTaskHovered: task => expr(() => store.hId === task.id),
-    isTaskSelected: task => expr(() => store.sId === task.id),
+    isTaskHovered: task => expr(() => taskId.hovered === task.id),
+    isTaskSelected: task => expr(() => taskId.selected === task.id),
     setSId: id => setSIdx(findIndexById(id)(store.tasks)),
     setHId: id => setHIdx(findIndexById(id)(store.tasks)),
     unSetHId: id => {
-      if (id === store.hId) {
+      if (id === taskId.hovered) {
         setHIdx(NaN)
       }
     },
     deleteAll: () => store.tasks.clear(),
     toggleSelectedTaskDone: () =>
-      xTogglePropById('done', store.sId, store.tasks),
-    deleteSelectedTask: () => xRemoveById(store.sId)(store.tasks),
+      xTogglePropById('done', taskId.selected, store.tasks),
+    deleteSelectedTask: () => xRemoveById(taskId.selected)(store.tasks),
   })
   return store
 })()
