@@ -4,7 +4,7 @@ import { findIndexById } from '../lib/ramda-ext'
 import { computedFn, xRemoveById, xSet, xTogglePropById } from './xUtils'
 import { observable } from 'mobx'
 import { expr } from 'mobx-utils'
-import { findIdByClampedIdx, propA, propS, propSOr } from '../lib/ramda-strict'
+import { findIdByClampedIdx, propS, propSOr } from '../lib/ramda-strict'
 
 export const store = (() => {
   const store = observable.object(
@@ -19,13 +19,9 @@ export const store = (() => {
         return store.getHoveredTaskId()
       },
       setSelectedTaskId: id =>
-        xSet(store)('_selectedTaskIdx')(
-          findIndexById(id)(propA('tasks')(store)),
-        ),
+        xSet(store)('_selectedTaskIdx')(findIndexById(id)(store._tasks)),
       setHoveredTaskWithId: id =>
-        xSet(store)('_hoveredTaskIdx')(
-          findIndexById(id)(propA('tasks')(store)),
-        ),
+        xSet(store)('_hoveredTaskIdx')(findIndexById(id)(store._tasks)),
       unSetHoveredTaskWithId: id => {
         if (id === store.getHoveredTaskId()) {
           xSet(store)('_hoveredTaskIdx')(NaN)
@@ -35,7 +31,7 @@ export const store = (() => {
         if (Number.isNaN(store._hoveredTaskIdx)) {
           return null
         }
-        return findIdByClampedIdx(store._hoveredTaskIdx, propA('tasks')(store))
+        return findIdByClampedIdx(store._hoveredTaskIdx, store._tasks)
       }),
     },
     {},
