@@ -1,5 +1,5 @@
 import { createNewTaskWithDefaults } from '../models/Task'
-import { times } from 'ramda'
+import { filter, prop, reject, times } from 'ramda'
 import { findIndexById } from '../lib/ramda-ext'
 import { computedFn, xRemoveById, xSet, xTogglePropById } from './xUtils'
 import { observable } from 'mobx'
@@ -41,7 +41,9 @@ export const store = (() => {
   )
 
   return {
-    getTasks: () => store._tasks,
+    getAllTasks: () => store._tasks,
+    getTodoTasks: () => reject(prop('done'))(store._tasks),
+    getDoneTasks: () => filter(prop('done'))(store._tasks),
     isTaskHovered: ({ id }) =>
       expr(() => propSOr('')('hoveredTaskId')(store) === id),
     isTaskSelected: ({ id }) =>

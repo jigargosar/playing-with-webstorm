@@ -82,7 +82,7 @@ Task.propTypes = {
 
 const TaskItems = composeHOC()(function TaskItems() {
   return (
-    <Models models={store.getTasks()}>{task => <Task task={task} />}</Models>
+    <Models models={store.getAllTasks()}>{task => <Task task={task} />}</Models>
   )
 })
 
