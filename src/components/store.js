@@ -13,7 +13,9 @@ function findIdByClampedModelIdx(idx, collectionName, store) {
 
 export const pathS = curry((paths, obj) => {
   validate('AO', [paths, obj])
-  return path(paths, obj)
+  const result = path(paths, obj)
+  validate('S', [result])
+  return result
 })
 
 export const store = (() => {
