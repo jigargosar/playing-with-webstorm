@@ -4,7 +4,7 @@ import { clampIdx, findIndexById } from '../lib/ramda-ext'
 import { computedFn, xGet, xRemoveById, xSet, xTogglePropById } from './xUtils'
 import { extendObservable, observable } from 'mobx'
 import { expr } from 'mobx-utils'
-import { pathSOr, propS } from '../lib/ramda-strict'
+import { propS, propSOr } from '../lib/ramda-strict'
 
 function findIdByClampedModelIdx(idx, collectionName, store) {
   const clampedIdx = clampIdx(idx)(store[collectionName])
@@ -48,7 +48,7 @@ export const store = (() => {
 
   extendObservable(store, {
     isTaskHovered: task =>
-      expr(() => pathSOr('')(['hoveredTaskId'])(taskId) === task.id),
+      expr(() => propSOr('')('hoveredTaskId')(taskId) === task.id),
     isTaskSelected: task =>
       expr(() => propS('selectedTaskId')(taskId) === task.id),
     deleteAll: () => store.tasks.clear(),
