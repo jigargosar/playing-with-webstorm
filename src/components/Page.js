@@ -19,7 +19,7 @@ import {
   highlightColor,
   primaryColor,
 } from '../reakit-components'
-import { Flex } from 'reakit'
+import { Flex, Heading } from 'reakit'
 
 const FloatingActionsContainer = composeHOC()(
   function FloatingActionsContainer({ children }) {
@@ -89,7 +89,9 @@ const MainContent = composeHOC()(function MainContent() {
   return (
     <div className="center measure-wide mv3">
       <div className="pa3 br3 bg-white shadow-1 ">
-        <Flex marginBottom={'1rem'}>Tasks</Flex>
+        <Flex marginBottom={'1rem'} as={[Heading, 'h3']}>
+          Tasks
+        </Flex>
         <TaskItems />
       </div>
     </div>
