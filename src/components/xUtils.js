@@ -21,5 +21,4 @@ export const xRemoveById = curry((id, list) =>
 )
 export const xSet = curryN(3, dset)
 export const xGet = curryN(2, dget)
-export const xGetOr = curryN(3, dget)
 export const computedFn = fn => () => computed(fn).get()
