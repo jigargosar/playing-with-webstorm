@@ -29,12 +29,9 @@ export const store = (() => {
     get sId() {
       return sGet('sTask.id')
     },
-    get hTask() {
-      const idx = clampIdx(store._hIdx)(store.tasks)
-      return sGet(['tasks', idx])
-    },
     get hId() {
-      return sGet('hTask.id')
+      const idx = clampIdx(store._hIdx)(store.tasks)
+      return sGet(['tasks', idx, 'id'])
     },
     isTaskHovered: task => expr(() => store.hId === task.id),
     isTaskSelected: task => expr(() => store.sId === task.id),
