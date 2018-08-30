@@ -13,7 +13,7 @@ import { Btn } from './Btn'
 import { expr } from 'mobx-utils'
 import { composeHOC } from './composeHOC'
 import { Button, FlexCenter, Group, secondaryDark } from '../reakit-components'
-import { Flex, Heading } from 'reakit'
+import { Flex, Heading, Shadow } from 'reakit'
 
 const FloatingActionsContainer = composeHOC()(
   function FloatingActionsContainer({ children }) {
@@ -94,7 +94,8 @@ const MainContent = composeHOC()(function MainContent() {
 export const Page = composeHOC()(function Page() {
   return (
     <ViewportHeightContainer className="bg-light-gray">
-      <div className="pa3 shadow-1">
+      <div className="pa3 relative">
+        <Shadow />
         <div>STATIC HEADER</div>
         <Group>
           <Button onClick={store.deleteAll}>Delete All</Button>
