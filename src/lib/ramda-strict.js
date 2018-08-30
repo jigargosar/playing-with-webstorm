@@ -7,4 +7,3 @@ const tapValidateArgs = spec => fn => (...args) => {
 }
 
 export const not = tapValidateArgs('B')(_not)
-export const vNot = not
