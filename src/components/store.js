@@ -1,7 +1,7 @@
 import { createNewTaskWithDefaults } from '../models/Task'
 import { times } from 'ramda'
 import { clampIdx, findIndexById } from '../lib/ramda-ext'
-import { xGet, xRemoveById, xSet, xTogglePropById } from './xUtils'
+import { xComputedFn, xGet, xRemoveById, xSet, xTogglePropById } from './xUtils'
 import { extendObservable, observable } from 'mobx'
 import { expr } from 'mobx-utils'
 
@@ -20,6 +20,15 @@ export const store = (() => {
 
   const setSIdx = sSet('_sIdx')
   const setHIdx = sSet('_hIdx')
+
+  const taskId = {
+    selected: xComputedFn(() => {
+      const idx = store._sIdx
+      const clampedIdx = clampIdx(idx)(store.tasks)
+      return sGet(['tasks', clampedIdx, 'id'])
+    }),
+    hovered: 1,
+  }
 
   extendObservable(store, {
     get sId() {
