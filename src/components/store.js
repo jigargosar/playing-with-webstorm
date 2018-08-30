@@ -28,6 +28,27 @@ export const store = (() => {
       _tasks: createSampleTasks(),
       _selectedTaskIdx: 0,
       _hoveredTaskIdx: NaN,
+      get taskGroups() {
+        const titleOrder = ['Todo', 'Done']
+        const taskGroups = compose(
+          sortBy(
+            compose(
+              indexOf(__, titleOrder),
+              prop('title'),
+            ),
+          ),
+          values,
+          mapObjIndexed((tasks, title) => ({ title, tasks })),
+          groupBy(
+            compose(
+              b => (b ? 'Done' : 'Todo'),
+              prop('done'),
+            ),
+          ),
+        )(store._tasks)
+        console.log('taskGroups', taskGroups)
+        return taskGroups
+      },
       get selectedTaskId() {
         return findIdByClampedIdx(
           store._selectedTaskIdx,
@@ -74,29 +95,7 @@ export const store = (() => {
         compose(
           flatten,
           pluck('tasks'),
-        )(store.getTaskGroups()),
-      get taskGroups() {
-        const titleOrder = ['Todo', 'Done']
-        const taskGroups = compose(
-          sortBy(
-            compose(
-              indexOf(__, titleOrder),
-              prop('title'),
-            ),
-          ),
-          values,
-          mapObjIndexed((tasks, title) => ({ title, tasks })),
-          groupBy(
-            compose(
-              b => (b ? 'Done' : 'Todo'),
-              prop('done'),
-            ),
-          ),
-        )(store._tasks)
-        console.log('taskGroups', taskGroups)
-        return taskGroups
-      },
-      getTaskGroups: () => store.taskGroups,
+        )(store.taskGroups),
     },
     {},
     { name: 'store' },
