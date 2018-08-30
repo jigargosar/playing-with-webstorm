@@ -96,6 +96,10 @@ const MainContent = composeHOC()(function MainContent() {
               console.log('update', ...args)
               return _tabProps.update(...args)
             },
+            show: (...args) => {
+              console.log('show', ...args)
+              return _tabProps.show(...args)
+            },
           }
           console.log(tabProps.getCurrentId())
           return (
