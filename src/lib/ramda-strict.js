@@ -1,5 +1,5 @@
 import { validate } from './validate'
-import { curry, curryN, path, pathOr } from 'ramda'
+import { curryN, path, pathOr } from 'ramda'
 
 const validateIO = (inputSpecs, outputSpecs = '*') => fn => {
   return curryN(fn.length)((...args) => {
@@ -10,7 +10,7 @@ const validateIO = (inputSpecs, outputSpecs = '*') => fn => {
   })
 }
 
-export const pathS = curry(validateIO('AO', 'S')(path))
-export const pathSOr = curry(validateIO('SAO', 'S|Z')(pathOr))
-export const propS = curry((p, obj) => pathS([p], obj))
-export const propSOr = curry((def, p, obj) => pathSOr(def, [p], obj))
+export const pathS = validateIO('AO', 'S')(path)
+export const pathSOr = validateIO('SAO', 'S|Z')(pathOr)
+export const propS = (p, obj) => pathS([p], obj)
+export const propSOr = (def, p, obj) => pathSOr(def, [p], obj)
