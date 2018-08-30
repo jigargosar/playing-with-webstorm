@@ -1,5 +1,5 @@
 import { createNewTaskWithDefaults } from '../models/Task'
-import { curry, times } from 'ramda'
+import { curry, path, times } from 'ramda'
 import { clampIdx, findIndexById } from '../lib/ramda-ext'
 import { computedFn, xGet, xRemoveById, xSet, xTogglePropById } from './xUtils'
 import { extendObservable, observable } from 'mobx'
