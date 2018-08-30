@@ -37,15 +37,18 @@ export const store = (() => {
         xSet(store)('_hoveredTaskIdx')(NaN)
       }
     },
-    get selectedTaskId() {
-      return taskId.getSelectedTaskId
-    },
     getSelectedTaskId: computedFn(() => {
       return findIdByClampedModelIdx(store._selectedTaskIdx, 'tasks', store)
     }),
     getHoveredTaskId: computedFn(() => {
       return findIdByClampedModelIdx(store._hoveredTaskIdx, 'tasks', store)
     }),
+    get selectedTaskId() {
+      return taskId.getSelectedTaskId()
+    },
+    get hoveredTaskId() {
+      return taskId.getHoveredTaskId()
+    },
   }
 
   extendObservable(store, {
