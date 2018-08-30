@@ -1,7 +1,6 @@
 import * as nanoid from 'nanoid'
 import { randomWords } from '../lib/fake'
 import { validate } from '../lib/validate'
-import { toggleProp } from '../lib/ramda-ext'
 
 export function createTask({
   id = `task_${nanoid()}`,
@@ -26,5 +25,3 @@ export function isDone({ done }) {
   validate('B', [done])
   return done
 }
-
-export const toggleTaskDone = toggleProp('done')
