@@ -8,3 +8,6 @@ import faker from 'faker'
 export function randomWords() {
   return faker.random.word()
 }
+export function randomBoolean() {
+  return faker.random.boolean()
+}

@@ -1,5 +1,5 @@
 import { createNewTaskWithDefaults } from '../models/Task'
-import { filter, prop, reject, times } from 'ramda'
+import { filter, groupBy, prop, reject, times } from 'ramda'
 import { findIndexById } from '../lib/ramda-ext'
 import { xRemoveById, xSet, xTogglePropById } from './xUtils'
 import { observable } from 'mobx'
@@ -37,12 +37,17 @@ export const store = (() => {
           xSet(store)('_hoveredTaskIdx')(NaN)
         }
       },
+      getTaskGroups: () => {
+        const taskGroups = groupBy(prop('done'))(store._tasks)
+        console.log(taskGroups)
+      },
     },
     {},
     { name: 'store' },
   )
 
   return {
+    getTaskGroups: store.getTaskGroups,
     getTodoTasks: () => expr(() => reject(prop('done'))(store._tasks)),
     getDoneTasks: () => expr(() => filter(prop('done'))(store._tasks)),
     isTaskHovered: ({ id }) =>
@@ -61,3 +66,5 @@ export const store = (() => {
     mouseLeaveTask: ({ id }) => store.unSetHoveredTaskWithId(id),
   }
 })()
+
+store.getTaskGroups()
