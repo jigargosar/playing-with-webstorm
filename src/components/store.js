@@ -13,13 +13,10 @@ export const store = (() => {
       _selectedTaskIdx: 0,
       _hoveredTaskIdx: NaN,
       get selectedTaskId() {
-        return store.getSelectedTaskId()
+        return findIdByClampedIdx(store._selectedTaskIdx, store._tasks)
       },
       get hoveredTaskId() {
         return store.getHoveredTaskId()
-      },
-      get tasks() {
-        return store._tasks
       },
       setSelectedTaskId: id =>
         xSet(store)('_selectedTaskIdx')(
@@ -34,9 +31,6 @@ export const store = (() => {
           xSet(store)('_hoveredTaskIdx')(NaN)
         }
       },
-      getSelectedTaskId: computedFn(() => {
-        return findIdByClampedIdx(store._selectedTaskIdx, propA('tasks')(store))
-      }),
       getHoveredTaskId: computedFn(() => {
         if (Number.isNaN(store._hoveredTaskIdx)) {
           return null
@@ -53,11 +47,11 @@ export const store = (() => {
       expr(() => propSOr('')('hoveredTaskId')(store) === id),
     isTaskSelected: ({ id }) =>
       expr(() => propS('selectedTaskId')(store) === id),
-    deleteAll: () => store.tasks.clear(),
+    deleteAll: () => store._tasks.clear(),
     toggleSelectedTaskDone: () =>
-      xTogglePropById('done', propS('selectedTaskId')(store), store.tasks),
+      xTogglePropById('done', propS('selectedTaskId')(store), store._tasks),
     deleteSelectedTask: () =>
-      xRemoveById(propS('selectedTaskId')(store))(store.tasks),
+      xRemoveById(propS('selectedTaskId')(store))(store._tasks),
     selectTask: ({ id }) => store.setSelectedTaskId(id),
     mouseEnterTask: ({ id }) => store.setHoveredTaskWithId(id),
     mouseLeaveTask: ({ id }) => store.unSetHoveredTaskWithId(id),
