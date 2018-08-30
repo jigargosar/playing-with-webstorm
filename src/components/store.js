@@ -91,11 +91,13 @@ export const store = (() => {
           xSet(store)('_hoveredTaskIdx')(NaN)
         }
       },
-      getFlattenedTasks: () =>
+      get flattenedTasks() {
         compose(
           flatten,
           pluck('tasks'),
-        )(store.taskGroups),
+        )(store.taskGroups)
+      },
+      getFlattenedTasks: () => store.flattenedTasks,
     },
     {},
     { name: 'store' },
