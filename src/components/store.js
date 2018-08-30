@@ -43,6 +43,7 @@ export const store = (() => {
   )
 
   return {
+    getTasks: () => store._tasks,
     isTaskHovered: ({ id }) =>
       expr(() => propSOr('')('hoveredTaskId')(store) === id),
     isTaskSelected: ({ id }) =>
