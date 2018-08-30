@@ -87,7 +87,7 @@ const TaskItems = composeHOC()(function TaskItems({ tasks }) {
 const MainContent = composeHOC()(function MainContent() {
   return (
     <Fragment>
-      <div className="center measure-wide mv3">
+      <div className="center measure mv3">
         <div className="pa3 br3 bg-white shadow-1 ">
           <Flex marginBottom={'1rem'} as={[Heading, 'h3']}>
             Todo
@@ -95,7 +95,7 @@ const MainContent = composeHOC()(function MainContent() {
           <TaskItems tasks={store.getTodoTasks()} />
         </div>
       </div>
-      <div className="center measure-wide mv3">
+      <div className="center measure mv3">
         <div className="pa3 br3 bg-white shadow-1 ">
           <Flex marginBottom={'1rem'} as={[Heading, 'h3']}>
             Done
