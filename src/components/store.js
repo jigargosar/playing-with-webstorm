@@ -41,7 +41,6 @@ export const store = (() => {
   )
 
   return {
-    getAllTasks: () => store._tasks,
     getTodoTasks: () => reject(prop('done'))(store._tasks),
     getDoneTasks: () => filter(prop('done'))(store._tasks),
     isTaskHovered: ({ id }) =>
