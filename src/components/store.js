@@ -45,19 +45,17 @@ export const store = (() => {
     },
     isTaskHovered: task => expr(() => store.hId === task.id),
 
-    setSId: id =>
-      compose(
-        setSIdx,
-        taskIndexById,
-      )(id),
-    setHId: id =>
-      compose(
-        setHIdx,
-        taskIndexById,
-      )(id),
+    setSId: compose(
+      setSIdx,
+      taskIndexById,
+    ),
+    setHId: compose(
+      setHIdx,
+      taskIndexById,
+    ),
     unSetHId: id => {
       if (id === store.hId) {
-        store.setHIdx(NaN)
+        setHIdx(NaN)
       }
     },
     deleteAll: () => store.tasks.clear(),
