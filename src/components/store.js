@@ -31,7 +31,7 @@ export const store = (() => {
       _tab: 'todo',
       get taskGroups() {
         return compose(
-          filter(propEq('id', store.tab)),
+          filter(propEq('id', store._tab)),
           sortBy(group => indexOf(group.id, ['todo', 'done'])),
           values,
           mapObjIndexed((tasks, id) => ({ id, tasks })),
