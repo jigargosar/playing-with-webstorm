@@ -3,6 +3,8 @@ import { Button as BaseButton, Flex, Group, styled } from 'reakit'
 export { Flex, Group }
 
 export const primaryColor = 'tomato'
+export const highlightColor = 'lightyellow'
+
 export const Button = styled(BaseButton)`
   // text-transform: uppercase;
   color: ${primaryColor};
