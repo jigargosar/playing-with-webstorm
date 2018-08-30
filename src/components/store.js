@@ -3,9 +3,11 @@ import {
   __,
   compose,
   filter,
+  flatten,
   groupBy,
   indexOf,
   mapObjIndexed,
+  pluck,
   prop,
   reject,
   sortBy,
@@ -49,6 +51,11 @@ export const store = (() => {
           xSet(store)('_hoveredTaskIdx')(NaN)
         }
       },
+      getFlattenedTasks: () =>
+        compose(
+          flatten,
+          pluck('tasks'),
+        )(store.getTaskGroups()),
       getTaskGroups: () => {
         const titleOrder = ['Todo', 'Done']
         const taskGroups = compose(
