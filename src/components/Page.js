@@ -63,7 +63,6 @@ const TaskContainer = composeHOC()(function TaskContainer({
     <Flex
       itemsCenter
       relative
-      margin="0.2rem 0"
       color={selected ? primaryColor : null}
       {...otherProps}
     />
