@@ -89,42 +89,51 @@ const MainContent = composeHOC()(function MainContent() {
   return (
     <Fragment>
       <Tabs.Container initialState={{ current: 1 }}>
-        {tabProps => (
-          <Observer>
-            {() => (
-              <Fragment>
-                <Tabs>
-                  <Tabs.Tab tab={'todo'} {...tabProps}>
-                    TODO
-                  </Tabs.Tab>
-                  <Tabs.Tab tab={'done'} {...tabProps}>
-                    DONE
-                  </Tabs.Tab>
-                </Tabs>
-                <Tabs.Panel tab={'todo'} {...tabProps}>
-                  <div className="center measure mv3">
-                    <div className="pa3 br3 bg-white shadow-1 ">
-                      <Flex marginBottom={'1rem'} as={[Heading, 'h3']}>
-                        Todo
-                      </Flex>
-                      <TaskItems tasks={store.getTodoTasks()} />
+        {_tabProps => {
+          const tabProps = {
+            ..._tabProps,
+            update: (...args) => {
+              console.log(...args)
+              return _tabProps.update(...args)
+            },
+          }
+          return (
+            <Observer>
+              {() => (
+                <Fragment>
+                  <Tabs>
+                    <Tabs.Tab tab={'todo'} {...tabProps}>
+                      TODO
+                    </Tabs.Tab>
+                    <Tabs.Tab tab={'done'} {...tabProps}>
+                      DONE
+                    </Tabs.Tab>
+                  </Tabs>
+                  <Tabs.Panel tab={'todo'} {...tabProps}>
+                    <div className="center measure mv3">
+                      <div className="pa3 br3 bg-white shadow-1 ">
+                        <Flex marginBottom={'1rem'} as={[Heading, 'h3']}>
+                          Todo
+                        </Flex>
+                        <TaskItems tasks={store.getTodoTasks()} />
+                      </div>
                     </div>
-                  </div>
-                </Tabs.Panel>
-                <Tabs.Panel tab={'done'} {...tabProps}>
-                  <div className="center measure mv3">
-                    <div className="pa3 br3 bg-white shadow-1 ">
-                      <Flex marginBottom={'1rem'} as={[Heading, 'h3']}>
-                        Done
-                      </Flex>
-                      <TaskItems tasks={store.getDoneTasks()} />
+                  </Tabs.Panel>
+                  <Tabs.Panel tab={'done'} {...tabProps}>
+                    <div className="center measure mv3">
+                      <div className="pa3 br3 bg-white shadow-1 ">
+                        <Flex marginBottom={'1rem'} as={[Heading, 'h3']}>
+                          Done
+                        </Flex>
+                        <TaskItems tasks={store.getDoneTasks()} />
+                      </div>
                     </div>
-                  </div>
-                </Tabs.Panel>
-              </Fragment>
-            )}
-          </Observer>
-        )}
+                  </Tabs.Panel>
+                </Fragment>
+              )}
+            </Observer>
+          )
+        }}
       </Tabs.Container>
     </Fragment>
   )
