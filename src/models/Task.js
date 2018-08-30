@@ -1,4 +1,4 @@
-import * as nanoid from 'nanoid'
+import nanoid from 'nanoid'
 import { randomWords } from '../lib/fake'
 import { validate } from '../lib/validate'
 
