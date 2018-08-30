@@ -14,7 +14,7 @@ import {
   secondaryDark,
 } from '../reakit-components'
 import { Flex, Heading, Shadow, Tabs } from 'reakit'
-import { tap } from 'ramda'
+import { indexOf, tap } from 'ramda'
 import { Observer } from 'mobx-react'
 
 const FloatingActionsContainer = composeHOC()(
@@ -86,9 +86,12 @@ const TaskItems = composeHOC()(function TaskItems({ tasks }) {
 })
 
 const MainContent = composeHOC()(function MainContent() {
+  const ids = ['todo', 'done']
   return (
     <Fragment>
-      <Tabs.Container initialState={{ ids: ['todo', 'done'], current: 0 }}>
+      <Tabs.Container
+        initialState={{ ids, current: indexOf(store.getTab())(ids) }}
+      >
         {_tabProps => {
           const tabProps = {
             ..._tabProps,
@@ -96,9 +99,10 @@ const MainContent = composeHOC()(function MainContent() {
               console.log('update', ...args)
               return _tabProps.update(...args)
             },
-            show: (...args) => {
-              console.log('show', ...args)
-              return _tabProps.show(...args)
+            show: tab => {
+              console.log('show', tab)
+              store.setTab(tab)
+              return _tabProps.show(tab)
             },
             hide: (...args) => {
               console.log('hide', ...args)

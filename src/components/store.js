@@ -27,6 +27,7 @@ export const store = (() => {
       _tasks: createSampleTasks(),
       _selectedTaskIdx: 0,
       _hoveredTaskIdx: NaN,
+      _tab: 'todo',
       get taskGroups() {
         return compose(
           sortBy(group => indexOf(group.title, ['Todo', 'Done'])),
@@ -81,6 +82,8 @@ export const store = (() => {
   )
 
   return {
+    setTab: tab => (store._tab = tab),
+    getTab: () => store._tab,
     getTodoTasks: () => expr(() => reject(prop('done'))(store._tasks)),
     getDoneTasks: () => expr(() => filter(prop('done'))(store._tasks)),
     isTaskSelected: store.isTaskAtSelected,
