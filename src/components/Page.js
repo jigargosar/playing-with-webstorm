@@ -13,6 +13,7 @@ import { Btn } from './Btn'
 import { expr } from 'mobx-utils'
 import { composeHOC } from './composeHOC'
 import { Button, Group, primaryColor } from '../reakit-components'
+import { Flex } from 'reakit'
 
 const FloatingActionsContainer = composeHOC()(
   function FloatingActionsContainer({ children }) {
