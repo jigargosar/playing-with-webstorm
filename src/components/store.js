@@ -4,11 +4,16 @@ import { clampIdx, findIndexById } from '../lib/ramda-ext'
 import { computedFn, xGet, xRemoveById, xSet, xTogglePropById } from './xUtils'
 import { extendObservable, observable } from 'mobx'
 import { expr } from 'mobx-utils'
-import { propS, propSOr } from '../lib/ramda-strict'
+import { pathS, propA, propS, propSOr } from '../lib/ramda-strict'
 
 function findIdByClampedModelIdx(idx, collectionName, store) {
   const clampedIdx = clampIdx(idx)(store[collectionName])
   return xGet(store)([collectionName, clampedIdx, 'id'])
+}
+
+function findIdByClampedIdx(idx, list) {
+  const clampedIdx = clampIdx(idx)(list)
+  return pathS([clampedIdx, 'id'])(list)
 }
 
 export const store = (() => {
@@ -27,19 +32,23 @@ export const store = (() => {
         return store._tasks
       },
       setSelectedTaskId: id =>
-        xSet(store)('_selectedTaskIdx')(findIndexById(id)(store.tasks)),
+        xSet(store)('_selectedTaskIdx')(
+          findIndexById(id)(propA('tasks')(store)),
+        ),
       setHoveredTaskWithId: id =>
-        xSet(store)('_hoveredTaskIdx')(findIndexById(id)(store.tasks)),
+        xSet(store)('_hoveredTaskIdx')(
+          findIndexById(id)(propA('tasks')(store)),
+        ),
       unSetHoveredTaskWithId: id => {
         if (id === store.getHoveredTaskId()) {
           xSet(store)('_hoveredTaskIdx')(NaN)
         }
       },
       getSelectedTaskId: computedFn(() => {
-        return findIdByClampedModelIdx(store._selectedTaskIdx, 'tasks', store)
+        return findIdByClampedIdx(store._selectedTaskIdx, propA('tasks')(store))
       }),
       getHoveredTaskId: computedFn(() => {
-        return findIdByClampedModelIdx(store._hoveredTaskIdx, 'tasks', store)
+        return findIdByClampedIdx(store._hoveredTaskIdx, propA('tasks')(store))
       }),
     },
     {},
