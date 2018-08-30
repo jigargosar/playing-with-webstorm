@@ -7,4 +7,5 @@ export {
   path,
   equals,
   pathOr,
+  curryN,
 } from 'ramda'

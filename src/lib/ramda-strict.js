@@ -1,11 +1,13 @@
 import { validate } from './validate'
-import { curry, path, pathOr } from 'ramda'
+import { curry, curryN, path, pathOr } from 'ramda'
 
-const validateIO = (inputSpecs, outputSpecs = '*') => fn => (...args) => {
-  validate(inputSpecs, args)
-  const result = fn(...args)
-  validate(outputSpecs, [result])
-  return result
+const validateIO = (inputSpecs, outputSpecs = '*') => fn => {
+  return curryN(fn.length)((...args) => {
+    validate(inputSpecs, args)
+    const result = fn(...args)
+    validate(outputSpecs, [result])
+    return result
+  })
 }
 
 export const pathS = curry(validateIO('AO', 'S')(path))
