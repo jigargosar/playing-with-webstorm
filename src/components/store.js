@@ -1,33 +1,15 @@
 import { createNewTaskWithDefaults } from '../models/Task'
-import { curry, defaultTo, path, times } from 'ramda'
+import { times } from 'ramda'
 import { clampIdx, findIndexById } from '../lib/ramda-ext'
 import { computedFn, xGet, xRemoveById, xSet, xTogglePropById } from './xUtils'
 import { extendObservable, observable } from 'mobx'
 import { expr } from 'mobx-utils'
-import { validate } from '../lib/validate'
+import { pathSOr, propS } from '../lib/ramda-strict'
 
 function findIdByClampedModelIdx(idx, collectionName, store) {
   const clampedIdx = clampIdx(idx)(store[collectionName])
   return xGet(store)([collectionName, clampedIdx, 'id'])
 }
-
-export const pathS = curry((paths, obj) => {
-  validate('AO', [paths, obj])
-  const result = path(paths, obj)
-  validate('S', [result])
-  return result
-})
-
-export const propS = curry((p, obj) => {
-  return pathS([p], obj)
-})
-
-export const pathSOr = curry((def, paths, obj) => {
-  validate('SAO', [def, paths, obj])
-  const result = path(paths, obj)
-  validate('S|Z', [result])
-  return defaultTo(def)(result)
-})
 
 export const store = (() => {
   const store = observable.object(
