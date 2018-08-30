@@ -88,15 +88,16 @@ const TaskItems = composeHOC()(function TaskItems({ tasks }) {
 const MainContent = composeHOC()(function MainContent() {
   return (
     <Fragment>
-      <Tabs.Container initialState={{ current: 1 }}>
+      <Tabs.Container initialState={{ ids: ['todo', 'done'], current: 0 }}>
         {_tabProps => {
           const tabProps = {
             ..._tabProps,
             update: (...args) => {
-              console.log(...args)
+              console.log('update', ...args)
               return _tabProps.update(...args)
             },
           }
+          console.log(tabProps.getCurrentId())
           return (
             <Observer>
               {() => (
