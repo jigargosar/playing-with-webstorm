@@ -1,7 +1,7 @@
 import { createNewTaskWithDefaults } from '../models/Task'
 import { path, times } from 'ramda'
 import { clampIdx, findIndexById } from '../lib/ramda-ext'
-import { computedFn, xGet, xRemoveById, xSet, xTogglePropById } from './xUtils'
+import { computedFn, xRemoveById, xSet, xTogglePropById } from './xUtils'
 import { extendObservable, observable } from 'mobx'
 import { expr } from 'mobx-utils'
 
@@ -11,7 +11,7 @@ function findIdByClampedModelIdx(idx, collectionName, store) {
 
 function findByClampedModelIdx(idx, collectionName, store) {
   const clampedIdx = clampIdx(idx)(store[collectionName])
-  return xGet(store)([collectionName, clampedIdx])
+  return path([collectionName, clampedIdx])(store)
 }
 
 export const store = (() => {
