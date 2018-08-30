@@ -41,6 +41,12 @@ export const store = (() => {
     getHoveredId: computedFn(() => {
       return findIdByClampedModelIdx(store._hoveredTaskIdx, 'tasks', store)
     }),
+    getSelected: computedFn(() => {
+      return findByClampedModelIdx(store._selectedTaskIdx, 'tasks', store)
+    }),
+    getHovered: computedFn(() => {
+      return findByClampedModelIdx(store._hoveredTaskIdx, 'tasks', store)
+    }),
   }
 
   extendObservable(store, {
