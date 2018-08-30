@@ -12,7 +12,7 @@ import {
 import { Btn } from './Btn'
 import { expr } from 'mobx-utils'
 import { composeHOC } from './composeHOC'
-import { Button } from '../reakit-components/Button'
+import { Button } from '../reakit-components'
 
 const FloatingActionsContainer = composeHOC()(
   function FloatingActionsContainer({ children }) {
