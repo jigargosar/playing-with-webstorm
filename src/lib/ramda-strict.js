@@ -8,6 +8,12 @@ const tapValidateArgs = spec => fn => (...args) => {
 
 export const not = tapValidateArgs('B')(_not)
 export const map = tapValidateArgs('O|A')(_map)
+
+export const defaultToS = curry((def, val) => {
+  validate('SS|SZ', [def, val])
+  return defaultTo(def, val)
+})
+
 export const pathS = curry((paths, obj) => {
   validate('AO', [paths, obj])
   const result = path(paths, obj)
