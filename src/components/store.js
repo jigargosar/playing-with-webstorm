@@ -1,5 +1,5 @@
 import { createNewTaskWithDefaults } from '../models/Task'
-import { curry, path, times } from 'ramda'
+import { curry, defaultTo, path, times } from 'ramda'
 import { clampIdx, findIndexById } from '../lib/ramda-ext'
 import { computedFn, xGet, xRemoveById, xSet, xTogglePropById } from './xUtils'
 import { extendObservable, observable } from 'mobx'
@@ -16,6 +16,13 @@ export const pathS = curry((paths, obj) => {
   const result = path(paths, obj)
   validate('S', [result])
   return result
+})
+
+export const pathSOr = curry((def, paths, obj) => {
+  validate('SAO', [def, paths, obj])
+  const result = path(paths, obj)
+  validate('S|Z', [result])
+  return defaultTo(def)(result)
 })
 
 export const store = (() => {
@@ -55,7 +62,7 @@ export const store = (() => {
 
   extendObservable(store, {
     isTaskHovered: task =>
-      expr(() => pathS(['hoveredTaskId'])(taskId) === task.id),
+      expr(() => pathSOr('')(['hoveredTaskId'])(taskId) === task.id),
     isTaskSelected: task =>
       expr(() => pathS(['selectedTaskId'])(taskId) === task.id),
     deleteAll: () => store.tasks.clear(),
