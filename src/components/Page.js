@@ -105,7 +105,10 @@ export const Page = composeHOC()(function Page() {
       <ScrollContainer>
         <MainContent />
       </ScrollContainer>
-      <div className="pa3 shadow-1">STATIC FOOTER</div>
+      <div className="pa3 relative">
+        <Shadow />
+        STATIC FOOTER
+      </div>
     </ViewportHeightContainer>
   )
 })
