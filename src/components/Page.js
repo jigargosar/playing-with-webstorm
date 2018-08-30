@@ -12,7 +12,7 @@ import {
 import { Btn } from './Btn'
 import { expr } from 'mobx-utils'
 import { composeHOC } from './composeHOC'
-import { Button, Group } from '../reakit-components'
+import { Button, Group, primaryColor } from '../reakit-components'
 
 const FloatingActionsContainer = composeHOC()(
   function FloatingActionsContainer({ children }) {
@@ -61,7 +61,7 @@ const TaskContainer = composeHOC()(function TaskContainer({
   return (
     <div
       className={cn('mv2 flex items-center relative', {
-        orange: expr(() => store.isTaskSelected(task)),
+        [primaryColor]: expr(() => store.isTaskSelected(task)),
       })}
       {...otherProps}
     />
