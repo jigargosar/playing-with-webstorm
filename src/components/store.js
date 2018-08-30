@@ -1,7 +1,7 @@
 import { createNewTaskWithDefaults } from '../models/Task'
 import { filter, prop, reject, times } from 'ramda'
 import { findIndexById } from '../lib/ramda-ext'
-import { computedFn, xRemoveById, xSet, xTogglePropById } from './xUtils'
+import { xRemoveById, xSet, xTogglePropById } from './xUtils'
 import { observable } from 'mobx'
 import { expr } from 'mobx-utils'
 import { findIdByClampedIdx, propS, propSOr } from '../lib/ramda-strict'
@@ -18,23 +18,20 @@ export const store = (() => {
         return findIdByClampedIdx(store._selectedTaskIdx, store._tasks)
       },
       get hoveredTaskId() {
-        return store.getHoveredTaskId()
+        if (Number.isNaN(store._hoveredTaskIdx)) {
+          return null
+        }
+        return findIdByClampedIdx(store._hoveredTaskIdx, store._tasks)
       },
       setSelectedTaskId: id =>
         xSet(store)('_selectedTaskIdx')(findIndexById(id)(store._tasks)),
       setHoveredTaskWithId: id =>
         xSet(store)('_hoveredTaskIdx')(findIndexById(id)(store._tasks)),
       unSetHoveredTaskWithId: id => {
-        if (id === store.getHoveredTaskId()) {
+        if (id === store.hoveredTaskId) {
           xSet(store)('_hoveredTaskIdx')(NaN)
         }
       },
-      getHoveredTaskId: computedFn(() => {
-        if (Number.isNaN(store._hoveredTaskIdx)) {
-          return null
-        }
-        return findIdByClampedIdx(store._hoveredTaskIdx, store._tasks)
-      }),
     },
     {},
     { name: 'store' },
