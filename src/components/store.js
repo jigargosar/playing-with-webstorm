@@ -1,7 +1,7 @@
 import { createNewTaskWithDefaults } from '../models/Task'
 import { eqProps, path, times } from 'ramda'
 import { clampIdx, findIndexById } from '../lib/ramda-ext'
-import { computedFn, xRemoveById, xSet, xTogglePropById } from './xUtils'
+import { computedFn, xRemoveById, xSet, xToggleProp } from './xUtils'
 import { extendObservable, observable } from 'mobx'
 import { expr } from 'mobx-utils'
 
@@ -55,8 +55,7 @@ export const store = (() => {
     isTaskSelected: task =>
       expr(() => eqProps('id', taskId.getSelected(), task)),
     deleteAll: () => store.tasks.clear(),
-    toggleSelectedTaskDone: () =>
-      xTogglePropById('done', taskId.getSelectedId(), store.tasks),
+    toggleSelectedTaskDone: () => xToggleProp('done', taskId.getSelected()),
     deleteSelectedTask: () => xRemoveById(taskId.getSelectedId())(store.tasks),
     selectTask: ({ id }) => taskId.setSelected(id),
     mouseEnterTask: ({ id }) => taskId.setHovered(id),
