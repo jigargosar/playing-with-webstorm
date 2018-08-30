@@ -12,7 +12,13 @@ import {
 import { Btn } from './Btn'
 import { expr } from 'mobx-utils'
 import { composeHOC } from './composeHOC'
-import { Button, FlexCenter, Group, secondaryDark } from '../reakit-components'
+import {
+  Button,
+  FlexCenter,
+  Group,
+  primaryLight,
+  secondaryDark,
+} from '../reakit-components'
 import { Flex, Heading, Shadow } from 'reakit'
 
 const FloatingActionsContainer = composeHOC()(
@@ -59,8 +65,11 @@ const Task = composeHOC()(function Task({ task }) {
     <FlexCenter
       className={cn('br2')}
       relative
-      {...(selected ? { color: '#fff', backgroundColor: secondaryDark } : {})}
-      // backgroundColor={hovered ? highlightColor : undefined}
+      {...(selected
+        ? { color: '#fff', backgroundColor: secondaryDark }
+        : hovered
+          ? { backgroundColor: primaryLight }
+          : {})}
       onMouseEnter={handleMouseOverTask(task.id)}
       onMouseLeave={handleMouseLeaveTask(task.id)}
       onClickCapture={expr(() => handleSelectTask(task.id))}
