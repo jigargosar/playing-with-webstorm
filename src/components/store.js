@@ -1,17 +1,13 @@
 import { createNewTaskWithDefaults } from '../models/Task'
-import { eqProps, path, times } from 'ramda'
+import { times } from 'ramda'
 import { clampIdx, findIndexById } from '../lib/ramda-ext'
-import { computedFn, xRemoveById, xSet, xToggleProp } from './xUtils'
+import { computedFn, xGet, xRemoveById, xSet, xTogglePropById } from './xUtils'
 import { extendObservable, observable } from 'mobx'
 import { expr } from 'mobx-utils'
 
 function findIdByClampedModelIdx(idx, collectionName, store) {
-  return path(['id'])(findByClampedModelIdx(idx, collectionName, store))
-}
-
-function findByClampedModelIdx(idx, collectionName, store) {
   const clampedIdx = clampIdx(idx)(store[collectionName])
-  return path([collectionName, clampedIdx])(store)
+  return xGet(store)([collectionName, clampedIdx, 'id'])
 }
 
 export const store = (() => {
@@ -41,21 +37,14 @@ export const store = (() => {
     getHoveredId: computedFn(() => {
       return findIdByClampedModelIdx(store._hoveredTaskIdx, 'tasks', store)
     }),
-    getSelected: computedFn(() => {
-      return findByClampedModelIdx(store._selectedTaskIdx, 'tasks', store)
-    }),
-    getHovered: computedFn(() => {
-      return findByClampedModelIdx(store._hoveredTaskIdx, 'tasks', store)
-    }),
   }
 
   extendObservable(store, {
-    isTaskHovered: task =>
-      expr(() => eqProps('id', taskId.getHovered() || {}, task)),
-    isTaskSelected: task =>
-      expr(() => eqProps('id', taskId.getSelected(), task)),
+    isTaskHovered: task => expr(() => taskId.getHoveredId() === task.id),
+    isTaskSelected: task => expr(() => taskId.getSelectedId() === task.id),
     deleteAll: () => store.tasks.clear(),
-    toggleSelectedTaskDone: () => xToggleProp('done', taskId.getSelected()),
+    toggleSelectedTaskDone: () =>
+      xTogglePropById('done', taskId.getSelectedId(), store.tasks),
     deleteSelectedTask: () => xRemoveById(taskId.getSelectedId())(store.tasks),
     selectTask: ({ id }) => taskId.setSelected(id),
     mouseEnterTask: ({ id }) => taskId.setHovered(id),
