@@ -18,6 +18,9 @@ export const store = (() => {
   const sGet = xGet(store)
   const sSet = xSet(store)
 
+  const setSIdx = sSet('_sIdx')
+  const setHIdx = sSet('_hIdx')
+
   const taskIndexById = id => findIndexById(id)(store.tasks)
   extendObservable(store, {
     get sTask() {
@@ -41,16 +44,15 @@ export const store = (() => {
       return sGet('hTask.id')
     },
     isTaskHovered: task => expr(() => store.hId === task.id),
-    setSIdx: sSet('_sIdx'),
-    setHIdx: sSet('_hIdx'),
+
     setSId: id =>
       compose(
-        store.setSIdx,
+        setSIdx,
         taskIndexById,
       )(id),
     setHId: id =>
       compose(
-        store.setHIdx,
+        setHIdx,
         taskIndexById,
       )(id),
     unSetHId: id => {
