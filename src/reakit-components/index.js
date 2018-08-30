@@ -1,4 +1,5 @@
 import { Button as BaseButton, Flex, Group, styled } from 'reakit'
+import { defaultProps } from 'recompose'
 
 export { Flex, Group }
 
@@ -9,6 +10,8 @@ export const Button = styled(BaseButton)`
   // font-size: 14px;
   height: 2em;
 `
+
+export const FlexCenter = defaultProps({ alignItems: 'center' })(Flex)
 
 // export const ButtonRounded = styled(Button)`
 //   border-radius: 1.25em;

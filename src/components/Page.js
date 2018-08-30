@@ -12,7 +12,7 @@ import {
 import { Btn } from './Btn'
 import { expr } from 'mobx-utils'
 import { composeHOC } from './composeHOC'
-import { Button, Group, primaryColor } from '../reakit-components'
+import { Button, FlexCenter, Group, primaryColor } from '../reakit-components'
 import { Flex } from 'reakit'
 
 const FloatingActionsContainer = composeHOC()(
@@ -60,7 +60,7 @@ const TaskContainer = composeHOC()(function TaskContainer({
 }) {
   const selected = expr(() => store.isTaskSelected(task))
   return (
-    <Flex
+    <FlexCenter
       itemsCenter
       relative
       color={selected ? primaryColor : null}
