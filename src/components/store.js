@@ -41,9 +41,7 @@ export const store = (() => {
     setSIdx: xSet(store)('_sIdx'),
     setHIdx: xSet(store)('_hIdx'),
     setSId: id => store.setSIdx(findIndexById(id)(store.tasks)),
-    setHId: id => {
-      return store.setHIdx(findIndexById(id)(store.tasks))
-    },
+    setHId: id => store.setHIdx(findIndexById(id)(store.tasks)),
     unSetHId: id => {
       if (id === store.hId) {
         store.setHIdx(NaN)
