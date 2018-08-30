@@ -23,6 +23,11 @@ export const store = (() => {
         }
         return findIdByClampedIdx(store._hoveredTaskIdx, store._tasks)
       },
+      isTaskAtSelectedIdx: ({ id }) => {
+        return expr(
+          () => store._selectedTaskIdx === findIndexById(id)(store._tasks),
+        )
+      },
       setSelectedTaskId: id =>
         xSet(store)('_selectedTaskIdx')(findIndexById(id)(store._tasks)),
       setHoveredTaskWithId: id =>
@@ -42,8 +47,9 @@ export const store = (() => {
     getDoneTasks: () => expr(() => filter(prop('done'))(store._tasks)),
     isTaskHovered: ({ id }) =>
       expr(() => propSOr('')('hoveredTaskId')(store) === id),
-    isTaskSelected: ({ id }) =>
-      expr(() => propS('selectedTaskId')(store) === id),
+    isTaskSelected: store.isTaskAtSelectedIdx,
+    // isTaskSelected: ({ id }) =>
+    //   expr(() => propS('selectedTaskId')(store) === id),
     deleteAllTasks: () => store._tasks.clear(),
     addMoreTasks: () => store._tasks.unshift(...createSampleTasks()),
     toggleSelectedTaskDone: () =>
