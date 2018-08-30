@@ -7,7 +7,6 @@ import {
   handleMouseLeaveTask,
   handleMouseOverTask,
   handleSelectTask,
-  isTaskHovered,
   store,
 } from './store'
 import { Btn } from './Btn'
