@@ -98,7 +98,7 @@ const MainContent = composeHOC()(function MainContent() {
   return (
     <div className="center measure-wide mv3">
       <div className="pa3 br3 bg-white shadow-1 ">
-        <Flex marginBottom={'0.5rem'}>Tasks</Flex>
+        <Flex marginBottom={'1rem'}>Tasks</Flex>
         <TaskItems />
       </div>
     </div>
