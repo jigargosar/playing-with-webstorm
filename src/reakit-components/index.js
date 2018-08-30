@@ -1,4 +1,4 @@
-import { Button as BaseButton, styled } from 'reakit'
+import { Button as BaseButton, Group as GroupBase, styled } from 'reakit'
 
 export const Button = styled(BaseButton)`
   // text-transform: uppercase;
@@ -6,6 +6,8 @@ export const Button = styled(BaseButton)`
   // font-size: 14px;
   height: 2em;
 `
+
+export const Group = GroupBase
 
 // export const ButtonRounded = styled(Button)`
 //   border-radius: 1.25em;
