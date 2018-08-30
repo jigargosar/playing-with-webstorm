@@ -45,7 +45,9 @@ export const store = (() => {
         )
       },
       setSelectedTaskId: id =>
-        xSet(store)('_selectedTaskIdx')(findIndexById(id)(store._tasks)),
+        xSet(store)('_selectedTaskIdx')(
+          findIndexById(id)(store.getFlattenedTasks()),
+        ),
       setHoveredTaskWithId: id =>
         xSet(store)('_hoveredTaskIdx')(findIndexById(id)(store._tasks)),
       unSetHoveredTaskWithId: id => {
