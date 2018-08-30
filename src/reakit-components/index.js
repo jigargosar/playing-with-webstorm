@@ -1,8 +1,9 @@
 import { Button as BaseButton, Group as GroupBase, styled } from 'reakit'
 
+export const primaryColor = 'tomato'
 export const Button = styled(BaseButton)`
   // text-transform: uppercase;
-  color: tomato;
+  color: ${primaryColor};
   // font-size: 14px;
   height: 2em;
 `
