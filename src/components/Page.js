@@ -105,7 +105,7 @@ const MainContent = composeHOC()(function MainContent() {
               return _tabProps.hide(...args)
             },
           }
-          console.log(tabProps.getCurrentId())
+          console.log('tabProps.getCurrentId()', tabProps.getCurrentId())
           return (
             <Observer>
               {() => (
