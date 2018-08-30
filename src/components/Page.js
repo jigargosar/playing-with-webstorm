@@ -73,16 +73,18 @@ TaskContainer.propTypes = {
 }
 
 const Task = composeHOC()(function Task({ task }) {
+  const selected = expr(() => store.isTaskSelected(task))
   return (
-    <TaskContainer
+    <FlexCenter
+      relative
+      color={selected ? primaryColor : null}
       onMouseEnter={handleMouseOverTask(task.id)}
       onMouseLeave={handleMouseLeaveTask(task.id)}
       onClickCapture={expr(() => handleSelectTask(task.id))}
-      task={task}
     >
       {expr(() => store.isTaskHovered(task)) && <TaskActions />}
       <TaskContent task={task} />
-    </TaskContainer>
+    </FlexCenter>
   )
 })
 Task.propTypes = {
