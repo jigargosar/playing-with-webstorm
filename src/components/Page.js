@@ -3,9 +3,8 @@ import { ScrollContainer, ViewportHeightContainer } from './containers'
 import * as PropTypes from 'prop-types'
 import { cn } from '../lib/react-ext'
 import { Models } from '../shared-components/Models'
-import { handleMouseLeaveTask, handleMouseOverTask, store } from './store'
+import { store } from './store'
 import { Btn } from './Btn'
-import { expr } from 'mobx-utils'
 import { composeHOC } from './composeHOC'
 import {
   Button,
@@ -65,9 +64,9 @@ const Task = composeHOC()(function Task({ task }) {
         : hovered
           ? { backgroundColor: primaryLight }
           : {})}
-      onMouseEnter={handleMouseOverTask(task.id)}
-      onMouseLeave={handleMouseLeaveTask(task.id)}
-      onClickCapture={expr(() => store.handleSelectTask(task.id))}
+      onMouseEnter={store.handleMouseOverTask(task.id)}
+      onMouseLeave={store.handleMouseLeaveTask(task.id)}
+      onClickCapture={store.handleSelectTask(task.id)}
     >
       {hovered && <TaskActions />}
       <TaskContent task={task} />

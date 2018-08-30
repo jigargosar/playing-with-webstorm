@@ -39,7 +39,6 @@ export const store = (() => {
   extendObservable(store, {
     isTaskHovered: task => expr(() => taskId.hovered() === task.id),
     isTaskSelected: task => expr(() => taskId.selected() === task.id),
-    setSId: id => setSIdx(findIndexById(id)(store.tasks)),
     setHId: id => setHIdx(findIndexById(id)(store.tasks)),
     unSetHId: id => {
       if (id === taskId.hovered()) {
@@ -51,10 +50,8 @@ export const store = (() => {
       xTogglePropById('done', taskId.selected(), store.tasks),
     deleteSelectedTask: () => xRemoveById(taskId.selected())(store.tasks),
     handleSelectTask: id => () => taskId.setSelected(id),
+    handleMouseOverTask: id => () => store.setHId(id),
+    handleMouseLeaveTask: id => () => store.unSetHId(id),
   })
   return store
 })()
-
-export const handleMouseOverTask = id => () => store.setHId(id)
-
-export const handleMouseLeaveTask = id => () => store.unSetHId(id)
