@@ -17,48 +17,45 @@ export const store = (() => {
       tasks: times(createNewTaskWithDefaults)(16),
       _selectedTaskIdx: 0,
       _hoveredTaskIdx: NaN,
+      setSelectedTaskId: id =>
+        xSet(store)('_selectedTaskIdx')(findIndexById(id)(store.tasks)),
+      setHoveredTaskWithId: id =>
+        xSet(store)('_hoveredTaskIdx')(findIndexById(id)(store.tasks)),
+      unSetHoveredTaskWithId: id => {
+        if (id === store.getHoveredTaskId()) {
+          xSet(store)('_hoveredTaskIdx')(NaN)
+        }
+      },
+      getSelectedTaskId: computedFn(() => {
+        return findIdByClampedModelIdx(store._selectedTaskIdx, 'tasks', store)
+      }),
+      getHoveredTaskId: computedFn(() => {
+        return findIdByClampedModelIdx(store._hoveredTaskIdx, 'tasks', store)
+      }),
+      get selectedTaskId() {
+        return store.getSelectedTaskId()
+      },
+      get hoveredTaskId() {
+        return store.getHoveredTaskId()
+      },
     },
     {},
     { name: 'store' },
   )
 
-  const taskId = {
-    setSelectedTaskId: id =>
-      xSet(store)('_selectedTaskIdx')(findIndexById(id)(store.tasks)),
-    setHoveredTaskWithId: id =>
-      xSet(store)('_hoveredTaskIdx')(findIndexById(id)(store.tasks)),
-    unSetHoveredTaskWithId: id => {
-      if (id === taskId.getHoveredTaskId()) {
-        xSet(store)('_hoveredTaskIdx')(NaN)
-      }
-    },
-    getSelectedTaskId: computedFn(() => {
-      return findIdByClampedModelIdx(store._selectedTaskIdx, 'tasks', store)
-    }),
-    getHoveredTaskId: computedFn(() => {
-      return findIdByClampedModelIdx(store._hoveredTaskIdx, 'tasks', store)
-    }),
-    get selectedTaskId() {
-      return taskId.getSelectedTaskId()
-    },
-    get hoveredTaskId() {
-      return taskId.getHoveredTaskId()
-    },
-  }
-
   extendObservable(store, {
     isTaskHovered: ({ id }) =>
-      expr(() => propSOr('')('hoveredTaskId')(taskId) === id),
+      expr(() => propSOr('')('hoveredTaskId')(store) === id),
     isTaskSelected: ({ id }) =>
-      expr(() => propS('selectedTaskId')(taskId) === id),
+      expr(() => propS('selectedTaskId')(store) === id),
     deleteAll: () => store.tasks.clear(),
     toggleSelectedTaskDone: () =>
-      xTogglePropById('done', propS('selectedTaskId')(taskId), store.tasks),
+      xTogglePropById('done', propS('selectedTaskId')(store), store.tasks),
     deleteSelectedTask: () =>
-      xRemoveById(propS('selectedTaskId')(taskId))(store.tasks),
-    selectTask: ({ id }) => taskId.setSelectedTaskId(id),
-    mouseEnterTask: ({ id }) => taskId.setHoveredTaskWithId(id),
-    mouseLeaveTask: ({ id }) => taskId.unSetHoveredTaskWithId(id),
+      xRemoveById(propS('selectedTaskId')(store))(store.tasks),
+    selectTask: ({ id }) => store.setSelectedTaskId(id),
+    mouseEnterTask: ({ id }) => store.setHoveredTaskWithId(id),
+    mouseLeaveTask: ({ id }) => store.unSetHoveredTaskWithId(id),
   })
   return store
 })()
