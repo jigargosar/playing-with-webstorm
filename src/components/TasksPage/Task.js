@@ -1,3 +1,5 @@
+import * as PropTypes from 'prop-types'
+import React from 'react'
 import { tap } from 'ramda'
 import { composeHOC } from '../composeHOC'
 import { Base } from 'reakit'
@@ -9,8 +11,6 @@ import {
 } from '../../reakit-components'
 import { FloatingActionsContainer } from './FloatingActionsContainer'
 import { Btn } from '../Btn'
-import * as PropTypes from 'prop-types'
-import React from 'react'
 
 const linkEvent = (fn, ...args) => tap(e => fn(...args, e))
 export const Task = composeHOC()(function Task({
