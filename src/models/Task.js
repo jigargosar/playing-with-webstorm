@@ -1,9 +1,8 @@
 import nanoid from 'nanoid'
 import { randomArrayElement, randomBoolean, randomWords } from '../lib/fake'
 import { validate } from '../lib/validate'
-import { compose, fromPairs, isEmpty, toPairs } from 'ramda'
+import { compose, fromPairs, isEmpty, map } from 'ramda'
 import { assert } from '../lib/assert'
-import { propS } from '../lib/ramda-strict'
 
 function Task({ id, title, done, createdAt, context, ...other }) {
   validate('SSBNOO', [id, title, done, createdAt, context, other])
@@ -18,7 +17,7 @@ export const systemContexts = [
 
 export const systemContextLookup = compose(
   fromPairs,
-  toPairs(propS('id')),
+  map(c => [c.id, c]),
 )(systemContexts)
 
 export function createNewTaskWithDefaults() {
