@@ -99,14 +99,14 @@ export const store = (() => {
   )
 
   return {
-    setTab: tab => (store._tab = tab),
+    setTabId: tab => (store._tab = tab),
     getTab: () => store._tab,
     getTabs: () =>
       expr(() => [
-        { tab: 'in_basket', title: 'Inbox' },
-        { tab: 'todo', title: 'TODO' },
-        { tab: 'some_day', title: 'SOME DAY' },
-        { tab: 'done', title: 'DONE' },
+        { id: 'in_basket', title: 'Inbox' },
+        { id: 'todo', title: 'TODO' },
+        { id: 'some_day', title: 'SOME DAY' },
+        { id: 'done', title: 'DONE' },
       ]),
     getTaskGroups: () => expr(() => store.taskGroups),
     isTaskSelected: store.isTaskAtSelected,

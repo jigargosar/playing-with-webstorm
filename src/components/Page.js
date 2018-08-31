@@ -121,7 +121,7 @@ TaskGroup.defaultProps = {
 }
 
 const MainContent = composeHOC()(function MainContent() {
-  const tabIds = pluck('tab')(store.getTabs())
+  const tabIds = pluck('id')(store.getTabs())
   return (
     <Fragment>
       <Tabs.Container
@@ -132,7 +132,7 @@ const MainContent = composeHOC()(function MainContent() {
             ..._tabProps,
             show: tab => {
               console.debug('show', tab)
-              store.setTab(tab)
+              store.setTabId(tab)
               return _tabProps.show(tab)
             },
           }
@@ -141,8 +141,8 @@ const MainContent = composeHOC()(function MainContent() {
               {() => (
                 <Fragment>
                   <Tabs>
-                    {map(({ id, tab, title }) => (
-                      <Tabs.Tab key={tab} tab={tab} {...tabProps}>
+                    {map(({ id, title }) => (
+                      <Tabs.Tab key={id} tab={id} {...tabProps}>
                         {title}
                       </Tabs.Tab>
                     ))(store.getTabs())}
