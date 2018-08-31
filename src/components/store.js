@@ -22,6 +22,13 @@ import { clampIdx, pathS } from '../lib/ramda-strict'
 
 const createSampleTasks = () => times(createNewTaskWithDefaults)(16)
 
+const tabs = [
+  { id: 'in_basket', title: 'Inbox' },
+  { id: 'todo', title: 'TODO' },
+  { id: 'some_day', title: 'SOME DAY' },
+  { id: 'done', title: 'DONE' },
+]
+
 function getTaskGroups(tabId, tasks) {
   return 'done' === tabId
     ? [
@@ -81,13 +88,7 @@ export const store = (() => {
   return {
     setTabId: tab => (store._tab = tab),
     getCurrentTabId: () => store._tab,
-    getTabs: () =>
-      expr(() => [
-        { id: 'in_basket', title: 'Inbox' },
-        { id: 'todo', title: 'TODO' },
-        { id: 'some_day', title: 'SOME DAY' },
-        { id: 'done', title: 'DONE' },
-      ]),
+    getTabs: () => expr(() => tabs),
     getTaskGroups: () => expr(() => store.taskGroups),
     isTaskSelected: store.isTaskAtSelected,
     deleteAllTasks: () => store._tasks.clear(),
