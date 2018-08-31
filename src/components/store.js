@@ -6,7 +6,7 @@ import { clampIdx, pathS } from '../lib/ramda-strict'
 import {
   createSampleTaskList,
   flattenGroupTasks,
-  getTaskGroups,
+  getTaskGroupForTab,
   tabList,
 } from '../models'
 
@@ -18,7 +18,7 @@ export const store = (() => {
       _tab: 'in_basket',
 
       get taskGroups() {
-        return getTaskGroups('in_basket', store._tasks)
+        return getTaskGroupForTab('in_basket', store._tasks)
       },
       get flattenedTasks() {
         return flattenGroupTasks(store.taskGroups)

@@ -17,7 +17,7 @@ import { Task } from './Task'
 import {
   createSampleTaskList,
   flattenGroupTasks,
-  getTaskGroups,
+  getTaskGroupForTab,
   tabList,
 } from '../../models'
 import merge from 'ramda/es/merge'
@@ -58,7 +58,7 @@ export const TasksPage = composeHOC()(function Page({ store }) {
                 <Tabs.Panel tab={currentTabId} {...tabProps}>
                   <Keyed
                     as={TaskGroup}
-                    list={getTaskGroups(currentTabId, taskList)}
+                    list={getTaskGroupForTab(currentTabId, taskList)}
                     getProps={group => ({ group })}
                     taskComponent={Task}
                     taskProps={merge(store, {
