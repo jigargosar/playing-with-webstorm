@@ -8,7 +8,7 @@ export const TaskFloatingActions = styled(Hidden)`
   right: -4rem;
   z-index: 1;
 `
-const tfaClass = `.${TaskFloatingActions.styledComponentId}`
+const floatingActionsClass = `.${TaskFloatingActions.styledComponentId}`
 
 export const TaskItem = styled(Base).attrs({ className: 'mv2 pv2 br2' })`
   &:hover {
@@ -26,10 +26,10 @@ export const TaskItem = styled(Base).attrs({ className: 'mv2 pv2 br2' })`
     `,
   )};
 
-  & ${tfaClass} {
+  & ${floatingActionsClass} {
     display: none;
   }
-  &:hover ${tfaClass} {
+  &:hover ${floatingActionsClass} {
     display: block;
   }
 `
