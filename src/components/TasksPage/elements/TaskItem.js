@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { Base, Group, Hidden, styled } from 'reakit'
+import { Base, css, Group, Hidden, styled } from 'reakit'
 import { ifProp } from 'styled-tools'
 import { Flex, primaryDark, primaryLight } from '../../../reakit-components'
 
@@ -15,7 +15,16 @@ export const TaskItem = styled(Base).attrs({ className: 'mv2 pv2 br2' })`
     color: #000;
     background-color: ${primaryLight};
   }
-  ${ifProp('selected', { color: '#fff', backgroundColor: primaryDark })};
+  ${ifProp(
+    'selected',
+    css`
+      &,
+      &:hover {
+        color: #fff;
+        background-color: ${primaryDark};
+      }
+    `,
+  )};
   & ${tfaClass} {
     display: none;
   }
