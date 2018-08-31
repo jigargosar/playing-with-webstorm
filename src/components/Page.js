@@ -16,7 +16,7 @@ import {
 import { Base, Flex, Heading, Shadow, Tabs } from 'reakit'
 import { indexOf, map, pluck, tap } from 'ramda'
 import { Keyed } from '../shared-components/Keyed'
-import { observer } from 'mobx-react'
+import { Observer, observer } from 'mobx-react'
 
 const FloatingActionsContainer = composeHOC()(
   function FloatingActionsContainer({ children }) {
@@ -116,17 +116,21 @@ const TaskTabsContainer = composeHOC()(function TaskTabsContainer({
         current: indexOf(store.getCurrentTabId())(tabIds),
       }}
     >
-      {_tabProps => {
-        const tabProps = {
-          ..._tabProps,
-          show: tabId => {
-            console.debug('show', tabId)
-            store.setTabId(tabId)
-            return _tabProps.show(tabId)
-          },
-        }
-        return children(tabProps)
-      }}
+      {_tabProps => (
+        <Observer>
+          {() => {
+            const tabProps = {
+              ..._tabProps,
+              show: tabId => {
+                console.debug('show', tabId)
+                store.setTabId(tabId)
+                return _tabProps.show(tabId)
+              },
+            }
+            return children(tabProps)
+          }}
+        </Observer>
+      )}
     </TabsContainer>
   )
 })
