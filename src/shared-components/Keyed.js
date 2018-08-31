@@ -1,18 +1,27 @@
 import React, { Fragment } from 'react'
 import * as PropTypes from 'prop-types'
-import * as xr from 'mobx-react'
 import { mapIndexedA, propS } from '../lib/ramda-strict'
+import { observer } from 'mobx-react'
 
-export const Keyed = xr.observer(function Keyed({ list, getKey }) {
+export const Keyed = observer(function Keyed({
+  list,
+  getKey,
+  as: Component,
+  name,
+  ...otherProps
+}) {
   return mapIndexedA((element, index) => (
-    <Fragment key={getKey(element)}>{render(element, index)}</Fragment>
+    <Fragment key={getKey(element, index)}>
+      <Component {...{ [name]: element }} {...otherProps} />
+    </Fragment>
   ))(list)
 })
 
 Keyed.propTypes = {
   list: PropTypes.array.isRequired,
   getKey: PropTypes.func,
-  comp: PropTypes.element.isRequired,
+  as: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
 }
 
 Keyed.defaultProps = {
