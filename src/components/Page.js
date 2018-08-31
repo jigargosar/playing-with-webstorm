@@ -2,7 +2,6 @@ import React, { Fragment } from 'react'
 import { ScrollContainer, ViewportHeightContainer } from './containers'
 import * as PropTypes from 'prop-types'
 import { cn } from '../lib/react-ext'
-import { Models } from '../shared-components/Models'
 import { store } from './store'
 import { Btn } from './Btn'
 import { composeHOC } from './composeHOC'
@@ -33,19 +32,6 @@ const FloatingActionsContainer = composeHOC()(
     )
   },
 )
-
-// const TaskContent = composeHOC()(function TaskContent({
-//   task: { done, title },
-// }) {
-//   return <div className={cn('flex-auto pa2', { strike: done })}>{title}</div>
-// })
-//
-// TaskContent.propTypes = {
-//   task: PropTypes.shape({
-//     done: PropTypes.bool.isRequired,
-//     title: PropTypes.string.isRequired,
-//   }).isRequired,
-// }
 
 const TaskActions = composeHOC()(function TaskActions() {
   return (
@@ -87,10 +73,6 @@ Task.propTypes = {
   task: PropTypes.shape({ id: PropTypes.string.isRequired }).isRequired,
 }
 
-// const TaskItems = composeHOC()(function TaskItems({ tasks }) {
-//   return <Keyed models={tasks}>{task => <Task task={task} />}</Keyed>
-// })
-
 const TaskGroup = composeHOC()(function TaskGroup({
   group: { title, tasks },
   showContext,
@@ -101,9 +83,12 @@ const TaskGroup = composeHOC()(function TaskGroup({
         <Flex marginBottom={'1rem'} as={[Heading, 'h3']}>
           {title}
         </Flex>
-        <Models models={tasks}>
-          {task => <Task showContext={showContext} task={task} />}
-        </Models>
+        <Keyed
+          list={tasks}
+          as={Task}
+          getProps={task => ({ task })}
+          showContext={showContext}
+        />
       </div>
     </div>
   )
