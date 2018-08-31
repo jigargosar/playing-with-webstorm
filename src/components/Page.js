@@ -161,7 +161,7 @@ const MainContent = composeHOC()(function MainContent() {
   )
 })
 
-export const Page = composeHOC()(function Page() {
+export const Page = composeHOC()(function Page({ store }) {
   return (
     <ViewportHeightContainer className="bg-light-gray">
       <div className="pa3 relative">
@@ -182,3 +182,14 @@ export const Page = composeHOC()(function Page() {
     </ViewportHeightContainer>
   )
 })
+
+Page.propTypes = {
+  store: PropTypes.shape({
+    addMoreTasks: PropTypes.func.isRequired,
+    deleteAllTasks: PropTypes.func.isRequired,
+  }),
+}
+
+Page.defaultProps = {
+  store,
+}
