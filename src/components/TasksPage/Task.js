@@ -12,18 +12,6 @@ import {
 } from '../../reakit-components'
 
 const linkEvent = (fn, ...args) => tap(e => fn(...args, e))
-export const FloatingActionsContainer = composeHOC()(
-  function FloatingActionsContainer({ children }) {
-    return (
-      <div
-        className={'absolute z-1 flex items-center'}
-        style={{ right: '-1rem' }}
-      >
-        {children}
-      </div>
-    )
-  },
-)
 export const Task = composeHOC()(function Task({
   task,
   mouseEnterTask,
@@ -39,6 +27,7 @@ export const Task = composeHOC()(function Task({
   const hovered = isTaskHovered(task)
   return (
     <Base
+      relative
       className={cn('mv2 pv2 br2')}
       {...(selected
         ? { color: '#fff', backgroundColor: secondaryDark }
@@ -49,21 +38,15 @@ export const Task = composeHOC()(function Task({
       onMouseLeave={linkEvent(mouseLeaveTask, task)}
       onClickCapture={linkEvent(selectTask, task)}
     >
-      <FlexCenter relative>
-        {hovered && (
-          <FloatingActionsContainer>
-            <Group vertical className="pa2 bg-white-90 br3 shadow-1">
-              <Button onClick={linkEvent(toggleTaskDone, task)}>
-                {'Done'}
-              </Button>
-              <Button onClick={linkEvent(deleteTask, task)}>{'Delete'}</Button>
-            </Group>
-          </FloatingActionsContainer>
-        )}
-        <div className={cn('flex-auto ph2', { strike: task.done })}>
-          {task.title}
-        </div>
-      </FlexCenter>
+      {hovered && (
+        <FlexCenter absolute zIndex={1}>
+          <Group vertical className="pa2 bg-white-90 br3 shadow-1">
+            <Button onClick={linkEvent(toggleTaskDone, task)}>{'Done'}</Button>
+            <Button onClick={linkEvent(deleteTask, task)}>{'Delete'}</Button>
+          </Group>
+        </FlexCenter>
+      )}
+      <div className={cn('ph2', { strike: task.done })}>{task.title}</div>
       <small className={'ttu f7 ph2'}>{`@${task.context.title}`}</small>
     </Base>
   )
