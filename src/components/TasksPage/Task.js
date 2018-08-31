@@ -29,6 +29,7 @@ export const Task = composeHOC()(function Task({
       onClickCapture={linkEvent(selectTask, task)}
     >
       <Fit
+        className="hide-unless-parent-hovered"
         style={{
           backgroundColor: backgroundColor,
           zIndex: 5,

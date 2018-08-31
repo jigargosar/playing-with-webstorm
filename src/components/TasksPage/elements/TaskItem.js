@@ -1,14 +1,7 @@
 import PropTypes from 'prop-types'
-import { Base, css, Group, Hidden, styled } from 'reakit'
+import { Base, css, Group, styled } from 'reakit'
 import { ifProp } from 'styled-tools'
 import { primaryDark, primaryLight } from '../../../reakit-components'
-
-export const TaskFloatingActions = styled(Hidden)`
-  position: absolute;
-  right: -4rem;
-  z-index: 1;
-`
-const floatingActionsClass = `.${TaskFloatingActions.styledComponentId}`
 
 export const TaskItem = styled(Base).attrs({ className: 'mv2 pv2 br2' })`
   &:hover {
@@ -26,11 +19,8 @@ export const TaskItem = styled(Base).attrs({ className: 'mv2 pv2 br2' })`
     `,
   )};
 
-  & ${floatingActionsClass} {
+  &:not(:hover) .hide-unless-parent-hovered {
     display: none;
-  }
-  &:hover ${floatingActionsClass} {
-    display: block;
   }
 `
 
