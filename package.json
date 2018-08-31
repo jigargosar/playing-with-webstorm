@@ -25,6 +25,9 @@
       "post-commit": "git update-index -g"
     }
   },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
   "lint-staged": {
     "*.{js,json,css,md}": [
       "prettier --config package.json --write",
@@ -46,6 +49,7 @@
     "dlv": "^1.1.2",
     "dset": "^1.0.1",
     "faker": "^4.1.0",
+    "flow-bin": "^0.79.1",
     "freactal": "^2.0.3",
     "json-schema-faker": "^0.5.0-rc15",
     "mobx": "^5.1.0",
@@ -54,6 +58,7 @@
     "nanoid": "^1.2.1",
     "prop-types": "latest",
     "radium": "latest",
+    "raf-schd": "^4.0.0",
     "ramda": "^0.25.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",

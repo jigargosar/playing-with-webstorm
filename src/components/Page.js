@@ -86,7 +86,7 @@ Task.propTypes = {
 }
 
 // const TaskItems = composeHOC()(function TaskItems({ tasks }) {
-//   return <Models models={tasks}>{task => <Task task={task} />}</Models>
+//   return <Keyed models={tasks}>{task => <Task task={task} />}</Keyed>
 // })
 
 const TaskGroup = composeHOC()(function TaskGroup({
