@@ -62,7 +62,7 @@ export const TasksPage = composeHOC()(function Page({ store }) {
                     list={taskGroups}
                     getProps={group => ({ group })}
                     taskComponent={Task}
-                    taskProps={store => ({
+                    taskProps={task => ({
                       isTaskSelected: task => task === head(flattenedTaskList),
                     })}
                   />
