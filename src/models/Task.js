@@ -13,6 +13,7 @@ export function createNewTaskWithDefaults() {
     title: randomWords(),
     done: randomBoolean(),
     createdAt: Date.now(),
+    context: { id: 'in_basket', type: 'system' },
   }
   return Task(defaults)
 }
