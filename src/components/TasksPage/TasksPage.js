@@ -76,7 +76,7 @@ export const TasksPage = composeHOC()(function Page({ store }) {
                       selectTask: identity,
                       deleteTask: identity,
                       toggleTaskDone: identity,
-                      isTaskSelected: task => task === head('getFlatTaskList'),
+                      isTaskSelected: task => task === head(getFlatTaskList()),
                     }}
                   />
                 </Tabs.Panel>
