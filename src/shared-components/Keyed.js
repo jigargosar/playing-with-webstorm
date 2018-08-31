@@ -12,7 +12,6 @@ export const Keyed = observer(function Keyed({
   getProps,
   ...otherProps
 }) {
-  debugger
   return addIndex(map)((element, index) => (
     <Fragment key={getKey(element, index)}>
       <Component {...otherProps} {...getProps(element, index, list)} />
