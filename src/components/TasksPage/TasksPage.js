@@ -30,9 +30,12 @@ export const TasksPage = composeHOC()(function Page({ store }) {
       </div>
       <ScrollContainer>
         <TabsContainer>
-          {tabProps => (
+          {_tabProps => (
             <Observer>
               {() => {
+                const tabProps = merge(_tabProps)({
+                  tab: _tabProps.getCurrentId(),
+                })
                 return (
                   <Fragment>
                     <Tabs>
