@@ -38,7 +38,7 @@ export const TasksPage = composeHOC()(function Page({ store }) {
         </Group>
       </div>
       <ScrollContainer>
-        <TabsContainer initialState={{ ids: pluck('id') }}>
+        <TabsContainer initialState={{ ids: pluck('id')(tabList) }}>
           {tabProps => {
             const currentTabId = tabProps.getCurrentId() || tabsList[0].id
             const taskGroups = getTaskGroupsForTab(currentTabId, taskList)
