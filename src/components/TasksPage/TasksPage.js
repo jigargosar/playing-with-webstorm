@@ -63,8 +63,7 @@ export const TasksPage = composeHOC()(function Page({ store }) {
                     getProps={group => ({ group })}
                     taskComponent={Task}
                     taskProps={merge(store, {
-                      isTaskSelected: task =>
-                        task.id === head(flattenedTaskList).id,
+                      isTaskSelected: task => task === head(flattenedTaskList),
                     })}
                   />
                 </Tabs.Panel>
