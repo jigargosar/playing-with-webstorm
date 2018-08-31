@@ -7,6 +7,7 @@ import {
   indexOf,
   mapObjIndexed,
   pluck,
+  prop,
   propEq,
   reject,
   sortBy,
@@ -29,6 +30,7 @@ export const store = (() => {
       _hoveredTaskIdx: NaN,
       _tab: 'todo',
       get taskGroups() {
+        const doneFilterFn = 'done' === store._tab ? filter : reject
         return compose(
           groups =>
             ('done' === store._tab
@@ -38,6 +40,7 @@ export const store = (() => {
           values,
           mapObjIndexed((tasks, id) => ({ id, tasks })),
           groupBy(task => (task.done ? 'done' : 'todo')),
+          doneFilterFn(prop('done')),
         )(store._tasks)
       },
       get flattenedTasks() {
