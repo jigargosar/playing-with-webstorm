@@ -18,7 +18,7 @@ import { findIndexById } from '../lib/ramda-ext'
 import { xRemoveById, xSet, xTogglePropById } from './xUtils'
 import { observable } from 'mobx'
 import { expr } from 'mobx-utils'
-import { clampIdx, pathS, pathSOr, propS } from '../lib/ramda-strict'
+import { clampIdx, pathS, pathSOr } from '../lib/ramda-strict'
 
 const createSampleTasks = () => times(createNewTaskWithDefaults)(16)
 
@@ -115,8 +115,6 @@ export const store = (() => {
     addMoreTasks: () => store._tasks.unshift(...createSampleTasks()),
     toggleTaskDone: ({ id }) => xTogglePropById('done', id, store._tasks),
     deleteTask: ({ id }) => xRemoveById(id)(store._tasks),
-    deleteSelectedTask: () =>
-      xRemoveById(propS('selectedTaskId')(store))(store._tasks),
     selectTask: ({ id }) => store.setSelectedTaskId(id),
     mouseEnterTask: ({ id }) => store.setHoveredTaskWithId(id),
     mouseLeaveTask: ({ id }) => store.unSetHoveredTaskWithId(id),
