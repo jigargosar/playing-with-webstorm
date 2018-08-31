@@ -2,9 +2,9 @@ import * as PropTypes from 'prop-types'
 import React from 'react'
 import { tap } from 'ramda'
 import { composeHOC } from '../composeHOC'
-import { Group } from 'reakit'
 import {
   TaskFloatingActions,
+  TaskFloatingActionsContent,
   TaskItem,
   TaskItemContent,
 } from './elements/TaskItem'
@@ -35,10 +35,10 @@ export const Task = composeHOC()(function Task({
     >
       <TaskItemContent>
         <TaskFloatingActions visible={hovered}>
-          <Group vertical relative className="pa2 bg-white-90 br3 shadow-1">
+          <TaskFloatingActionsContent>
             <Button onClick={linkEvent(toggleTaskDone, task)}>{'Done'}</Button>
             <Button onClick={linkEvent(deleteTask, task)}>{'Delete'}</Button>
-          </Group>
+          </TaskFloatingActionsContent>
         </TaskFloatingActions>
 
         <FlexColumn>
