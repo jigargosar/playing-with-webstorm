@@ -3,9 +3,25 @@ import { Base, Group, Hidden, styled } from 'reakit'
 import { ifProp } from 'styled-tools'
 import { Flex, primaryDark, primaryLight } from '../../../reakit-components'
 
+export const TaskFloatingActions = styled(Hidden)`
+  position: absolute;
+  right: -4rem;
+  z-index: 1;
+`
+const tfaClass = `.${TaskFloatingActions.styledComponentId}`
+
 export const TaskItem = styled(Base).attrs({ className: 'mv2 pv2 br2' })`
-  ${ifProp('hovered', { backgroundColor: primaryLight })};
+  &:hover {
+    color: #000;
+    background-color: ${primaryLight};
+  }
   ${ifProp('selected', { color: '#fff', backgroundColor: primaryDark })};
+  & ${tfaClass} {
+    display: none;
+  }
+  &:hover ${tfaClass} {
+    display: block;
+  }
 `
 
 TaskItem.propTypes = {
@@ -22,11 +38,6 @@ export const TaskItemContent = styled(Flex)`
   flex-direction: row;
   align-items: center;
   position: relative;
-`
-export const TaskFloatingActions = styled(Hidden)`
-  position: absolute;
-  right: -4rem;
-  z-index: 1;
 `
 export const TaskFloatingActionsContent = styled(Group).attrs({
   vertical: true,

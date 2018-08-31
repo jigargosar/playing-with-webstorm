@@ -24,17 +24,13 @@ export const Task = composeHOC()(function Task({
   toggleTaskDone,
   deleteTask,
 }) {
-  const hovered = isTaskHovered(task)
   return (
     <TaskItem
       selected={isTaskSelected(task)}
-      hovered={hovered}
-      onMouseEnter={linkEvent(mouseEnterTask, task)}
-      onMouseLeave={linkEvent(mouseLeaveTask, task)}
       onClickCapture={linkEvent(selectTask, task)}
     >
       <TaskItemContent>
-        <TaskFloatingActions visible={hovered}>
+        <TaskFloatingActions visible={true}>
           <TaskFloatingActionsContent>
             <Button onClick={linkEvent(toggleTaskDone, task)}>{'Done'}</Button>
             <Button onClick={linkEvent(deleteTask, task)}>{'Delete'}</Button>
