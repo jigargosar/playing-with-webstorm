@@ -34,6 +34,7 @@ export const Task = composeHOC()(function Task({
   mouseLeaveTask,
   selectTask,
   toggleSelectedTaskDone,
+  toggleTaskDone,
   deleteSelectedTask,
 }) {
   const selected = isTaskSelected(task)
@@ -53,7 +54,7 @@ export const Task = composeHOC()(function Task({
       <FlexCenter relative>
         {hovered && (
           <FloatingActionsContainer>
-            <Btn onClick={toggleSelectedTaskDone}>{'Done'}</Btn>
+            <Btn onClick={linkEvent(toggleTaskDone, task)}>{'Done'}</Btn>
             <Btn onClick={deleteSelectedTask}>{'Delete'}</Btn>
           </FloatingActionsContainer>
         )}
@@ -73,5 +74,6 @@ Task.propTypes = {
   mouseLeaveTask: PropTypes.func.isRequired,
   selectTask: PropTypes.func.isRequired,
   toggleSelectedTaskDone: PropTypes.func.isRequired,
+  toggleTaskDone: PropTypes.func.isRequired,
   deleteSelectedTask: PropTypes.func.isRequired,
 }

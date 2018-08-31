@@ -49,6 +49,7 @@ export const MainContent = composeHOC()(function MainContent() {
                 'mouseLeaveTask',
                 'selectTask',
                 'toggleSelectedTaskDone',
+                'toggleTaskDone',
                 'deleteSelectedTask',
               ])(store)}
             />
