@@ -25,6 +25,7 @@ export const TaskItem = styled(Base).attrs({ className: 'mv2 pv2 br2' })`
       }
     `,
   )};
+
   & ${tfaClass} {
     display: none;
   }
