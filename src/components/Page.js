@@ -130,10 +130,10 @@ const MainContent = composeHOC()(function MainContent() {
         {_tabProps => {
           const tabProps = {
             ..._tabProps,
-            show: tab => {
-              console.debug('show', tab)
-              store.setTabId(tab)
-              return _tabProps.show(tab)
+            show: tabId => {
+              console.debug('show', tabId)
+              store.setTabId(tabId)
+              return _tabProps.show(tabId)
             },
           }
           return (
