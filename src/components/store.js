@@ -114,8 +114,6 @@ export const store = (() => {
     isTaskHovered: store.isTaskAtHovered,
     deleteAllTasks: () => store._tasks.clear(),
     addMoreTasks: () => store._tasks.unshift(...createSampleTasks()),
-    toggleSelectedTaskDone: () =>
-      store.toggleTaskDone(propS('selectedTaskId')(store)),
     toggleTaskDone: store.toggleTaskDone,
     deleteSelectedTask: () =>
       xRemoveById(propS('selectedTaskId')(store))(store._tasks),
