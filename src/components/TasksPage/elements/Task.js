@@ -23,3 +23,8 @@ Task.propTypes = {
   hovered: PropTypes.bool,
   selected: PropTypes.bool,
 }
+
+Task.defaultProps = {
+  hovered: false,
+  selected: false,
+}
