@@ -2,8 +2,12 @@ import * as PropTypes from 'prop-types'
 import React from 'react'
 import { tap } from 'ramda'
 import { composeHOC } from '../composeHOC'
-import { Group, Hidden } from 'reakit'
-import { TaskItem, TaskItemContent } from './elements/TaskItem'
+import { Group } from 'reakit'
+import {
+  TaskFloatingActions,
+  TaskItem,
+  TaskItemContent,
+} from './elements/TaskItem'
 import cn from 'classname'
 import { Button, FlexColumn } from '../../reakit-components'
 
@@ -30,12 +34,12 @@ export const Task = composeHOC()(function Task({
       onClickCapture={linkEvent(selectTask, task)}
     >
       <TaskItemContent>
-        <Hidden visible={hovered} absolute zIndex={1} right={'-4rem'}>
+        <TaskFloatingActions visible={hovered}>
           <Group vertical relative className="pa2 bg-white-90 br3 shadow-1">
             <Button onClick={linkEvent(toggleTaskDone, task)}>{'Done'}</Button>
             <Button onClick={linkEvent(deleteTask, task)}>{'Delete'}</Button>
           </Group>
-        </Hidden>
+        </TaskFloatingActions>
 
         <FlexColumn>
           <div className={cn('ph2', { strike: task.done })}>{task.title}</div>

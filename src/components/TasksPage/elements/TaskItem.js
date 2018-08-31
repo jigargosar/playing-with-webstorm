@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { Base, styled } from 'reakit'
+import { Base, Hidden, styled } from 'reakit'
 import { ifProp } from 'styled-tools'
 import { Flex, primaryDark, primaryLight } from '../../../reakit-components'
 
@@ -22,4 +22,9 @@ export const TaskItemContent = styled(Flex)`
   flex-direction: row;
   align-items: center;
   position: relative;
+`
+export const TaskFloatingActions = styled(Hidden)`
+  position: absolute;
+  right: -4rem;
+  z-index: 1;
 `
