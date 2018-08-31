@@ -1,55 +1,10 @@
-import { createNewTaskWithDefaults, systemContextLookup } from '../models/Task'
-import {
-  compose,
-  filter,
-  flatten,
-  groupBy,
-  indexOf,
-  mapObjIndexed,
-  pluck,
-  prop,
-  propEq,
-  reject,
-  sortBy,
-  times,
-  values,
-} from 'ramda'
+import { compose, flatten, pluck } from 'ramda'
 import { findIndexById } from '../lib/ramda-ext'
 import { xRemoveById, xSet, xTogglePropById } from './xUtils'
 import { observable } from 'mobx'
 import { expr } from 'mobx-utils'
 import { clampIdx, pathS } from '../lib/ramda-strict'
-
-const createSampleTasks = () => times(createNewTaskWithDefaults)(16)
-
-const tabs = [
-  { id: 'in_basket', title: 'Inbox' },
-  { id: 'todo', title: 'TODO' },
-  { id: 'some_day', title: 'SOME DAY' },
-  { id: 'done', title: 'DONE' },
-]
-
-function getTaskGroups(tabId, tasks) {
-  return 'done' === tabId
-    ? [
-        compose(
-          tasks => ({ id: 'done', title: 'Done', tasks }),
-          filter(prop('done')),
-        )(tasks),
-      ]
-    : compose(
-        filter(propEq('id')(tabId)),
-        sortBy(group => indexOf(group.id, ['in_basket', 'some_day'])),
-        values,
-        mapObjIndexed((tasks, id) => ({
-          id,
-          title: systemContextLookup[id].title,
-          tasks,
-        })),
-        groupBy(pathS(['context', 'id'])),
-        reject(prop('done')),
-      )(tasks)
-}
+import { createSampleTasks, getTaskGroups, tabs } from '../models'
 
 export const store = (() => {
   const store = observable.object(
