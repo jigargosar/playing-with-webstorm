@@ -9,6 +9,7 @@ import {
   pluck,
   prop,
   propEq,
+  reject,
   sortBy,
   times,
   values,
@@ -30,7 +31,10 @@ export const store = (() => {
       _tab: 'todo',
       get taskGroups() {
         return compose(
-          filter(propEq('id', store._tab)),
+          groups =>
+            ('done' === store._tab
+              ? filter(propEq('id', 'done'))
+              : reject(propEq('id', 'done')))(groups),
           sortBy(group => indexOf(group.id, ['todo', 'done'])),
           values,
           mapObjIndexed((tasks, id) => ({ id, tasks })),
