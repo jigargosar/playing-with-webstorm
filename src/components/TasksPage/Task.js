@@ -13,6 +13,7 @@ import {
 } from '../../reakit-components'
 
 const linkEvent = (fn, ...args) => tap(e => fn(...args, e))
+
 export const Task = composeHOC()(function Task({
   task,
   mouseEnterTask,
