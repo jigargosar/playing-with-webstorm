@@ -132,6 +132,7 @@ const MainContent = composeHOC()(function MainContent() {
                       getProps={({ id, title }) => ({
                         tab: id,
                         children: title,
+                        ...tabProps,
                       })}
                       list={store.getTabs()}
                     />
