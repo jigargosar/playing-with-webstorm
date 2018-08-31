@@ -8,6 +8,7 @@ export const TaskGroup = composeHOC()(function TaskGroup({
   group: { title, tasks },
   showContext,
   taskComponent: Task,
+  taskProps,
 }) {
   return (
     <div className="center measure mv3">
@@ -20,6 +21,7 @@ export const TaskGroup = composeHOC()(function TaskGroup({
           as={Task}
           getProps={task => ({ task })}
           showContext={showContext}
+          {...taskProps}
         />
       </div>
     </div>
@@ -34,6 +36,7 @@ TaskGroup.propTypes = {
   }).isRequired,
   showContext: PropTypes.bool,
   taskComponent: PropTypes.func.isRequired,
+  taskProps: PropTypes.object.isRequired,
 }
 
 TaskGroup.defaultProps = {
