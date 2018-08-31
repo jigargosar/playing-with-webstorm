@@ -3,9 +3,9 @@ import React from 'react'
 import { tap } from 'ramda'
 import { composeHOC } from '../composeHOC'
 import { Group, Hidden } from 'reakit'
-import { TaskItem } from './elements/TaskItem'
+import { TaskContentWrapper, TaskItem } from './elements/TaskItem'
 import cn from 'classname'
-import { Button, FlexCenter, FlexColumn } from '../../reakit-components'
+import { Button, FlexColumn } from '../../reakit-components'
 
 const linkEvent = (fn, ...args) => tap(e => fn(...args, e))
 
@@ -29,7 +29,7 @@ export const Task = composeHOC()(function Task({
       onMouseLeave={linkEvent(mouseLeaveTask, task)}
       onClickCapture={linkEvent(selectTask, task)}
     >
-      <FlexCenter relative>
+      <TaskContentWrapper>
         <Hidden visible={hovered} absolute zIndex={1} right={'-4rem'}>
           <Group vertical relative className="pa2 bg-white-90 br3 shadow-1">
             <Button onClick={linkEvent(toggleTaskDone, task)}>{'Done'}</Button>
@@ -41,7 +41,7 @@ export const Task = composeHOC()(function Task({
           <div className={cn('ph2', { strike: task.done })}>{task.title}</div>
           <small className={'ttu f7 ph2'}>{`@${task.context.title}`}</small>
         </FlexColumn>
-      </FlexCenter>
+      </TaskContentWrapper>
     </TaskItem>
   )
 })

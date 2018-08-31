@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { Base, styled } from 'reakit'
 import { ifProp } from 'styled-tools'
-import { primaryDark, primaryLight } from '../../../reakit-components'
+import { Flex, primaryDark, primaryLight } from '../../../reakit-components'
 
 export const TaskItem = styled(Base).attrs({ className: 'mv2 pv2 br2' })`
   ${ifProp('hovered', { backgroundColor: primaryLight })};
@@ -17,3 +17,9 @@ TaskItem.defaultProps = {
   hovered: false,
   selected: false,
 }
+
+export const TaskContentWrapper = styled(Flex)`
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+`
