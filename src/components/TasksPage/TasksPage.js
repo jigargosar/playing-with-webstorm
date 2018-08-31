@@ -26,11 +26,11 @@ import identity from 'ramda/es/identity'
 const getTaskGroupsFromState = ({ taskList, ids, current }) =>
   getTaskGroupsForTab(ids[current], taskList)
 
+const getFlatTaskList = compose(
+  flattenGroupTasks,
+  getTaskGroupsFromState,
+)
 export const TasksPage = composeHOC()(function Page({ store }) {
-  const getFlatTaskList = compose(
-    flattenGroupTasks,
-    getTaskGroupsFromState,
-  )
   return (
     <ViewportHeightContainer className="bg-light-gray">
       <div className="pa3 relative">
@@ -50,9 +50,10 @@ export const TasksPage = composeHOC()(function Page({ store }) {
           selectors={{
             getTaskGroups: () => getTaskGroupsFromState,
             getFlatTaskList: () => getFlatTaskList,
+            selectedTask: () => head(getFlatTaskList()),
           }}
         >
-          {({ getTaskGroups, getFlatTaskList, getCurrentId, ...tabProps }) => {
+          {({ getTaskGroups, selectedTask, getCurrentId, ...tabProps }) => {
             return (
               <Fragment>
                 <Tabs>
@@ -76,7 +77,7 @@ export const TasksPage = composeHOC()(function Page({ store }) {
                       selectTask: identity,
                       deleteTask: identity,
                       toggleTaskDone: identity,
-                      isTaskSelected: task => task === head(getFlatTaskList()),
+                      isTaskSelected: task => task === selectedTask,
                     }}
                   />
                 </Tabs.Panel>
