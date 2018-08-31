@@ -100,7 +100,7 @@ export const store = (() => {
 
   return {
     setTabId: tab => (store._tab = tab),
-    getTab: () => store._tab,
+    getCurrentTabId: () => store._tab,
     getTabs: () =>
       expr(() => [
         { id: 'in_basket', title: 'Inbox' },

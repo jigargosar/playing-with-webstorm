@@ -125,7 +125,10 @@ const MainContent = composeHOC()(function MainContent() {
   return (
     <Fragment>
       <Tabs.Container
-        initialState={{ ids: tabIds, current: indexOf(store.getTab())(tabIds) }}
+        initialState={{
+          ids: tabIds,
+          current: indexOf(store.getCurrentTabId())(tabIds),
+        }}
       >
         {_tabProps => {
           const tabProps = {
@@ -147,7 +150,7 @@ const MainContent = composeHOC()(function MainContent() {
                       </Tabs.Tab>
                     ))(store.getTabs())}
                   </Tabs>
-                  <Tabs.Panel tab={store.getTab()} {...tabProps}>
+                  <Tabs.Panel tab={store.getCurrentTabId()} {...tabProps}>
                     {map(group => <TaskGroup key={group.id} group={group} />)(
                       store.getTaskGroups(),
                     )}
