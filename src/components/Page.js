@@ -60,9 +60,8 @@ const Task = composeHOC()(function Task({ task }) {
   const selected = store.isTaskSelected(task)
   const hovered = store.isTaskHovered(task)
   return (
-    <FlexCenter
-      className={cn('br2')}
-      relative
+    <div
+      className={cn('mv3 br2')}
       {...(selected
         ? { color: '#fff', backgroundColor: secondaryDark }
         : hovered
@@ -72,12 +71,14 @@ const Task = composeHOC()(function Task({ task }) {
       onMouseLeave={linkEvent(store.mouseLeaveTask, task)}
       onClickCapture={linkEvent(store.selectTask, task)}
     >
-      {hovered && <TaskActions />}
-      <div className={cn('flex-auto pa2', { strike: task.done })}>
-        {task.title}
-      </div>
-      <div>{task.context.title}</div>
-    </FlexCenter>
+      <FlexCenter relative>
+        {hovered && <TaskActions />}
+        <div className={cn('flex-auto ph2', { strike: task.done })}>
+          {task.title}
+        </div>
+      </FlexCenter>
+      <small className={'ttu f7 ph2'}>{`@${task.context.title}`}</small>
+    </div>
   )
 })
 Task.propTypes = {
