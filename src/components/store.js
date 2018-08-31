@@ -51,9 +51,6 @@ export const store = (() => {
       _selectedTaskIdx: 0,
       _tab: 'in_basket',
 
-      get doneTaskGroup() {
-        return
-      },
       get taskGroups() {
         return getTasksGroups('in_basket', store._tasks)
       },
