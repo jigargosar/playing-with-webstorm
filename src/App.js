@@ -4,12 +4,6 @@ import { GlobalStyles } from './GlobalStyles'
 import { Provider } from 'reakit'
 import { observer } from 'mobx-react'
 
-const theme = {
-  Button: `
-    
-  `,
-}
-
 class App extends Component {
   state = {
     hasError: false,
@@ -21,7 +15,7 @@ class App extends Component {
         {this.state.hasError ? (
           'Error'
         ) : (
-          <Provider theme={theme}>
+          <Provider>
             <Fragment>
               <GlobalStyles />
               <div
