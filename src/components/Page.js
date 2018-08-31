@@ -16,6 +16,7 @@ import {
 import { Base, Flex, Heading, Shadow, Tabs } from 'reakit'
 import { indexOf, map, pluck, tap } from 'ramda'
 import { Observer } from 'mobx-react'
+import { Keyed } from '../shared-components/Keyed'
 
 const FloatingActionsContainer = composeHOC()(
   function FloatingActionsContainer({ children }) {
@@ -144,13 +145,14 @@ const MainContent = composeHOC()(function MainContent() {
               {() => (
                 <Fragment>
                   <Tabs>
-                    <Models models={store.getTabs()}>
-                      {({ id, title }) => (
-                        <Tabs.Tab tab={id} {...tabProps}>
-                          {title}
-                        </Tabs.Tab>
-                      )}
-                    </Models>
+                    <Keyed
+                      as={Tabs.Tab}
+                      getProps={({ id, title }) => ({
+                        tab: id,
+                        children: title,
+                      })}
+                      list={store.getTabs()}
+                    />
                   </Tabs>
                   <Tabs.Panel tab={store.getCurrentTabId()} {...tabProps}>
                     {map(group => <TaskGroup key={group.id} group={group} />)(
