@@ -6,13 +6,7 @@ import { Group, Hidden } from 'reakit'
 import { Task as StyledTask } from './elements/Task'
 
 import cn from 'classname'
-import {
-  Button,
-  FlexCenter,
-  FlexColumn,
-  primaryDark,
-  primaryLight,
-} from '../../reakit-components'
+import { Button, FlexCenter, FlexColumn } from '../../reakit-components'
 
 const linkEvent = (fn, ...args) => tap(e => fn(...args, e))
 
@@ -27,16 +21,11 @@ export const Task = composeHOC()(function Task({
   toggleTaskDone,
   deleteTask,
 }) {
-  const selected = isTaskSelected(task)
   const hovered = isTaskHovered(task)
   return (
     <StyledTask
-      className={cn('mv2 pv2 br2')}
-      {...(selected
-        ? { color: '#fff', backgroundColor: primaryDark }
-        : hovered
-          ? { backgroundColor: primaryLight }
-          : {})}
+      selected={isTaskSelected(task)}
+      hovered={hovered}
       onMouseEnter={linkEvent(mouseEnterTask, task)}
       onMouseLeave={linkEvent(mouseLeaveTask, task)}
       onClickCapture={linkEvent(selectTask, task)}
