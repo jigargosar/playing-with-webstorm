@@ -1,9 +1,12 @@
 import nanoid from 'nanoid'
 import { randomArrayElement, randomBoolean, randomWords } from '../lib/fake'
 import { validate } from '../lib/validate'
+import { assert } from '../lib/assert'
+import { isEmpty } from 'ramda'
 
-function Task({ id, title, done, createdAt }) {
-  validate('SSBN', [id, title, done, createdAt])
+function Task({ id, title, done, createdAt, ...other }) {
+  validate('SSBNA', [id, title, done, createdAt, other])
+  assert(isEmpty(other))
   return { id, title, done, createdAt }
 }
 
