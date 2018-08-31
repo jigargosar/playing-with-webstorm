@@ -76,7 +76,7 @@ const Task = composeHOC()(function Task({ task }) {
       <div className={cn('flex-auto pa2', { strike: task.done })}>
         {task.title}
       </div>
-      <div>Context</div>
+      <div>{task.context.title}</div>
     </FlexCenter>
   )
 })
