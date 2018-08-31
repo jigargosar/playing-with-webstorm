@@ -2,10 +2,13 @@ import * as PropTypes from 'prop-types'
 import React from 'react'
 import { tap } from 'ramda'
 import { composeHOC } from '../composeHOC'
-import { TaskActionsContent, TaskItem } from './elements/TaskItem'
+import {
+  TaskActionsContent,
+  TaskHoverActions,
+  TaskItem,
+} from './elements/TaskItem'
 import cn from 'classname'
 import { Button } from '../../reakit-components'
-import { Fit } from 'reakit'
 
 const linkEvent = (fn, ...args) => tap(e => fn(...args, e))
 
@@ -28,19 +31,12 @@ export const Task = composeHOC()(function Task({
       selected={isTaskSelected(task)}
       onClickCapture={linkEvent(selectTask, task)}
     >
-      <Fit
-        className="hide-unless-parent-hovered"
-        style={{
-          zIndex: 1,
-          left: 'calc( 100% - 3rem)',
-          top: '-50%',
-        }}
-      >
+      <TaskHoverActions>
         <TaskActionsContent>
           <Button onClick={linkEvent(toggleTaskDone, task)}>{'Done'}</Button>
           <Button onClick={linkEvent(deleteTask, task)}>{'Delete'}</Button>
         </TaskActionsContent>
-      </Fit>
+      </TaskHoverActions>
       <div className={cn('ph2', { strike: task.done })}>{task.title}</div>
       <small className={'ttu f7 ph2'}>{`@${task.context.title}`}</small>
     </TaskItem>
