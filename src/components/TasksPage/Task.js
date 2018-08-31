@@ -2,14 +2,9 @@ import * as PropTypes from 'prop-types'
 import React from 'react'
 import { tap } from 'ramda'
 import { composeHOC } from '../composeHOC'
-import {
-  TaskFloatingActions,
-  TaskFloatingActionsContent,
-  TaskItem,
-  TaskItemContent,
-} from './elements/TaskItem'
+import { TaskFloatingActionsContent, TaskItem } from './elements/TaskItem'
 import cn from 'classname'
-import { Button, FlexColumn } from '../../reakit-components'
+import { Button } from '../../reakit-components'
 import { Fit } from 'reakit'
 
 const linkEvent = (fn, ...args) => tap(e => fn(...args, e))
@@ -46,19 +41,8 @@ export const Task = composeHOC()(function Task({
           <Button onClick={linkEvent(deleteTask, task)}>{'Delete'}</Button>
         </TaskFloatingActionsContent>
       </Fit>
-      <TaskItemContent>
-        <TaskFloatingActions visible={true}>
-          <TaskFloatingActionsContent>
-            <Button onClick={linkEvent(toggleTaskDone, task)}>{'Done'}</Button>
-            <Button onClick={linkEvent(deleteTask, task)}>{'Delete'}</Button>
-          </TaskFloatingActionsContent>
-        </TaskFloatingActions>
-
-        <FlexColumn>
-          <div className={cn('ph2', { strike: task.done })}>{task.title}</div>
-          <small className={'ttu f7 ph2'}>{`@${task.context.title}`}</small>
-        </FlexColumn>
-      </TaskItemContent>
+      <div className={cn('ph2', { strike: task.done })}>{task.title}</div>
+      <small className={'ttu f7 ph2'}>{`@${task.context.title}`}</small>
     </TaskItem>
   )
 })
