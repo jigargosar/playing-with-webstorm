@@ -133,6 +133,7 @@ const MainContent = composeHOC()(function MainContent() {
                   </Tabs>
                   <Tabs.Panel tab={'todo'} {...tabProps}>
                     <TaskGroup title={'Todo'} tasks={store.getTodoTasks()} />
+                    {console.log(store.getTodoGroups()) && false}
                   </Tabs.Panel>
                   <Tabs.Panel tab={'done'} {...tabProps}>
                     <TaskGroup title={'Done'} tasks={store.getDoneTasks()} />

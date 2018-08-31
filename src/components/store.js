@@ -87,6 +87,8 @@ export const store = (() => {
     setTab: tab => (store._tab = tab),
     getTab: () => store._tab,
     getTodoTasks: () => expr(() => reject(prop('done'))(store._tasks)),
+    getTodoGroups: () =>
+      expr(() => reject(propEq('id', 'done'))(store.taskGroups)),
     getDoneTasks: () => expr(() => filter(prop('done'))(store._tasks)),
     isTaskSelected: store.isTaskAtSelected,
     isTaskHovered: store.isTaskAtHovered,
