@@ -18,7 +18,7 @@ TaskItem.defaultProps = {
   selected: false,
 }
 
-export const HoverActionsContentWrapper = styled(Flex)`
+export const TaskItemContent = styled(Flex)`
   flex-direction: row;
   align-items: center;
   position: relative;
