@@ -1,21 +1,20 @@
-import { composeHOC } from './composeHOC'
+import { composeHOC } from '../composeHOC'
 import { Base, Flex, Heading } from 'reakit'
-import { Keyed } from '../shared-components/Keyed'
+import { Keyed } from '../../shared-components/Keyed'
 import * as PropTypes from 'prop-types'
 import React, { Fragment } from 'react'
 import { indexOf, pluck, tap } from 'ramda'
-import { store } from './store'
+import { store } from '../store'
 import {
   FlexCenter,
   primaryLight,
   secondaryDark,
   Tabs,
-  TabsContainer,
   TabsTab,
-} from '../reakit-components'
-import { Observer } from 'mobx-react'
+} from '../../reakit-components/index'
 import cn from 'classname'
-import { Btn } from './Btn'
+import { Btn } from '../Btn'
+import { TaskTabsContainer } from './TaskTabsContainer'
 
 const FloatingActionsContainer = composeHOC()(
   function FloatingActionsContainer({ children }) {
@@ -98,31 +97,6 @@ TaskGroup.propTypes = {
 TaskGroup.defaultProps = {
   showContext: true,
 }
-const TaskTabsContainer = composeHOC()(function TaskTabsContainer({
-  initialState,
-  children,
-  setTabId,
-}) {
-  return (
-    <TabsContainer initialState={initialState}>
-      {_tabProps => (
-        <Observer>
-          {() => {
-            const tabProps = {
-              ..._tabProps,
-              show: tabId => {
-                console.debug('show', tabId)
-                setTabId(tabId)
-                return _tabProps.show(tabId)
-              },
-            }
-            return children(tabProps)
-          }}
-        </Observer>
-      )}
-    </TabsContainer>
-  )
-})
 
 export const MainContent = composeHOC()(function MainContent() {
   const tabsList = store.getTabs()

@@ -5,7 +5,7 @@ import { store } from './store'
 import { composeHOC } from './composeHOC'
 import { Button, Group } from '../reakit-components'
 import { Shadow } from 'reakit'
-import { MainContent } from './MainContent'
+import { MainContent } from './TasksPage/MainContent'
 
 export const TasksPage = composeHOC()(function Page({ store }) {
   return (
