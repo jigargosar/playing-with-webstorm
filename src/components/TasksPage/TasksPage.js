@@ -24,8 +24,6 @@ import { head, pluck } from 'ramda'
 import identity from 'ramda/es/identity'
 
 export const TasksPage = composeHOC()(function Page({ store }) {
-  const tabsList = tabList
-  const taskList = createSampleTaskList()
   return (
     <ViewportHeightContainer className="bg-light-gray">
       <div className="pa3 relative">
@@ -38,9 +36,13 @@ export const TasksPage = composeHOC()(function Page({ store }) {
       </div>
       <ScrollContainer>
         <TabsContainer
-          initialState={{ ids: pluck('id')(tabList), taskList, tabsList }}
+          initialState={{
+            ids: pluck('id')(tabList),
+            taskList: createSampleTaskList(),
+            tabList,
+          }}
         >
-          {({ taskList, tabsList, ...tabProps }) => {
+          {({ taskList, tabsList: tabList, ...tabProps }) => {
             const currentTabId = tabProps.getCurrentId()
             const taskGroups = getTaskGroupsForTab(currentTabId, taskList)
             const flattenedTaskList = flattenGroupTasks(taskGroups)
@@ -54,7 +56,7 @@ export const TasksPage = composeHOC()(function Page({ store }) {
                       children: title,
                       ...tabProps,
                     })}
-                    list={tabsList}
+                    list={tabList}
                   />
                 </Tabs>
                 <Tabs.Panel tab={currentTabId} {...tabProps}>
