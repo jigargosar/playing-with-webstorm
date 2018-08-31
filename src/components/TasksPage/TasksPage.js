@@ -52,8 +52,7 @@ export const TasksPage = composeHOC()(function Page({ store }) {
               ),
           }}
         >
-          {({ getTaskGroups, getCurrentId, ...tabProps }) => {
-            const flattenedTaskList = flattenGroupTasks(getTaskGroups())
+          {({ getTaskGroups, getFlatTaskList, getCurrentId, ...tabProps }) => {
             return (
               <Fragment>
                 <Tabs>
@@ -77,7 +76,7 @@ export const TasksPage = composeHOC()(function Page({ store }) {
                       selectTask: identity,
                       deleteTask: identity,
                       toggleTaskDone: identity,
-                      isTaskSelected: task => task === head(flattenedTaskList),
+                      isTaskSelected: task => task === head('getFlatTaskList'),
                     }}
                   />
                 </Tabs.Panel>
