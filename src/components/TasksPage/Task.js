@@ -2,7 +2,7 @@ import * as PropTypes from 'prop-types'
 import React from 'react'
 import { tap } from 'ramda'
 import { composeHOC } from '../composeHOC'
-import { Base, Flex, Group } from 'reakit'
+import { Base, Group } from 'reakit'
 import cn from 'classname'
 import {
   Button,
@@ -26,7 +26,7 @@ export const Task = composeHOC()(function Task({
   const selected = isTaskSelected(task)
   const hovered = isTaskHovered(task)
   return (
-    <Base
+    <FlexCenter
       relative
       className={cn('mv2 pv2 br2')}
       {...(selected
@@ -39,22 +39,16 @@ export const Task = composeHOC()(function Task({
       onClickCapture={linkEvent(selectTask, task)}
     >
       {hovered && (
-        <FlexCenter absolute zIndex={1} right={-1}>
-          <Base
-            direction="column"
-            as={[Flex, Group]}
-            relative
-            vertical
-            className="pa2 bg-white-90 br3 shadow-1"
-          >
+        <Base absolute zIndex={1} right={-1}>
+          <Group vertical relative className="pa2 bg-white-90 br3 shadow-1">
             <Button onClick={linkEvent(toggleTaskDone, task)}>{'Done'}</Button>
             <Button onClick={linkEvent(deleteTask, task)}>{'Delete'}</Button>
-          </Base>
-        </FlexCenter>
+          </Group>
+        </Base>
       )}
       <div className={cn('ph2', { strike: task.done })}>{task.title}</div>
       <small className={'ttu f7 ph2'}>{`@${task.context.title}`}</small>
-    </Base>
+    </FlexCenter>
   )
 })
 Task.propTypes = {
