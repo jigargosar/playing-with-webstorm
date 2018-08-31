@@ -1,12 +1,9 @@
 import * as PropTypes from 'prop-types'
 import React from 'react'
-import { tap } from 'ramda'
 import { composeHOC } from '../../composeHOC'
 import { Base } from 'reakit'
 import cn from 'classname'
 import { primaryDark, primaryLight } from '../../../reakit-components'
-
-const linkEvent = (fn, ...args) => tap(e => fn(...args, e))
 
 export const Task = composeHOC()(function Task({
   selected,
