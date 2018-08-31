@@ -106,49 +106,47 @@ TaskGroup.defaultProps = {
 const MainContent = composeHOC()(function MainContent() {
   const tabIds = pluck('id')(store.getTabs())
   return (
-    <Fragment>
-      <Tabs.Container
-        initialState={{
-          ids: tabIds,
-          current: indexOf(store.getCurrentTabId())(tabIds),
-        }}
-      >
-        {_tabProps => {
-          const tabProps = {
-            ..._tabProps,
-            show: tabId => {
-              console.debug('show', tabId)
-              store.setTabId(tabId)
-              return _tabProps.show(tabId)
-            },
-          }
-          return (
-            <Observer>
-              {() => (
-                <Fragment>
-                  <Tabs>
-                    <Keyed
-                      as={TabsTab}
-                      getProps={({ id, title }) => ({
-                        tab: id,
-                        children: title,
-                        ...tabProps,
-                      })}
-                      list={store.getTabs()}
-                    />
-                  </Tabs>
-                  <Tabs.Panel tab={store.getCurrentTabId()} {...tabProps}>
-                    {map(group => <TaskGroup key={group.id} group={group} />)(
-                      store.getTaskGroups(),
-                    )}
-                  </Tabs.Panel>
-                </Fragment>
-              )}
-            </Observer>
-          )
-        }}
-      </Tabs.Container>
-    </Fragment>
+    <Tabs.Container
+      initialState={{
+        ids: tabIds,
+        current: indexOf(store.getCurrentTabId())(tabIds),
+      }}
+    >
+      {_tabProps => {
+        const tabProps = {
+          ..._tabProps,
+          show: tabId => {
+            console.debug('show', tabId)
+            store.setTabId(tabId)
+            return _tabProps.show(tabId)
+          },
+        }
+        return (
+          <Observer>
+            {() => (
+              <Fragment>
+                <Tabs>
+                  <Keyed
+                    as={TabsTab}
+                    getProps={({ id, title }) => ({
+                      tab: id,
+                      children: title,
+                      ...tabProps,
+                    })}
+                    list={store.getTabs()}
+                  />
+                </Tabs>
+                <Tabs.Panel tab={store.getCurrentTabId()} {...tabProps}>
+                  {map(group => <TaskGroup key={group.id} group={group} />)(
+                    store.getTaskGroups(),
+                  )}
+                </Tabs.Panel>
+              </Fragment>
+            )}
+          </Observer>
+        )
+      }}
+    </Tabs.Container>
   )
 })
 
