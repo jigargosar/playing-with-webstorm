@@ -142,7 +142,7 @@ const MainContent = composeHOC()(function MainContent() {
                 <Fragment>
                   <Tabs>
                     {map(({ id, tab, title }) => (
-                      <Tabs.Tab key={id} tab={tab} {...tabProps}>
+                      <Tabs.Tab key={tab} tab={tab} {...tabProps}>
                         {title}
                       </Tabs.Tab>
                     ))(store.getTabs())}
