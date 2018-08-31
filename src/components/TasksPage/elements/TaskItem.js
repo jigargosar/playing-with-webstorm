@@ -35,12 +35,10 @@ export const TaskItem = styled(Base).attrs({ className: 'mv2 pv2 br2' })`
 `
 
 TaskItem.propTypes = {
-  hovered: PropTypes.bool,
   selected: PropTypes.bool,
 }
 
 TaskItem.defaultProps = {
-  hovered: false,
   selected: false,
 }
 
