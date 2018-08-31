@@ -14,7 +14,7 @@ import {
   secondaryDark,
 } from '../reakit-components'
 import { Flex, Heading, Shadow, Tabs } from 'reakit'
-import { indexOf, tap } from 'ramda'
+import { indexOf, map, tap } from 'ramda'
 import { Observer } from 'mobx-react'
 
 const FloatingActionsContainer = composeHOC()(
