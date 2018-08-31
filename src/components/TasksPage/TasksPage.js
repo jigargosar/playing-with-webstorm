@@ -35,7 +35,7 @@ export const TasksPage = composeHOC()(function Page({ store }) {
             <Observer>
               {() => {
                 const tabProps = merge(_tabProps)({
-                  tab: _tabProps.getCurrentId(),
+                  tab: _tabProps.getCurrentId() || tabsList[0].id,
                 })
                 return (
                   <Fragment>
@@ -50,10 +50,7 @@ export const TasksPage = composeHOC()(function Page({ store }) {
                         list={tabsList}
                       />
                     </Tabs>
-                    <Tabs.Panel
-                      tab={tabProps.getCurrentId() || tabsList[0].id}
-                      {...tabProps}
-                    >
+                    <Tabs.Panel {...tabProps}>
                       <Keyed
                         as={TaskGroup}
                         list={store.getTaskGroups()}
