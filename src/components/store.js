@@ -8,6 +8,7 @@ import {
   mapObjIndexed,
   pluck,
   prop,
+  propEq,
   reject,
   sortBy,
   times,
@@ -40,6 +41,7 @@ export const store = (() => {
           return [store.doneTaskGroup]
         }
         return compose(
+          filter(propEq('title')(store._tab)),
           sortBy(group => indexOf(group.id, ['in_basket', 'some_day'])),
           values,
           mapObjIndexed((tasks, id) => ({
