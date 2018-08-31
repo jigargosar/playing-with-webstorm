@@ -23,12 +23,9 @@ import {
 import { head, pluck } from 'ramda'
 import identity from 'ramda/es/identity'
 
-const getTaskGroupsFromState = ({
-  taskList,
-  ids,
-  current,
-  currentTabId: tabId = ids[current],
-}) => getTaskGroupsForTab(tabId, taskList)
+const getTaskGroupsFromState = ({ taskList, ids, current }) =>
+  getTaskGroupsForTab(ids[current], taskList)
+
 export const TasksPage = composeHOC()(function Page({ store }) {
   return (
     <ViewportHeightContainer className="bg-light-gray">
