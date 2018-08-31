@@ -1,10 +1,14 @@
-import { compose, flatten, pluck } from 'ramda'
 import { findIndexById } from '../lib/ramda-ext'
 import { xRemoveById, xSet, xTogglePropById } from './xUtils'
 import { observable } from 'mobx'
 import { expr } from 'mobx-utils'
 import { clampIdx, pathS } from '../lib/ramda-strict'
-import { createSampleTaskList, getTaskGroups, tabList } from '../models'
+import {
+  createSampleTaskList,
+  flattenGroupTasks,
+  getTaskGroups,
+  tabList,
+} from '../models'
 
 export const store = (() => {
   const store = observable.object(
@@ -17,16 +21,13 @@ export const store = (() => {
         return getTaskGroups('in_basket', store._tasks)
       },
       get flattenedTasks() {
-        return compose(
-          flatten,
-          pluck('tasks'),
-        )(store.taskGroups)
+        return flattenGroupTasks(store.taskGroups)
       },
       get selectedTaskIdx() {
         return clampIdx(store._selectedTaskIdx, store.flattenedTasks)
       },
       get selectedTaskId() {
-        return pathS(['flattenedTasks', store.selectedTaskIdx, 'id'])(store)
+        return pathS(['flattenGroupTasks', store.selectedTaskIdx, 'id'])(store)
       },
       isTaskAtSelected: ({ id }) => {
         return expr(() => store.selectedTaskId === id)

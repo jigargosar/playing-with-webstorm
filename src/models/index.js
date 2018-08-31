@@ -1,9 +1,11 @@
 import {
   compose,
   filter,
+  flatten,
   groupBy,
   indexOf,
   mapObjIndexed,
+  pluck,
   prop,
   propEq,
   reject,
@@ -43,4 +45,11 @@ export function getTaskGroups(tabId, tasks) {
         groupBy(pathS(['context', 'id'])),
         reject(prop('done')),
       )(tasks)
+}
+
+export function flattenGroupTasks(taskGroups) {
+  return compose(
+    flatten,
+    pluck('tasks'),
+  )(taskGroups)
 }

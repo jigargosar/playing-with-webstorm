@@ -14,13 +14,19 @@ import { Shadow } from 'reakit'
 import { Keyed } from '../../shared-components/Keyed'
 import { TaskGroup } from './TaskGroup'
 import { Task } from './Task'
-import { createSampleTaskList, getTaskGroups, tabList } from '../../models'
+import {
+  createSampleTaskList,
+  flattenGroupTasks,
+  getTaskGroups,
+  tabList,
+} from '../../models'
 import merge from 'ramda/es/merge'
 import { head } from 'ramda'
 
 export const TasksPage = composeHOC()(function Page({ store }) {
   const tabsList = tabList
   const taskList = createSampleTaskList()
+
   return (
     <ViewportHeightContainer className="bg-light-gray">
       <div className="pa3 relative">
@@ -35,6 +41,7 @@ export const TasksPage = composeHOC()(function Page({ store }) {
         <TabsContainer>
           {tabProps => {
             const currentTabId = tabProps.getCurrentId() || tabsList[0].id
+            const flattenedTaskList = flattenGroupTasks()
             return (
               <Fragment>
                 <Tabs>
@@ -55,7 +62,7 @@ export const TasksPage = composeHOC()(function Page({ store }) {
                     getProps={group => ({ group })}
                     taskComponent={Task}
                     taskProps={merge(store, {
-                      isTaskSelected: task => task === head(taskList),
+                      isTaskSelected: task => task === head(flattenedTaskList),
                     })}
                   />
                 </Tabs.Panel>
