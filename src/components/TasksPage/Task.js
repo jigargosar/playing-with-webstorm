@@ -25,8 +25,8 @@ export const Task = composeHOC()(function Task(props) {
           <Button onClick={linkEvent(deleteTask, task)}>{'Delete'}</Button>
         </TaskHoverActionsContent>
       </TaskHoverActions>
-      <div className={cn('ph2', { strike: task.done })}>{task.title}</div>
-      <small className={'ttu f7 ph2'}>{`@${task.context.title}`}</small>
+      <div className={cn('mh2', { strike: task.done })}>{task.title}</div>
+      <small className={'ttu f7 mh2'}>{`@${task.context.title}`}</small>
     </TaskItem>
   )
 })
