@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { TasksPage } from './components/TasksPage'
+import { TasksPage } from './components/TasksPage/TasksPage'
 import { GlobalStyles } from './GlobalStyles'
 import { Provider } from 'reakit'
 import { observer } from 'mobx-react'

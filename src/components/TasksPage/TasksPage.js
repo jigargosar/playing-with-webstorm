@@ -1,11 +1,11 @@
 import React from 'react'
-import { ScrollContainer, ViewportHeightContainer } from './containers'
+import { ScrollContainer, ViewportHeightContainer } from '../containers'
 import * as PropTypes from 'prop-types'
-import { store } from './store'
-import { composeHOC } from './composeHOC'
-import { Button, Group } from '../reakit-components'
+import { store } from '../store'
+import { composeHOC } from '../composeHOC'
+import { Button, Group } from '../../reakit-components/index'
 import { Shadow } from 'reakit'
-import { MainContent } from './TasksPage/MainContent'
+import { MainContent } from './MainContent'
 
 export const TasksPage = composeHOC()(function Page({ store }) {
   return (
