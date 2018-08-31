@@ -9,10 +9,23 @@ import {
   primaryLight,
   secondaryDark,
 } from '../../reakit-components'
-import { FloatingActionsContainer } from './FloatingActionsContainer'
 import { Btn } from '../Btn'
 
 const linkEvent = (fn, ...args) => tap(e => fn(...args, e))
+export const FloatingActionsContainer = composeHOC()(
+  function FloatingActionsContainer({ children }) {
+    return (
+      <div
+        className={'absolute z-1 flex items-center'}
+        style={{ right: '2rem' }}
+      >
+        <div className="absolute ">
+          <div className="pa2 bg-white-80 br3 shadow-1">{children}</div>
+        </div>
+      </div>
+    )
+  },
+)
 export const Task = composeHOC()(function Task({
   task,
   mouseEnterTask,
