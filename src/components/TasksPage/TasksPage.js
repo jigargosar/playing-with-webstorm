@@ -66,6 +66,7 @@ export const TasksPage = composeHOC()(function Page({ store }) {
                     taskProps={{
                       selectTask: identity,
                       deleteTask: identity,
+                      toggleTaskDone: identity,
                       isTaskSelected: task => task === head(flattenedTaskList),
                     }}
                   />
