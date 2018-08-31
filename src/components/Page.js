@@ -90,8 +90,7 @@ Task.propTypes = {
 // })
 
 const TaskGroup = composeHOC()(function TaskGroup({
-  title,
-  tasks,
+  group: { title, tasks },
   showContext,
 }) {
   return (
@@ -109,8 +108,11 @@ const TaskGroup = composeHOC()(function TaskGroup({
 })
 
 TaskGroup.propTypes = {
-  title: PropTypes.string.isRequired,
-  tasks: PropTypes.array.isRequired,
+  group: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    tasks: PropTypes.array.isRequired,
+  }).isRequired,
   showContext: PropTypes.bool,
 }
 
@@ -147,9 +149,9 @@ const MainContent = composeHOC()(function MainContent() {
                     </Tabs.Tab>
                   </Tabs>
                   <Tabs.Panel tab={store.getTab()} {...tabProps}>
-                    {map(g => (
-                      <TaskGroup key={g.id} title={g.id} tasks={g.tasks} />
-                    ))(store.getTaskGroups())}
+                    {map(group => <TaskGroup key={group.id} group={group} />)(
+                      store.getTaskGroups(),
+                    )}
                   </Tabs.Panel>
                 </Fragment>
               )}

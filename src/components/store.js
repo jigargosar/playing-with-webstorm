@@ -44,7 +44,7 @@ export const store = (() => {
           values,
           mapObjIndexed((tasks, id) => ({
             id,
-            title: systemContextLookup[id],
+            title: systemContextLookup[id].title,
             tasks,
           })),
           groupBy(pathS(['context', 'id'])),
