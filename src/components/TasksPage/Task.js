@@ -2,7 +2,7 @@ import * as PropTypes from 'prop-types'
 import React from 'react'
 import { tap } from 'ramda'
 import { composeHOC } from '../composeHOC'
-import { TaskFloatingActionsContent, TaskItem } from './elements/TaskItem'
+import { TaskActionsGroup, TaskItem } from './elements/TaskItem'
 import cn from 'classname'
 import { Button } from '../../reakit-components'
 import { Fit } from 'reakit'
@@ -36,10 +36,10 @@ export const Task = composeHOC()(function Task({
           top: '-50%',
         }}
       >
-        <TaskFloatingActionsContent>
+        <TaskActionsGroup>
           <Button onClick={linkEvent(toggleTaskDone, task)}>{'Done'}</Button>
           <Button onClick={linkEvent(deleteTask, task)}>{'Delete'}</Button>
-        </TaskFloatingActionsContent>
+        </TaskActionsGroup>
       </Fit>
       <div className={cn('ph2', { strike: task.done })}>{task.title}</div>
       <small className={'ttu f7 ph2'}>{`@${task.context.title}`}</small>
