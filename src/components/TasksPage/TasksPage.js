@@ -15,10 +15,11 @@ import { Keyed } from '../../shared-components/Keyed'
 import { TaskGroup } from './TaskGroup'
 import { Task } from './Task'
 import { Observer } from 'mobx-react'
-import { getTaskGroups } from '../../models'
+import { createSampleTasks, getTaskGroups } from '../../models'
 
 export const TasksPage = composeHOC()(function Page({ store }) {
   const tabsList = store.getTabs()
+  const tasks = createSampleTasks()
   return (
     <ViewportHeightContainer className="bg-light-gray">
       <div className="pa3 relative">
@@ -51,7 +52,7 @@ export const TasksPage = composeHOC()(function Page({ store }) {
                     <Tabs.Panel tab={currentTabId} {...tabProps}>
                       <Keyed
                         as={TaskGroup}
-                        list={getTaskGroups(currentTabId)}
+                        list={getTaskGroups(currentTabId, tasks)}
                         getProps={group => ({ group })}
                         taskComponent={Task}
                         taskProps={store}
