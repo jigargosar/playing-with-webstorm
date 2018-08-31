@@ -35,7 +35,7 @@ export const Task = composeHOC()(function Task({
   selectTask,
   toggleSelectedTaskDone,
   toggleTaskDone,
-  deleteSelectedTask,
+  deleteTask,
 }) {
   const selected = isTaskSelected(task)
   const hovered = isTaskHovered(task)
@@ -55,7 +55,7 @@ export const Task = composeHOC()(function Task({
         {hovered && (
           <FloatingActionsContainer>
             <Btn onClick={linkEvent(toggleTaskDone, task)}>{'Done'}</Btn>
-            <Btn onClick={deleteSelectedTask}>{'Delete'}</Btn>
+            <Btn onClick={linkEvent(deleteTask, task)}>{'Delete'}</Btn>
           </FloatingActionsContainer>
         )}
         <div className={cn('flex-auto ph2', { strike: task.done })}>
@@ -74,5 +74,5 @@ Task.propTypes = {
   mouseLeaveTask: PropTypes.func.isRequired,
   selectTask: PropTypes.func.isRequired,
   toggleTaskDone: PropTypes.func.isRequired,
-  deleteSelectedTask: PropTypes.func.isRequired,
+  deleteTask: PropTypes.func.isRequired,
 }
