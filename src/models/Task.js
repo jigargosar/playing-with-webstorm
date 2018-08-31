@@ -8,8 +8,8 @@ function Task({ id, title, done, createdAt }) {
 }
 
 const systemContexts = [
-  { id: 'in_basket', type: 'system' },
-  { id: 'some_day', type: 'system' },
+  { id: 'in_basket', title: 'Inbox', type: 'system' },
+  { id: 'some_day', title: 'SomeDay', type: 'system' },
 ]
 
 export function createNewTaskWithDefaults() {
