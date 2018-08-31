@@ -15,7 +15,7 @@ import { Keyed } from '../../shared-components/Keyed'
 import { TaskGroup } from './TaskGroup'
 import { Task } from './Task'
 import { Observer } from 'mobx-react'
-import merge from 'ramda/es/merge'
+import { getTaskGroups } from '../../models'
 
 export const TasksPage = composeHOC()(function Page({ store }) {
   const tabsList = store.getTabs()
@@ -31,29 +31,27 @@ export const TasksPage = composeHOC()(function Page({ store }) {
       </div>
       <ScrollContainer>
         <TabsContainer>
-          {_tabProps => (
+          {tabProps => (
             <Observer>
               {() => {
-                const tabProps = merge(_tabProps)({
-                  tab: _tabProps.getCurrentId() || tabsList[0].id,
-                })
+                const currentTabId = tabProps.getCurrentId() || tabsList[0].id
                 return (
                   <Fragment>
                     <Tabs>
                       <Keyed
                         as={TabsTab}
                         getProps={({ id, title }) => ({
+                          tab: id,
                           children: title,
                           ...tabProps,
-                          tab: id,
                         })}
                         list={tabsList}
                       />
                     </Tabs>
-                    <Tabs.Panel {...tabProps}>
+                    <Tabs.Panel tab={currentTabId} {...tabProps}>
                       <Keyed
                         as={TaskGroup}
-                        list={store.getTaskGroups()}
+                        list={getTaskGroups(currentTabId)}
                         getProps={group => ({ group })}
                         taskComponent={Task}
                         taskProps={store}
