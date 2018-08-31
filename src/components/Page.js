@@ -61,7 +61,7 @@ const Task = composeHOC()(function Task({ task }) {
   const hovered = store.isTaskHovered(task)
   return (
     <Base
-      className={cn('mv3 br2')}
+      className={cn('mv2 pv2 br2')}
       {...(selected
         ? { color: '#fff', backgroundColor: secondaryDark }
         : hovered
