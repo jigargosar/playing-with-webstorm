@@ -2,7 +2,9 @@ import * as PropTypes from 'prop-types'
 import React from 'react'
 import { tap } from 'ramda'
 import { composeHOC } from '../composeHOC'
-import { Base, Group, Hidden } from 'reakit'
+import { Group, Hidden } from 'reakit'
+import { Task as StyledTask } from './elements/Task'
+
 import cn from 'classname'
 import {
   Button,
@@ -28,7 +30,7 @@ export const Task = composeHOC()(function Task({
   const selected = isTaskSelected(task)
   const hovered = isTaskHovered(task)
   return (
-    <Base
+    <StyledTask
       className={cn('mv2 pv2 br2')}
       {...(selected
         ? { color: '#fff', backgroundColor: primaryDark }
@@ -52,7 +54,7 @@ export const Task = composeHOC()(function Task({
           <small className={'ttu f7 ph2'}>{`@${task.context.title}`}</small>
         </FlexColumn>
       </FlexCenter>
-    </Base>
+    </StyledTask>
   )
 })
 Task.propTypes = {
