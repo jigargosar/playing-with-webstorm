@@ -1,4 +1,5 @@
 import { Button as BaseButton, Flex, Group, styled, Tabs } from 'reakit'
+import { always } from 'ramda'
 
 export { Flex, Group }
 
@@ -23,3 +24,4 @@ export const FlexCenter = styled(Flex)`
 `
 
 export const TabsTab = Tabs.Tab
+export const TabsContainer = always(Tabs.Container)()

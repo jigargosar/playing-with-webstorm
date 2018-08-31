@@ -11,12 +11,13 @@ import {
   Group,
   primaryLight,
   secondaryDark,
+  TabsContainer,
   TabsTab,
 } from '../reakit-components'
 import { Base, Flex, Heading, Shadow, Tabs } from 'reakit'
 import { indexOf, map, pluck, tap } from 'ramda'
 import { Keyed } from '../shared-components/Keyed'
-import { Observer, observer } from 'mobx-react'
+import { Observer } from 'mobx-react'
 
 const FloatingActionsContainer = composeHOC()(
   function FloatingActionsContainer({ children }) {
@@ -102,8 +103,6 @@ TaskGroup.propTypes = {
 TaskGroup.defaultProps = {
   showContext: true,
 }
-
-const TabsContainer = observer(Tabs.Container)
 
 const TaskTabsContainer = composeHOC()(function TaskTabsContainer({
   children,
