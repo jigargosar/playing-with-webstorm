@@ -8,8 +8,8 @@ import {
   Button,
   FlexCenter,
   FlexColumn,
+  primaryDark,
   primaryLight,
-  secondaryDark,
 } from '../../reakit-components'
 
 const linkEvent = (fn, ...args) => tap(e => fn(...args, e))
@@ -30,7 +30,7 @@ export const Task = composeHOC()(function Task({
     <Base
       className={cn('mv2 pv2 br2')}
       {...(selected
-        ? { color: '#fff', backgroundColor: secondaryDark }
+        ? { color: '#fff', backgroundColor: primaryDark }
         : hovered
           ? { backgroundColor: primaryLight }
           : {})}
