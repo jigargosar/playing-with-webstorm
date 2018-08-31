@@ -135,14 +135,7 @@ const MainContent = composeHOC()(function MainContent() {
                     <TaskGroup title={'Todo'} tasks={store.getTodoTasks()} />
                   </Tabs.Panel>
                   <Tabs.Panel tab={'done'} {...tabProps}>
-                    <div className="center measure mv3">
-                      <div className="pa3 br3 bg-white shadow-1 ">
-                        <Flex marginBottom={'1rem'} as={[Heading, 'h3']}>
-                          Done
-                        </Flex>
-                        <TaskItems tasks={store.getDoneTasks()} />
-                      </div>
-                    </div>
+                    <TaskGroup title={'Done'} tasks={store.getDoneTasks()} />
                   </Tabs.Panel>
                 </Fragment>
               )}
