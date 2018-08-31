@@ -81,18 +81,24 @@ Task.propTypes = {
   task: PropTypes.shape({ id: PropTypes.string.isRequired }).isRequired,
 }
 
-const TaskItems = composeHOC()(function TaskItems({ tasks }) {
-  return <Models models={tasks}>{task => <Task task={task} />}</Models>
-})
+// const TaskItems = composeHOC()(function TaskItems({ tasks }) {
+//   return <Models models={tasks}>{task => <Task task={task} />}</Models>
+// })
 
-const TaskGroup = composeHOC()(function TaskGroup({ title, tasks }) {
+const TaskGroup = composeHOC()(function TaskGroup({
+  title,
+  tasks,
+  showContext,
+}) {
   return (
     <div className="center measure mv3">
       <div className="pa3 br3 bg-white shadow-1 ">
         <Flex marginBottom={'1rem'} as={[Heading, 'h3']}>
           {title}
         </Flex>
-        <TaskItems tasks={tasks} />
+        <Models models={tasks}>
+          {task => <Task showContext={showContext} task={task} />}
+        </Models>
       </div>
     </div>
   )
