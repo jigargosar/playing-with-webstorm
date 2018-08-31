@@ -17,7 +17,7 @@ export const Task = composeHOC()(function Task(props) {
   return (
     <TaskItem
       selected={isTaskSelected(task)}
-      onClickCapture={linkEvent(selectTask, task)}
+      onClick={linkEvent(selectTask, task)}
     >
       <TaskHoverActions>
         <TaskHoverActionsContent>
