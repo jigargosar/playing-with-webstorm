@@ -49,7 +49,6 @@ export const TasksPage = composeHOC()(function Page({ store }) {
           }}
           selectors={{
             getTaskGroups: () => getTaskGroupsFromState,
-            getFlatTaskList: () => getFlatTaskList,
             selectedTask: () =>
               compose(
                 head,
