@@ -26,6 +26,7 @@ import { head, pluck } from 'ramda'
 export const TasksPage = composeHOC()(function Page({ store }) {
   const tabsList = tabList
   const taskList = createSampleTaskList()
+  const tabIds = pluck('id')(tabList)
 
   return (
     <ViewportHeightContainer className="bg-light-gray">
@@ -38,7 +39,7 @@ export const TasksPage = composeHOC()(function Page({ store }) {
         </Group>
       </div>
       <ScrollContainer>
-        <TabsContainer initialState={{ ids: pluck('id')(tabList) }}>
+        <TabsContainer initialState={{ ids: tabIds }}>
           {tabProps => {
             const currentTabId = tabProps.getCurrentId() || tabsList[0].id
             const taskGroups = getTaskGroupsForTab(currentTabId, taskList)
