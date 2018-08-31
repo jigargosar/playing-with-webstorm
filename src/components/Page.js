@@ -15,8 +15,8 @@ import {
 } from '../reakit-components'
 import { Base, Flex, Heading, Shadow, Tabs } from 'reakit'
 import { indexOf, map, pluck, tap } from 'ramda'
-import { Observer } from 'mobx-react'
 import { Keyed } from '../shared-components/Keyed'
+import { observer } from 'mobx-react'
 
 const FloatingActionsContainer = composeHOC()(
   function FloatingActionsContainer({ children }) {
@@ -103,12 +103,14 @@ TaskGroup.defaultProps = {
   showContext: true,
 }
 
+const TabsContainer = observer(Tabs.Container)
+
 const TaskTabsContainer = composeHOC()(function TaskTabsContainer({
   children,
 }) {
   const tabIds = pluck('id')(store.getTabs())
   return (
-    <Tabs.Container
+    <TabsContainer
       initialState={{
         ids: tabIds,
         current: indexOf(store.getCurrentTabId())(tabIds),
@@ -125,7 +127,7 @@ const TaskTabsContainer = composeHOC()(function TaskTabsContainer({
         }
         return children(tabProps)
       }}
-    </Tabs.Container>
+    </TabsContainer>
   )
 })
 
@@ -133,28 +135,24 @@ const MainContent = composeHOC()(function MainContent() {
   return (
     <TaskTabsContainer>
       {tabProps => (
-        <Observer>
-          {() => (
-            <Fragment>
-              <Tabs>
-                <Keyed
-                  as={TabsTab}
-                  getProps={({ id, title }) => ({
-                    tab: id,
-                    children: title,
-                    ...tabProps,
-                  })}
-                  list={store.getTabs()}
-                />
-              </Tabs>
-              <Tabs.Panel tab={store.getCurrentTabId()} {...tabProps}>
-                {map(group => <TaskGroup key={group.id} group={group} />)(
-                  store.getTaskGroups(),
-                )}
-              </Tabs.Panel>
-            </Fragment>
-          )}
-        </Observer>
+        <Fragment>
+          <Tabs>
+            <Keyed
+              as={TabsTab}
+              getProps={({ id, title }) => ({
+                tab: id,
+                children: title,
+                ...tabProps,
+              })}
+              list={store.getTabs()}
+            />
+          </Tabs>
+          <Tabs.Panel tab={store.getCurrentTabId()} {...tabProps}>
+            {map(group => <TaskGroup key={group.id} group={group} />)(
+              store.getTaskGroups(),
+            )}
+          </Tabs.Panel>
+        </Fragment>
       )}
     </TaskTabsContainer>
   )
