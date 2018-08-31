@@ -37,7 +37,7 @@ export const store = (() => {
       },
       get taskGroups() {
         if ('done' === store._tab) {
-          return store.doneTaskGroup()
+          return store.doneTaskGroup
         }
         return compose(
           sortBy(group => indexOf(group.id, ['in_basket', 'some_day'])),
