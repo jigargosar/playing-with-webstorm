@@ -4,7 +4,6 @@ import { tap } from 'ramda'
 import { composeHOC } from '../composeHOC'
 import { Group, Hidden } from 'reakit'
 import { TaskItem } from './elements/TaskItem'
-
 import cn from 'classname'
 import { Button, FlexCenter, FlexColumn } from '../../reakit-components'
 
