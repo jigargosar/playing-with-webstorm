@@ -28,7 +28,7 @@ export const store = (() => {
       _tasks: createSampleTasks(),
       _selectedTaskIdx: 0,
       _hoveredTaskIdx: NaN,
-      _tab: 'todo',
+      _tab: 'in_basket',
 
       get doneTaskGroup() {
         return compose(
@@ -41,7 +41,7 @@ export const store = (() => {
           return [store.doneTaskGroup]
         }
         return compose(
-          filter(propEq('title')(store._tab)),
+          filter(propEq('id')(store._tab)),
           sortBy(group => indexOf(group.id, ['in_basket', 'some_day'])),
           values,
           mapObjIndexed((tasks, id) => ({
