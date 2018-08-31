@@ -16,21 +16,8 @@ import cn from 'classname'
 import { Btn } from '../Btn'
 import { TaskTabsContainer } from './TaskTabsContainer'
 import { TaskGroup } from './TaskGroup'
+import { FloatingActionsContainer } from './FloatingActionsContainer'
 
-const FloatingActionsContainer = composeHOC()(
-  function FloatingActionsContainer({ children }) {
-    return (
-      <div
-        className={'absolute z-1 flex items-center'}
-        style={{ right: '2rem' }}
-      >
-        <div className="absolute ">
-          <div className="pa2 bg-white-80 br3 shadow-1">{children}</div>
-        </div>
-      </div>
-    )
-  },
-)
 const linkEvent = (fn, ...args) => tap(e => fn(...args, e))
 const Task = composeHOC()(function Task({ task }) {
   const selected = store.isTaskSelected(task)
