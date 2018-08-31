@@ -10,8 +10,11 @@ import {
 } from './elements/TaskItem'
 import cn from 'classname'
 import { Button, FlexColumn } from '../../reakit-components'
+import { Fit } from 'reakit'
 
 const linkEvent = (fn, ...args) => tap(e => fn(...args, e))
+
+const backgroundColor = 'rgba(1,1,1,0.2)'
 
 export const Task = composeHOC()(function Task({
   task,
@@ -26,9 +29,23 @@ export const Task = composeHOC()(function Task({
 }) {
   return (
     <TaskItem
+      relative
       selected={isTaskSelected(task)}
       onClickCapture={linkEvent(selectTask, task)}
     >
+      <Fit
+        style={{
+          backgroundColor: backgroundColor,
+          zIndex: 5,
+          left: 'calc( 100% - 5rem)',
+          top: '-50%',
+        }}
+      >
+        <TaskFloatingActionsContent>
+          <Button onClick={linkEvent(toggleTaskDone, task)}>{'Done'}</Button>
+          <Button onClick={linkEvent(deleteTask, task)}>{'Delete'}</Button>
+        </TaskFloatingActionsContent>
+      </Fit>
       <TaskItemContent>
         <TaskFloatingActions visible={true}>
           <TaskFloatingActionsContent>

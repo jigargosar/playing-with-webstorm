@@ -25,7 +25,7 @@ export const propAOr = validateIO('SSO|SSA', 'A')((def, p, obj) =>
 )
 
 export const findIdByClampedIdx = validateIO('NA', 'S')((idx, list) => {
-  return pathS([clampIdx(idx)(list), 'id'])(list)
+  return pathS([clampIdx(idx)(list), 'id'])(list).l
 })
 export const clampIdx = validateIO('NA', 'N')(
   (idx, list) => (isEmpty(list) ? NaN : clamp(0, list.length - 1)(idx)),
