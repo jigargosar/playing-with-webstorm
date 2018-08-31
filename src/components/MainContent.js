@@ -9,13 +9,13 @@ import {
   FlexCenter,
   primaryLight,
   secondaryDark,
+  Tabs,
   TabsContainer,
   TabsTab,
 } from '../reakit-components'
 import { Observer } from 'mobx-react'
 import cn from 'classname'
 import { Btn } from './Btn'
-import { Tabs } from 'reakit/Tabs'
 
 const FloatingActionsContainer = composeHOC()(
   function FloatingActionsContainer({ children }) {
