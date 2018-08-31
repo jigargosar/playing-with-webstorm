@@ -1,13 +1,15 @@
 import {
   Button as BaseButton,
-  Flex,
+  Flex as FlexBase,
   Group,
   styled,
   Tabs as BaseTabs,
 } from 'reakit'
 import { always } from 'ramda'
 
-export { Flex, Group }
+export const Flex = FlexBase
+
+export { Group }
 export const Tabs = BaseTabs
 
 // https://material.io/tools/color/#!/?view.left=0&view.right=0&primary.color=03A9F4&secondary.color=1976D2
