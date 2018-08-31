@@ -15,6 +15,7 @@ import { createNewTaskWithDefaults, systemContextLookup } from './Task'
 import { pathS } from '../lib/ramda-strict'
 
 export const createSampleTasks = () => times(createNewTaskWithDefaults)(16)
+
 export const tabs = [
   { id: 'in_basket', title: 'INBOX' },
   { id: 'todo', title: 'TODO' },
