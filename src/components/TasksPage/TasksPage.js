@@ -62,9 +62,9 @@ export const TasksPage = composeHOC()(function Page({ store }) {
                     list={taskGroups}
                     getProps={group => ({ group })}
                     taskComponent={Task}
-                    taskProps={task => ({
+                    taskProps={{
                       isTaskSelected: task => task === head(flattenedTaskList),
-                    })}
+                    }}
                   />
                 </Tabs.Panel>
               </Fragment>
