@@ -1,4 +1,4 @@
-import { createNewTaskWithDefaults } from '../models/Task'
+import { createNewTaskWithDefaults, systemContextLookup } from '../models/Task'
 import {
   compose,
   filter,
@@ -42,7 +42,11 @@ export const store = (() => {
         return compose(
           sortBy(group => indexOf(group.id, ['in_basket', 'some_day'])),
           values,
-          mapObjIndexed((tasks, id) => ({ id, tasks })),
+          mapObjIndexed((tasks, id) => ({
+            id,
+            title: systemContextLookup[id],
+            tasks,
+          })),
           groupBy(pathS(['context', 'id'])),
           reject(prop('done')),
         )(store._tasks)
