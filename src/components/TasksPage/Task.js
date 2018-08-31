@@ -3,7 +3,7 @@ import React from 'react'
 import { tap } from 'ramda'
 import { composeHOC } from '../composeHOC'
 import { Group, Hidden } from 'reakit'
-import { Task as StyledTask } from './elements/Task'
+import { TaskItem } from './elements/TaskItem'
 
 import cn from 'classname'
 import { Button, FlexCenter, FlexColumn } from '../../reakit-components'
@@ -23,7 +23,7 @@ export const Task = composeHOC()(function Task({
 }) {
   const hovered = isTaskHovered(task)
   return (
-    <StyledTask
+    <TaskItem
       selected={isTaskSelected(task)}
       hovered={hovered}
       onMouseEnter={linkEvent(mouseEnterTask, task)}
@@ -43,7 +43,7 @@ export const Task = composeHOC()(function Task({
           <small className={'ttu f7 ph2'}>{`@${task.context.title}`}</small>
         </FlexColumn>
       </FlexCenter>
-    </StyledTask>
+    </TaskItem>
   )
 })
 Task.propTypes = {
