@@ -8,7 +8,6 @@ import {
   mapObjIndexed,
   pluck,
   prop,
-  propEq,
   reject,
   sortBy,
   times,
@@ -37,14 +36,15 @@ export const store = (() => {
         )(store._tasks)
       },
       get taskGroups() {
-        const doneFilterFn = 'done' === store._tab ? filter : reject
+        if ('done' === store._tab) {
+          return store.doneTaskGroup()
+        }
         return compose(
-          doneFilterFn(propEq('id', 'done')),
-          sortBy(group => indexOf(group.id, ['todo', 'done'])),
+          sortBy(group => indexOf(group.id, ['in_basket', 'some_day'])),
           values,
           mapObjIndexed((tasks, id) => ({ id, tasks })),
-          groupBy(task => (task.done ? 'done' : 'todo')),
-          // doneFilterFn(prop('done')),
+          groupBy(pathS(['context', 'id'])),
+          reject(prop('done')),
         )(store._tasks)
       },
       get flattenedTasks() {
