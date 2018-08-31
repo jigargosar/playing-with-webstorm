@@ -7,6 +7,7 @@ import {
   indexOf,
   mapObjIndexed,
   pluck,
+  prop,
   propEq,
   reject,
   sortBy,
@@ -28,6 +29,13 @@ export const store = (() => {
       _selectedTaskIdx: 0,
       _hoveredTaskIdx: NaN,
       _tab: 'todo',
+
+      get doneTaskGroup() {
+        return compose(
+          tasks => ({ id: 'done', title: 'Done', tasks }),
+          filter(prop('done')),
+        )(store._tasks)
+      },
       get taskGroups() {
         const doneFilterFn = 'done' === store._tab ? filter : reject
         return compose(
