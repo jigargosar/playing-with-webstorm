@@ -1,8 +1,8 @@
 import nanoid from 'nanoid'
 import { randomArrayElement, randomBoolean, randomWords } from '../lib/fake'
 import { validate } from '../lib/validate'
-import assert from 'power-assert'
 import { isEmpty } from 'ramda'
+import { assert } from '../lib/assert'
 
 function Task({ id, title, done, createdAt, ...other }) {
   validate('SSBNO', [id, title, done, createdAt, other])
