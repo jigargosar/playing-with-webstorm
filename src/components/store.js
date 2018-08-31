@@ -101,6 +101,7 @@ export const store = (() => {
     getTab: () => store._tab,
     getTabs: () =>
       expr(() => [
+        { tab: 'in_basket', title: 'Inbox' },
         { tab: 'todo', title: 'TODO' },
         { tab: 'done', title: 'DONE' },
       ]),
