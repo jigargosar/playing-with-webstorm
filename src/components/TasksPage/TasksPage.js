@@ -21,6 +21,7 @@ import {
   tabList,
 } from '../../models'
 import { head, pluck } from 'ramda'
+import identity from 'ramda/es/identity'
 
 export const TasksPage = composeHOC()(function Page({ store }) {
   const tabsList = tabList
@@ -63,6 +64,7 @@ export const TasksPage = composeHOC()(function Page({ store }) {
                     getProps={group => ({ group })}
                     taskComponent={Task}
                     taskProps={{
+                      selectTask: identity,
                       isTaskSelected: task => task === head(flattenedTaskList),
                     }}
                   />
