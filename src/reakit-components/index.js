@@ -17,11 +17,10 @@ export const primaryLight = '#67daff'
 export const secondary = '#1976d2'
 export const secondaryLight = '#63a4ff'
 export const secondaryDark = '#004ba0'
-export const highlightColor = 'lightyellow'
 
 export const Button = styled(BaseButton)`
   // text-transform: uppercase;
-  color: ${primary};
+  color: ${secondaryDark};
   // font-size: 14px;
   height: 2em;
 `
