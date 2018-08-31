@@ -98,6 +98,11 @@ const TaskGroup = composeHOC()(function TaskGroup({ title, tasks }) {
   )
 })
 
+TaskGroup.propTypes = {
+  title: PropTypes.string.isRequired,
+  tasks: PropTypes.array.isRequired,
+}
+
 const MainContent = composeHOC()(function MainContent() {
   const ids = ['todo', 'done']
   return (
