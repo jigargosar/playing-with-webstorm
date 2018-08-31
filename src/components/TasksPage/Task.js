@@ -27,7 +27,6 @@ export const Task = composeHOC()(function Task({
 }) {
   return (
     <TaskItem
-      relative
       selected={isTaskSelected(task)}
       onClickCapture={linkEvent(selectTask, task)}
     >

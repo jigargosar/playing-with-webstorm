@@ -4,6 +4,7 @@ import { ifProp } from 'styled-tools'
 import { primaryDark, primaryLight } from '../../../reakit-components'
 
 export const TaskItem = styled(Base).attrs({ className: 'mv2 pv2 br2' })`
+  position: relative;
   &:hover {
     color: #000;
     background-color: ${primaryLight};
