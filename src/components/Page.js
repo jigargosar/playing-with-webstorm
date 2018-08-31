@@ -13,7 +13,7 @@ import {
   primaryLight,
   secondaryDark,
 } from '../reakit-components'
-import { Flex, Heading, Shadow, Tabs } from 'reakit'
+import { Base, Flex, Heading, Shadow, Tabs } from 'reakit'
 import { indexOf, map, pluck, tap } from 'ramda'
 import { Observer } from 'mobx-react'
 
@@ -60,7 +60,7 @@ const Task = composeHOC()(function Task({ task }) {
   const selected = store.isTaskSelected(task)
   const hovered = store.isTaskHovered(task)
   return (
-    <div
+    <Base
       className={cn('mv3 br2')}
       {...(selected
         ? { color: '#fff', backgroundColor: secondaryDark }
@@ -78,7 +78,7 @@ const Task = composeHOC()(function Task({ task }) {
         </div>
       </FlexCenter>
       <small className={'ttu f7 ph2'}>{`@${task.context.title}`}</small>
-    </div>
+    </Base>
   )
 })
 Task.propTypes = {
