@@ -39,10 +39,9 @@ export const TasksPage = composeHOC()(function Page({ store }) {
           initialState={{
             ids: pluck('id')(tabList),
             taskList: createSampleTaskList(),
-            tabList: tabList,
           }}
         >
-          {({ taskList, tabList, ...tabProps }) => {
+          {({ taskList, ...tabProps }) => {
             const currentTabId = tabProps.getCurrentId()
             const taskGroups = getTaskGroupsForTab(currentTabId, taskList)
             const flattenedTaskList = flattenGroupTasks(taskGroups)
