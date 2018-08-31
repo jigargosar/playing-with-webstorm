@@ -11,3 +11,6 @@ export function randomWords() {
 export function randomBoolean() {
   return faker.random.boolean()
 }
+export function randomArrayElement(array) {
+  return faker.random.arrayElement(array)
+}

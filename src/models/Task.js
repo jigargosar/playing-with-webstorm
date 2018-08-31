@@ -1,5 +1,5 @@
 import nanoid from 'nanoid'
-import { randomBoolean, randomWords } from '../lib/fake'
+import { randomArrayElement, randomBoolean, randomWords } from '../lib/fake'
 import { validate } from '../lib/validate'
 
 function Task({ id, title, done, createdAt }) {
@@ -7,13 +7,18 @@ function Task({ id, title, done, createdAt }) {
   return { id, title, done, createdAt }
 }
 
+const systemContexts = [
+  { id: 'in_basket', type: 'system' },
+  { id: 'some_day', type: 'system' },
+]
+
 export function createNewTaskWithDefaults() {
   const defaults = {
     id: `task_${nanoid()}`,
     title: randomWords(),
     done: randomBoolean(),
     createdAt: Date.now(),
-    context: { id: 'in_basket', type: 'system' },
+    context: randomArrayElement(systemContexts),
   }
   return Task(defaults)
 }
