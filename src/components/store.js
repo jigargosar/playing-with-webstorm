@@ -93,6 +93,7 @@ export const store = (() => {
           xSet(store)('_hoveredTaskIdx')(NaN)
         }
       },
+      toggleTaskDone: ({ id }) => xTogglePropById('done', id, store._tasks),
     },
     {},
     { name: 'store' },
@@ -114,7 +115,8 @@ export const store = (() => {
     deleteAllTasks: () => store._tasks.clear(),
     addMoreTasks: () => store._tasks.unshift(...createSampleTasks()),
     toggleSelectedTaskDone: () =>
-      xTogglePropById('done', propS('selectedTaskId')(store), store._tasks),
+      store.toggleTaskDone(propS('selectedTaskId')(store)),
+    toggleTaskDone: store.toggleTaskDone,
     deleteSelectedTask: () =>
       xRemoveById(propS('selectedTaskId')(store))(store._tasks),
     selectTask: ({ id }) => store.setSelectedTaskId(id),
