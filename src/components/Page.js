@@ -95,25 +95,12 @@ const MainContent = composeHOC()(function MainContent() {
         {_tabProps => {
           const tabProps = {
             ..._tabProps,
-            update: (...args) => {
-              console.log('update', ...args)
-              return _tabProps.update(...args)
-            },
             show: tab => {
-              console.log('show', tab)
+              console.debug('show', tab)
               store.setTab(tab)
               return _tabProps.show(tab)
             },
-            hide: (...args) => {
-              console.log('hide', ...args)
-              return _tabProps.hide(...args)
-            },
-            toggle: (...args) => {
-              console.log('toggle', ...args)
-              return _tabProps.toggle(...args)
-            },
           }
-          // console.log('tabProps.getCurrentId()', tabProps.getCurrentId())
           return (
             <Observer>
               {() => (
