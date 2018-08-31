@@ -99,16 +99,12 @@ TaskGroup.defaultProps = {
   showContext: true,
 }
 const TaskTabsContainer = composeHOC()(function TaskTabsContainer({
+  initialState,
   children,
+  setTabId,
 }) {
-  const tabIds = pluck('id')(store.getTabs())
   return (
-    <TabsContainer
-      initialState={{
-        ids: tabIds,
-        current: indexOf(store.getCurrentTabId())(tabIds),
-      }}
-    >
+    <TabsContainer initialState={initialState}>
       {_tabProps => (
         <Observer>
           {() => {
@@ -116,7 +112,7 @@ const TaskTabsContainer = composeHOC()(function TaskTabsContainer({
               ..._tabProps,
               show: tabId => {
                 console.debug('show', tabId)
-                store.setTabId(tabId)
+                setTabId(tabId)
                 return _tabProps.show(tabId)
               },
             }
@@ -130,8 +126,15 @@ const TaskTabsContainer = composeHOC()(function TaskTabsContainer({
 export const MainContent = composeHOC()(function MainContent() {
   const tabsList = store.getTabs()
   const currentTabId = store.getCurrentTabId()
+  const tabIds = pluck('id')(tabsList)
   return (
-    <TaskTabsContainer>
+    <TaskTabsContainer
+      initialState={{
+        ids: tabIds,
+        current: indexOf(currentTabId)(tabIds),
+      }}
+      setTabId={store.setTabId}
+    >
       {tabProps => (
         <Fragment>
           <Tabs>
