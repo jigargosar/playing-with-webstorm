@@ -128,6 +128,8 @@ const TaskTabsContainer = composeHOC()(function TaskTabsContainer({
   )
 })
 export const MainContent = composeHOC()(function MainContent() {
+  const tabsList = store.getTabs()
+  const currentTabId = store.getCurrentTabId()
   return (
     <TaskTabsContainer>
       {tabProps => (
@@ -140,10 +142,10 @@ export const MainContent = composeHOC()(function MainContent() {
                 children: title,
                 ...tabProps,
               })}
-              list={store.getTabs()}
+              list={tabsList}
             />
           </Tabs>
-          <Tabs.Panel tab={store.getCurrentTabId()} {...tabProps}>
+          <Tabs.Panel tab={currentTabId} {...tabProps}>
             {map(group => <TaskGroup key={group.id} group={group} />)(
               store.getTaskGroups(),
             )}
