@@ -41,7 +41,7 @@ export const TasksPage = composeHOC()(function Page({ store }) {
         <TabsContainer>
           {tabProps => {
             const currentTabId = tabProps.getCurrentId() || tabsList[0].id
-            const flattenedTaskList = flattenGroupTasks()
+            const flattenedTaskList = flattenGroupTasks(taskList)
             return (
               <Fragment>
                 <Tabs>
