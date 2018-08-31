@@ -4,10 +4,10 @@ import { validate } from '../lib/validate'
 import { isEmpty } from 'ramda'
 import { assert } from '../lib/assert'
 
-function Task({ id, title, done, createdAt, ...other }) {
-  validate('SSBNO', [id, title, done, createdAt, other])
+function Task({ id, title, done, createdAt, context, ...other }) {
+  validate('SSBNOO', [id, title, done, createdAt, context, other])
   assert(isEmpty(other))
-  return { id, title, done, createdAt }
+  return { id, title, done, createdAt, context }
 }
 
 const systemContexts = [
