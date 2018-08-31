@@ -67,6 +67,7 @@ Task.propTypes = {
 const TaskGroup = composeHOC()(function TaskGroup({
   group: { title, tasks },
   showContext,
+  taskComponent: Task,
 }) {
   return (
     <div className="center measure mv3">
@@ -92,6 +93,7 @@ TaskGroup.propTypes = {
     tasks: PropTypes.array.isRequired,
   }).isRequired,
   showContext: PropTypes.bool,
+  taskComponent: PropTypes.func.isRequired,
 }
 
 TaskGroup.defaultProps = {
@@ -128,6 +130,7 @@ export const MainContent = composeHOC()(function MainContent() {
               as={TaskGroup}
               list={store.getTaskGroups()}
               getProps={group => ({ group })}
+              taskComponent={Task}
             />
           </Tabs.Panel>
         </Fragment>
