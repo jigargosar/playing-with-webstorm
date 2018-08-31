@@ -134,7 +134,7 @@ const MainContent = composeHOC()(function MainContent() {
                   <Tabs.Panel tab={'todo'} {...tabProps}>
                     {map(g => (
                       <TaskGroup key={g.id} title={g.id} tasks={g.tasks} />
-                    ))(store.getTodoGroups())}
+                    ))(store.getTaskGroups())}
                   </Tabs.Panel>
                   <Tabs.Panel tab={'done'} {...tabProps}>
                     <TaskGroup title={'Done'} tasks={store.getDoneTasks()} />

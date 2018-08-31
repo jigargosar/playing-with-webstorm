@@ -9,7 +9,6 @@ import {
   pluck,
   prop,
   propEq,
-  reject,
   sortBy,
   times,
   values,
@@ -86,8 +85,7 @@ export const store = (() => {
   return {
     setTab: tab => (store._tab = tab),
     getTab: () => store._tab,
-    getTodoGroups: () =>
-      expr(() => reject(propEq('id', 'done'))(store.taskGroups)),
+    getTaskGroups: () => expr(() => store.taskGroups),
     getDoneTasks: () => expr(() => filter(prop('done'))(store._tasks)),
     isTaskSelected: store.isTaskAtSelected,
     isTaskHovered: store.isTaskAtHovered,
