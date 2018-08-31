@@ -3,8 +3,8 @@ import React from 'react'
 import { tap } from 'ramda'
 import { composeHOC } from '../composeHOC'
 import {
-  TaskActionsContent,
   TaskHoverActions,
+  TaskHoverActionsContent,
   TaskItem,
 } from './elements/TaskItem'
 import cn from 'classname'
@@ -32,10 +32,10 @@ export const Task = composeHOC()(function Task({
       onClickCapture={linkEvent(selectTask, task)}
     >
       <TaskHoverActions>
-        <TaskActionsContent>
+        <TaskHoverActionsContent>
           <Button onClick={linkEvent(toggleTaskDone, task)}>{'Done'}</Button>
           <Button onClick={linkEvent(deleteTask, task)}>{'Delete'}</Button>
-        </TaskActionsContent>
+        </TaskHoverActionsContent>
       </TaskHoverActions>
       <div className={cn('ph2', { strike: task.done })}>{task.title}</div>
       <small className={'ttu f7 ph2'}>{`@${task.context.title}`}</small>
