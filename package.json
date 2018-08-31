@@ -70,6 +70,7 @@
     "reakit": "^0.14.5",
     "recompose": "^0.28.2",
     "styled-components": "^3.4.5",
+    "styled-tools": "^1.4.3",
     "tachyons": "^4.11.1",
     "webpack-chain": "^4.9.0"
   },
