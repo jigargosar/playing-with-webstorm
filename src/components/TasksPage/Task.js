@@ -32,12 +32,11 @@ export const Task = composeHOC()(function Task({
         className="hide-unless-parent-hovered"
         style={{
           zIndex: 1,
-          width: '5rem',
           left: 'calc( 100% - 3rem)',
           top: '-50%',
         }}
       >
-        <TaskActionsGroup>
+        <TaskActionsGroup absolute>
           <Button onClick={linkEvent(toggleTaskDone, task)}>{'Done'}</Button>
           <Button onClick={linkEvent(deleteTask, task)}>{'Delete'}</Button>
         </TaskActionsGroup>
