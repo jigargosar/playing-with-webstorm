@@ -20,7 +20,6 @@ import {
   getTaskGroupsForTab,
   tabList,
 } from '../../models'
-import merge from 'ramda/es/merge'
 import { head, pluck } from 'ramda'
 
 export const TasksPage = composeHOC()(function Page({ store }) {
@@ -63,7 +62,7 @@ export const TasksPage = composeHOC()(function Page({ store }) {
                     list={taskGroups}
                     getProps={group => ({ group })}
                     taskComponent={Task}
-                    taskProps={merge(store, {
+                    taskProps={store => ({
                       isTaskSelected: task => task === head(flattenedTaskList),
                     })}
                   />
