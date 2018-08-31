@@ -6,6 +6,7 @@ import { Group, Hidden } from 'reakit'
 import cn from 'classname'
 import {
   Button,
+  Flex,
   FlexCenter,
   primaryLight,
   secondaryDark,
@@ -45,8 +46,10 @@ export const Task = composeHOC()(function Task({
         </Group>
       </Hidden>
 
-      <div className={cn('ph2', { strike: task.done })}>{task.title}</div>
-      <small className={'ttu f7 ph2'}>{`@${task.context.title}`}</small>
+      <Flex column>
+        <div className={cn('ph2', { strike: task.done })}>{task.title}</div>
+        <small className={'ttu f7 ph2'}>{`@${task.context.title}`}</small>
+      </Flex>
     </FlexCenter>
   )
 })
