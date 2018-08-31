@@ -85,6 +85,19 @@ const TaskItems = composeHOC()(function TaskItems({ tasks }) {
   return <Models models={tasks}>{task => <Task task={task} />}</Models>
 })
 
+const TaskGroup = composeHOC()(function TaskGroup({ title, tasks }) {
+  return (
+    <div className="center measure mv3">
+      <div className="pa3 br3 bg-white shadow-1 ">
+        <Flex marginBottom={'1rem'} as={[Heading, 'h3']}>
+          {title}
+        </Flex>
+        <TaskItems tasks={tasks} />
+      </div>
+    </div>
+  )
+})
+
 const MainContent = composeHOC()(function MainContent() {
   const ids = ['todo', 'done']
   return (
@@ -114,14 +127,7 @@ const MainContent = composeHOC()(function MainContent() {
                     </Tabs.Tab>
                   </Tabs>
                   <Tabs.Panel tab={'todo'} {...tabProps}>
-                    <div className="center measure mv3">
-                      <div className="pa3 br3 bg-white shadow-1 ">
-                        <Flex marginBottom={'1rem'} as={[Heading, 'h3']}>
-                          Todo
-                        </Flex>
-                        <TaskItems tasks={store.getTodoTasks()} />
-                      </div>
-                    </div>
+                    <TaskGroup title={'Todo'} tasks={store.getTodoTasks()} />
                   </Tabs.Panel>
                   <Tabs.Panel tab={'done'} {...tabProps}>
                     <div className="center measure mv3">
