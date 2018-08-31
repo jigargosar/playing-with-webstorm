@@ -3,7 +3,7 @@ import { Base, Flex, Heading } from 'reakit'
 import { Keyed } from '../shared-components/Keyed'
 import * as PropTypes from 'prop-types'
 import React, { Fragment } from 'react'
-import { indexOf, map, pluck, tap } from 'ramda'
+import { indexOf, pluck, tap } from 'ramda'
 import { store } from './store'
 import {
   FlexCenter,
@@ -130,6 +130,7 @@ const TaskTabsContainer = composeHOC()(function TaskTabsContainer({
 export const MainContent = composeHOC()(function MainContent() {
   const tabsList = store.getTabs()
   const currentTabId = store.getCurrentTabId()
+  const taskGroups = store.getTaskGroups()
   return (
     <TaskTabsContainer>
       {tabProps => (
@@ -146,9 +147,11 @@ export const MainContent = composeHOC()(function MainContent() {
             />
           </Tabs>
           <Tabs.Panel tab={currentTabId} {...tabProps}>
-            {map(group => <TaskGroup key={group.id} group={group} />)(
-              store.getTaskGroups(),
-            )}
+            <Keyed
+              as={TaskGroup}
+              list={taskGroups}
+              getProps={group => ({ group })}
+            />
           </Tabs.Panel>
         </Fragment>
       )}
