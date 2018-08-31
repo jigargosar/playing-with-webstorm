@@ -43,9 +43,9 @@ export const TasksPage = composeHOC()(function Page({ store }) {
                       <Keyed
                         as={TabsTab}
                         getProps={({ id, title }) => ({
-                          tab: id,
                           children: title,
                           ...tabProps,
+                          tab: id,
                         })}
                         list={tabsList}
                       />
