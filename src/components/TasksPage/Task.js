@@ -12,17 +12,8 @@ import { Button } from '../../reakit-components'
 
 const linkEvent = (fn, ...args) => tap(e => fn(...args, e))
 
-export const Task = composeHOC()(function Task({
-  task,
-  mouseEnterTask,
-  isTaskSelected,
-  isTaskHovered,
-  mouseLeaveTask,
-  selectTask,
-  toggleSelectedTaskDone,
-  toggleTaskDone,
-  deleteTask,
-}) {
+export const Task = composeHOC()(function Task(props) {
+  const { task, isTaskSelected, selectTask, toggleTaskDone, deleteTask } = props
   return (
     <TaskItem
       selected={isTaskSelected(task)}
@@ -43,9 +34,6 @@ export const Task = composeHOC()(function Task({
 Task.propTypes = {
   task: PropTypes.shape({ id: PropTypes.string.isRequired }).isRequired,
   isTaskSelected: PropTypes.func.isRequired,
-  isTaskHovered: PropTypes.func.isRequired,
-  mouseEnterTask: PropTypes.func.isRequired,
-  mouseLeaveTask: PropTypes.func.isRequired,
   selectTask: PropTypes.func.isRequired,
   toggleTaskDone: PropTypes.func.isRequired,
   deleteTask: PropTypes.func.isRequired,
