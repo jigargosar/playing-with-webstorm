@@ -4,8 +4,9 @@ import { validate } from '../lib/validate'
 import { assert } from '../lib/assert'
 import { isEmpty } from 'ramda'
 
-function Task({ id, title, done, createdAt, context, ...other }) {
+function Task({ id, title, done, createdAt, ...other }) {
   validate('SSBNO', [id, title, done, createdAt, other])
+  debugger
   assert(isEmpty(other))
   return { id, title, done, createdAt }
 }
