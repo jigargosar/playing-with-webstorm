@@ -24,7 +24,6 @@ export const Button = styled(BaseButton)`
   // font-size: 14px;
   height: 2em;
 `
-
 export const FlexCenter = styled(Flex)`
   align-items: center;
 `

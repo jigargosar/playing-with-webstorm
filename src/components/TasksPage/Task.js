@@ -17,9 +17,9 @@ export const FloatingActionsContainer = composeHOC()(
     return (
       <div
         className={'absolute z-1 flex items-center'}
-        style={{ right: '2rem' }}
+        style={{ right: '-1rem' }}
       >
-        <div className="absolute ">{children}</div>
+        {children}
       </div>
     )
   },
@@ -52,7 +52,7 @@ export const Task = composeHOC()(function Task({
       <FlexCenter relative>
         {hovered && (
           <FloatingActionsContainer>
-            <Group vertical relative className="_pa2 bg-white-90 br3 shadow-1">
+            <Group vertical className="pa2 bg-white-90 br3 shadow-1">
               <Button onClick={linkEvent(toggleTaskDone, task)}>
                 {'Done'}
               </Button>
