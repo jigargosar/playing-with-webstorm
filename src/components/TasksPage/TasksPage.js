@@ -27,6 +27,10 @@ const getTaskGroupsFromState = ({ taskList, ids, current }) =>
   getTaskGroupsForTab(ids[current], taskList)
 
 export const TasksPage = composeHOC()(function Page({ store }) {
+  const getFlatTaskList = compose(
+    flattenGroupTasks,
+    getTaskGroupsFromState,
+  )
   return (
     <ViewportHeightContainer className="bg-light-gray">
       <div className="pa3 relative">
@@ -45,11 +49,7 @@ export const TasksPage = composeHOC()(function Page({ store }) {
           }}
           selectors={{
             getTaskGroups: () => getTaskGroupsFromState,
-            getFlatTaskList: () =>
-              compose(
-                flattenGroupTasks,
-                getTaskGroupsFromState,
-              ),
+            getFlatTaskList: () => getFlatTaskList,
           }}
         >
           {({ getTaskGroups, getFlatTaskList, getCurrentId, ...tabProps }) => {
