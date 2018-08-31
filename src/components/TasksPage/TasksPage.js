@@ -56,7 +56,12 @@ export const TasksPage = composeHOC()(function Page({ store }) {
               ),
           }}
         >
-          {({ getTaskGroups, selectedTask, getCurrentId, ...tabProps }) => {
+          {({
+            getTaskGroups,
+            selectedTask: getSelectedTask,
+            getCurrentId,
+            ...tabProps
+          }) => {
             return (
               <Fragment>
                 <Tabs>
@@ -80,7 +85,7 @@ export const TasksPage = composeHOC()(function Page({ store }) {
                       selectTask: identity,
                       deleteTask: identity,
                       toggleTaskDone: identity,
-                      isTaskSelected: task => task === selectedTask,
+                      isTaskSelected: task => task === getSelectedTask(),
                     }}
                   />
                 </Tabs.Panel>
