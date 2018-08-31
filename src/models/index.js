@@ -14,7 +14,7 @@ import {
   values,
 } from 'ramda'
 import { createNewTaskWithDefaults, systemContextLookup } from './Task'
-import { pathS } from '../lib/ramda-strict'
+import { pathS, validateIO } from '../lib/ramda-strict'
 
 export const createSampleTaskList = () => times(createNewTaskWithDefaults)(16)
 
@@ -47,9 +47,11 @@ export function getTaskGroups(tabId, tasks) {
       )(tasks)
 }
 
-export function flattenGroupTasks(taskGroups) {
+export const flattenGroupTasks = validateIO('A')(function flattenGroupTasks(
+  taskGroups,
+) {
   return compose(
     flatten,
     pluck('tasks'),
   )(taskGroups)
-}
+})

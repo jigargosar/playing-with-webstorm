@@ -1,7 +1,7 @@
 import { validate } from './validate'
 import { clamp, curryN, isEmpty, map, path, pathOr } from 'ramda'
 
-const validateIO = (inputSpecs, outputSpecs = '*') => fn => {
+export const validateIO = (inputSpecs, outputSpecs = '*') => fn => {
   return curryN(fn.length)((...args) => {
     validate(inputSpecs, args)
     const result = fn(...args)
