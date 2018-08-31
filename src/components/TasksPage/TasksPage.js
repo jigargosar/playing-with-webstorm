@@ -15,6 +15,8 @@ import { Keyed } from '../../shared-components/Keyed'
 import { TaskGroup } from './TaskGroup'
 import { Task } from './Task'
 import { createSampleTaskList, getTaskGroups, tabList } from '../../models'
+import merge from 'ramda/es/merge'
+import { head } from 'ramda'
 
 export const TasksPage = composeHOC()(function Page({ store }) {
   const tabsList = tabList
@@ -52,7 +54,9 @@ export const TasksPage = composeHOC()(function Page({ store }) {
                     list={getTaskGroups(currentTabId, taskList)}
                     getProps={group => ({ group })}
                     taskComponent={Task}
-                    taskProps={store}
+                    taskProps={merge(store, {
+                      isTaskSelected: task => task === head(taskList),
+                    })}
                   />
                 </Tabs.Panel>
               </Fragment>
