@@ -47,6 +47,7 @@ export const TaskItemContent = styled(Flex)`
   align-items: center;
   position: relative;
 `
+
 export const TaskFloatingActionsContent = styled(Group).attrs({
   vertical: true,
   className: 'pa2 bg-white-90 br3 shadow-1',
