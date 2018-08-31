@@ -20,7 +20,7 @@ import {
   getTaskGroupsForTab,
   tabList,
 } from '../../models'
-import { head, pluck } from 'ramda'
+import { compose, head, pluck } from 'ramda'
 import identity from 'ramda/es/identity'
 
 const getTaskGroupsFromState = ({ taskList, ids, current }) =>
@@ -45,9 +45,11 @@ export const TasksPage = composeHOC()(function Page({ store }) {
           }}
           selectors={{
             getTaskGroups: () => getTaskGroupsFromState,
-            getFlatTaskList: () => state => {
-              flattenGroupTasks(getTaskGroupsFromState(state))
-            },
+            getFlatTaskList: () =>
+              compose(
+                flattenGroupTasks,
+                getTaskGroupsFromState,
+              ),
           }}
         >
           {({ taskList, getTaskGroups, getCurrentId, ...tabProps }) => {
