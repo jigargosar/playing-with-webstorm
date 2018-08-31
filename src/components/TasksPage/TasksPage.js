@@ -21,7 +21,7 @@ import {
   tabList,
 } from '../../models'
 import merge from 'ramda/es/merge'
-import { head } from 'ramda'
+import { head, pluck } from 'ramda'
 
 export const TasksPage = composeHOC()(function Page({ store }) {
   const tabsList = tabList
@@ -38,7 +38,7 @@ export const TasksPage = composeHOC()(function Page({ store }) {
         </Group>
       </div>
       <ScrollContainer>
-        <TabsContainer>
+        <TabsContainer initialState={{ ids: pluck('id') }}>
           {tabProps => {
             const currentTabId = tabProps.getCurrentId() || tabsList[0].id
             const taskGroups = getTaskGroupsForTab(currentTabId, taskList)
