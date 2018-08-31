@@ -55,7 +55,7 @@ export const store = (() => {
         return
       },
       get taskGroups() {
-        return getTasksGroups(store._tab, store._tasks)
+        return getTasksGroups('in_basket', store._tasks)
       },
       get flattenedTasks() {
         return compose(
