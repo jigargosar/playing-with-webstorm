@@ -36,7 +36,7 @@ export const Task = composeHOC()(function Task({
           top: '-50%',
         }}
       >
-        <TaskActionsGroup absolute>
+        <TaskActionsGroup>
           <Button onClick={linkEvent(toggleTaskDone, task)}>{'Done'}</Button>
           <Button onClick={linkEvent(deleteTask, task)}>{'Delete'}</Button>
         </TaskActionsGroup>

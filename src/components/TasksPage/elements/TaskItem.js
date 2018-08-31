@@ -35,4 +35,6 @@ TaskItem.defaultProps = {
 export const TaskActionsGroup = styled(Group).attrs({
   vertical: true,
   className: 'pa2 bg-white-90 br3 shadow-1',
-})``
+})`
+  position: absolute;
+`
