@@ -33,15 +33,6 @@ const FloatingActionsContainer = composeHOC()(
   },
 )
 
-const TaskActions = composeHOC()(function TaskActions() {
-  return (
-    <FloatingActionsContainer>
-      <Btn onClick={store.toggleSelectedTaskDone}>{'Done'}</Btn>
-      <Btn onClick={store.deleteSelectedTask}>{'Delete'}</Btn>
-    </FloatingActionsContainer>
-  )
-})
-
 const linkEvent = (fn, ...args) => tap(e => fn(...args, e))
 
 const Task = composeHOC()(function Task({ task }) {
@@ -60,7 +51,12 @@ const Task = composeHOC()(function Task({ task }) {
       onClickCapture={linkEvent(store.selectTask, task)}
     >
       <FlexCenter relative>
-        {hovered && <TaskActions />}
+        {hovered && (
+          <FloatingActionsContainer>
+            <Btn onClick={store.toggleSelectedTaskDone}>{'Done'}</Btn>
+            <Btn onClick={store.deleteSelectedTask}>{'Delete'}</Btn>
+          </FloatingActionsContainer>
+        )}
         <div className={cn('flex-auto ph2', { strike: task.done })}>
           {task.title}
         </div>
