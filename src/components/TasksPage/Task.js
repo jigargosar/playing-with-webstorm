@@ -39,7 +39,7 @@ export const Task = composeHOC()(function Task({
       onClickCapture={linkEvent(selectTask, task)}
     >
       {hovered && (
-        <Base absolute zIndex={1} right={-1}>
+        <Base absolute zIndex={1} right={'-4rem'}>
           <Group vertical relative className="pa2 bg-white-90 br3 shadow-1">
             <Button onClick={linkEvent(toggleTaskDone, task)}>{'Done'}</Button>
             <Button onClick={linkEvent(deleteTask, task)}>{'Delete'}</Button>
