@@ -1,5 +1,5 @@
 import { validate } from './validate'
-import { addIndex, clamp, curryN, isEmpty, map, path, pathOr } from 'ramda'
+import { clamp, curryN, isEmpty, map, path, pathOr } from 'ramda'
 
 const validateIO = (inputSpecs, outputSpecs = '*') => fn => {
   return curryN(fn.length)((...args) => {
@@ -33,4 +33,4 @@ export const clampIdx = validateIO('NA', 'N')(
 
 export const mapA = validateIO('FA')(map)
 
-export const mapIndexedA = validateIO('FA')(addIndex(map))
+export const mapIndexedA = validateIO('FA')(mapA)

@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react'
 import * as PropTypes from 'prop-types'
-import { mapIndexedA, propS } from '../lib/ramda-strict'
+import { propS } from '../lib/ramda-strict'
 import { observer } from 'mobx-react'
-import { always } from 'ramda'
+import { addIndex, always, compose, map, nth } from 'ramda'
 
 export const Keyed = observer(function Keyed({
   list,
@@ -12,7 +12,8 @@ export const Keyed = observer(function Keyed({
   getProps,
   ...otherProps
 }) {
-  return mapIndexedA((element, index) => (
+  debugger
+  return addIndex(map)((element, index) => (
     <Fragment key={getKey(element, index)}>
       <Component {...otherProps} {...getProps(element, index, list)} />
     </Fragment>
@@ -27,6 +28,9 @@ Keyed.propTypes = {
 }
 
 Keyed.defaultProps = {
-  getKey: propS('id'),
+  getKey: compose(
+    propS('id'),
+    nth(0),
+  ),
   getProps: always({}),
 }
