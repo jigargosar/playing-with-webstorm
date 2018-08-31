@@ -123,6 +123,7 @@ const TaskTabsContainer = composeHOC()(function TaskTabsContainer({
     </TabsContainer>
   )
 })
+
 export const MainContent = composeHOC()(function MainContent() {
   const tabsList = store.getTabs()
   const currentTabId = store.getCurrentTabId()
