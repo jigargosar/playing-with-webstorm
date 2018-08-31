@@ -99,6 +99,11 @@ export const store = (() => {
   return {
     setTab: tab => (store._tab = tab),
     getTab: () => store._tab,
+    getTabs: () =>
+      expr(() => [
+        { tab: 'todo', title: 'TODO' },
+        { tab: 'done', title: 'DONE' },
+      ]),
     getTaskGroups: () => expr(() => store.taskGroups),
     isTaskSelected: store.isTaskAtSelected,
     isTaskHovered: store.isTaskAtHovered,

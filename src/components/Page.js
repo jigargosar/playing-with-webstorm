@@ -141,12 +141,11 @@ const MainContent = composeHOC()(function MainContent() {
               {() => (
                 <Fragment>
                   <Tabs>
-                    <Tabs.Tab tab={'todo'} {...tabProps}>
-                      TODO
-                    </Tabs.Tab>
-                    <Tabs.Tab tab={'done'} {...tabProps}>
-                      DONE
-                    </Tabs.Tab>
+                    {map(({ tab, title }) => (
+                      <Tabs.Tab tab={tab} {...tabProps}>
+                        {title}
+                      </Tabs.Tab>
+                    ))(store.getTabs())}
                   </Tabs>
                   <Tabs.Panel tab={store.getTab()} {...tabProps}>
                     {map(group => <TaskGroup key={group.id} group={group} />)(
