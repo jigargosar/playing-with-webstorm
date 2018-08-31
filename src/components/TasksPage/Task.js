@@ -12,8 +12,6 @@ import { Button } from '../../reakit-components'
 
 const linkEvent = (fn, ...args) => tap(e => fn(...args, e))
 
-const backgroundColor = 'rgba(1,1,1,0.2)'
-
 export const Task = composeHOC()(function Task({
   task,
   mouseEnterTask,
