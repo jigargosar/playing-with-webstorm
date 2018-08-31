@@ -15,6 +15,7 @@ import { Keyed } from '../../shared-components/Keyed'
 import { TaskGroup } from './TaskGroup'
 import { Task } from './Task'
 import { Observer } from 'mobx-react'
+import merge from 'ramda/es/merge'
 
 export const TasksPage = composeHOC()(function Page({ store }) {
   const tabsList = store.getTabs()
