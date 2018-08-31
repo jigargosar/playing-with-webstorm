@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { Page } from './components/Page'
+import { TasksPage } from './components/TasksPage'
 import { GlobalStyles } from './GlobalStyles'
 import { Provider } from 'reakit'
 import { observer } from 'mobx-react'
@@ -31,7 +31,7 @@ class App extends Component {
                   fontSize: 16,
                 }}
               >
-                <Page />
+                <TasksPage />
               </div>
             </Fragment>
           </Provider>
