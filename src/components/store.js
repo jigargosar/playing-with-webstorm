@@ -22,6 +22,28 @@ import { clampIdx, pathS } from '../lib/ramda-strict'
 
 const createSampleTasks = () => times(createNewTaskWithDefaults)(16)
 
+function getTasksGroups(tabId, tasks) {
+  return 'done' === tabId
+    ? [
+        compose(
+          tasks => ({ id: 'done', title: 'Done', tasks }),
+          filter(prop('done')),
+        )(tasks),
+      ]
+    : compose(
+        filter(propEq('id')(tabId)),
+        sortBy(group => indexOf(group.id, ['in_basket', 'some_day'])),
+        values,
+        mapObjIndexed((tasks, id) => ({
+          id,
+          title: systemContextLookup[id].title,
+          tasks,
+        })),
+        groupBy(pathS(['context', 'id'])),
+        reject(prop('done')),
+      )(tasks)
+}
+
 export const store = (() => {
   const store = observable.object(
     {
@@ -30,27 +52,10 @@ export const store = (() => {
       _tab: 'in_basket',
 
       get doneTaskGroup() {
-        return compose(
-          tasks => ({ id: 'done', title: 'Done', tasks }),
-          filter(prop('done')),
-        )(store._tasks)
+        return
       },
       get taskGroups() {
-        if ('done' === store._tab) {
-          return [store.doneTaskGroup]
-        }
-        return compose(
-          filter(propEq('id')(store._tab)),
-          sortBy(group => indexOf(group.id, ['in_basket', 'some_day'])),
-          values,
-          mapObjIndexed((tasks, id) => ({
-            id,
-            title: systemContextLookup[id].title,
-            tasks,
-          })),
-          groupBy(pathS(['context', 'id'])),
-          reject(prop('done')),
-        )(store._tasks)
+        return getTasksGroups(store._tab, store._tasks)
       },
       get flattenedTasks() {
         return compose(
