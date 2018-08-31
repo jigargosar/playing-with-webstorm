@@ -32,18 +32,18 @@ const FloatingActionsContainer = composeHOC()(
   },
 )
 
-const TaskContent = composeHOC()(function TaskContent({
-  task: { done, title },
-}) {
-  return <div className={cn('flex-auto pa2', { strike: done })}>{title}</div>
-})
-
-TaskContent.propTypes = {
-  task: PropTypes.shape({
-    done: PropTypes.bool.isRequired,
-    title: PropTypes.string.isRequired,
-  }).isRequired,
-}
+// const TaskContent = composeHOC()(function TaskContent({
+//   task: { done, title },
+// }) {
+//   return <div className={cn('flex-auto pa2', { strike: done })}>{title}</div>
+// })
+//
+// TaskContent.propTypes = {
+//   task: PropTypes.shape({
+//     done: PropTypes.bool.isRequired,
+//     title: PropTypes.string.isRequired,
+//   }).isRequired,
+// }
 
 const TaskActions = composeHOC()(function TaskActions() {
   return (
@@ -73,7 +73,10 @@ const Task = composeHOC()(function Task({ task }) {
       onClickCapture={linkEvent(store.selectTask, task)}
     >
       {hovered && <TaskActions />}
-      <TaskContent task={task} />
+      <div className={cn('flex-auto pa2', { strike: task.done })}>
+        {task.title}
+      </div>
+      <div>Context</div>
     </FlexCenter>
   )
 })
