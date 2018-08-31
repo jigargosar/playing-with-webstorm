@@ -5,7 +5,7 @@ import { store } from '../store'
 import { composeHOC } from '../composeHOC'
 import { Button, Group, Tabs, TabsTab } from '../../reakit-components/index'
 import { Shadow } from 'reakit'
-import { indexOf, pick, pluck } from 'ramda'
+import { indexOf, pluck } from 'ramda'
 import { TaskTabsContainer } from './TaskTabsContainer'
 import { Keyed } from '../../shared-components/Keyed'
 import { TaskGroup } from './TaskGroup'
@@ -42,16 +42,7 @@ export const MainContent = composeHOC()(function MainContent() {
               list={store.getTaskGroups()}
               getProps={group => ({ group })}
               taskComponent={Task}
-              taskProps={pick([
-                'isTaskSelected',
-                'isTaskHovered',
-                'mouseEnterTask',
-                'mouseLeaveTask',
-                'selectTask',
-                'toggleSelectedTaskDone',
-                'toggleTaskDone',
-                'deleteSelectedTask',
-              ])(store)}
+              taskProps={store}
             />
           </Tabs.Panel>
         </Fragment>

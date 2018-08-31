@@ -73,7 +73,6 @@ Task.propTypes = {
   mouseEnterTask: PropTypes.func.isRequired,
   mouseLeaveTask: PropTypes.func.isRequired,
   selectTask: PropTypes.func.isRequired,
-  toggleSelectedTaskDone: PropTypes.func.isRequired,
   toggleTaskDone: PropTypes.func.isRequired,
   deleteSelectedTask: PropTypes.func.isRequired,
 }
