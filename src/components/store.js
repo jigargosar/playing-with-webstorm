@@ -22,7 +22,7 @@ import { clampIdx, pathS } from '../lib/ramda-strict'
 
 const createSampleTasks = () => times(createNewTaskWithDefaults)(16)
 
-function getTasksGroups(tabId, tasks) {
+function getTaskGroups(tabId, tasks) {
   return 'done' === tabId
     ? [
         compose(
@@ -52,7 +52,7 @@ export const store = (() => {
       _tab: 'in_basket',
 
       get taskGroups() {
-        return getTasksGroups('in_basket', store._tasks)
+        return getTaskGroups('in_basket', store._tasks)
       },
       get flattenedTasks() {
         return compose(
