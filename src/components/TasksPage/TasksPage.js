@@ -52,8 +52,7 @@ export const TasksPage = composeHOC()(function Page({ store }) {
               ),
           }}
         >
-          {({ taskList, getTaskGroups, getCurrentId, ...tabProps }) => {
-            const currentTabId = getCurrentId()
+          {({ getTaskGroups, getCurrentId, ...tabProps }) => {
             const flattenedTaskList = flattenGroupTasks(getTaskGroups())
             return (
               <Fragment>
@@ -68,7 +67,7 @@ export const TasksPage = composeHOC()(function Page({ store }) {
                     list={tabList}
                   />
                 </Tabs>
-                <Tabs.Panel tab={currentTabId} {...tabProps}>
+                <Tabs.Panel tab={getCurrentId()} {...tabProps}>
                   <Keyed
                     as={TaskGroup}
                     list={getTaskGroups()}
