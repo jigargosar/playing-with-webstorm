@@ -1,11 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Base } from 'reakit'
+import { Base, styled } from 'reakit'
 import { primaryDark, primaryLight } from '../../../reakit-components'
+
+const TaskStyled = styled(Base)``
 
 function Task({ selected, hovered, ...otherProps }) {
   return (
-    <Base
+    <TaskStyled
       className="mv2 pv2 br2"
       {...(selected
         ? { color: '#fff', backgroundColor: primaryDark }
