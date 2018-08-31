@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { Base, css, Group, styled } from 'reakit'
+import { Base, css, Fit, Group, styled } from 'reakit'
 import { ifProp } from 'styled-tools'
 import { primaryDark, primaryLight } from '../../../reakit-components'
 
@@ -32,9 +32,17 @@ TaskItem.defaultProps = {
   selected: false,
 }
 
-export const TaskActions = styled(Group).attrs({
+export const TaskActionsContent = styled(Group).attrs({
   vertical: true,
   className: 'pa2 bg-white-90 br3 shadow-1',
 })`
   position: absolute;
+`
+
+export const TaskHoverActions = styled(Fit).attrs({
+  className: 'hide-unless-parent-hovered',
+})`
+  z-index: 1;
+  left: calc(100% - 3rem);
+  top: -50%;
 `
