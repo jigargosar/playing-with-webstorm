@@ -103,6 +103,7 @@ export const store = (() => {
       expr(() => [
         { tab: 'in_basket', title: 'Inbox' },
         { tab: 'todo', title: 'TODO' },
+        { tab: 'some_day', title: 'SOME DAY' },
         { tab: 'done', title: 'DONE' },
       ]),
     getTaskGroups: () => expr(() => store.taskGroups),
