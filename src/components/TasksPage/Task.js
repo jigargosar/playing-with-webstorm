@@ -2,7 +2,7 @@ import * as PropTypes from 'prop-types'
 import React from 'react'
 import { tap } from 'ramda'
 import { composeHOC } from '../composeHOC'
-import { Group, Hidden } from 'reakit'
+import { Base, Group, Hidden } from 'reakit'
 import cn from 'classname'
 import {
   Button,
@@ -27,8 +27,7 @@ export const Task = composeHOC()(function Task({
   const selected = isTaskSelected(task)
   const hovered = isTaskHovered(task)
   return (
-    <FlexCenter
-      relative
+    <Base
       className={cn('mv2 pv2 br2')}
       {...(selected
         ? { color: '#fff', backgroundColor: secondaryDark }
@@ -39,18 +38,20 @@ export const Task = composeHOC()(function Task({
       onMouseLeave={linkEvent(mouseLeaveTask, task)}
       onClickCapture={linkEvent(selectTask, task)}
     >
-      <Hidden visible={hovered} absolute zIndex={1} right={'-4rem'}>
-        <Group vertical relative className="pa2 bg-white-90 br3 shadow-1">
-          <Button onClick={linkEvent(toggleTaskDone, task)}>{'Done'}</Button>
-          <Button onClick={linkEvent(deleteTask, task)}>{'Delete'}</Button>
-        </Group>
-      </Hidden>
+      <FlexCenter relative>
+        <Hidden visible={hovered} absolute zIndex={1} right={'-4rem'}>
+          <Group vertical relative className="pa2 bg-white-90 br3 shadow-1">
+            <Button onClick={linkEvent(toggleTaskDone, task)}>{'Done'}</Button>
+            <Button onClick={linkEvent(deleteTask, task)}>{'Delete'}</Button>
+          </Group>
+        </Hidden>
 
-      <Flex column>
-        <div className={cn('ph2', { strike: task.done })}>{task.title}</div>
-        <small className={'ttu f7 ph2'}>{`@${task.context.title}`}</small>
-      </Flex>
-    </FlexCenter>
+        <Flex column>
+          <div className={cn('ph2', { strike: task.done })}>{task.title}</div>
+          <small className={'ttu f7 ph2'}>{`@${task.context.title}`}</small>
+        </Flex>
+      </FlexCenter>
+    </Base>
   )
 })
 Task.propTypes = {
