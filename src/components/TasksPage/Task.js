@@ -42,6 +42,7 @@ export const Task = composeHOC()(function Task({
     </TaskItem>
   )
 })
+
 Task.propTypes = {
   task: PropTypes.shape({ id: PropTypes.string.isRequired }).isRequired,
   isTaskSelected: PropTypes.func.isRequired,
