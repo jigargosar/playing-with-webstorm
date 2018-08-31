@@ -103,7 +103,9 @@ TaskGroup.defaultProps = {
   showContext: true,
 }
 
-const MainContent = composeHOC()(function MainContent() {
+const TaskTabsContainer = composeHOC()(function TaskTabsContainer({
+  children,
+}) {
   const tabIds = pluck('id')(store.getTabs())
   return (
     <Tabs.Container
@@ -121,32 +123,40 @@ const MainContent = composeHOC()(function MainContent() {
             return _tabProps.show(tabId)
           },
         }
-        return (
-          <Observer>
-            {() => (
-              <Fragment>
-                <Tabs>
-                  <Keyed
-                    as={TabsTab}
-                    getProps={({ id, title }) => ({
-                      tab: id,
-                      children: title,
-                      ...tabProps,
-                    })}
-                    list={store.getTabs()}
-                  />
-                </Tabs>
-                <Tabs.Panel tab={store.getCurrentTabId()} {...tabProps}>
-                  {map(group => <TaskGroup key={group.id} group={group} />)(
-                    store.getTaskGroups(),
-                  )}
-                </Tabs.Panel>
-              </Fragment>
-            )}
-          </Observer>
-        )
+        return children(tabProps)
       }}
     </Tabs.Container>
+  )
+})
+
+const MainContent = composeHOC()(function MainContent() {
+  return (
+    <TaskTabsContainer>
+      {tabProps => (
+        <Observer>
+          {() => (
+            <Fragment>
+              <Tabs>
+                <Keyed
+                  as={TabsTab}
+                  getProps={({ id, title }) => ({
+                    tab: id,
+                    children: title,
+                    ...tabProps,
+                  })}
+                  list={store.getTabs()}
+                />
+              </Tabs>
+              <Tabs.Panel tab={store.getCurrentTabId()} {...tabProps}>
+                {map(group => <TaskGroup key={group.id} group={group} />)(
+                  store.getTaskGroups(),
+                )}
+              </Tabs.Panel>
+            </Fragment>
+          )}
+        </Observer>
+      )}
+    </TaskTabsContainer>
   )
 })
 
