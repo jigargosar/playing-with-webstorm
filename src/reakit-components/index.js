@@ -1,7 +1,14 @@
-import { Button as BaseButton, Flex, Group, styled, Tabs } from 'reakit'
+import {
+  Button as BaseButton,
+  Flex,
+  Group,
+  styled,
+  Tabs as BaseTabs,
+} from 'reakit'
 import { always } from 'ramda'
 
 export { Flex, Group }
+export const Tabs = BaseTabs
 
 // https://material.io/tools/color/#!/?view.left=0&view.right=0&primary.color=03A9F4&secondary.color=1976D2
 export const primary = '#03a9f4'
@@ -22,6 +29,5 @@ export const Button = styled(BaseButton)`
 export const FlexCenter = styled(Flex)`
   align-items: center;
 `
-export { Tabs }
 export const TabsTab = Tabs.Tab
 export const TabsContainer = always(Tabs.Container)()
