@@ -29,5 +29,7 @@ export const Button = styled(BaseButton)`
 export const FlexCenter = styled(Flex)`
   align-items: center;
 `
+
+export const FlexColumn = styled(Flex).attrs({ column: true })``
 export const TabsTab = Tabs.Tab
 export const TabsContainer = always(Tabs.Container)()
