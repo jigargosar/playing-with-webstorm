@@ -12,6 +12,7 @@ import {
   Group,
   primaryLight,
   secondaryDark,
+  TabsTab,
 } from '../reakit-components'
 import { Base, Flex, Heading, Shadow, Tabs } from 'reakit'
 import { indexOf, map, pluck, tap } from 'ramda'
@@ -146,7 +147,7 @@ const MainContent = composeHOC()(function MainContent() {
                 <Fragment>
                   <Tabs>
                     <Keyed
-                      as={Tabs.Tab}
+                      as={TabsTab}
                       getProps={({ id, title }) => ({
                         tab: id,
                         children: title,
