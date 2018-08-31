@@ -25,7 +25,7 @@ export const tabList = [
   { id: 'done', title: 'DONE' },
 ]
 
-export const getTaskGroupForTab = validateIO('SA', 'A')(
+export const getTaskGroupsForTab = validateIO('SA', 'A')(
   function getTaskGroupForTab(tabId, tasks) {
     return 'done' === tabId
       ? [

@@ -17,7 +17,7 @@ import { Task } from './Task'
 import {
   createSampleTaskList,
   flattenGroupTasks,
-  getTaskGroupForTab,
+  getTaskGroupsForTab,
   tabList,
 } from '../../models'
 import merge from 'ramda/es/merge'
@@ -41,7 +41,8 @@ export const TasksPage = composeHOC()(function Page({ store }) {
         <TabsContainer>
           {tabProps => {
             const currentTabId = tabProps.getCurrentId() || tabsList[0].id
-            const flattenedTaskList = flattenGroupTasks(taskList)
+            const taskGroups = getTaskGroupsForTab(currentTabId, taskList)
+            const flattenedTaskList = flattenGroupTasks(taskGroups)
             return (
               <Fragment>
                 <Tabs>
@@ -58,11 +59,12 @@ export const TasksPage = composeHOC()(function Page({ store }) {
                 <Tabs.Panel tab={currentTabId} {...tabProps}>
                   <Keyed
                     as={TaskGroup}
-                    list={getTaskGroupForTab(currentTabId, taskList)}
+                    list={taskGroups}
                     getProps={group => ({ group })}
                     taskComponent={Task}
                     taskProps={merge(store, {
-                      isTaskSelected: task => task === head(flattenedTaskList),
+                      isTaskSelected: task =>
+                        task.id === head(flattenedTaskList).id,
                     })}
                   />
                 </Tabs.Panel>
