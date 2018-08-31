@@ -2,7 +2,6 @@ import PropTypes from 'prop-types'
 import { Base, Group, Hidden, styled } from 'reakit'
 import { ifProp } from 'styled-tools'
 import { Flex, primaryDark, primaryLight } from '../../../reakit-components'
-import React from 'react'
 
 export const TaskItem = styled(Base).attrs({ className: 'mv2 pv2 br2' })`
   ${ifProp('hovered', { backgroundColor: primaryLight })};
