@@ -31,9 +31,9 @@ export const Task = composeHOC()(function Task({
       <Fit
         className="hide-unless-parent-hovered"
         style={{
-          backgroundColor: backgroundColor,
-          zIndex: 5,
-          left: 'calc( 100% - 5rem)',
+          zIndex: 1,
+          width: '5rem',
+          left: 'calc( 100% - 3rem)',
           top: '-50%',
         }}
       >
