@@ -2,14 +2,14 @@ import * as PropTypes from 'prop-types'
 import React from 'react'
 import { tap } from 'ramda'
 import { composeHOC } from '../composeHOC'
-import { Base } from 'reakit'
+import { Base, Group } from 'reakit'
 import cn from 'classname'
 import {
+  Button,
   FlexCenter,
   primaryLight,
   secondaryDark,
 } from '../../reakit-components'
-import { Btn } from '../Btn'
 
 const linkEvent = (fn, ...args) => tap(e => fn(...args, e))
 export const FloatingActionsContainer = composeHOC()(
@@ -54,8 +54,12 @@ export const Task = composeHOC()(function Task({
       <FlexCenter relative>
         {hovered && (
           <FloatingActionsContainer>
-            <Btn onClick={linkEvent(toggleTaskDone, task)}>{'Done'}</Btn>
-            <Btn onClick={linkEvent(deleteTask, task)}>{'Delete'}</Btn>
+            <Group vertical>
+              <Button onClick={linkEvent(toggleTaskDone, task)}>
+                {'Done'}
+              </Button>
+              <Button onClick={linkEvent(deleteTask, task)}>{'Delete'}</Button>
+            </Group>
           </FloatingActionsContainer>
         )}
         <div className={cn('flex-auto ph2', { strike: task.done })}>
