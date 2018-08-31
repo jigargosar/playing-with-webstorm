@@ -11,6 +11,7 @@ import {
   propEq,
   reject,
   sortBy,
+  tap,
   times,
   values,
 } from 'ramda'
@@ -42,6 +43,7 @@ export const store = (() => {
         }
         return compose(
           filter(propEq('id')(store._tab)),
+          tap(console.log),
           sortBy(group => indexOf(group.id, ['in_basket', 'some_day'])),
           values,
           mapObjIndexed((tasks, id) => ({
