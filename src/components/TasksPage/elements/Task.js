@@ -1,7 +1,7 @@
 import * as PropTypes from 'prop-types'
 import React from 'react'
 import { tap } from 'ramda'
-import { composeHOC } from '../composeHOC'
+import { composeHOC } from '../../composeHOC'
 import { Base, Group, Hidden } from 'reakit'
 import cn from 'classname'
 import {
@@ -10,7 +10,7 @@ import {
   FlexColumn,
   primaryDark,
   primaryLight,
-} from '../../reakit-components'
+} from '../../../reakit-components'
 
 const linkEvent = (fn, ...args) => tap(e => fn(...args, e))
 
