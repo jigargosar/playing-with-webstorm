@@ -22,6 +22,7 @@ import {
 } from '../../models'
 import { head, pluck } from 'ramda'
 import identity from 'ramda/es/identity'
+import tap from 'ramda/es/tap'
 
 export const TasksPage = composeHOC()(function Page({ store }) {
   return (
@@ -40,9 +41,10 @@ export const TasksPage = composeHOC()(function Page({ store }) {
             ids: pluck('id')(tabList),
             taskList: createSampleTaskList(),
           }}
+          selectors={{ getTaskGroups: () => tap(console.log) }}
         >
-          {({ taskList, ...tabProps }) => {
-            const currentTabId = tabProps.getCurrentId()
+          {({ taskList, getCurrentId, ...tabProps }) => {
+            const currentTabId = getCurrentId()
             const taskGroups = getTaskGroupsForTab(currentTabId, taskList)
             const flattenedTaskList = flattenGroupTasks(taskGroups)
             return (
