@@ -101,6 +101,11 @@ const TaskGroup = composeHOC()(function TaskGroup({ title, tasks }) {
 TaskGroup.propTypes = {
   title: PropTypes.string.isRequired,
   tasks: PropTypes.array.isRequired,
+  showContext: PropTypes.bool,
+}
+
+TaskGroup.defaultProps = {
+  showContext: true,
 }
 
 const MainContent = composeHOC()(function MainContent() {
