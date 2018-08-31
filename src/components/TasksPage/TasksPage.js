@@ -23,6 +23,12 @@ import {
 import { head, pluck } from 'ramda'
 import identity from 'ramda/es/identity'
 
+const getTaskGroupsFromState = ({
+  taskList,
+  ids,
+  current,
+  currentTabId: tabId = ids[current],
+}) => getTaskGroupsForTab(tabId, taskList)
 export const TasksPage = composeHOC()(function Page({ store }) {
   return (
     <ViewportHeightContainer className="bg-light-gray">
@@ -41,12 +47,7 @@ export const TasksPage = composeHOC()(function Page({ store }) {
             taskList: createSampleTaskList(),
           }}
           selectors={{
-            getTaskGroups: () => ({
-              taskList,
-              ids,
-              current,
-              currentTabId = ids[current],
-            }) => getTaskGroupsForTab(currentTabId, taskList),
+            getTaskGroups: () => getTaskGroupsFromState,
           }}
         >
           {({ taskList, getTaskGroups, getCurrentId, ...tabProps }) => {
