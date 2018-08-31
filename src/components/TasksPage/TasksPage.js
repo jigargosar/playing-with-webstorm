@@ -3,18 +3,21 @@ import { ScrollContainer, ViewportHeightContainer } from '../containers'
 import * as PropTypes from 'prop-types'
 import { store } from '../store'
 import { composeHOC } from '../composeHOC'
-import { Button, Group, Tabs, TabsTab } from '../../reakit-components/index'
+import {
+  Button,
+  Group,
+  Tabs,
+  TabsContainer,
+  TabsTab,
+} from '../../reakit-components/index'
 import { Shadow } from 'reakit'
-import { indexOf, pluck } from 'ramda'
-import { TaskTabsContainer } from './TaskTabsContainer'
 import { Keyed } from '../../shared-components/Keyed'
 import { TaskGroup } from './TaskGroup'
 import { Task } from './Task'
+import { Observer } from 'mobx-react'
 
 export const TasksPage = composeHOC()(function Page({ store }) {
   const tabsList = store.getTabs()
-  const currentTabId = store.getCurrentTabId()
-  const tabIds = pluck('id')(tabsList)
   return (
     <ViewportHeightContainer className="bg-light-gray">
       <div className="pa3 relative">
@@ -26,38 +29,41 @@ export const TasksPage = composeHOC()(function Page({ store }) {
         </Group>
       </div>
       <ScrollContainer>
-        <TaskTabsContainer
-          initialState={{
-            ids: tabIds,
-            current: indexOf(currentTabId)(tabIds),
-          }}
-          setTabId={store.setTabId}
-        >
+        <TabsContainer>
           {tabProps => (
-            <Fragment>
-              <Tabs>
-                <Keyed
-                  as={TabsTab}
-                  getProps={({ id, title }) => ({
-                    tab: id,
-                    children: title,
-                    ...tabProps,
-                  })}
-                  list={tabsList}
-                />
-              </Tabs>
-              <Tabs.Panel tab={currentTabId} {...tabProps}>
-                <Keyed
-                  as={TaskGroup}
-                  list={store.getTaskGroups()}
-                  getProps={group => ({ group })}
-                  taskComponent={Task}
-                  taskProps={store}
-                />
-              </Tabs.Panel>
-            </Fragment>
+            <Observer>
+              {() => {
+                return (
+                  <Fragment>
+                    <Tabs>
+                      <Keyed
+                        as={TabsTab}
+                        getProps={({ id, title }) => ({
+                          tab: id,
+                          children: title,
+                          ...tabProps,
+                        })}
+                        list={tabsList}
+                      />
+                    </Tabs>
+                    <Tabs.Panel
+                      tab={tabProps.getCurrentId() || tabsList[0].id}
+                      {...tabProps}
+                    >
+                      <Keyed
+                        as={TaskGroup}
+                        list={store.getTaskGroups()}
+                        getProps={group => ({ group })}
+                        taskComponent={Task}
+                        taskProps={store}
+                      />
+                    </Tabs.Panel>
+                  </Fragment>
+                )
+              }}
+            </Observer>
           )}
-        </TaskTabsContainer>
+        </TabsContainer>
       </ScrollContainer>
       <div className="pa3 relative">
         <Shadow depth={1} />
