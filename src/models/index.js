@@ -16,7 +16,7 @@ import { pathS } from '../lib/ramda-strict'
 
 export const createSampleTasks = () => times(createNewTaskWithDefaults)(16)
 export const tabs = [
-  { id: 'in_basket', title: 'Inbox' },
+  { id: 'in_basket', title: 'INBOX' },
   { id: 'todo', title: 'TODO' },
   { id: 'some_day', title: 'SOME DAY' },
   { id: 'done', title: 'DONE' },
