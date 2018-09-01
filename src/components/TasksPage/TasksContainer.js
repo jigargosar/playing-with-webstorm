@@ -30,9 +30,7 @@ const actions = {
 export const TasksContainer = props => (
   <Container
     {...props}
-    initialState={{
-      ...initialState,
-    }}
+    initialState={{ ...initialState }}
     selectors={{ ...selectors, ...props.selectors }}
     actions={{ ...actions, ...props.actions }}
   />
