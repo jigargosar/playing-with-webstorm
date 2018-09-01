@@ -9,14 +9,14 @@ import {
 } from '../../reakit-components/index'
 import { Shadow } from 'reakit'
 import { Keyed } from '../../shared-components/Keyed'
-import { TaskGroup } from './TaskGroup'
+import { GroupCard, GroupCardTitle } from './TaskGroup'
 import { Task } from './Task'
-import { tabList } from '../../models'
+import { flattenTasksFromGroups, tabList } from '../../models'
 import { pluck } from 'ramda'
 import identity from 'ramda/es/identity'
 import { TasksContainer } from './TasksContainer'
 import { validate } from '../../lib/validate'
-import { tapLog, validateIO } from '../../lib/ramda-strict'
+import { mapA, tapLog, validateIO } from '../../lib/ramda-strict'
 
 const renderTaskTabs = validateIO('OO', 'O')(function renderTaskTabs(
   state,
@@ -25,6 +25,8 @@ const renderTaskTabs = validateIO('OO', 'O')(function renderTaskTabs(
   const { setSelectedTask, getTaskGroupsForTabId, isTaskSelected } = state
   validate('FFF', [setSelectedTask, getTaskGroupsForTabId, isTaskSelected])
   const currentTabId = tapLog('currentTabId')(tabProps.getCurrentId())
+  const taskGroups = getTaskGroupsForTabId(currentTabId)
+  const taskList = flattenTasksFromGroups(taskGroups)
   return (
     <Fragment>
       <Tabs>
@@ -39,18 +41,23 @@ const renderTaskTabs = validateIO('OO', 'O')(function renderTaskTabs(
         />
       </Tabs>
       <Tabs.Panel tab={currentTabId} {...tabProps}>
-        <Keyed
-          as={TaskGroup}
-          list={getTaskGroupsForTabId(currentTabId)}
-          getProps={group => ({ group })}
-          taskComponent={Task}
-          taskProps={{
-            selectTask: setSelectedTask,
-            deleteTask: identity,
-            toggleTaskDone: identity,
-            isTaskSelected,
-          }}
-        />
+        {mapA(({ id, title, tasks }) => (
+          <GroupCard key={id}>
+            <GroupCardTitle>{title}</GroupCardTitle>
+            {mapA(task => (
+              <Task
+                key={`{title}--${task.id}`}
+                {...{
+                  task,
+                  selectTask: setSelectedTask,
+                  deleteTask: identity,
+                  toggleTaskDone: identity,
+                  isTaskSelected,
+                }}
+              />
+            ))(tasks)}
+          </GroupCard>
+        ))(taskGroups)}
       </Tabs.Panel>
     </Fragment>
   )
