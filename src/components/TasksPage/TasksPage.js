@@ -18,12 +18,10 @@ import { TasksContainer } from './TasksContainer'
 import tap from 'ramda/es/tap'
 import { validate } from '../../lib/validate'
 
-function renderTaskTabs({
-  tabProps,
-  taskGroups,
-  setSelectedTask,
-  isTaskSelected,
-}) {
+function foo(state, tabProps) {
+  const { setSelectedTask, getTaskGroupsForTabId, isTaskSelected } = state
+  validate('FFF', [setSelectedTask, getTaskGroupsForTabId, isTaskSelected])
+  const currentTabId = tabProps.getCurrentId()
   return (
     <Fragment>
       <Tabs>
@@ -37,10 +35,10 @@ function renderTaskTabs({
           list={tabList}
         />
       </Tabs>
-      <Tabs.Panel tab={tap(console.log)(tabProps.getCurrentId())} {...tabProps}>
+      <Tabs.Panel tab={tap(console.log)(currentTabId)} {...tabProps}>
         <Keyed
           as={TaskGroup}
-          list={taskGroups}
+          list={getTaskGroupsForTabId(currentTabId)}
           getProps={group => ({ group })}
           taskComponent={Task}
           taskProps={{
@@ -67,26 +65,9 @@ export function TasksPage({ store }) {
         </Group>
       </div>
       <ScrollContainer>
-        <TabsContainer
-          initialState={{ ids: pluck('id')(tabList) }}
-          onUpdate={console.log}
-        >
+        <TabsContainer initialState={{ ids: pluck('id')(tabList) }}>
           {tabProps => (
-            <TasksContainer>
-              {({ setSelectedTask, getTaskGroupsForTabId, isTaskSelected }) => {
-                validate('FFF', [
-                  setSelectedTask,
-                  getTaskGroupsForTabId,
-                  isTaskSelected,
-                ])
-                return renderTaskTabs({
-                  tabProps,
-                  taskGroups: getTaskGroupsForTabId(tabProps.getCurrentId()),
-                  setSelectedTask,
-                  isTaskSelected,
-                })
-              }}
-            </TasksContainer>
+            <TasksContainer>{state => foo(state, tabProps)}</TasksContainer>
           )}
         </TabsContainer>
       </ScrollContainer>
