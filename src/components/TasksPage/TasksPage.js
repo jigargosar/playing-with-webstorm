@@ -16,6 +16,7 @@ import { pluck } from 'ramda'
 import identity from 'ramda/es/identity'
 import { TasksContainer } from './TasksContainer'
 import tap from 'ramda/es/tap'
+import { validate } from '../../lib/validate'
 
 function renderTaskTabs({
   tabProps,
@@ -72,14 +73,19 @@ export function TasksPage({ store }) {
         >
           {tabProps => (
             <TasksContainer>
-              {({ setSelectedTask, getTaskGroupsForTabId, isTaskSelected }) =>
-                renderTaskTabs({
+              {({ setSelectedTask, getTaskGroupsForTabId, isTaskSelected }) => {
+                validate('FFF', [
+                  setSelectedTask,
+                  getTaskGroupsForTabId,
+                  isTaskSelected,
+                ])
+                return renderTaskTabs({
                   tabProps,
                   taskGroups: getTaskGroupsForTabId(tabProps.getCurrentId()),
                   setSelectedTask,
                   isTaskSelected,
                 })
-              }
+              }}
             </TasksContainer>
           )}
         </TabsContainer>
