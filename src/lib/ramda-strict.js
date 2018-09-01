@@ -13,7 +13,7 @@ import {
 
 function specsToSignature(i, o) {
   return `${compose(
-    join('->'),
+    join(' => '),
     split(''),
   )(i)}`
 }
@@ -27,7 +27,7 @@ export const validateIO = function validateIO(inputSpecs, outputSpecs = '*') {
         console.debug(e)
         console.log(inputSpecs, args)
         throw new Error(
-          `${fn.name}::${specsToSignature(inputSpecs, outputSpecs)} \n ${
+          `${fn.name} :: ${specsToSignature(inputSpecs, outputSpecs)} \n ${
             e.message
           }`,
         )
