@@ -1,7 +1,6 @@
 import * as PropTypes from 'prop-types'
 import React from 'react'
 import { tap } from 'ramda'
-import { composeHOC } from '../composeHOC'
 import {
   TaskHoverActions,
   TaskHoverActionsContent,
@@ -12,7 +11,7 @@ import { Button } from '../../reakit-components'
 
 const linkEvent = (fn, ...args) => tap(e => fn(...args, e))
 
-export const Task = composeHOC()(function Task(props) {
+export function Task(props) {
   const { task, selected, selectTask, toggleTaskDone, deleteTask } = props
   return (
     <TaskItem selected={selected} onClick={linkEvent(selectTask, task)}>
@@ -26,7 +25,7 @@ export const Task = composeHOC()(function Task(props) {
       <small className={'ttu f7 mh2'}>{`@${task.context.title}`}</small>
     </TaskItem>
   )
-})
+}
 
 Task.propTypes = {
   task: PropTypes.shape({ id: PropTypes.string.isRequired }).isRequired,

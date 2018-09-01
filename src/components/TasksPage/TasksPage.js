@@ -9,7 +9,7 @@ import {
 } from '../../reakit-components/index'
 import { Shadow } from 'reakit'
 import { Keyed } from '../../shared-components/Keyed'
-import { GroupCard, GroupCardTitle } from './TaskGroup'
+import { TaskGroup, TaskGroupTitle } from './elements/TaskGroup'
 import { Task } from './Task'
 import { flattenTasksFromGroups, tabList } from '../../models'
 import { partial, pluck } from 'ramda'
@@ -42,8 +42,8 @@ const renderTaskTabs = validateIO('OO', 'O')(function renderTaskTabs(
         <SingleSelectionContainer>
           {({ isSelected, setSelected }) =>
             mapA(group => (
-              <GroupCard key={group.id}>
-                <GroupCardTitle>{group.title}</GroupCardTitle>
+              <TaskGroup key={group.id}>
+                <TaskGroupTitle>{group.title}</TaskGroupTitle>
                 {mapA(task => (
                   <Task
                     key={`${group.title}--${task.id}`}
@@ -56,7 +56,7 @@ const renderTaskTabs = validateIO('OO', 'O')(function renderTaskTabs(
                     }}
                   />
                 ))(group.tasks)}
-              </GroupCard>
+              </TaskGroup>
             ))(taskGroups)
           }
         </SingleSelectionContainer>
