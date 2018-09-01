@@ -45,22 +45,25 @@ export const TasksPage = composeHOC()(function Page({ store }) {
           }}
         >
           {tabProps => {
-            const getTaskCollection = path(['taskCollection'])
+            const taskCollectionFromState = path(['taskCollection'])
             const getCurrentTabId = tabProps.getCurrentId
-            const getTaskGroups = state =>
-              getTaskGroupsForTab(getCurrentTabId(), getTaskCollection(state))
+            const taskGroupsFromState = state =>
+              getTaskGroupsForTab(
+                getCurrentTabId(),
+                taskCollectionFromState(state),
+              )
 
-            const getCurrentTaskList = compose(
+            const currentTaskListFromState = compose(
               flattenGroupTasks,
-              getTaskGroups,
+              taskGroupsFromState,
             )
-            const getSelectedTask = state => {
+            const selectedTaskFromState = state => {
               const selectedTaskIdx = clampIdx(state.selectedTaskIdx)(
-                getCurrentTaskList(state),
+                currentTaskListFromState(state),
               )
               return compose(
                 path([selectedTaskIdx]),
-                getCurrentTaskList,
+                currentTaskListFromState,
               )(state)
             }
             return (
@@ -70,8 +73,8 @@ export const TasksPage = composeHOC()(function Page({ store }) {
                   selectedTaskIdx: 0,
                 }}
                 selectors={{
-                  getTaskGroups: () => getTaskGroups,
-                  getSelectedTask: () => getSelectedTask,
+                  getTaskGroups: () => taskGroupsFromState,
+                  getSelectedTask: () => selectedTaskFromState,
                   getCurrentTabId: () => getCurrentTabId,
                   getTabProps: () => () => tabProps,
                 }}
@@ -79,7 +82,7 @@ export const TasksPage = composeHOC()(function Page({ store }) {
                   setSelectedTask: ({ id }) => state => {
                     return {
                       selectedTaskIdx: findIndexById(id)(
-                        getCurrentTaskList(state),
+                        currentTaskListFromState(state),
                       ),
                     }
                   },
