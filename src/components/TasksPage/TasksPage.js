@@ -25,6 +25,7 @@ import identity from 'ramda/es/identity'
 import path from 'ramda/es/path'
 import { clampIdx } from '../../lib/ramda-strict'
 import { findIndexById } from '../../lib/ramda-ext'
+import { Container } from '../../lib-exports/reakit-exports'
 
 export const TasksPage = composeHOC()(function Page({ store }) {
   const getTaskCollection = path(['taskCollection'])
@@ -81,33 +82,37 @@ export const TasksPage = composeHOC()(function Page({ store }) {
             setSelectedTask,
             ...tabProps
           }) => (
-            <Fragment>
-              <Tabs>
-                <Keyed
-                  as={TabsTab}
-                  getProps={({ id, title }) => ({
-                    tab: id,
-                    children: title,
-                    ...tabProps,
-                  })}
-                  list={tabList}
-                />
-              </Tabs>
-              <Tabs.Panel tab={getCurrentId()} {...tabProps}>
-                <Keyed
-                  as={TaskGroup}
-                  list={getTaskGroups()}
-                  getProps={group => ({ group })}
-                  taskComponent={Task}
-                  taskProps={{
-                    selectTask: setSelectedTask,
-                    deleteTask: identity,
-                    toggleTaskDone: identity,
-                    isTaskSelected: task => task === getSelectedTask(),
-                  }}
-                />
-              </Tabs.Panel>
-            </Fragment>
+            <Container>
+              {() => (
+                <Fragment>
+                  <Tabs>
+                    <Keyed
+                      as={TabsTab}
+                      getProps={({ id, title }) => ({
+                        tab: id,
+                        children: title,
+                        ...tabProps,
+                      })}
+                      list={tabList}
+                    />
+                  </Tabs>
+                  <Tabs.Panel tab={getCurrentId()} {...tabProps}>
+                    <Keyed
+                      as={TaskGroup}
+                      list={getTaskGroups()}
+                      getProps={group => ({ group })}
+                      taskComponent={Task}
+                      taskProps={{
+                        selectTask: setSelectedTask,
+                        deleteTask: identity,
+                        toggleTaskDone: identity,
+                        isTaskSelected: task => task === getSelectedTask(),
+                      }}
+                    />
+                  </Tabs.Panel>
+                </Fragment>
+              )}
+            </Container>
           )}
         </TabsContainer>
       </ScrollContainer>
