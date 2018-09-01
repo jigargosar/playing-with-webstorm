@@ -20,7 +20,7 @@ export const createSampleTaskList = () => times(createNewTaskWithDefaults)(16)
 
 export const tabList = [
   { id: 'in_basket', title: 'INBOX' },
-  { id: 'todo', title: 'TODO' },
+  { id: 'next_actions', title: 'NEXT ACTIONS' },
   { id: 'some_day', title: 'SOME DAY' },
   { id: 'done', title: 'DONE' },
 ]
