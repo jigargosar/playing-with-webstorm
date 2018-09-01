@@ -7,7 +7,9 @@ export const validateIO = function validateIO(inputSpecs, outputSpecs = '*') {
       try {
         validate(inputSpecs, args)
       } catch (e) {
-        throw e
+        console.debug(e)
+        console.log(inputSpecs, args)
+        throw new Error(`[${fn.name}] ${e.message}`)
       }
       const result = fn(...args)
       validate(outputSpecs, [result])

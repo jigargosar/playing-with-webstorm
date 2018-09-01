@@ -35,7 +35,7 @@ class App extends Component {
   }
 
   componentDidCatch(error, info) {
-    console.log(error, info)
+    console.debug(error, info)
     this.setState({ hasError: true })
   }
 }
