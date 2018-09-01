@@ -17,7 +17,6 @@ import identity from 'ramda/es/identity'
 import { TasksContainer } from './TasksContainer'
 import { validate } from '../../lib/validate'
 import { tapLog, validateIO } from '../../lib/ramda-strict'
-import { defaultProps } from 'recompose'
 
 const renderTaskTabs = validateIO('OO', 'O')(function renderTaskTabs(
   state,
@@ -56,8 +55,7 @@ const renderTaskTabs = validateIO('OO', 'O')(function renderTaskTabs(
     </Fragment>
   )
 })
-
-function TasksPageInner({ store, state, tabProps }) {
+export function TasksPage({ store }) {
   return (
     <ViewportHeight className="bg-light-gray">
       <div className="pa3 relative">
@@ -68,7 +66,15 @@ function TasksPageInner({ store, state, tabProps }) {
           <Button onClick={store && store.deleteAllTasks}>Delete All</Button>
         </Group>
       </div>
-      <Scrollable>{renderTaskTabs(state, tabProps)}</Scrollable>
+      <Scrollable>
+        <TabsContainer initialState={{ ids: pluck('id')(tabList) }}>
+          {tabProps => (
+            <TasksContainer>
+              {state => renderTaskTabs(state, tabProps)}
+            </TasksContainer>
+          )}
+        </TabsContainer>
+      </Scrollable>
       <div className="pa3 relative">
         <Shadow depth={1} />
         STATIC FOOTER
@@ -76,33 +82,6 @@ function TasksPageInner({ store, state, tabProps }) {
     </ViewportHeight>
   )
 }
-
-const TaskTabsContainer = defaultProps({
-  context: 'TaskTabsContainer',
-  initialState: { ids: pluck('id')(tabList) },
-})(TabsContainer)
-
-// eslint-disable-next-line no-func-assign
-export function TasksPage() {
-  return (
-    <TasksContainer>
-      {state => (
-        <TaskTabsContainer>
-          {tabProps => <TasksPageInner state={state} tabProps={tabProps} />}
-        </TaskTabsContainer>
-      )}
-    </TasksContainer>
-  )
-}
-
-// // eslint-disable-next-line no-func-assign
-// TasksPage = compose(
-//   // Context (Function as Child Components)
-//   fromRenderProps(TasksContainer, state => ({ state })),
-//   fromRenderProps(TaskTabsContainer, tabProps => ({ tabProps })),
-//   // Render props
-//   // fromRenderProps(RenderPropsComponent, ({ value }) => ({ value }), 'render'),
-// )(TasksPage)
 
 TasksPage.propTypes = {}
 

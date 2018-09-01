@@ -8,7 +8,7 @@ import {
 } from '../../models'
 import path from 'ramda/es/path'
 import { compose } from 'ramda'
-import { clampIdx } from '../../lib/ramda-strict'
+import { clampIdx, validateIO } from '../../lib/ramda-strict'
 import { findIndexById } from '../../lib/ramda-ext'
 
 const initialState = {
@@ -21,10 +21,13 @@ const getTaskGroups = () => getTaskGroupsForTabId('in_basket')
 const getTaskGroupsForTabId = tabId => state =>
   getTaskGroupsForTab(tabId, getTaskCollection()(state))
 
+export const atClampedIdx = validateIO('NA')(function atClampedIdx(idx, list) {
+  return path([clampIdx(idx)(list)])(list)
+})
+
 const getSelectedTask = () => state => {
   const currentTaskList = getCurrentTaskList()(state)
-  const selectedTaskIdx = clampIdx(state.selectedTaskIdx)(currentTaskList)
-  return path([selectedTaskIdx])(currentTaskList)
+  return atClampedIdx(state.selectedTaskIdx, currentTaskList)
 }
 
 const isTaskSelected = task => state => getSelectedTask()(state) === task
