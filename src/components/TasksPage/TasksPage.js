@@ -19,7 +19,9 @@ import tap from 'ramda/es/tap'
 import { validate } from '../../lib/validate'
 import { validateIO } from '../../lib/ramda-strict'
 
-const tapLog = msg => tap((...args) => console.log(msg, ...args))
+const tapLog = validateIO('S|Z', 'F')(msg =>
+  tap((...args) => console.log(msg, ...args)),
+)
 
 const renderTaskTabs = validateIO('OO', 'O')(function renderTaskTabs(
   state,
