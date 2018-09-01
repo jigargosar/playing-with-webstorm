@@ -52,7 +52,7 @@ const renderTaskTabs = validateIO('OO', 'O')(function renderTaskTabs(
                       selectTask: partial(setSelected)([task, taskList]),
                       deleteTask: identity,
                       toggleTaskDone: identity,
-                      isTaskSelected: () => isSelected(task, taskList),
+                      selected: isSelected(task, taskList),
                     }}
                   />
                 ))(tasks)}

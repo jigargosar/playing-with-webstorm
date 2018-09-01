@@ -13,12 +13,9 @@ import { Button } from '../../reakit-components'
 const linkEvent = (fn, ...args) => tap(e => fn(...args, e))
 
 export const Task = composeHOC()(function Task(props) {
-  const { task, isTaskSelected, selectTask, toggleTaskDone, deleteTask } = props
+  const { task, selected, selectTask, toggleTaskDone, deleteTask } = props
   return (
-    <TaskItem
-      selected={isTaskSelected(task)}
-      onClick={linkEvent(selectTask, task)}
-    >
+    <TaskItem selected={selected} onClick={linkEvent(selectTask, task)}>
       <TaskHoverActions>
         <TaskHoverActionsContent>
           <Button onClick={linkEvent(toggleTaskDone, task)}>{'Done'}</Button>
@@ -33,7 +30,7 @@ export const Task = composeHOC()(function Task(props) {
 
 Task.propTypes = {
   task: PropTypes.shape({ id: PropTypes.string.isRequired }).isRequired,
-  isTaskSelected: PropTypes.func.isRequired,
+  selected: PropTypes.bool.isRequired,
   selectTask: PropTypes.func.isRequired,
   toggleTaskDone: PropTypes.func.isRequired,
   deleteTask: PropTypes.func.isRequired,
