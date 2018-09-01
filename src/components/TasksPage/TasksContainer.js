@@ -9,6 +9,7 @@ import {
 import path from 'ramda/es/path'
 import { compose, prop } from 'ramda'
 import { clampIdx, propS } from '../../lib/ramda-strict'
+import { findIndexById } from '../../lib/ramda-ext'
 
 const initialState = {
   taskCollection: createSampleTaskList(),
@@ -40,6 +41,16 @@ const selectors = {
   getTabProps,
 }
 
+const setSelectedTask = ({ id }) => state => {
+  return {
+    selectedTaskIdx: findIndexById(id)(getCurrentTaskList()(state)),
+  }
+}
+
+const actions = {
+  setSelectedTask: setSelectedTask,
+}
+
 export const TasksContainer = props => (
   <Container
     {...props}
@@ -49,6 +60,7 @@ export const TasksContainer = props => (
       tabProps: props.tabProps,
     }}
     selectors={{ ...selectors, ...props.selectors }}
+    actions={{ ...actions, ...props.actions }}
   />
 )
 
