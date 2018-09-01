@@ -12,20 +12,18 @@ import { Keyed } from '../../shared-components/Keyed'
 import { GroupCard, GroupCardTitle } from './TaskGroup'
 import { Task } from './Task'
 import { flattenTasksFromGroups, tabList } from '../../models'
-import { pluck } from 'ramda'
+import { partial, pluck } from 'ramda'
 import identity from 'ramda/es/identity'
 import { TasksContainer } from './TasksContainer'
-import { validate } from '../../lib/validate'
 import { mapA, tapLog, validateIO } from '../../lib/ramda-strict'
+import { SingleSelectionContainer } from './SingleSelectionContainer'
 
 const renderTaskTabs = validateIO('OO', 'O')(function renderTaskTabs(
   state,
   tabProps,
 ) {
-  const { setSelectedTask, getTaskGroupsForTabId, isTaskSelected } = state
-  validate('FFF', [setSelectedTask, getTaskGroupsForTabId, isTaskSelected])
   const currentTabId = tapLog('currentTabId')(tabProps.getCurrentId())
-  const taskGroups = getTaskGroupsForTabId(currentTabId)
+  const taskGroups = state.getTaskGroupsForTabId(currentTabId)
   const taskList = flattenTasksFromGroups(taskGroups)
   return (
     <Fragment>
@@ -41,23 +39,27 @@ const renderTaskTabs = validateIO('OO', 'O')(function renderTaskTabs(
         />
       </Tabs>
       <Tabs.Panel tab={currentTabId} {...tabProps}>
-        {mapA(({ id, title, tasks }) => (
-          <GroupCard key={id}>
-            <GroupCardTitle>{title}</GroupCardTitle>
-            {mapA(task => (
-              <Task
-                key={`{title}--${task.id}`}
-                {...{
-                  task,
-                  selectTask: setSelectedTask,
-                  deleteTask: identity,
-                  toggleTaskDone: identity,
-                  isTaskSelected,
-                }}
-              />
-            ))(tasks)}
-          </GroupCard>
-        ))(taskGroups)}
+        <SingleSelectionContainer>
+          {({ isSelected, setSelected }) =>
+            mapA(({ id, title, tasks }) => (
+              <GroupCard key={id}>
+                <GroupCardTitle>{title}</GroupCardTitle>
+                {mapA(task => (
+                  <Task
+                    key={`{title}--${task.id}`}
+                    {...{
+                      task,
+                      selectTask: partial(setSelected)([task, taskList]),
+                      deleteTask: identity,
+                      toggleTaskDone: identity,
+                      isTaskSelected: () => isSelected(task, taskList),
+                    }}
+                  />
+                ))(tasks)}
+              </GroupCard>
+            ))(taskGroups)
+          }
+        </SingleSelectionContainer>
       </Tabs.Panel>
     </Fragment>
   )
