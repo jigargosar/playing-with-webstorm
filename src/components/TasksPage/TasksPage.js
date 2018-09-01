@@ -15,13 +15,10 @@ import { flattenTasksFromGroups, tabList } from '../../models'
 import { partial, pluck } from 'ramda'
 import identity from 'ramda/es/identity'
 import { TasksContainer } from './TasksContainer'
-import { mapA, validateIO } from '../../lib/ramda-strict'
+import { mapA } from '../../lib/ramda-strict'
 import { SingleSelectionContainer } from './SingleSelectionContainer'
 
-const renderTaskTabs = validateIO('OO', 'O')(function renderTaskTabs(
-  state,
-  tabProps,
-) {
+function renderTaskTabs(state, tabProps) {
   const currentTabId = tabProps.getCurrentId()
   const taskGroups = state.getTaskGroupsForTabId(currentTabId)
   const taskList = flattenTasksFromGroups(taskGroups)
@@ -63,32 +60,33 @@ const renderTaskTabs = validateIO('OO', 'O')(function renderTaskTabs(
       </Tabs.Panel>
     </Fragment>
   )
-})
-export function TasksPage({ store }) {
+}
+
+export function TasksPage() {
   return (
-    <ViewportHeight className="bg-light-gray">
-      <div className="pa3 relative">
-        <Shadow depth={1} />
-        <div>STATIC HEADER</div>
-        <Group>
-          <Button onClick={store && store.addMoreTasks}>Add More</Button>
-          <Button onClick={store && store.deleteAllTasks}>Delete All</Button>
-        </Group>
-      </div>
-      <Scrollable>
-        <TabsContainer initialState={{ ids: pluck('id')(tabList) }}>
-          {tabProps => (
-            <TasksContainer>
-              {state => renderTaskTabs(state, tabProps)}
-            </TasksContainer>
-          )}
-        </TabsContainer>
-      </Scrollable>
-      <div className="pa3 relative">
-        <Shadow depth={1} />
-        STATIC FOOTER
-      </div>
-    </ViewportHeight>
+    <TasksContainer>
+      {state => (
+        <ViewportHeight className="bg-light-gray">
+          <div className="pa3 relative">
+            <Shadow depth={1} />
+            <div>STATIC HEADER</div>
+            <Group>
+              <Button onClick={state.addMoreTasks}>Add More</Button>
+              <Button onClick={state.deleteAllTasks}>Delete All</Button>
+            </Group>
+          </div>
+          <Scrollable>
+            <TabsContainer initialState={{ ids: pluck('id')(tabList) }}>
+              {tabProps => renderTaskTabs(state, tabProps)}
+            </TabsContainer>
+          </Scrollable>
+          <div className="pa3 relative">
+            <Shadow depth={1} />
+            STATIC FOOTER
+          </div>
+        </ViewportHeight>
+      )}
+    </TasksContainer>
   )
 }
 
