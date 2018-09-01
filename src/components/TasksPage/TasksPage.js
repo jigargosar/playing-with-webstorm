@@ -28,24 +28,6 @@ import { findIndexById } from '../../lib/ramda-ext'
 import { Container } from '../../lib-exports/reakit-exports'
 
 export const TasksPage = composeHOC()(function Page({ store }) {
-  const getTaskCollection = path(['taskCollection'])
-  const getCurrentTabId = ({ ids, current }) => ids[current]
-  const getTaskGroups = state =>
-    getTaskGroupsForTab(getCurrentTabId(state), getTaskCollection(state))
-
-  const getCurrentTaskList = compose(
-    flattenGroupTasks,
-    getTaskGroups,
-  )
-  const getSelectedTask = state => {
-    const selectedTaskIdx = clampIdx(state.selectedTaskIdx)(
-      getCurrentTaskList(state),
-    )
-    return compose(
-      path([selectedTaskIdx]),
-      getCurrentTaskList,
-    )(state)
-  }
   return (
     <ViewportHeightContainer className="bg-light-gray">
       <div className="pa3 relative">
@@ -60,60 +42,86 @@ export const TasksPage = composeHOC()(function Page({ store }) {
         <TabsContainer
           initialState={{
             ids: pluck('id')(tabList),
-            taskCollection: createSampleTaskList(),
-            selectedTaskIdx: 0,
-          }}
-          selectors={{
-            getTaskGroups: () => getTaskGroups,
-            getSelectedTask: () => getSelectedTask,
-          }}
-          actions={{
-            setSelectedTask: ({ id }) => state => {
-              return {
-                selectedTaskIdx: findIndexById(id)(getCurrentTaskList(state)),
-              }
-            },
           }}
         >
-          {({
-            getTaskGroups,
-            getSelectedTask,
-            getCurrentId,
-            setSelectedTask,
-            ...tabProps
-          }) => (
-            <Container>
-              {() => (
-                <Fragment>
-                  <Tabs>
-                    <Keyed
-                      as={TabsTab}
-                      getProps={({ id, title }) => ({
-                        tab: id,
-                        children: title,
-                        ...tabProps,
-                      })}
-                      list={tabList}
-                    />
-                  </Tabs>
-                  <Tabs.Panel tab={getCurrentId()} {...tabProps}>
-                    <Keyed
-                      as={TaskGroup}
-                      list={getTaskGroups()}
-                      getProps={group => ({ group })}
-                      taskComponent={Task}
-                      taskProps={{
-                        selectTask: setSelectedTask,
-                        deleteTask: identity,
-                        toggleTaskDone: identity,
-                        isTaskSelected: task => task === getSelectedTask(),
-                      }}
-                    />
-                  </Tabs.Panel>
-                </Fragment>
-              )}
-            </Container>
-          )}
+          {tabProps => {
+            const getTaskCollection = path(['taskCollection'])
+            const getCurrentTabId = tabProps.getCurrentId
+            const getTaskGroups = state =>
+              getTaskGroupsForTab(getCurrentTabId(), getTaskCollection(state))
+
+            const getCurrentTaskList = compose(
+              flattenGroupTasks,
+              getTaskGroups,
+            )
+            const getSelectedTask = state => {
+              const selectedTaskIdx = clampIdx(state.selectedTaskIdx)(
+                getCurrentTaskList(state),
+              )
+              return compose(
+                path([selectedTaskIdx]),
+                getCurrentTaskList,
+              )(state)
+            }
+            return (
+              <Container
+                initialState={{
+                  taskCollection: createSampleTaskList(),
+                  selectedTaskIdx: 0,
+                }}
+                selectors={{
+                  getTaskGroups: () => getTaskGroups,
+                  getSelectedTask: () => getSelectedTask,
+                  getCurrentTabId: () => getCurrentTabId,
+                  getTabProps: () => () => tabProps,
+                }}
+                actions={{
+                  setSelectedTask: ({ id }) => state => {
+                    return {
+                      selectedTaskIdx: findIndexById(id)(
+                        getCurrentTaskList(state),
+                      ),
+                    }
+                  },
+                }}
+              >
+                {({
+                  getCurrentTabId,
+                  setSelectedTask,
+                  getTabProps,
+                  getTaskGroups,
+                }) => (
+                  <Fragment>
+                    <Tabs>
+                      <Keyed
+                        as={TabsTab}
+                        getProps={({ id, title }) => ({
+                          tab: id,
+                          children: title,
+                          ...getTabProps(),
+                        })}
+                        list={tabList}
+                      />
+                    </Tabs>
+                    <Tabs.Panel tab={getCurrentTabId()} {...getTabProps()}>
+                      <Keyed
+                        as={TaskGroup}
+                        list={getTaskGroups()}
+                        getProps={group => ({ group })}
+                        taskComponent={Task}
+                        taskProps={{
+                          selectTask: setSelectedTask,
+                          deleteTask: identity,
+                          toggleTaskDone: identity,
+                          isTaskSelected: task => task === getSelectedTask(),
+                        }}
+                      />
+                    </Tabs.Panel>
+                  </Fragment>
+                )}
+              </Container>
+            )
+          }}
         </TabsContainer>
       </ScrollContainer>
       <div className="pa3 relative">
