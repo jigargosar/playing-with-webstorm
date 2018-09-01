@@ -14,7 +14,7 @@ import {
   times,
   values,
 } from 'ramda'
-import { pathS, validateIO } from '../lib/ramda-strict'
+import { mapA, pathS, validateIO } from '../lib/ramda-strict'
 import nanoid from 'nanoid'
 import { randomArrayElement, randomBoolean, randomWords } from '../lib/fake'
 import { validate } from '../lib/validate'
@@ -26,9 +26,14 @@ function Task({ id, title, done, createdAt, group, ...other }) {
   return { id, title, done, createdAt, group }
 }
 
-export const listTypes = ['in_basket', 'next_actions', 'some_day', 'projects']
+export const systemListIds = [
+  'in_basket',
+  'next_actions',
+  'some_day',
+  'projects',
+]
 
-export const listTypeLookup = {
+export const systemListIdLookup = {
   in_basket: { type: 'in_basket', title: 'Inbox' },
   next_actions: { type: 'next_actions', title: 'Next Actions' },
   projects: { type: 'projects', title: 'Projects' },
@@ -41,7 +46,7 @@ export function createNewTaskWithDefaults() {
     title: randomWords(),
     done: randomBoolean(),
     createdAt: Date.now(),
-    listType: randomArrayElement(listTypes),
+    systemListId: randomArrayElement(systemListIds),
   }
   return Task(defaults)
 }
@@ -49,10 +54,12 @@ export function createNewTaskWithDefaults() {
 export const createSampleTaskList = () => times(createNewTaskWithDefaults)(16)
 
 export const tabList = [
-  { id: 'in_basket', title: 'INBOX' },
-  { id: 'next_actions', title: 'NEXT ACTIONS' },
-  { id: 'some_day', title: 'SOME DAY' },
-  { id: 'done', title: 'DONE' },
+  ...mapA(id => ({
+    id,
+    type: 'system_list',
+    title: systemListIdLookup[id].title,
+  }))(systemListIds),
+  { id: 'done', type: 'filter', title: 'DONE' },
 ]
 
 export const getTaskGroupsForTab = validateIO('SA', 'A')(
@@ -70,7 +77,7 @@ export const getTaskGroupsForTab = validateIO('SA', 'A')(
           values,
           mapObjIndexed((tasks, id) => ({
             id,
-            title: listTypeLookup[id].title,
+            title: systemListIdLookup[id].title,
             tasks,
           })),
           groupBy(pathS(['group', 'id'])),
