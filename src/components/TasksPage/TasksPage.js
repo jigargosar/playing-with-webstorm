@@ -80,37 +80,35 @@ export const TasksPage = composeHOC()(function Page({ store }) {
             getCurrentId,
             setSelectedTask,
             ...tabProps
-          }) => {
-            return (
-              <Fragment>
-                <Tabs>
-                  <Keyed
-                    as={TabsTab}
-                    getProps={({ id, title }) => ({
-                      tab: id,
-                      children: title,
-                      ...tabProps,
-                    })}
-                    list={tabList}
-                  />
-                </Tabs>
-                <Tabs.Panel tab={getCurrentId()} {...tabProps}>
-                  <Keyed
-                    as={TaskGroup}
-                    list={getTaskGroups()}
-                    getProps={group => ({ group })}
-                    taskComponent={Task}
-                    taskProps={{
-                      selectTask: setSelectedTask,
-                      deleteTask: identity,
-                      toggleTaskDone: identity,
-                      isTaskSelected: task => task === getSelectedTask(),
-                    }}
-                  />
-                </Tabs.Panel>
-              </Fragment>
-            )
-          }}
+          }) => (
+            <Fragment>
+              <Tabs>
+                <Keyed
+                  as={TabsTab}
+                  getProps={({ id, title }) => ({
+                    tab: id,
+                    children: title,
+                    ...tabProps,
+                  })}
+                  list={tabList}
+                />
+              </Tabs>
+              <Tabs.Panel tab={getCurrentId()} {...tabProps}>
+                <Keyed
+                  as={TaskGroup}
+                  list={getTaskGroups()}
+                  getProps={group => ({ group })}
+                  taskComponent={Task}
+                  taskProps={{
+                    selectTask: setSelectedTask,
+                    deleteTask: identity,
+                    toggleTaskDone: identity,
+                    isTaskSelected: task => task === getSelectedTask(),
+                  }}
+                />
+              </Tabs.Panel>
+            </Fragment>
+          )}
         </TabsContainer>
       </ScrollContainer>
       <div className="pa3 relative">
