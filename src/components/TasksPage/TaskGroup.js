@@ -31,4 +31,7 @@ TaskGroup.propTypes = {
   taskProps: PropTypes.object.isRequired,
 }
 
-TaskGroup.defaultProps = {}
+TaskGroup.defaultProps = {
+  group: { title: 'GROUP_TITLE', tasks: [] },
+  taskProps: {},
+}
