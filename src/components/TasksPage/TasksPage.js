@@ -1,7 +1,5 @@
 import React, { Fragment } from 'react'
 import { ScrollContainer, ViewportHeightContainer } from '../containers'
-import * as PropTypes from 'prop-types'
-import { store } from '../store'
 import {
   Button,
   Group,
@@ -63,8 +61,8 @@ export function TasksPage({ store }) {
         <Shadow depth={1} />
         <div>STATIC HEADER</div>
         <Group>
-          <Button onClick={store.addMoreTasks}>Add More</Button>
-          <Button onClick={store.deleteAllTasks}>Delete All</Button>
+          <Button onClick={store && store.addMoreTasks}>Add More</Button>
+          <Button onClick={store && store.deleteAllTasks}>Delete All</Button>
         </Group>
       </div>
       <ScrollContainer>
@@ -74,10 +72,10 @@ export function TasksPage({ store }) {
         >
           {tabProps => (
             <TasksContainer>
-              {({ setSelectedTask, getTaskGroups, isTaskSelected }) =>
+              {({ setSelectedTask, getTaskGroupsForTabId, isTaskSelected }) =>
                 renderTaskTabs({
                   tabProps,
-                  taskGroups: getTaskGroups(),
+                  taskGroups: getTaskGroupsForTabId(tabProps.getCurrentId()),
                   setSelectedTask,
                   isTaskSelected,
                 })
@@ -94,13 +92,6 @@ export function TasksPage({ store }) {
   )
 }
 
-TasksPage.propTypes = {
-  store: PropTypes.shape({
-    addMoreTasks: PropTypes.func.isRequired,
-    deleteAllTasks: PropTypes.func.isRequired,
-  }),
-}
+TasksPage.propTypes = {}
 
-TasksPage.defaultProps = {
-  store,
-}
+TasksPage.defaultProps = {}

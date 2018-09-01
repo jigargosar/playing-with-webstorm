@@ -16,9 +16,9 @@ const initialState = {
   selectedTaskIdx: 0,
 }
 
-const getTaskGroups = () => getTaskGroupForTabId('in_basket')
+const getTaskGroups = () => getTaskGroupsForTabId('in_basket')
 
-const getTaskGroupForTabId = tabId => state =>
+const getTaskGroupsForTabId = tabId => state =>
   getTaskGroupsForTab(tabId, getTaskCollection()(state))
 
 const getSelectedTask = () => state => {
@@ -45,7 +45,7 @@ const setSelectedTask = ({ id }) => state => {
 
 const selectors = {
   getTaskGroups,
-  getTaskGroupForTabId,
+  getTaskGroupsForTabId,
   isTaskSelected,
 }
 
