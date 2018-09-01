@@ -20,17 +20,27 @@ import {
   getTaskGroupsForTab,
   tabList,
 } from '../../models'
-import { compose, head, pluck } from 'ramda'
+import { compose, pluck } from 'ramda'
 import identity from 'ramda/es/identity'
+import path from 'ramda/es/path'
+import { clampIdx } from '../../lib/ramda-strict'
+import { findIndexById } from '../../lib/ramda-ext'
 
-const getTaskGroupsFromState = ({ taskList, ids, current }) =>
-  getTaskGroupsForTab(ids[current], taskList)
-
-const getFlatTaskList = compose(
-  flattenGroupTasks,
-  getTaskGroupsFromState,
-)
 export const TasksPage = composeHOC()(function Page({ store }) {
+  const getTaskGroups = ({ taskList, ids, current }) =>
+    getTaskGroupsForTab(ids[current], taskList)
+
+  const getCurrentTaskList = compose(
+    flattenGroupTasks,
+    getTaskGroups,
+  )
+  const getSelectedTask = state => {
+    const selectedTaskIdx = clampIdx(state.selectedTaskIdx)(state.taskList)
+    return compose(
+      path([selectedTaskIdx]),
+      getCurrentTaskList,
+    )(state)
+  }
   return (
     <ViewportHeightContainer className="bg-light-gray">
       <div className="pa3 relative">
@@ -46,21 +56,25 @@ export const TasksPage = composeHOC()(function Page({ store }) {
           initialState={{
             ids: pluck('id')(tabList),
             taskList: createSampleTaskList(),
-            idx: 0,
+            selectedTaskIdx: 0,
           }}
           selectors={{
-            getTaskGroups: () => getTaskGroupsFromState,
-            selectedTask: () =>
-              compose(
-                head,
-                getFlatTaskList,
-              ),
+            getTaskGroups: () => getTaskGroups,
+            getSelectedTask: () => getSelectedTask,
+          }}
+          actions={{
+            setSelectedTask: ({ id }) => state => {
+              return {
+                selectedTaskIdx: findIndexById(id)(getCurrentTaskList(state)),
+              }
+            },
           }}
         >
           {({
             getTaskGroups,
-            selectedTask: getSelectedTask,
+            getSelectedTask,
             getCurrentId,
+            setSelectedTask,
             ...tabProps
           }) => {
             return (
@@ -83,7 +97,7 @@ export const TasksPage = composeHOC()(function Page({ store }) {
                     getProps={group => ({ group })}
                     taskComponent={Task}
                     taskProps={{
-                      selectTask: identity,
+                      selectTask: setSelectedTask,
                       deleteTask: identity,
                       toggleTaskDone: identity,
                       isTaskSelected: task => task === getSelectedTask(),
