@@ -8,12 +8,12 @@ import {
   join,
   map,
   partial,
-  path,
   pathOr,
   split,
 } from 'ramda'
 import flip from 'ramda/es/flip'
 import tap from 'ramda/es/tap'
+import path from 'ramda/es/path'
 
 function specsToSignature(i, o) {
   const arrow = ' => '
@@ -80,3 +80,6 @@ export const mapA = validateIO('FA')(map)
 export const mapIndexedA = validateIO('FA')(mapA)
 //validateIO('S|Z', 'F')
 export const tapLog = msg => tap(partial(console.log)([msg]))
+export const atClampedIdx = validateIO('NA')(function atClampedIdx(idx, list) {
+  return path([clampIdx(idx)(list)])(list)
+})

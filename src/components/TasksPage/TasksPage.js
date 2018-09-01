@@ -9,22 +9,22 @@ import {
 } from '../../reakit-components/index'
 import { Shadow } from 'reakit'
 import { Keyed } from '../../shared-components/Keyed'
-import { TaskGroup } from './TaskGroup'
+import { TaskGroup, TaskGroupTitle } from './elements/TaskGroup'
 import { Task } from './Task'
-import { tabList } from '../../models'
-import { pluck } from 'ramda'
+import { flattenTasksFromGroups, tabList } from '../../models'
+import { partial, pluck } from 'ramda'
 import identity from 'ramda/es/identity'
 import { TasksContainer } from './TasksContainer'
-import { validate } from '../../lib/validate'
-import { tapLog, validateIO } from '../../lib/ramda-strict'
+import { mapA, validateIO } from '../../lib/ramda-strict'
+import { SingleSelectionContainer } from './SingleSelectionContainer'
 
 const renderTaskTabs = validateIO('OO', 'O')(function renderTaskTabs(
   state,
   tabProps,
 ) {
-  const { setSelectedTask, getTaskGroupsForTabId, isTaskSelected } = state
-  validate('FFF', [setSelectedTask, getTaskGroupsForTabId, isTaskSelected])
-  const currentTabId = tapLog('currentTabId')(tabProps.getCurrentId())
+  const currentTabId = tabProps.getCurrentId()
+  const taskGroups = state.getTaskGroupsForTabId(currentTabId)
+  const taskList = flattenTasksFromGroups(taskGroups)
   return (
     <Fragment>
       <Tabs>
@@ -39,18 +39,27 @@ const renderTaskTabs = validateIO('OO', 'O')(function renderTaskTabs(
         />
       </Tabs>
       <Tabs.Panel tab={currentTabId} {...tabProps}>
-        <Keyed
-          as={TaskGroup}
-          list={getTaskGroupsForTabId(currentTabId)}
-          getProps={group => ({ group })}
-          taskComponent={Task}
-          taskProps={{
-            selectTask: setSelectedTask,
-            deleteTask: identity,
-            toggleTaskDone: identity,
-            isTaskSelected,
-          }}
-        />
+        <SingleSelectionContainer>
+          {({ isSelected, setSelected }) =>
+            mapA(group => (
+              <TaskGroup key={group.id}>
+                <TaskGroupTitle>{group.title}</TaskGroupTitle>
+                {mapA(task => (
+                  <Task
+                    key={`${group.title}--${task.id}`}
+                    {...{
+                      task,
+                      selectTask: partial(setSelected)([task, taskList]),
+                      deleteTask: identity,
+                      toggleTaskDone: identity,
+                      selected: isSelected(task, taskList),
+                    }}
+                  />
+                ))(group.tasks)}
+              </TaskGroup>
+            ))(taskGroups)
+          }
+        </SingleSelectionContainer>
       </Tabs.Panel>
     </Fragment>
   )
