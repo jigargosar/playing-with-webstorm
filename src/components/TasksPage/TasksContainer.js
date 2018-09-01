@@ -35,7 +35,6 @@ export const TasksContainer = props => (
     actions={{ ...actions, ...props.actions }}
   />
 )
-
 TasksContainer.propTypes = {
   initialState: PropTypes.object,
   actions: PropTypes.objectOf(PropTypes.func),
