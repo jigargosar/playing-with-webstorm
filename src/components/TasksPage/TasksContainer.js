@@ -18,7 +18,7 @@ const initialState = {
 
 const getTabProps = () => prop('tabProps')
 
-const getCurrentTabId = () => state => state.tabProps.getCurrentId()
+const getCurrentTabId = () => state => state.tabProps.getCurrentId
 
 const getTaskGroups = () => state =>
   getTaskGroupsForTab(getCurrentTabId()(state), getTaskCollection()(state))

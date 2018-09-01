@@ -7,10 +7,14 @@ export const validateIO = function validateIO(inputSpecs, outputSpecs = '*') {
     return curryN(fn.length)(fnWrapper)
 
     function fnWrapper(...args) {
-      validate(inputSpecs, args)
-      const result = fn(...args)
-      validate(outputSpecs, [result])
-      return result
+      try {
+        validate(inputSpecs, args)
+        const result = fn(...args)
+        validate(outputSpecs, [result])
+        return result
+      } catch (e) {
+        throw e
+      }
     }
   }
 }
