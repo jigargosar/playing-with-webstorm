@@ -77,6 +77,7 @@ export const clampIdx = validateIO('NA', 'N')(
 export const mapA = validateIO('FA')(map)
 
 export const mapIndexedA = validateIO('FA')(mapA)
+
 export const tapLog = validateIO('S|Z', 'F')(function tapLog(msg) {
   return tap((...args) => console.log(msg, ...args))
 })
