@@ -28,17 +28,26 @@ export const validateIO = function validateIO(inputSpecs, outputSpecs = '*') {
       try {
         validate(inputSpecs, args)
       } catch (e) {
-        console.debug(e)
-        console.log(inputSpecs, args)
+        console.debug(args, e)
         throw new Error(
-          `${fn.name} :: ${specsToSignature(inputSpecs, outputSpecs)} \n ${
+          `[IN] ${fn.name} :: ${specsToSignature(inputSpecs, outputSpecs)} \n ${
             e.message
           }`,
         )
       }
-      const result = fn(...args)
-      validate(outputSpecs, [result])
-      return result
+      try {
+        const result = fn(...args)
+        validate(outputSpecs, [result])
+        return result
+      } catch (e) {
+        console.debug(args, e)
+        throw new Error(
+          `[OUT] ${fn.name} :: ${specsToSignature(
+            inputSpecs,
+            outputSpecs,
+          )} \n ${e.message}`,
+        )
+      }
     })
   }
 }
