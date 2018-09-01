@@ -5,7 +5,7 @@ import { createSampleTaskList, getTaskGroupsForTab } from '../../models'
 import path from 'ramda/es/path'
 import { always, concat, lensProp, not, over } from 'ramda'
 import { validateIO } from '../../lib/ramda-strict'
-import { overElById } from '../../lib/ramda-ext'
+import { overElById, removeById } from '../../lib/ramda-ext'
 
 const initialState = {
   taskCollection: createSampleTaskList(),
@@ -20,7 +20,7 @@ const overTasksCollection = over(lensProp('taskCollection'))
 
 const toggleTaskDone = task =>
   overTasksCollection(overElById(task)(toggleDoneProp))
-
+const deleteTask = task => overTasksCollection(removeById(task))
 const deleteAllTasks = () => always({ taskCollection: [] })
 const addMoreTasks = () =>
   validateIO('O', 'O')(overTasksCollection(concat(createSampleTaskList())))
@@ -32,6 +32,7 @@ const actions = {
   deleteAllTasks,
   addMoreTasks,
   toggleTaskDone,
+  deleteTask,
 }
 export const TasksContainer = props => (
   <Container
