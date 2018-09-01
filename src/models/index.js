@@ -41,6 +41,15 @@ export const systemListIdLookup = {
   some_day: { type: 'some_day', title: 'Some xDay' },
 }
 
+export const tabList = [
+  ...mapA(id => ({
+    id,
+    type: 'system_list',
+    title: systemListIdLookup[id].title,
+  }))(systemListIds),
+  { id: 'done', type: 'filter', title: 'DONE' },
+]
+
 export function createNewTaskWithDefaults() {
   const defaults = {
     id: `task_${nanoid()}`,
@@ -53,15 +62,6 @@ export function createNewTaskWithDefaults() {
 }
 
 export const createSampleTaskList = () => times(createNewTaskWithDefaults)(16)
-
-export const tabList = [
-  ...mapA(id => ({
-    id,
-    type: 'system_list',
-    title: systemListIdLookup[id].title,
-  }))(systemListIds),
-  { id: 'done', type: 'filter', title: 'DONE' },
-]
 
 export const getTaskGroupsForTab = validateIO('SA', 'A')(
   function getTaskGroupForTab(tabId, taskList) {
