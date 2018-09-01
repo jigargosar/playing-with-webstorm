@@ -1,5 +1,6 @@
 import { validate } from './validate'
 import {
+  append,
   clamp,
   compose,
   curryN,
@@ -12,8 +13,10 @@ import {
 } from 'ramda'
 
 function specsToSignature(i, o) {
+  const arrow = ' => '
   return `${compose(
-    join(' => '),
+    append(`${arrow} ${o}`),
+    join(arrow),
     split(''),
   )(i)}`
 }
