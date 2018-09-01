@@ -18,7 +18,7 @@ import { TasksContainer } from './TasksContainer'
 import tap from 'ramda/es/tap'
 import { validate } from '../../lib/validate'
 
-function foo(state, tabProps) {
+function renderTaskTabs(state, tabProps) {
   const { setSelectedTask, getTaskGroupsForTabId, isTaskSelected } = state
   validate('FFF', [setSelectedTask, getTaskGroupsForTabId, isTaskSelected])
   const currentTabId = tabProps.getCurrentId()
@@ -67,7 +67,9 @@ export function TasksPage({ store }) {
       <ScrollContainer>
         <TabsContainer initialState={{ ids: pluck('id')(tabList) }}>
           {tabProps => (
-            <TasksContainer>{state => foo(state, tabProps)}</TasksContainer>
+            <TasksContainer>
+              {state => renderTaskTabs(state, tabProps)}
+            </TasksContainer>
           )}
         </TabsContainer>
       </ScrollContainer>
