@@ -30,23 +30,24 @@ const getSelectedTask = () => state => {
 }
 
 const getTaskCollection = () => path(['taskCollection'])
+
 const getCurrentTaskList = () =>
   compose(
     flattenTasksFromGroups,
     getTaskGroups(),
   )
 
+const setSelectedTask = ({ id }) => state => {
+  return {
+    selectedTaskIdx: findIndexById(id)(getCurrentTaskList()(state)),
+  }
+}
+
 const selectors = {
   getTaskGroups,
   getSelectedTask,
   getCurrentTabId,
   getTabProps,
-}
-
-const setSelectedTask = ({ id }) => state => {
-  return {
-    selectedTaskIdx: findIndexById(id)(getCurrentTaskList()(state)),
-  }
 }
 
 const actions = {
