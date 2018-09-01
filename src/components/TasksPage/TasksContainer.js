@@ -18,7 +18,11 @@ const initialState = {
 const getTaskGroups = () => state =>
   getTaskGroupsForTab(state.currentTabId, getTaskCollection()(state))
 
-const getSelectedTask = () => selectedTaskFromState
+const getSelectedTask = () => state => {
+  const currentTaskList = getCurrentTaskList()(state)
+  const selectedTaskIdx = clampIdx(state.selectedTaskIdx)(currentTaskList)
+  return path([selectedTaskIdx])(currentTaskList)
+}
 
 const getTaskCollection = () => path(['taskCollection'])
 
@@ -28,16 +32,11 @@ const getCurrentTaskList = () =>
     getTaskGroups(),
   )
 
-const selectedTaskFromState = state => {
-  const currentTaskList = getCurrentTaskList()(state)
-  const selectedTaskIdx = clampIdx(state.selectedTaskIdx)(currentTaskList)
-  return path([selectedTaskIdx])(currentTaskList)
-}
-
 const selectors = {
   getTaskGroups,
   getSelectedTask,
 }
+
 export const TasksContainer = props => (
   <Container
     {...props}
