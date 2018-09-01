@@ -3,19 +3,16 @@ import { clamp, curryN, isEmpty, map, path, pathOr } from 'ramda'
 
 export const validateIO = function validateIO(inputSpecs, outputSpecs = '*') {
   return fn => {
-    fnWrapper.displayName = fn.name
-    return curryN(fn.length)(fnWrapper)
-
-    function fnWrapper(...args) {
+    return curryN(fn.length)((...args) => {
       try {
         validate(inputSpecs, args)
-        const result = fn(...args)
-        validate(outputSpecs, [result])
-        return result
       } catch (e) {
         throw e
       }
-    }
+      const result = fn(...args)
+      validate(outputSpecs, [result])
+      return result
+    })
   }
 }
 
