@@ -7,7 +7,7 @@ import {
   getTaskGroupsForTab,
 } from '../../models'
 import path from 'ramda/es/path'
-import { compose } from 'ramda'
+import { __, always, compose, concat } from 'ramda'
 import { clampIdx, validateIO } from '../../lib/ramda-strict'
 import { findIndexById } from '../../lib/ramda-ext'
 
@@ -46,6 +46,11 @@ const setSelectedTask = ({ id }) => state => {
   }
 }
 
+const deleteAllTasks = () => always({ taskCollection: [] })
+const addMoreTasks = () => ({ taskCollection }) => ({
+  taskCollection: concat(__, createSampleTaskList()),
+})
+
 const selectors = {
   getTaskGroupsForTabId,
   isTaskSelected,
@@ -53,6 +58,8 @@ const selectors = {
 
 const actions = {
   setSelectedTask,
+  deleteAllTasks,
+  addMoreTasks,
 }
 
 export const TasksContainer = props => (
