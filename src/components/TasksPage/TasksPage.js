@@ -2,7 +2,6 @@ import React, { Fragment } from 'react'
 import { ScrollContainer, ViewportHeightContainer } from '../containers'
 import * as PropTypes from 'prop-types'
 import { store } from '../store'
-import { composeHOC } from '../composeHOC'
 import {
   Button,
   Group,
@@ -18,8 +17,9 @@ import { tabList } from '../../models'
 import { pluck } from 'ramda'
 import identity from 'ramda/es/identity'
 import { TasksContainer } from './TasksContainer'
+import tap from 'ramda/es/tap'
 
-export const TasksPage = composeHOC()(function Page({ store }) {
+export function TasksPage({ store }) {
   return (
     <ViewportHeightContainer className="bg-light-gray">
       <div className="pa3 relative">
@@ -35,16 +35,11 @@ export const TasksPage = composeHOC()(function Page({ store }) {
           initialState={{
             ids: pluck('id')(tabList),
           }}
+          onUpdate={console.log}
         >
           {tabProps => (
-            <TasksContainer tabProps={tabProps}>
-              {({
-                getCurrentTabId,
-                setSelectedTask,
-                getTabProps,
-                getTaskGroups,
-                getSelectedTask,
-              }) => (
+            <TasksContainer>
+              {({ setSelectedTask, getTaskGroups, getSelectedTask }) => (
                 <Fragment>
                   <Tabs>
                     <Keyed
@@ -52,12 +47,15 @@ export const TasksPage = composeHOC()(function Page({ store }) {
                       getProps={({ id, title }) => ({
                         tab: id,
                         children: title,
-                        ...getTabProps(),
+                        ...tabProps,
                       })}
                       list={tabList}
                     />
                   </Tabs>
-                  <Tabs.Panel tab={getCurrentTabId()} {...getTabProps()}>
+                  <Tabs.Panel
+                    tab={tap(console.log)(tabProps.getCurrentId())}
+                    {...tabProps}
+                  >
                     <Keyed
                       as={TaskGroup}
                       list={getTaskGroups()}
@@ -83,7 +81,7 @@ export const TasksPage = composeHOC()(function Page({ store }) {
       </div>
     </ViewportHeightContainer>
   )
-})
+}
 
 TasksPage.propTypes = {
   store: PropTypes.shape({
