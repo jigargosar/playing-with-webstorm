@@ -38,7 +38,7 @@ const renderTaskTabs = validateIO('OO', 'O')(function renderTaskTabs(
           list={tabList}
         />
       </Tabs>
-      <Tabs.Panel key={currentTabId} tab={currentTabId} {...tabProps}>
+      <Tabs.Panel tab={currentTabId} {...tabProps}>
         <SingleSelectionContainer>
           {({ isSelected, setSelected }) =>
             mapA(group => (
