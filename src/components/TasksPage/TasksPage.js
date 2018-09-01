@@ -35,7 +35,9 @@ export const TasksPage = composeHOC()(function Page({ store }) {
     getTaskGroups,
   )
   const getSelectedTask = state => {
-    const selectedTaskIdx = clampIdx(state.selectedTaskIdx)(state.taskList)
+    const selectedTaskIdx = clampIdx(state.selectedTaskIdx)(
+      getCurrentTaskList(state),
+    )
     return compose(
       path([selectedTaskIdx]),
       getCurrentTaskList,
