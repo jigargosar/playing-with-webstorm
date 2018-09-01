@@ -28,14 +28,15 @@ function Task({ id, title, done, createdAt, context, ...other }) {
   return { id, title, done, createdAt, context }
 }
 
-export const systemContexts = [
-  { id: 'in_basket', title: 'Inbox', type: 'system' },
-  { id: 'some_day', title: 'SomeDay', type: 'system' },
+export const groups = [
+  { id: 'in_basket', title: 'Inbox' },
+  { id: 'next_actions', title: 'Next Actions' },
+  { id: 'some_day', title: 'SomeDay' },
 ]
 export const systemContextLookup = compose(
   fromPairs,
   map(c => [c.id, c]),
-)(systemContexts)
+)(groups)
 
 export function createNewTaskWithDefaults() {
   const defaults = {
@@ -43,7 +44,7 @@ export function createNewTaskWithDefaults() {
     title: randomWords(),
     done: randomBoolean(),
     createdAt: Date.now(),
-    context: randomArrayElement(systemContexts),
+    context: randomArrayElement(groups),
   }
   return Task(defaults)
 }
