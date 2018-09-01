@@ -12,23 +12,12 @@ import { Button } from '../../reakit-components'
 
 const linkEvent = (fn, ...args) => tap(e => fn(...args, e))
 
-const backgroundColor = 'rgba(1,1,1,0.2)'
-
-export const Task = composeHOC()(function Task({
-  task,
-  mouseEnterTask,
-  isTaskSelected,
-  isTaskHovered,
-  mouseLeaveTask,
-  selectTask,
-  toggleSelectedTaskDone,
-  toggleTaskDone,
-  deleteTask,
-}) {
+export const Task = composeHOC()(function Task(props) {
+  const { task, isTaskSelected, selectTask, toggleTaskDone, deleteTask } = props
   return (
     <TaskItem
       selected={isTaskSelected(task)}
-      onClickCapture={linkEvent(selectTask, task)}
+      onClick={linkEvent(selectTask, task)}
     >
       <TaskHoverActions>
         <TaskHoverActionsContent>
@@ -36,8 +25,8 @@ export const Task = composeHOC()(function Task({
           <Button onClick={linkEvent(deleteTask, task)}>{'Delete'}</Button>
         </TaskHoverActionsContent>
       </TaskHoverActions>
-      <div className={cn('ph2', { strike: task.done })}>{task.title}</div>
-      <small className={'ttu f7 ph2'}>{`@${task.context.title}`}</small>
+      <div className={cn('mh2', { strike: task.done })}>{task.title}</div>
+      <small className={'ttu f7 mh2'}>{`@${task.context.title}`}</small>
     </TaskItem>
   )
 })
@@ -45,9 +34,6 @@ export const Task = composeHOC()(function Task({
 Task.propTypes = {
   task: PropTypes.shape({ id: PropTypes.string.isRequired }).isRequired,
   isTaskSelected: PropTypes.func.isRequired,
-  isTaskHovered: PropTypes.func.isRequired,
-  mouseEnterTask: PropTypes.func.isRequired,
-  mouseLeaveTask: PropTypes.func.isRequired,
   selectTask: PropTypes.func.isRequired,
   toggleTaskDone: PropTypes.func.isRequired,
   deleteTask: PropTypes.func.isRequired,

@@ -1,84 +1,88 @@
 import React, { Fragment } from 'react'
-import { ScrollContainer, ViewportHeightContainer } from '../containers'
-import * as PropTypes from 'prop-types'
-import { store } from '../store'
-import { composeHOC } from '../composeHOC'
-import { Button, Group, Tabs, TabsTab } from '../../reakit-components/index'
+import { Scrollable, ViewportHeight } from '../containers'
+import {
+  Button,
+  Group,
+  Tabs,
+  TabsContainer,
+  TabsTab,
+} from '../../reakit-components/index'
 import { Shadow } from 'reakit'
-import { indexOf, pluck } from 'ramda'
-import { TaskTabsContainer } from './TaskTabsContainer'
 import { Keyed } from '../../shared-components/Keyed'
 import { TaskGroup } from './TaskGroup'
 import { Task } from './Task'
+import { tabList } from '../../models'
+import { pluck } from 'ramda'
+import identity from 'ramda/es/identity'
+import { TasksContainer } from './TasksContainer'
+import { validate } from '../../lib/validate'
+import { tapLog, validateIO } from '../../lib/ramda-strict'
 
-export const MainContent = composeHOC()(function MainContent() {
-  const tabsList = store.getTabs()
-  const currentTabId = store.getCurrentTabId()
-  const tabIds = pluck('id')(tabsList)
+const renderTaskTabs = validateIO('OO', 'O')(function renderTaskTabs(
+  state,
+  tabProps,
+) {
+  const { setSelectedTask, getTaskGroupsForTabId, isTaskSelected } = state
+  validate('FFF', [setSelectedTask, getTaskGroupsForTabId, isTaskSelected])
+  const currentTabId = tapLog('currentTabId')(tabProps.getCurrentId())
   return (
-    <TaskTabsContainer
-      initialState={{
-        ids: tabIds,
-        current: indexOf(currentTabId)(tabIds),
-      }}
-      setTabId={store.setTabId}
-    >
-      {tabProps => (
-        <Fragment>
-          <Tabs>
-            <Keyed
-              as={TabsTab}
-              getProps={({ id, title }) => ({
-                tab: id,
-                children: title,
-                ...tabProps,
-              })}
-              list={tabsList}
-            />
-          </Tabs>
-          <Tabs.Panel tab={currentTabId} {...tabProps}>
-            <Keyed
-              as={TaskGroup}
-              list={store.getTaskGroups()}
-              getProps={group => ({ group })}
-              taskComponent={Task}
-              taskProps={store}
-            />
-          </Tabs.Panel>
-        </Fragment>
-      )}
-    </TaskTabsContainer>
+    <Fragment>
+      <Tabs>
+        <Keyed
+          as={TabsTab}
+          getProps={({ id, title }) => ({
+            tab: id,
+            children: title,
+            ...tabProps,
+          })}
+          list={tabList}
+        />
+      </Tabs>
+      <Tabs.Panel tab={currentTabId} {...tabProps}>
+        <Keyed
+          as={TaskGroup}
+          list={getTaskGroupsForTabId(currentTabId)}
+          getProps={group => ({ group })}
+          taskComponent={Task}
+          taskProps={{
+            selectTask: setSelectedTask,
+            deleteTask: identity,
+            toggleTaskDone: identity,
+            isTaskSelected,
+          }}
+        />
+      </Tabs.Panel>
+    </Fragment>
   )
 })
-export const TasksPage = composeHOC()(function Page({ store }) {
+export function TasksPage({ store }) {
   return (
-    <ViewportHeightContainer className="bg-light-gray">
+    <ViewportHeight className="bg-light-gray">
       <div className="pa3 relative">
         <Shadow depth={1} />
         <div>STATIC HEADER</div>
         <Group>
-          <Button onClick={store.addMoreTasks}>Add More</Button>
-          <Button onClick={store.deleteAllTasks}>Delete All</Button>
+          <Button onClick={store && store.addMoreTasks}>Add More</Button>
+          <Button onClick={store && store.deleteAllTasks}>Delete All</Button>
         </Group>
       </div>
-      <ScrollContainer>
-        <MainContent />
-      </ScrollContainer>
+      <Scrollable>
+        <TabsContainer initialState={{ ids: pluck('id')(tabList) }}>
+          {tabProps => (
+            <TasksContainer>
+              {state => renderTaskTabs(state, tabProps)}
+            </TasksContainer>
+          )}
+        </TabsContainer>
+      </Scrollable>
       <div className="pa3 relative">
         <Shadow depth={1} />
         STATIC FOOTER
       </div>
-    </ViewportHeightContainer>
+    </ViewportHeight>
   )
-})
-
-TasksPage.propTypes = {
-  store: PropTypes.shape({
-    addMoreTasks: PropTypes.func.isRequired,
-    deleteAllTasks: PropTypes.func.isRequired,
-  }),
 }
 
-TasksPage.defaultProps = {
-  store,
-}
+TasksPage.propTypes = {}
+
+TasksPage.defaultProps = {}

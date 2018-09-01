@@ -1,13 +1,57 @@
 import { validate } from './validate'
-import { clamp, curryN, isEmpty, map, path, pathOr } from 'ramda'
+import {
+  clamp,
+  compose,
+  concat,
+  curryN,
+  isEmpty,
+  join,
+  map,
+  partial,
+  path,
+  pathOr,
+  split,
+} from 'ramda'
+import flip from 'ramda/es/flip'
+import tap from 'ramda/es/tap'
 
-const validateIO = (inputSpecs, outputSpecs = '*') => fn => {
-  return curryN(fn.length)((...args) => {
-    validate(inputSpecs, args)
-    const result = fn(...args)
-    validate(outputSpecs, [result])
-    return result
-  })
+function specsToSignature(i, o) {
+  const arrow = ' => '
+  return `${compose(
+    flip(concat)(`${arrow} ${o}`),
+    join(arrow),
+    split(''),
+  )(i)}`
+}
+
+export const validateIO = function validateIO(inputSpecs, outputSpecs = '*') {
+  return fn => {
+    return curryN(fn.length)((...args) => {
+      try {
+        validate(inputSpecs, args)
+      } catch (e) {
+        console.debug(args, e)
+        throw new Error(
+          `[IN] ${fn.name} :: ${specsToSignature(inputSpecs, outputSpecs)} \n ${
+            e.message
+          }`,
+        )
+      }
+      try {
+        const result = fn(...args)
+        validate(outputSpecs, [result])
+        return result
+      } catch (e) {
+        console.debug(args, e)
+        throw new Error(
+          `[OUT] ${fn.name} :: ${specsToSignature(
+            inputSpecs,
+            outputSpecs,
+          )} \n ${e.message}`,
+        )
+      }
+    })
+  }
 }
 
 export const pathS = validateIO('AO|AA', 'S')(path)
@@ -34,3 +78,5 @@ export const clampIdx = validateIO('NA', 'N')(
 export const mapA = validateIO('FA')(map)
 
 export const mapIndexedA = validateIO('FA')(mapA)
+//validateIO('S|Z', 'F')
+export const tapLog = msg => tap(partial(console.log)([msg]))
