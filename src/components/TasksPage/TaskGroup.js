@@ -1,29 +1,24 @@
 import { composeHOC } from '../composeHOC'
-import { Flex, Heading } from 'reakit'
-import { Keyed } from '../../shared-components/Keyed'
+import { Heading, styled } from 'reakit'
 import * as PropTypes from 'prop-types'
 import React from 'react'
+import { map } from 'ramda'
+import { Task } from './Task'
+
+const TaskGroupTitle = styled(Heading).attrs({ as: 'h3' })`
+  margin-bottom: 1rem;
+`
 
 export const TaskGroup = composeHOC()(function TaskGroup({
   group: { title, tasks },
-  showContext,
-  taskComponent: Task,
   taskProps,
 }) {
   return (
-    <div className="center measure mv3">
-      <div className="pa3 br3 bg-white shadow-1 ">
-        <Flex marginBottom={'1rem'} as={[Heading, 'h3']}>
-          {title}
-        </Flex>
-        <Keyed
-          list={tasks}
-          as={Task}
-          getProps={task => ({ task })}
-          showContext={showContext}
-          {...taskProps}
-        />
-      </div>
+    <div className="center measure mv3 pa3 br3 bg-white shadow-1 ">
+      <TaskGroupTitle>{title}</TaskGroupTitle>
+      {map(task => (
+        <Task key={`{title}--${task.id}`} task={task} {...taskProps} />
+      ))(tasks)}
     </div>
   )
 })
@@ -34,11 +29,7 @@ TaskGroup.propTypes = {
     title: PropTypes.string.isRequired,
     tasks: PropTypes.array.isRequired,
   }).isRequired,
-  showContext: PropTypes.bool,
-  taskComponent: PropTypes.func.isRequired,
   taskProps: PropTypes.object.isRequired,
 }
 
-TaskGroup.defaultProps = {
-  showContext: true,
-}
+TaskGroup.defaultProps = {}
