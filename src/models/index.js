@@ -48,6 +48,7 @@ export const getTaskGroupsForTab = validateIO('SA', 'A')(
         )(taskList)
   },
 )
+
 export const flattenTasksFromGroups = validateIO('A', 'A')(
   function flattenGroupTasks(taskGroups) {
     return compose(
