@@ -38,15 +38,15 @@ const renderTaskTabs = validateIO('OO', 'O')(function renderTaskTabs(
           list={tabList}
         />
       </Tabs>
-      <Tabs.Panel tab={currentTabId} {...tabProps}>
+      <Tabs.Panel key={currentTabId} tab={currentTabId} {...tabProps}>
         <SingleSelectionContainer>
           {({ isSelected, setSelected }) =>
-            mapA(({ id, title, tasks }) => (
-              <GroupCard key={id}>
-                <GroupCardTitle>{title}</GroupCardTitle>
+            mapA(group => (
+              <GroupCard key={group.id}>
+                <GroupCardTitle>{group.title}</GroupCardTitle>
                 {mapA(task => (
                   <Task
-                    key={`{title}--${task.id}`}
+                    key={`${group.title}--${task.id}`}
                     {...{
                       task,
                       selectTask: partial(setSelected)([task, taskList]),
@@ -55,7 +55,7 @@ const renderTaskTabs = validateIO('OO', 'O')(function renderTaskTabs(
                       selected: isSelected(task, taskList),
                     }}
                   />
-                ))(tasks)}
+                ))(group.tasks)}
               </GroupCard>
             ))(taskGroups)
           }
