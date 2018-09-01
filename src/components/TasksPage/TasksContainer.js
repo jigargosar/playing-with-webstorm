@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import { Container } from 'constate'
 import { createSampleTaskList, getTaskGroupsForTab } from '../../models'
 import path from 'ramda/es/path'
-import { __, always, concat, over, prop } from 'ramda'
+import { always, concat, lensProp, over } from 'ramda'
+import { validateIO } from '../../lib/ramda-strict'
 
 const initialState = {
   taskCollection: createSampleTaskList(),
@@ -19,7 +20,9 @@ const deleteAllTasks = () => always({ taskCollection: [] })
 // })
 
 const addMoreTasks = () =>
-  over(prop('taskCollection'))(concat(__, createSampleTaskList()))
+  validateIO('O', 'O')(
+    over(lensProp('taskCollection'))(concat(createSampleTaskList())),
+  )
 
 const selectors = {
   getTaskGroupsForTabId,
