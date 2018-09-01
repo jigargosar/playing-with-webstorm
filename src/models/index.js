@@ -50,7 +50,7 @@ export const tabList = [
   { id: 'done', type: 'filter', title: 'DONE' },
 ]
 
-export function createNewTaskWithDefaults() {
+export function createRandomTask() {
   const defaults = {
     id: `task_${nanoid()}`,
     title: randomWords(),
@@ -61,7 +61,7 @@ export function createNewTaskWithDefaults() {
   return Task(defaults)
 }
 
-export const createSampleTaskList = () => times(createNewTaskWithDefaults)(16)
+export const createRandomTaskList = () => times(createRandomTask)(16)
 
 export const getTaskGroupsForTab = validateIO('SA', 'A')(
   function getTaskGroupForTab(tabId, taskList) {

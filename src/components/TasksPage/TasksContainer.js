@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Container } from 'constate'
-import { createSampleTaskList, getTaskGroupsForTab } from '../../models'
+import { createRandomTaskList, getTaskGroupsForTab } from '../../models'
 import path from 'ramda/es/path'
 import { always, concat } from 'ramda'
 import { validateIO } from '../../lib/ramda-strict'
@@ -13,7 +13,7 @@ import {
 } from '../../lib/ramda-ext'
 
 const initialState = {
-  taskCollection: createSampleTaskList(),
+  taskCollection: createRandomTaskList(),
 }
 
 const getTaskGroupsForTabId = tabId => state =>
@@ -26,7 +26,7 @@ const toggleTaskDone = task => overTasks(overElById(task)(toggleProp('done')))
 const deleteTask = task => overTasks(removeById(task))
 const deleteAllTasks = () => always({ taskCollection: [] })
 const addMoreTasks = () =>
-  validateIO('O', 'O')(overTasks(concat(createSampleTaskList())))
+  validateIO('O', 'O')(overTasks(concat(createRandomTaskList())))
 
 const selectors = {
   getTaskGroupsForTabId,
