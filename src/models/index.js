@@ -20,10 +20,10 @@ import { randomArrayElement, randomBoolean, randomWords } from '../lib/fake'
 import { validate } from '../lib/validate'
 import { assert } from '../lib/assert'
 
-function Task({ id, title, done, createdAt, group, ...other }) {
-  validate('SSBNOO', [id, title, done, createdAt, group, other])
+function Task({ id, title, done, createdAt, systemListId, ...other }) {
+  validate('SSBNSO', [id, title, done, createdAt, systemListId, other])
   assert(isEmpty(other))
-  return { id, title, done, createdAt, group }
+  return { id, title, done, createdAt, systemListId }
 }
 
 export const systemListIds = [
@@ -73,14 +73,14 @@ export const getTaskGroupsForTab = validateIO('SA', 'A')(
         ]
       : compose(
           filter(propEq('id')(tabId)),
-          sortBy(group => indexOf(group.id, ['in_basket', 'some_day'])),
+          sortBy(id => indexOf(id, systemListIds)),
           values,
-          mapObjIndexed((tasks, id) => ({
-            id,
-            title: systemListIdLookup[id].title,
+          mapObjIndexed((tasks, systemListId) => ({
+            id: systemListId,
+            title: systemListIdLookup[systemListId].title,
             tasks,
           })),
-          groupBy(pathS(['group', 'id'])),
+          groupBy(pathS(['systemListId'])),
           reject(prop('done')),
         )(taskList)
   },

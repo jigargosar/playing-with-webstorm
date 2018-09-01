@@ -8,6 +8,7 @@ import {
 } from './elements/TaskItem'
 import cn from 'classname'
 import { Button } from '../../reakit-components'
+import { systemListIdLookup } from '../../models'
 
 const linkEvent = (fn, ...args) => tap(e => fn(...args, e))
 
@@ -22,7 +23,9 @@ export function Task(props) {
         </TaskHoverActionsContent>
       </TaskHoverActions>
       <div className={cn('mh2', { strike: task.done })}>{task.title}</div>
-      <small className={'ttu f7 mh2'}>{`@${task.group.title}`}</small>
+      <small className={'ttu f7 mh2'}>{`@${
+        systemListIdLookup[task.systemListId].title
+      }`}</small>
     </TaskItem>
   )
 }
