@@ -38,7 +38,7 @@ export const systemListIdLookup = {
   in_basket: { type: 'in_basket', title: 'Inbox' },
   next_actions: { type: 'next_actions', title: 'Next Actions' },
   projects: { type: 'projects', title: 'Projects' },
-  some_day: { type: 'some_day', title: 'SomeDay' },
+  some_day: { type: 'some_day', title: 'Some xDay' },
 }
 
 export function createNewTaskWithDefaults() {
