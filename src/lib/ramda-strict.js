@@ -1,5 +1,22 @@
 import { validate } from './validate'
-import { clamp, curryN, isEmpty, map, path, pathOr } from 'ramda'
+import {
+  clamp,
+  compose,
+  curryN,
+  isEmpty,
+  join,
+  map,
+  path,
+  pathOr,
+  split,
+} from 'ramda'
+
+function specsToSignature(i, o) {
+  return `${compose(
+    join('->'),
+    split(''),
+  )(i)}`
+}
 
 export const validateIO = function validateIO(inputSpecs, outputSpecs = '*') {
   return fn => {
@@ -9,7 +26,11 @@ export const validateIO = function validateIO(inputSpecs, outputSpecs = '*') {
       } catch (e) {
         console.debug(e)
         console.log(inputSpecs, args)
-        throw new Error(`[${fn.name}] ${e.message}`)
+        throw new Error(
+          `${fn.name}::${specsToSignature(inputSpecs, outputSpecs)} \n ${
+            e.message
+          }`,
+        )
       }
       const result = fn(...args)
       validate(outputSpecs, [result])
