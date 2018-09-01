@@ -19,6 +19,43 @@ import identity from 'ramda/es/identity'
 import { TasksContainer } from './TasksContainer'
 import tap from 'ramda/es/tap'
 
+function TaskTabsView(
+  tabProps,
+  getTaskGroups,
+  setSelectedTask,
+  getSelectedTask,
+) {
+  return (
+    <Fragment>
+      <Tabs>
+        <Keyed
+          as={TabsTab}
+          getProps={({ id, title }) => ({
+            tab: id,
+            children: title,
+            ...tabProps,
+          })}
+          list={tabList}
+        />
+      </Tabs>
+      <Tabs.Panel tab={tap(console.log)(tabProps.getCurrentId())} {...tabProps}>
+        <Keyed
+          as={TaskGroup}
+          list={getTaskGroups()}
+          getProps={group => ({ group })}
+          taskComponent={Task}
+          taskProps={{
+            selectTask: setSelectedTask,
+            deleteTask: identity,
+            toggleTaskDone: identity,
+            isTaskSelected: task => task === getSelectedTask(),
+          }}
+        />
+      </Tabs.Panel>
+    </Fragment>
+  )
+}
+
 export function TasksPage({ store }) {
   return (
     <ViewportHeightContainer className="bg-light-gray">
@@ -39,38 +76,14 @@ export function TasksPage({ store }) {
         >
           {tabProps => (
             <TasksContainer>
-              {({ setSelectedTask, getTaskGroups, getSelectedTask }) => (
-                <Fragment>
-                  <Tabs>
-                    <Keyed
-                      as={TabsTab}
-                      getProps={({ id, title }) => ({
-                        tab: id,
-                        children: title,
-                        ...tabProps,
-                      })}
-                      list={tabList}
-                    />
-                  </Tabs>
-                  <Tabs.Panel
-                    tab={tap(console.log)(tabProps.getCurrentId())}
-                    {...tabProps}
-                  >
-                    <Keyed
-                      as={TaskGroup}
-                      list={getTaskGroups()}
-                      getProps={group => ({ group })}
-                      taskComponent={Task}
-                      taskProps={{
-                        selectTask: setSelectedTask,
-                        deleteTask: identity,
-                        toggleTaskDone: identity,
-                        isTaskSelected: task => task === getSelectedTask(),
-                      }}
-                    />
-                  </Tabs.Panel>
-                </Fragment>
-              )}
+              {({ setSelectedTask, getTaskGroups, getSelectedTask }) =>
+                TaskTabsView(
+                  tabProps,
+                  getTaskGroups,
+                  setSelectedTask,
+                  getSelectedTask,
+                )
+              }
             </TasksContainer>
           )}
         </TabsContainer>
