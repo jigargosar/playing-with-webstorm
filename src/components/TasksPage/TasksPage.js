@@ -12,11 +12,12 @@ import { Keyed } from '../../shared-components/Keyed'
 import { TaskGroup } from './TaskGroup'
 import { Task } from './Task'
 import { tabList } from '../../models'
-import { pluck } from 'ramda'
+import { compose, pluck } from 'ramda'
 import identity from 'ramda/es/identity'
 import { TasksContainer } from './TasksContainer'
 import { validate } from '../../lib/validate'
 import { tapLog, validateIO } from '../../lib/ramda-strict'
+import { defaultProps, fromRenderProps } from 'recompose'
 
 const renderTaskTabs = validateIO('OO', 'O')(function renderTaskTabs(
   state,
@@ -55,7 +56,9 @@ const renderTaskTabs = validateIO('OO', 'O')(function renderTaskTabs(
     </Fragment>
   )
 })
-export function TasksPage({ store }) {
+
+function TasksPage({ store, state, tabProps }) {
+  debugger
   return (
     <ViewportHeight className="bg-light-gray">
       <div className="pa3 relative">
@@ -67,13 +70,14 @@ export function TasksPage({ store }) {
         </Group>
       </div>
       <Scrollable>
-        <TabsContainer initialState={{ ids: pluck('id')(tabList) }}>
-          {tabProps => (
-            <TasksContainer>
-              {state => renderTaskTabs(state, tabProps)}
-            </TasksContainer>
-          )}
-        </TabsContainer>
+        {renderTaskTabs(state, tabProps)}
+        {/*<TasksContainer>*/}
+        {/*{state => (*/}
+        {/*<TabsContainer initialState={{ ids: pluck('id')(tabList) }}>*/}
+        {/*{tabProps => renderTaskTabs(state, tabProps)}*/}
+        {/*</TabsContainer>*/}
+        {/*)}*/}
+        {/*</TasksContainer>*/}
       </Scrollable>
       <div className="pa3 relative">
         <Shadow depth={1} />
@@ -83,6 +87,21 @@ export function TasksPage({ store }) {
   )
 }
 
+const TaskTabsContainer = defaultProps({
+  initialState: { ids: pluck('id')(tabList) },
+})
+
+// eslint-disable-next-line no-func-assign
+TasksPage = compose(
+  // Context (Function as Child Components)
+  fromRenderProps(TasksContainer, state => ({ state })),
+  fromRenderProps(TabsContainer, tabProps => ({ tabProps })),
+  // Render props
+  // fromRenderProps(RenderPropsComponent, ({ value }) => ({ value }), 'render'),
+)(TasksPage)
+
 TasksPage.propTypes = {}
 
 TasksPage.defaultProps = {}
+
+export { TasksPage }
