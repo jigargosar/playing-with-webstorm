@@ -21,7 +21,7 @@ import tap from 'ramda/es/tap'
 
 function renderTaskTabs({
   tabProps,
-  getTaskGroups,
+  taskGroups,
   setSelectedTask,
   isTaskSelected,
 }) {
@@ -41,7 +41,7 @@ function renderTaskTabs({
       <Tabs.Panel tab={tap(console.log)(tabProps.getCurrentId())} {...tabProps}>
         <Keyed
           as={TaskGroup}
-          list={getTaskGroups()}
+          list={taskGroups}
           getProps={group => ({ group })}
           taskComponent={Task}
           taskProps={{
@@ -77,7 +77,7 @@ export function TasksPage({ store }) {
               {({ setSelectedTask, getTaskGroups, isTaskSelected }) =>
                 renderTaskTabs({
                   tabProps,
-                  getTaskGroups,
+                  taskGroups: getTaskGroups(),
                   setSelectedTask,
                   isTaskSelected,
                 })
