@@ -15,14 +15,14 @@ import { flattenTasksFromGroups, tabList } from '../../models'
 import { partial, pluck } from 'ramda'
 import identity from 'ramda/es/identity'
 import { TasksContainer } from './TasksContainer'
-import { mapA, tapLog, validateIO } from '../../lib/ramda-strict'
+import { mapA, validateIO } from '../../lib/ramda-strict'
 import { SingleSelectionContainer } from './SingleSelectionContainer'
 
 const renderTaskTabs = validateIO('OO', 'O')(function renderTaskTabs(
   state,
   tabProps,
 ) {
-  const currentTabId = tapLog('currentTabId')(tabProps.getCurrentId())
+  const currentTabId = tabProps.getCurrentId()
   const taskGroups = state.getTaskGroupsForTabId(currentTabId)
   const taskList = flattenTasksFromGroups(taskGroups)
   return (
