@@ -19,14 +19,15 @@ import tap from 'ramda/es/tap'
 import { validate } from '../../lib/validate'
 import { validateIO } from '../../lib/ramda-strict'
 
+const tapLog = msg => tap((...args) => console.log(msg, ...args))
+
 const renderTaskTabs = validateIO('OO', 'O')(function renderTaskTabs(
   state,
   tabProps,
 ) {
   const { setSelectedTask, getTaskGroupsForTabId, isTaskSelected } = state
   validate('FFF', [setSelectedTask, getTaskGroupsForTabId, isTaskSelected])
-  const currentTabId = tabProps.getCurrentId()
-  const tapLog = msg => tap(console.log)
+  const currentTabId = tapLog('currentTabId')(tabProps.getCurrentId())
   return (
     <Fragment>
       <Tabs>
@@ -40,7 +41,7 @@ const renderTaskTabs = validateIO('OO', 'O')(function renderTaskTabs(
           list={tabList}
         />
       </Tabs>
-      <Tabs.Panel tab={tapLog('currentTabId')(currentTabId)} {...tabProps}>
+      <Tabs.Panel tab={currentTabId} {...tabProps}>
         <Keyed
           as={TaskGroup}
           list={getTaskGroupsForTabId(currentTabId)}
