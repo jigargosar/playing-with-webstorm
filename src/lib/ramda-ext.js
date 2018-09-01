@@ -5,6 +5,8 @@ import {
   findIndex,
   isEmpty,
   lensIndex,
+  lensProp,
+  not,
   over,
   propEq,
   reject,
@@ -46,3 +48,5 @@ export const removeById = ({ id }) => list => {
   assert(idx >= 0)
   return remove(idx)(1)(list)
 }
+export const overProp = p => over(lensProp(p))
+export const toggleProp = p => overProp(p)(not)
