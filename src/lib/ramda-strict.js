@@ -1,8 +1,8 @@
 import { validate } from './validate'
 import {
-  append,
   clamp,
   compose,
+  concat,
   curryN,
   isEmpty,
   join,
@@ -11,11 +11,12 @@ import {
   pathOr,
   split,
 } from 'ramda'
+import flip from 'ramda/es/flip'
 
 function specsToSignature(i, o) {
   const arrow = ' => '
   return `${compose(
-    append(`${arrow} ${o}`),
+    flip(concat)(`${arrow} ${o}`),
     join(arrow),
     split(''),
   )(i)}`
