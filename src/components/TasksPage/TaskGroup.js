@@ -25,7 +25,6 @@ export const TaskGroup = composeHOC()(function TaskGroup({
 
 TaskGroup.propTypes = {
   group: PropTypes.shape({
-    id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     tasks: PropTypes.array.isRequired,
   }).isRequired,
