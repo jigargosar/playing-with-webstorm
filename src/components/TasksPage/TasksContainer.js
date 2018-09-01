@@ -48,7 +48,7 @@ const setSelectedTask = ({ id }) => state => {
 }
 
 const actions = {
-  setSelectedTask: setSelectedTask,
+  setSelectedTask,
 }
 
 export const TasksContainer = props => (
