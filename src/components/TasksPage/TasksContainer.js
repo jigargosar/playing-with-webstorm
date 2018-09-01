@@ -15,10 +15,6 @@ const getTaskGroupsForTabId = tabId => state =>
 const getTaskCollection = () => path(['taskCollection'])
 
 const deleteAllTasks = () => always({ taskCollection: [] })
-// const addMoreTasks = () => ({ taskCollection }) => ({
-//   taskCollection: concat(createSampleTaskList(), taskCollection),
-// })
-
 const addMoreTasks = () =>
   validateIO('O', 'O')(
     over(lensProp('taskCollection'))(concat(createSampleTaskList())),
