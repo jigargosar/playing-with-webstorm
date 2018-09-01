@@ -21,6 +21,7 @@ import { validate } from '../lib/validate'
 import { assert } from '../lib/assert'
 
 function Task({ id, title, done, createdAt, systemListId, ...other }) {
+  // noinspection SpellCheckingInspection
   validate('SSBNSO', [id, title, done, createdAt, systemListId, other])
   assert(isEmpty(other))
   return { id, title, done, createdAt, systemListId }
