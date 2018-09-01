@@ -44,7 +44,6 @@ const setSelectedTask = ({ id }) => state => {
 }
 
 const selectors = {
-  getTaskGroups,
   getTaskGroupsForTabId,
   isTaskSelected,
 }
