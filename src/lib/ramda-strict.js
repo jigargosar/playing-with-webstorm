@@ -12,6 +12,7 @@ import {
   split,
 } from 'ramda'
 import flip from 'ramda/es/flip'
+import tap from 'ramda/es/tap'
 
 function specsToSignature(i, o) {
   const arrow = ' => '
@@ -76,3 +77,6 @@ export const clampIdx = validateIO('NA', 'N')(
 export const mapA = validateIO('FA')(map)
 
 export const mapIndexedA = validateIO('FA')(mapA)
+export const tapLog = validateIO('S|Z', 'F')(msg =>
+  tap((...args) => console.log(msg, ...args)),
+)

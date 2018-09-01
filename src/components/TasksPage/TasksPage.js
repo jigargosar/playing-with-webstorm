@@ -15,13 +15,8 @@ import { tabList } from '../../models'
 import { pluck } from 'ramda'
 import identity from 'ramda/es/identity'
 import { TasksContainer } from './TasksContainer'
-import tap from 'ramda/es/tap'
 import { validate } from '../../lib/validate'
-import { validateIO } from '../../lib/ramda-strict'
-
-const tapLog = validateIO('S|Z', 'F')(msg =>
-  tap((...args) => console.log(msg, ...args)),
-)
+import { tapLog, validateIO } from '../../lib/ramda-strict'
 
 const renderTaskTabs = validateIO('OO', 'O')(function renderTaskTabs(
   state,
