@@ -12,12 +12,12 @@ import { Keyed } from '../../shared-components/Keyed'
 import { TaskGroup } from './TaskGroup'
 import { Task } from './Task'
 import { tabList } from '../../models'
-import { compose, pluck } from 'ramda'
+import { pluck } from 'ramda'
 import identity from 'ramda/es/identity'
 import { TasksContainer } from './TasksContainer'
 import { validate } from '../../lib/validate'
 import { tapLog, validateIO } from '../../lib/ramda-strict'
-import { defaultProps, fromRenderProps } from 'recompose'
+import { defaultProps } from 'recompose'
 
 const renderTaskTabs = validateIO('OO', 'O')(function renderTaskTabs(
   state,
@@ -57,7 +57,7 @@ const renderTaskTabs = validateIO('OO', 'O')(function renderTaskTabs(
   )
 })
 
-function TasksPage({ store, state, tabProps }) {
+function TasksPageInner({ store, state, tabProps }) {
   return (
     <ViewportHeight className="bg-light-gray">
       <div className="pa3 relative">
@@ -83,16 +83,27 @@ const TaskTabsContainer = defaultProps({
 })(TabsContainer)
 
 // eslint-disable-next-line no-func-assign
-TasksPage = compose(
-  // Context (Function as Child Components)
-  fromRenderProps(TasksContainer, state => ({ state })),
-  fromRenderProps(TaskTabsContainer, tabProps => ({ tabProps })),
-  // Render props
-  // fromRenderProps(RenderPropsComponent, ({ value }) => ({ value }), 'render'),
-)(TasksPage)
+export function TasksPage() {
+  return (
+    <TasksContainer>
+      {state => (
+        <TaskTabsContainer>
+          {tabProps => <TasksPageInner state={state} tabProps={tabProps} />}
+        </TaskTabsContainer>
+      )}
+    </TasksContainer>
+  )
+}
+
+// // eslint-disable-next-line no-func-assign
+// TasksPage = compose(
+//   // Context (Function as Child Components)
+//   fromRenderProps(TasksContainer, state => ({ state })),
+//   fromRenderProps(TaskTabsContainer, tabProps => ({ tabProps })),
+//   // Render props
+//   // fromRenderProps(RenderPropsComponent, ({ value }) => ({ value }), 'render'),
+// )(TasksPage)
 
 TasksPage.propTypes = {}
 
 TasksPage.defaultProps = {}
-
-export { TasksPage }
