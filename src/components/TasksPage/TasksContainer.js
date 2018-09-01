@@ -27,6 +27,8 @@ const getSelectedTask = () => state => {
   return path([selectedTaskIdx])(currentTaskList)
 }
 
+const isTaskSelected = task => state => getSelectedTask()(state) === task
+
 const getTaskCollection = () => path(['taskCollection'])
 
 const getCurrentTaskList = () =>
@@ -44,7 +46,7 @@ const setSelectedTask = ({ id }) => state => {
 const selectors = {
   getTaskGroups,
   getTaskGroupForTabId,
-  getSelectedTask,
+  isTaskSelected,
 }
 
 const actions = {

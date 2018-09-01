@@ -19,12 +19,12 @@ import identity from 'ramda/es/identity'
 import { TasksContainer } from './TasksContainer'
 import tap from 'ramda/es/tap'
 
-function TaskTabsView(
+function renderTaskTabs({
   tabProps,
   getTaskGroups,
   setSelectedTask,
-  getSelectedTask,
-) {
+  isTaskSelected,
+}) {
   return (
     <Fragment>
       <Tabs>
@@ -48,7 +48,7 @@ function TaskTabsView(
             selectTask: setSelectedTask,
             deleteTask: identity,
             toggleTaskDone: identity,
-            isTaskSelected: task => task === getSelectedTask(),
+            isTaskSelected,
           }}
         />
       </Tabs.Panel>
@@ -69,20 +69,18 @@ export function TasksPage({ store }) {
       </div>
       <ScrollContainer>
         <TabsContainer
-          initialState={{
-            ids: pluck('id')(tabList),
-          }}
+          initialState={{ ids: pluck('id')(tabList) }}
           onUpdate={console.log}
         >
           {tabProps => (
             <TasksContainer>
-              {({ setSelectedTask, getTaskGroups, getSelectedTask }) =>
-                TaskTabsView(
+              {({ setSelectedTask, getTaskGroups, isTaskSelected }) =>
+                renderTaskTabs({
                   tabProps,
                   getTaskGroups,
                   setSelectedTask,
-                  getSelectedTask,
-                )
+                  isTaskSelected,
+                })
               }
             </TasksContainer>
           )}
