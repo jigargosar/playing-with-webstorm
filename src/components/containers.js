@@ -10,10 +10,10 @@ export const FullHeightContainer = withAdditionalClassName(
   'h-100 overflow-hidden flex flex-column',
 )('div')
 
-export const ViewportHeightContainer = withAdditionalClassName(
+export const ViewportHeight = withAdditionalClassName(
   'vh-100 overflow-hidden flex flex-column',
 )('div')
 
-export const ScrollContainer = withAdditionalClassName(
+export const Scrollable = withAdditionalClassName(
   'overflow-scroll flex-grow-1',
 )('div')

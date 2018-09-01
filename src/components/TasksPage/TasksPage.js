@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { ScrollContainer, ViewportHeightContainer } from '../containers'
+import { Scrollable, ViewportHeight } from '../containers'
 import {
   Button,
   Group,
@@ -55,7 +55,7 @@ function renderTaskTabs(state, tabProps) {
 
 export function TasksPage({ store }) {
   return (
-    <ViewportHeightContainer className="bg-light-gray">
+    <ViewportHeight className="bg-light-gray">
       <div className="pa3 relative">
         <Shadow depth={1} />
         <div>STATIC HEADER</div>
@@ -64,7 +64,7 @@ export function TasksPage({ store }) {
           <Button onClick={store && store.deleteAllTasks}>Delete All</Button>
         </Group>
       </div>
-      <ScrollContainer>
+      <Scrollable>
         <TabsContainer initialState={{ ids: pluck('id')(tabList) }}>
           {tabProps => (
             <TasksContainer>
@@ -72,12 +72,12 @@ export function TasksPage({ store }) {
             </TasksContainer>
           )}
         </TabsContainer>
-      </ScrollContainer>
+      </Scrollable>
       <div className="pa3 relative">
         <Shadow depth={1} />
         STATIC FOOTER
       </div>
-    </ViewportHeightContainer>
+    </ViewportHeight>
   )
 }
 
