@@ -40,7 +40,7 @@ const renderTaskTabs = validateIO('OO', 'O')(function renderTaskTabs(
           list={tabList}
         />
       </Tabs>
-      <Tabs.Panel tab={tapLog()(currentTabId)} {...tabProps}>
+      <Tabs.Panel tab={tapLog('currentTabId')(currentTabId)} {...tabProps}>
         <Keyed
           as={TaskGroup}
           list={getTaskGroupsForTabId(currentTabId)}
