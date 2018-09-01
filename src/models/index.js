@@ -22,10 +22,10 @@ import { randomArrayElement, randomBoolean, randomWords } from '../lib/fake'
 import { validate } from '../lib/validate'
 import { assert } from '../lib/assert'
 
-function Task({ id, title, done, createdAt, context, ...other }) {
-  validate('SSBNOO', [id, title, done, createdAt, context, other])
+function Task({ id, title, done, createdAt, group, ...other }) {
+  validate('SSBNOO', [id, title, done, createdAt, group, other])
   assert(isEmpty(other))
-  return { id, title, done, createdAt, context }
+  return { id, title, done, createdAt, group }
 }
 
 export const groups = [
@@ -44,7 +44,7 @@ export function createNewTaskWithDefaults() {
     title: randomWords(),
     done: randomBoolean(),
     createdAt: Date.now(),
-    context: randomArrayElement(groups),
+    group: randomArrayElement(groups),
   }
   return Task(defaults)
 }
@@ -76,7 +76,7 @@ export const getTaskGroupsForTab = validateIO('SA', 'A')(
             title: systemContextLookup[id].title,
             tasks,
           })),
-          groupBy(pathS(['context', 'id'])),
+          groupBy(pathS(['group', 'id'])),
           reject(prop('done')),
         )(taskList)
   },

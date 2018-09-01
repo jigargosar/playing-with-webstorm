@@ -22,7 +22,7 @@ export function Task(props) {
         </TaskHoverActionsContent>
       </TaskHoverActions>
       <div className={cn('mh2', { strike: task.done })}>{task.title}</div>
-      <small className={'ttu f7 mh2'}>{`@${task.context.title}`}</small>
+      <small className={'ttu f7 mh2'}>{`@${task.group.title}`}</small>
     </TaskItem>
   )
 }
