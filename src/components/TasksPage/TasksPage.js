@@ -13,7 +13,6 @@ import { TaskGroup, TaskGroupTitle } from './elements/TaskGroup'
 import { Task } from './Task'
 import { flattenTasksFromGroups, tabList } from '../../models'
 import { partial, pluck } from 'ramda'
-import identity from 'ramda/es/identity'
 import { TasksContainer } from './TasksContainer'
 import { mapA } from '../../lib/ramda-strict'
 import { SingleSelectionContainer } from './SingleSelectionContainer'
@@ -48,7 +47,7 @@ function renderTaskTabs(state, tabProps) {
                       {...{
                         task,
                         selectTask: partial(setSelected)([task, taskList]),
-                        deleteTask: identity,
+                        deleteTask: partial(state.deleteTask)([task]),
                         toggleTaskDone: partial(state.toggleTaskDone)([task]),
                         selected: isSelected(task, taskList),
                       }}
