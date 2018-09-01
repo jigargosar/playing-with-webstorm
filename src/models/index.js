@@ -2,11 +2,9 @@ import {
   compose,
   filter,
   flatten,
-  fromPairs,
   groupBy,
   indexOf,
   isEmpty,
-  map,
   mapObjIndexed,
   pluck,
   prop,
@@ -28,15 +26,14 @@ function Task({ id, title, done, createdAt, group, ...other }) {
   return { id, title, done, createdAt, group }
 }
 
-export const groups = [
-  { id: 'in_basket', title: 'Inbox' },
-  { id: 'next_actions', title: 'Next Actions' },
-  { id: 'some_day', title: 'SomeDay' },
-]
-export const systemContextLookup = compose(
-  fromPairs,
-  map(c => [c.id, c]),
-)(groups)
+export const listTypes = ['in_basket', 'next_actions', 'some_day', 'projects']
+
+export const listTypeLookup = {
+  in_basket: { type: 'in_basket', title: 'Inbox' },
+  next_actions: { type: 'next_actions', title: 'Next Actions' },
+  projects: { type: 'projects', title: 'Projects' },
+  some_day: { type: 'some_day', title: 'SomeDay' },
+}
 
 export function createNewTaskWithDefaults() {
   const defaults = {
@@ -44,7 +41,7 @@ export function createNewTaskWithDefaults() {
     title: randomWords(),
     done: randomBoolean(),
     createdAt: Date.now(),
-    group: randomArrayElement(groups),
+    listType: randomArrayElement(listTypes),
   }
   return Task(defaults)
 }
@@ -73,7 +70,7 @@ export const getTaskGroupsForTab = validateIO('SA', 'A')(
           values,
           mapObjIndexed((tasks, id) => ({
             id,
-            title: systemContextLookup[id].title,
+            title: listTypeLookup[id].title,
             tasks,
           })),
           groupBy(pathS(['group', 'id'])),
