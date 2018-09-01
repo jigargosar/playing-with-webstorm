@@ -26,13 +26,13 @@ export const tabList = [
 ]
 
 export const getTaskGroupsForTab = validateIO('SA', 'A')(
-  function getTaskGroupForTab(tabId, tasks) {
+  function getTaskGroupForTab(tabId, taskList) {
     return 'done' === tabId
       ? [
           compose(
             tasks => ({ id: 'done', title: 'Done', tasks }),
             filter(prop('done')),
-          )(tasks),
+          )(taskList),
         ]
       : compose(
           filter(propEq('id')(tabId)),
@@ -45,7 +45,7 @@ export const getTaskGroupsForTab = validateIO('SA', 'A')(
           })),
           groupBy(pathS(['context', 'id'])),
           reject(prop('done')),
-        )(tasks)
+        )(taskList)
   },
 )
 export const flattenTasksFromGroups = validateIO('A', 'A')(
