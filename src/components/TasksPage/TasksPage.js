@@ -27,8 +27,10 @@ import { clampIdx } from '../../lib/ramda-strict'
 import { findIndexById } from '../../lib/ramda-ext'
 
 export const TasksPage = composeHOC()(function Page({ store }) {
-  const getTaskGroups = ({ taskList, ids, current }) =>
-    getTaskGroupsForTab(ids[current], taskList)
+  const getTaskCollection = path(['taskList'])
+  const getCurrentTabId = ({ ids, current }) => ids[current]
+  const getTaskGroups = state =>
+    getTaskGroupsForTab(getCurrentTabId(state), getTaskCollection(state))
 
   const getCurrentTaskList = compose(
     flattenGroupTasks,
