@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Container } from 'constate'
 import {
   createSampleTaskList,
-  flattenGroupTasks,
+  flattenTasksFromGroups,
   getTaskGroupsForTab,
 } from '../../models'
 import path from 'ramda/es/path'
@@ -24,7 +24,7 @@ const getTaskCollection = () => path(['taskCollection'])
 
 const getCurrentTaskList = () =>
   compose(
-    flattenGroupTasks,
+    flattenTasksFromGroups,
     getTaskGroups(),
   )
 

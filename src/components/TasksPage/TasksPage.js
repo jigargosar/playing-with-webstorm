@@ -16,7 +16,7 @@ import { TaskGroup } from './TaskGroup'
 import { Task } from './Task'
 import {
   createSampleTaskList,
-  flattenGroupTasks,
+  flattenTasksFromGroups,
   getTaskGroupsForTab,
   tabList,
 } from '../../models'
@@ -54,7 +54,7 @@ export const TasksPage = composeHOC()(function Page({ store }) {
               )
 
             const currentTaskListFromState = compose(
-              flattenGroupTasks,
+              flattenTasksFromGroups,
               taskGroupsFromState,
             )
             const selectedTaskFromState = state => {

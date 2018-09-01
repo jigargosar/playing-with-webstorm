@@ -5,7 +5,7 @@ import { expr } from 'mobx-utils'
 import { clampIdx, pathS } from '../lib/ramda-strict'
 import {
   createSampleTaskList,
-  flattenGroupTasks,
+  flattenTasksFromGroups,
   getTaskGroupsForTab,
   tabList,
 } from '../models'
@@ -21,13 +21,15 @@ export const store = (() => {
         return getTaskGroupsForTab('in_basket', store._tasks)
       },
       get flattenedTasks() {
-        return flattenGroupTasks(store.taskGroups)
+        return flattenTasksFromGroups(store.taskGroups)
       },
       get selectedTaskIdx() {
         return clampIdx(store._selectedTaskIdx, store.flattenedTasks)
       },
       get selectedTaskId() {
-        return pathS(['flattenGroupTasks', store.selectedTaskIdx, 'id'])(store)
+        return pathS(['flattenTasksFromGroups', store.selectedTaskIdx, 'id'])(
+          store,
+        )
       },
       isTaskAtSelected: ({ id }) => {
         return expr(() => store.selectedTaskId === id)
