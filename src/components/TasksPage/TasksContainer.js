@@ -4,7 +4,6 @@ import { Container } from 'constate'
 import { createSampleTaskList, getTaskGroupsForTab } from '../../models'
 import path from 'ramda/es/path'
 import { __, always, concat } from 'ramda'
-import { clampIdx, validateIO } from '../../lib/ramda-strict'
 
 const initialState = {
   taskCollection: createSampleTaskList(),
@@ -12,11 +11,6 @@ const initialState = {
 
 const getTaskGroupsForTabId = tabId => state =>
   getTaskGroupsForTab(tabId, getTaskCollection()(state))
-
-export const atClampedIdx = validateIO('NA')(function atClampedIdx(idx, list) {
-  return path([clampIdx(idx)(list)])(list)
-})
-
 const getTaskCollection = () => path(['taskCollection'])
 
 const deleteAllTasks = () => always({ taskCollection: [] })
@@ -27,12 +21,10 @@ const addMoreTasks = () => ({ taskCollection }) => ({
 const selectors = {
   getTaskGroupsForTabId,
 }
-
 const actions = {
   deleteAllTasks,
   addMoreTasks,
 }
-
 export const TasksContainer = props => (
   <Container
     {...props}
