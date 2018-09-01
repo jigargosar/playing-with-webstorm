@@ -58,7 +58,6 @@ const renderTaskTabs = validateIO('OO', 'O')(function renderTaskTabs(
 })
 
 function TasksPage({ store, state, tabProps }) {
-  debugger
   return (
     <ViewportHeight className="bg-light-gray">
       <div className="pa3 relative">
@@ -88,14 +87,15 @@ function TasksPage({ store, state, tabProps }) {
 }
 
 const TaskTabsContainer = defaultProps({
+  context: 'TaskTabsContainer',
   initialState: { ids: pluck('id')(tabList) },
-})
+})(TabsContainer)
 
 // eslint-disable-next-line no-func-assign
 TasksPage = compose(
   // Context (Function as Child Components)
   fromRenderProps(TasksContainer, state => ({ state })),
-  fromRenderProps(TabsContainer, tabProps => ({ tabProps })),
+  fromRenderProps(TaskTabsContainer, tabProps => ({ tabProps })),
   // Render props
   // fromRenderProps(RenderPropsComponent, ({ value }) => ({ value }), 'render'),
 )(TasksPage)
