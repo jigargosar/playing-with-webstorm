@@ -17,11 +17,16 @@ import identity from 'ramda/es/identity'
 import { TasksContainer } from './TasksContainer'
 import tap from 'ramda/es/tap'
 import { validate } from '../../lib/validate'
+import { validateIO } from '../../lib/ramda-strict'
 
-function renderTaskTabs(state, tabProps) {
+const renderTaskTabs = validateIO('OO', 'O')(function renderTaskTabs(
+  state,
+  tabProps,
+) {
   const { setSelectedTask, getTaskGroupsForTabId, isTaskSelected } = state
   validate('FFF', [setSelectedTask, getTaskGroupsForTabId, isTaskSelected])
   const currentTabId = tabProps.getCurrentId()
+  const tapLog = msg => tap(console.log)
   return (
     <Fragment>
       <Tabs>
@@ -35,7 +40,7 @@ function renderTaskTabs(state, tabProps) {
           list={tabList}
         />
       </Tabs>
-      <Tabs.Panel tab={tap(console.log)(currentTabId)} {...tabProps}>
+      <Tabs.Panel tab={tapLog()(currentTabId)} {...tabProps}>
         <Keyed
           as={TaskGroup}
           list={getTaskGroupsForTabId(currentTabId)}
@@ -51,8 +56,7 @@ function renderTaskTabs(state, tabProps) {
       </Tabs.Panel>
     </Fragment>
   )
-}
-
+})
 export function TasksPage({ store }) {
   return (
     <ViewportHeight className="bg-light-gray">
