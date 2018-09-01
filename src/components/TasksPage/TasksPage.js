@@ -90,6 +90,7 @@ export const TasksPage = composeHOC()(function Page({ store }) {
                   setSelectedTask,
                   getTabProps,
                   getTaskGroups,
+                  getSelectedTask,
                 }) => (
                   <Fragment>
                     <Tabs>
