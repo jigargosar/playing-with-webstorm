@@ -30,8 +30,8 @@ function Task({ id, title, done, createdAt, systemListId, ...other }) {
 export const systemListIds = [
   'in_basket',
   'next_actions',
-  'some_day',
   'projects',
+  'some_day',
 ]
 
 export const systemListIdLookup = {
