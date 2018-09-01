@@ -3,8 +3,9 @@ import PropTypes from 'prop-types'
 import { Container } from 'constate'
 import { createSampleTaskList, getTaskGroupsForTab } from '../../models'
 import path from 'ramda/es/path'
-import { always, concat, lensProp, over } from 'ramda'
+import { always, concat, lensProp, not, over } from 'ramda'
 import { validateIO } from '../../lib/ramda-strict'
+import { overElById } from '../../lib/ramda-ext'
 
 const initialState = {
   taskCollection: createSampleTaskList(),
@@ -14,11 +15,15 @@ const getTaskGroupsForTabId = tabId => state =>
   getTaskGroupsForTab(tabId, getTaskCollection()(state))
 const getTaskCollection = () => path(['taskCollection'])
 
+const toggleDoneProp = over(lensProp('done'))(not)
+const overTasksCollection = over(lensProp('taskCollection'))
+
+const toggleTaskDone = task =>
+  overTasksCollection(overElById(task)(toggleDoneProp))
+
 const deleteAllTasks = () => always({ taskCollection: [] })
 const addMoreTasks = () =>
-  validateIO('O', 'O')(
-    over(lensProp('taskCollection'))(concat(createSampleTaskList())),
-  )
+  validateIO('O', 'O')(overTasksCollection(concat(createSampleTaskList())))
 
 const selectors = {
   getTaskGroupsForTabId,
@@ -26,6 +31,7 @@ const selectors = {
 const actions = {
   deleteAllTasks,
   addMoreTasks,
+  toggleTaskDone,
 }
 export const TasksContainer = props => (
   <Container

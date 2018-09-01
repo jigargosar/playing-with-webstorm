@@ -41,18 +41,20 @@ function renderTaskTabs(state, tabProps) {
             mapA(group => (
               <TaskGroup key={group.id}>
                 <TaskGroupTitle>{group.title}</TaskGroupTitle>
-                {mapA(task => (
-                  <Task
-                    key={`${group.title}--${task.id}`}
-                    {...{
-                      task,
-                      selectTask: partial(setSelected)([task, taskList]),
-                      deleteTask: identity,
-                      toggleTaskDone: identity,
-                      selected: isSelected(task, taskList),
-                    }}
-                  />
-                ))(group.tasks)}
+                {mapA(task => {
+                  return (
+                    <Task
+                      key={`${group.title}--${task.id}`}
+                      {...{
+                        task,
+                        selectTask: partial(setSelected)([task, taskList]),
+                        deleteTask: identity,
+                        toggleTaskDone: partial(state.toggleTaskDone)([task]),
+                        selected: isSelected(task, taskList),
+                      }}
+                    />
+                  )
+                })(group.tasks)}
               </TaskGroup>
             ))(taskGroups)
           }
