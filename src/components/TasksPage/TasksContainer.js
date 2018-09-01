@@ -7,7 +7,7 @@ import {
   getTaskGroupsForTab,
 } from '../../models'
 import path from 'ramda/es/path'
-import { compose, prop } from 'ramda'
+import { compose } from 'ramda'
 import { clampIdx, propS } from '../../lib/ramda-strict'
 import { findIndexById } from '../../lib/ramda-ext'
 
@@ -15,7 +15,11 @@ const initialState = {
   taskCollection: createSampleTaskList(),
   selectedTaskIdx: 0,
 }
+
+const getTabProps = () => path(['tabProps', 'getCurrentId'])()
+
 const getCurrentTabId = () => propS('currentTabId')
+
 const getTaskGroups = () => state =>
   getTaskGroupsForTab(getCurrentTabId()(state), getTaskCollection()(state))
 
@@ -26,13 +30,11 @@ const getSelectedTask = () => state => {
 }
 
 const getTaskCollection = () => path(['taskCollection'])
-
 const getCurrentTaskList = () =>
   compose(
     flattenTasksFromGroups,
     getTaskGroups(),
   )
-const getTabProps = () => prop('tabProps')
 
 const selectors = {
   getTaskGroups,
