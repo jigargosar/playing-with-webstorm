@@ -1,13 +1,18 @@
 import { validate } from './validate'
 import { clamp, curryN, isEmpty, map, path, pathOr } from 'ramda'
 
-export const validateIO = (inputSpecs, outputSpecs = '*') => fn => {
-  return curryN(fn.length)((...args) => {
-    validate(inputSpecs, args)
-    const result = fn(...args)
-    validate(outputSpecs, [result])
-    return result
-  })
+export const validateIO = function validateIO(inputSpecs, outputSpecs = '*') {
+  return fn => {
+    fnWrapper.displayName = fn.name
+    return curryN(fn.length)(fnWrapper)
+
+    function fnWrapper(...args) {
+      validate(inputSpecs, args)
+      const result = fn(...args)
+      validate(outputSpecs, [result])
+      return result
+    }
+  }
 }
 
 export const pathS = validateIO('AO|AA', 'S')(path)
