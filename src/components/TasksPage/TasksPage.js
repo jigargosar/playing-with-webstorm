@@ -68,16 +68,7 @@ function TasksPage({ store, state, tabProps }) {
           <Button onClick={store && store.deleteAllTasks}>Delete All</Button>
         </Group>
       </div>
-      <Scrollable>
-        {renderTaskTabs(state, tabProps)}
-        {/*<TasksContainer>*/}
-        {/*{state => (*/}
-        {/*<TabsContainer initialState={{ ids: pluck('id')(tabList) }}>*/}
-        {/*{tabProps => renderTaskTabs(state, tabProps)}*/}
-        {/*</TabsContainer>*/}
-        {/*)}*/}
-        {/*</TasksContainer>*/}
-      </Scrollable>
+      <Scrollable>{renderTaskTabs(state, tabProps)}</Scrollable>
       <div className="pa3 relative">
         <Shadow depth={1} />
         STATIC FOOTER
